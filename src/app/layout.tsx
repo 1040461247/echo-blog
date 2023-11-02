@@ -1,29 +1,23 @@
 import React from 'react'
 import type { Metadata } from 'next'
+import Providers from '@/store/providers'
 import localFont from 'next/font/local'
 import 'normalize.css'
-import '@/assets/style/reset.scss'
-import Providers from '@/store/providers'
+import '@/assets/style/reset.css'
+import '@/assets/style/variables.css'
+import '@/assets/style/common.css'
+import MainHeader from '../components/main/main-header'
+import MainFooter from '../components/main/main-footer'
 
 const myFont = localFont({
   src: [
     {
-      path: '../assets/fonts/Alimama_DongFangDaKai_Regular.woff2',
+      path: '../../public/fonts/Alimama_DongFangDaKai_Regular.woff2',
       weight: '400',
       style: 'normal'
     },
     {
-      path: '../assets/fonts/Alimama_DongFangDaKai_Regular.woff',
-      weight: '400',
-      style: 'normal'
-    },
-    {
-      path: '../assets/fonts/Alimama_DongFangDaKai_Regular.ttf',
-      weight: '400',
-      style: 'normal'
-    },
-    {
-      path: '../assets/fonts/Alimama_DongFangDaKai_Regular.otf',
+      path: '../../public/fonts/Alimama_DongFangDaKai_Regular.woff2',
       weight: '400',
       style: 'normal'
     }
@@ -40,7 +34,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <Providers>
       <html lang="zh" className={myFont.className}>
-        <body>{children}</body>
+        <body>
+          <MainHeader />
+          {children}
+          <MainFooter />
+        </body>
       </html>
     </Providers>
   )
