@@ -1,4 +1,6 @@
 body {
+  min-width: 375px;
+  padding-top: var(--header-height);
   background-color: var(--bg-color-v1);
   color: var(--font-color);
 }

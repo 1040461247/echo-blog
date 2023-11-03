@@ -1,5 +1,5 @@
 import { memo, type FC } from 'react'
-import './style.scss'
+import './index.scss'
 
 const MainFooter: FC<IProps> = memo(() => {
   return (

@@ -1,10 +1,13 @@
-import { memo, type FC } from 'react'
+import { memo } from 'react'
+import './page-style.scss'
+import HomeMain from './c-cpns/home-main'
+// Types import
+import type { FC } from 'react'
 
 const IndexPage: FC<IProps> = memo(() => {
   return (
     <div className="index-page">
-      <h1>Hello world</h1>
-      <p>你好啊，我是田若茜，一名前端工程师</p>
+      <HomeMain />
     </div>
   )
 })

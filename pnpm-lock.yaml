@@ -47,6 +47,9 @@ dependencies:
   react-redux:
     specifier: ^8.1.2
     version: 8.1.2(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+  rellax:
+    specifier: ^1.12.1
+    version: 1.12.1
   tailwindcss:
     specifier: 3.3.3
     version: 3.3.3
@@ -55,6 +58,9 @@ dependencies:
     version: 5.2.2
 
 devDependencies:
+  '@types/rellax':
+    specifier: ^1.7.6
+    version: 1.7.6
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.7.2
     version: 6.7.2(@typescript-eslint/parser@6.7.2)(eslint@8.49.0)(typescript@5.2.2)
@@ -364,6 +370,10 @@ packages:
       '@types/scheduler': 0.16.3
       csstype: 3.1.2
     dev: false
+
+  /@types/rellax@1.7.6:
+    resolution: {integrity: sha512-NDzpJXKZVlouFPN29j9m3/x3oDZjcs0Yccn60h3diXPnZCmRYR2ik9quwYkmUHg7AEmgU+jow0y9kXzfbfx+3Q==}
+    dev: true
 
   /@types/scheduler@0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
@@ -2474,6 +2484,10 @@ packages:
       call-bind: 1.0.2
       define-properties: 1.2.1
       set-function-name: 2.0.1
+
+  /rellax@1.12.1:
+    resolution: {integrity: sha512-XBIi0CDpW5FLTujYjYBn1CIbK2CJL6TsAg/w409KghP2LucjjzBjsujXDAjyBLWgsfupfUcL5WzdnIPcGfK7XA==}
+    dev: false
 
   /reselect@4.1.8:
     resolution: {integrity: sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==}

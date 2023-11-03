@@ -1,0 +1,56 @@
+.home-main {
+  overflow: hidden;
+  position: relative;
+  height: calc(100vh + 31.25vw);
+  background: var(--bg-color-v2);
+}
+
+.content {
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .astronaut {
+    position: absolute;
+    bottom: -2.6042vw;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 50%;
+
+    .astronaut-mask {
+      overflow: hidden;
+      position: absolute;
+      top: 1.8229vw;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0 auto;
+      width: 50%;
+      height: 50%;
+
+      .img-sta {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+    }
+
+    .img-astronaut {
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  .frame {
+    position: relative;
+
+    .img-mask {
+      width: 100%;
+    }
+  }
+}

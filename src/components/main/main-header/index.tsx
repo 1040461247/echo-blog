@@ -9,7 +9,7 @@ import './index.scss'
 import '@/assets/iconfont/main-header/iconfont.css'
 import menuList from '@/assets/data/main-header-menu'
 
-// Import Types
+// Types import
 import type { FC } from 'react'
 import type { IMenuListItem } from '@/assets/data/main-header-menu'
 
@@ -20,7 +20,10 @@ const MainHeader: FC<IProps> = memo(() => {
     return (
       <ul className="submenu">
         {subMenu.map((item: IMenuListItem) => (
-          <li className="submenu-item" key={item.text}>
+          <li
+            className={classNames('submenu-item', { 'active-sublink': isActivePath(item) })}
+            key={item.text}
+          >
             <Link className="submenu-item-link" href={item.path!}>
               <i className={classNames('icon', 'iconfont', item.icon)} />
               <span className="text">{item.text}</span>
@@ -43,8 +46,10 @@ const MainHeader: FC<IProps> = memo(() => {
     <header className="main-header">
       <div className="inner">
         <div className="logo">
-          <Image src="/images/main-header/logo.svg" width={46} height={46} alt="logo" />
-          <h1>Echo Blog</h1>
+          <Link href="#">
+            <Image src="/images/main-header/logo.svg" width={46} height={46} alt="logo" />
+            <h1>Echo Blog</h1>
+          </Link>
         </div>
 
         <ul className="menu">

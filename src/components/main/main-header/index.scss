@@ -1,25 +1,37 @@
 $menu-duration: 150ms;
+$header-bg-color: #2a2a39;
 
 .main-header {
-  height: 70px;
-  background-color: rgba(255, 255, 255, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: var(--header-height);
+  background: $header-bg-color;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 
   .inner {
     display: flex;
     justify-content: space-between;
-    width: 62.5vw;
+    width: 80%;
+    max-width: 1200px;
     height: 100%;
     margin: 0 auto;
   }
 }
 
 .logo {
-  flex: 1;
+  // flex: 1;
   display: flex;
   align-items: center;
 
-  color: var(--primary-color);
+  a {
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    white-space: nowrap;
+  }
 }
 
 .menu {
@@ -61,7 +73,6 @@ $menu-duration: 150ms;
         position: absolute;
         top: 100%;
         left: 0;
-
         width: 100%;
         padding: 0.5208vw;
         background-color: white;
@@ -76,9 +87,9 @@ $menu-duration: 150ms;
           border-radius: 8px;
           transition: background-color ease $menu-duration;
 
-          &:hover {
+          &:hover,
+          &.active-sublink {
             background-color: #f7f7f7;
-
             .submenu-item-link {
               transition: color ease $menu-duration;
               color: var(--primary-color);
