@@ -15,13 +15,18 @@ const HomeMain: FC<IProps> = memo(() => {
       <div className="content">hello world</div>
 
       <div className="bottom">
-        <div className="astronaut rellax" data-rellax-speed="-7">
+        <div
+          className="astronaut rellax"
+          data-rellax-desktop-speed="-6"
+          data-rellax-mobile-speed="-3"
+        >
           <div className="astronaut-mask">
             <img
               className="img-sta rellax"
               src="/images/home/astronaut-sta.png"
               alt="universe"
-              data-rellax-speed="-6"
+              data-rellax-desktop-speed="-6"
+              data-rellax-mobile-speed="-3"
             />
           </div>
           <img className="img-astronaut" src="/images/home/astronaut.png" alt="astronaut" />

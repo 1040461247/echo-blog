@@ -8,6 +8,7 @@ const IndexPage: FC<IProps> = memo(() => {
   return (
     <div className="index-page">
       <HomeMain />
+      <div style={{ height: 2000 }}>666</div>
     </div>
   )
 })
