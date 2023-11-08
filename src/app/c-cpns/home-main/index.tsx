@@ -2,35 +2,30 @@
 
 import { memo } from 'react'
 import './index.scss'
-// const Rellax = require('rellax')
-import Rellax from 'rellax'
+import useParallax from '@/hooks/parallax'
 // Types import
 import type { FC } from 'react'
 
 const HomeMain: FC<IProps> = memo(() => {
-  if (typeof window !== 'undefined') new Rellax()
+  const parallax = useParallax()!
 
   return (
     <section className="home-main">
       <div className="content">hello world</div>
 
       <div className="bottom">
-        <div
-          className="astronaut rellax"
-          data-rellax-desktop-speed="-6"
-          data-rellax-mobile-speed="-3"
-        >
+        <div className="astronaut" ref={(elRef) => parallax(elRef)}>
           <div className="astronaut-mask">
             <img
-              className="img-sta rellax"
+              className="img-sta"
               src="/images/home/astronaut-sta.png"
               alt="universe"
-              data-rellax-desktop-speed="-6"
-              data-rellax-mobile-speed="-3"
+              ref={(elRef) => parallax(elRef)}
             />
           </div>
           <img className="img-astronaut" src="/images/home/astronaut.png" alt="astronaut" />
         </div>
+
         <div className="frame">
           <img className="img-mask" src="/images/home/Mask.png" alt="mask" />
         </div>

@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import './page-style.scss'
 import HomeMain from './c-cpns/home-main'
+import HomeContent from './c-cpns/home-content'
 // Types import
 import type { FC } from 'react'
 
@@ -8,7 +9,7 @@ const IndexPage: FC<IProps> = memo(() => {
   return (
     <div className="index-page">
       <HomeMain />
-      <div style={{ height: 2000 }}>666</div>
+      <HomeContent />
     </div>
   )
 })
