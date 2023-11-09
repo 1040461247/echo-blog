@@ -1,28 +1,33 @@
 'use client'
 
 import { memo } from 'react'
+import Image from 'next/image'
 import BgTower from '@/components/bg-tower'
 import './index.scss'
-import useParallax from '@/hooks/parallax'
 // Import Types
 import type { FC } from 'react'
-import type { IOption } from '@/hooks/parallax'
 
 const HomeContent: FC<IProps> = memo(() => {
-  const parallax = useParallax()!
-
-  const option: IOption = {
-    speed: -2,
-    isTransparent: true,
-    startShowPct: 0.2
-  }
-
   return (
     <section className="home-content">
       <BgTower />
-      <h1 ref={(elRef) => parallax(elRef, option)}>你好啊，我是田若茜</h1>
-      <h1 ref={(elRef) => parallax(elRef, option)}>一名软件开发工程师</h1>
-      <h1 ref={(elRef) => parallax(elRef, option)}>很高兴认识你^_^</h1>
+
+      <div className="inner">
+        <aside className="sidebar">
+          <div className="first-card card">
+            <div className="avatar">
+              <div className="avatar-wrap">
+                {/* <Image src="/images/temp/avatar.png" fill alt="avatar" /> */}
+                <img src="/images/temp/avatar.png" alt="avatar" />
+              </div>
+            </div>
+            <div className="myname">
+              <span>Cheems</span>
+            </div>
+          </div>
+        </aside>
+        <div className="main card"></div>
+      </div>
     </section>
   )
 })

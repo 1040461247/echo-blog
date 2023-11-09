@@ -47,9 +47,6 @@ dependencies:
   react-redux:
     specifier: ^8.1.2
     version: 8.1.2(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
-  rellax:
-    specifier: ^1.12.1
-    version: 1.12.1
   tailwindcss:
     specifier: 3.3.3
     version: 3.3.3
@@ -2484,10 +2481,6 @@ packages:
       call-bind: 1.0.2
       define-properties: 1.2.1
       set-function-name: 2.0.1
-
-  /rellax@1.12.1:
-    resolution: {integrity: sha512-XBIi0CDpW5FLTujYjYBn1CIbK2CJL6TsAg/w409KghP2LucjjzBjsujXDAjyBLWgsfupfUcL5WzdnIPcGfK7XA==}
-    dev: false
 
   /reselect@4.1.8:
     resolution: {integrity: sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==}

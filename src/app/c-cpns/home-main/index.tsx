@@ -11,7 +11,13 @@ const HomeMain: FC<IProps> = memo(() => {
 
   return (
     <section className="home-main">
-      <div className="content">hello world</div>
+      <div className="content">
+        <div className="title">
+          <span className="sup">你好啊，我是若茜</span>
+          <span className="center">一名软件开发工程师</span>
+          <span className="sub">很高兴认识你^_^</span>
+        </div>
+      </div>
 
       <div className="bottom">
         <div className="astronaut" ref={(elRef) => parallax(elRef)}>
