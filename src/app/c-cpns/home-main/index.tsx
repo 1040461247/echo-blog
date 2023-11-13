@@ -13,7 +13,7 @@ const HomeMain: FC<IProps> = memo(() => {
     <section className="home-main">
       <div className="content">
         <div className="title">
-          <span className="sup">你好啊，我是若茜</span>
+          <span className="sup">你好啊，我是Cheems</span>
           <span className="center">一名软件开发工程师</span>
           <span className="sub">很高兴认识你^_^</span>
         </div>

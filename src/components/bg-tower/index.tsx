@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import './index.scss'
+import styles from './styles.module.scss'
 import useParallax from '@/hooks/parallax'
 // Import Types
 import type { FC } from 'react'
@@ -18,24 +18,25 @@ const BgTower: FC<IProps> = memo(() => {
   }
 
   return (
-    <div className="bg-tower">
-      <div className="left">
+    <section className={styles['bg-tower']}>
+      <article className={styles['left']}>
         <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
           <img src="/images/common/bgBuilding1.png" alt="tower1" />
         </div>
         <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
           <img src="/images/common/bgBuilding2.png" alt="tower2" />
         </div>
-      </div>
-      <div className="right">
+      </article>
+
+      <article className={styles['right']}>
         <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
           <img src="/images/common/bgBuilding3.png" alt="tower3" />
         </div>
         <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
           <img src="/images/common/bgBuilding4.png" alt="tower4" />
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   )
 })
 
