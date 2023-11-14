@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* MainHeader */
+  .header-active-link {
+    @apply text-[--primary-color] !important;
+    border-bottom: 3px solid var(--primary-color);
+  }
+  .header-active-sublink {
+    @apply text-[--primary-color] bg-gray-100 !important;
+  }
+  .header-item-link {
+    @apply relative flex items-center px-[1.3021vw] py-2.5 text-gray-400 cursor-pointer hover:header-active-link;
+  }
+
+  /* Drawer */
+}

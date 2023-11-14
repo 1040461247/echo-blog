@@ -1,6 +1,17 @@
 body {
   min-width: 375px;
-  padding-top: var(--header-height);
-  background-color: var(--bg-color-v1);
-  color: var(--font-color);
+  padding-top: var(--header-height-ssm);
+  background-color: var(--bg-dark-blue);
+  color: var(--font-gray);
+}
+
+@media (min-width: 640px) {
+  body {
+    padding-top: var(--header-height-sm);
+  }
+}
+@media (min-width: 768px) {
+  body {
+    padding-top: var(--header-height-md);
+  }
 }

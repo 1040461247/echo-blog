@@ -21,19 +21,19 @@ const BgTower: FC<IProps> = memo(() => {
     <section className={styles['bg-tower']}>
       <article className={styles['left']}>
         <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
-          <img src="/images/common/bgBuilding1.png" alt="tower1" />
+          <img src="/images/bg-tower/bgBuilding1.png" alt="tower1" />
         </div>
         <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
-          <img src="/images/common/bgBuilding2.png" alt="tower2" />
+          <img src="/images/bg-tower/bgBuilding2.png" alt="tower2" />
         </div>
       </article>
 
       <article className={styles['right']}>
         <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
-          <img src="/images/common/bgBuilding3.png" alt="tower3" />
+          <img src="/images/bg-tower/bgBuilding3.png" alt="tower3" />
         </div>
         <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
-          <img src="/images/common/bgBuilding4.png" alt="tower4" />
+          <img src="/images/bg-tower/bgBuilding4.png" alt="tower4" />
         </div>
       </article>
     </section>

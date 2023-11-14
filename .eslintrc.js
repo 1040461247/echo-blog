@@ -30,6 +30,7 @@ module.exports = {
     'no-undef': 0,
     '@typescript-eslint/no-explicit-any': 0,
     'react/react-in-jsx-scope': 0,
-    '@typescript-eslint/no-var-requires': 0
+    '@typescript-eslint/no-var-requires': 0,
+    'react/prop-types': 0
   }
 }
