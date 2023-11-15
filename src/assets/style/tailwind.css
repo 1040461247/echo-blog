@@ -15,5 +15,16 @@
     @apply relative flex items-center px-[1.3021vw] py-2.5 text-gray-400 cursor-pointer hover:header-active-link;
   }
 
-  /* Drawer */
+  /* HomeContent Card */
+  .c-card {
+    --card-bg-color: #a9a8ccee;
+    --card-text-color: #272945;
+    @apply overflow-hidden bg-[--card-bg-color] rounded-[18px] shadow-md text-[--card-text-color];
+  }
+
+  /* HomeMain WordArt */
+  .big-word-art {
+    @apply text-[#1d1e2c] text-[4.1667vw] font-black text-center rotate-[-8deg] translate-y-[-11vh];
+    text-shadow: -0.2083vw 0.2083vw var(--primary-color);
+  }
 }

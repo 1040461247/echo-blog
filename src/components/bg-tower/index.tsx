@@ -1,9 +1,12 @@
 import { memo } from 'react'
-import styles from './styles.module.scss'
 import useParallax from '@/hooks/parallax'
-// Import Types
 import type { FC } from 'react'
 import type { IOption } from '@/hooks/parallax'
+
+// Types
+export interface IProps {
+  children?: React.ReactElement
+}
 
 const BgTower: FC<IProps> = memo(() => {
   const parallax = useParallax()!
@@ -18,22 +21,24 @@ const BgTower: FC<IProps> = memo(() => {
   }
 
   return (
-    <section className={styles['bg-tower']}>
-      <article className={styles['left']}>
-        <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
-          <img src="/images/bg-tower/bgBuilding1.png" alt="tower1" />
+    <section className="overflow-hidden absolute inset-0 -z-50">
+      {/* Left Towers */}
+      <article className="absolute inset-y-0 left-0 w-4/12">
+        <div ref={(elRef) => parallax(elRef, firstTowersOption)}>
+          <img className="w-full" src="/images/bg-tower/bgBuilding1.png" alt="tower" />
         </div>
-        <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
-          <img src="/images/bg-tower/bgBuilding2.png" alt="tower2" />
+        <div ref={(elRef) => parallax(elRef, secondTowersOption)}>
+          <img className="w-full" src="/images/bg-tower/bgBuilding2.png" alt="tower" />
         </div>
       </article>
 
-      <article className={styles['right']}>
-        <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
-          <img src="/images/bg-tower/bgBuilding3.png" alt="tower3" />
+      {/* Right Towers */}
+      <article className="absolute inset-y-0 right-0 w-4/12">
+        <div ref={(elRef) => parallax(elRef, firstTowersOption)}>
+          <img className="w-full" src="/images/bg-tower/bgBuilding3.png" alt="tower" />
         </div>
-        <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
-          <img src="/images/bg-tower/bgBuilding4.png" alt="tower4" />
+        <div ref={(elRef) => parallax(elRef, secondTowersOption)}>
+          <img className="w-full" src="/images/bg-tower/bgBuilding4.png" alt="tower" />
         </div>
       </article>
     </section>
@@ -42,8 +47,3 @@ const BgTower: FC<IProps> = memo(() => {
 
 export default BgTower
 BgTower.displayName = 'BgTower'
-
-// Types
-export interface IProps {
-  children?: React.ReactElement
-}

@@ -58,7 +58,7 @@ export default function useParallax() {
         } else {
           opacity = 1
         }
-        elRef.style.transition = 'opacity 200ms'
+        elRef.style.transition = 'opacity 150ms'
 
         opacity = opacity >= 1 ? 1 : opacity <= 0 ? 0 : opacity
 

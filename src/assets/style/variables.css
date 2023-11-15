@@ -2,17 +2,14 @@
   /* bg color */
   --primary-color: #ff5a79;
   --bg-dark-blue: #1f1f2e;
-  --bg-color-v2: #d7ddfa;
+  --bg-light-blue: #d7ddfa;
 
   /* font color */
   --font-gray: #8a8b9a;
-  --font-color-v2: #abb0c9;
+  --font-light-blue: #abb0c9;
 
   /* header-height */
   --header-height-ssm: 54px;
   --header-height-sm: 61px;
   --header-height-md: 70px;
-
-  --card-bg-color: #a9a8ccee;
-  --card-text-color: #272945;
 }

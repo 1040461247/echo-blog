@@ -37,13 +37,13 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
         hidden: !isOpen
       })}
     >
-      {/* 背景遮罩 */}
+      {/* Mask */}
       <div
         className="absolute inset-0 bg-black/50 transition-opacity duration-300"
         onClick={handleClose}
       ></div>
 
-      {/* 抽屉内容 */}
+      {/* Drawer Wrap */}
       <Transition
         show={isDrawerOpen}
         enter={`transition-transform duration-${durationTime} ease-out`}
@@ -56,7 +56,7 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
         <div
           className={`fixed inset-y-0 right-0 max-w-full w-full xs:w-64 h-[100vh] p-4 bg-[--bg-dark-blue] text-gray-400 shadow-lg transition-all duration-300`}
         >
-          {/* 抽屉头部 */}
+          {/* Drawer Header */}
           <div className="flex justify-end">
             <button
               className="hover:text-gray-300 focus:outline-none transition-colors"
@@ -66,7 +66,7 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
             </button>
           </div>
 
-          {/* 抽屉主体内容 */}
+          {/* Drawer Main Content */}
           <div className="mt-4">{children}</div>
         </div>
       </Transition>
