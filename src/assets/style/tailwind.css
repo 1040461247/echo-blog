@@ -3,6 +3,17 @@
 @tailwind utilities;
 
 @layer components {
+  /* Common */
+  .hover-highlight {
+    @apply hover:text-[--primary-color] transition-colors;
+  }
+  .ellipsis-2-line {
+    @apply overflow-hidden text-ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
   /* MainHeader */
   .header-active-link {
     @apply text-[--primary-color] !important;
@@ -17,9 +28,8 @@
 
   /* HomeContent Card */
   .c-card {
-    --card-bg-color: #a9a8ccee;
-    --card-text-color: #272945;
-    @apply overflow-hidden bg-[--card-bg-color] rounded-[18px] shadow-md text-[--card-text-color];
+    --card-bg-color: rgb(255 255 255 / 0.1);
+    @apply overflow-hidden bg-[--card-bg-color] rounded-[18px] text-gray-200 backdrop-blur-md border border-gray-50/5 shadow shadow-gray-50/10;
   }
 
   /* HomeMain WordArt */

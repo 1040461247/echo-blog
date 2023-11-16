@@ -57,17 +57,17 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
           className={`fixed inset-y-0 right-0 max-w-full w-full xs:w-64 h-[100vh] p-4 bg-[--bg-dark-blue] text-gray-400 shadow-lg transition-all duration-300`}
         >
           {/* Drawer Header */}
-          <div className="flex justify-end">
+          <header className="flex justify-end">
             <button
               className="hover:text-gray-300 focus:outline-none transition-colors"
               onClick={handleClose}
             >
               <Image src="/images/common-icons/close.svg" width={30} height={30} alt="exit" />
             </button>
-          </div>
+          </header>
 
           {/* Drawer Main Content */}
-          <div className="mt-4">{children}</div>
+          <main className="mt-4">{children}</main>
         </div>
       </Transition>
     </div>

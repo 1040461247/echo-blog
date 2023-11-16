@@ -9,7 +9,7 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   return (
-    <section className="md:hidden">
+    <div className="md:hidden">
       {/* MenuBtn */}
       <div className="flex items-center h-full  bg-red px-2" onClick={() => setIsDrawerOpen(true)}>
         <Image src="/images/main-header/menu.svg" width={25} height={25} alt="menubtn"></Image>
@@ -19,7 +19,7 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
       <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <div>sdf</div>
       </Drawer>
-    </section>
+    </div>
   )
 })
 

@@ -12,4 +12,7 @@
   --header-height-ssm: 54px;
   --header-height-sm: 61px;
   --header-height-md: 70px;
+  --ssm-sticky: calc(var(--header-height-ssm) + 20px);
+  --sm-sticky: calc(var(--header-height-sm) + 20px);
+  --md-sticky: calc(var(--header-height-md) + 20px);
 }

@@ -13,9 +13,9 @@ const HeaderMenu: FC<IProps> = memo(() => {
 
   function showSubMenu(subMenu: IMenuListItem[]) {
     return (
-      <ul className="hidden flex-col absolute top-full left-0 w-full p-[0.1333vw] bg-white rounded-[10px] group-hover:flex">
+      <nav className="hidden flex-col absolute top-full left-0 w-full p-[0.1333vw] bg-white rounded-[10px] group-hover:flex">
         {subMenu.map((item: IMenuListItem) => (
-          <li
+          <div
             className={classNames(
               'w-full h-[30px] px-[15px] py-[3px] text-center whitespace-nowrap rounded-xl text-black hover:header-active-sublink transition-colors',
               {
@@ -28,9 +28,9 @@ const HeaderMenu: FC<IProps> = memo(() => {
               <i className={classNames('icon', 'iconfont', item.icon)} />
               <span className="text">{item.text}</span>
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </nav>
     )
   }
 
@@ -43,9 +43,9 @@ const HeaderMenu: FC<IProps> = memo(() => {
   }
 
   return (
-    <ul className="hidden items-center md:flex">
+    <nav className="hidden items-center md:flex">
       {menuList.map((item) => (
-        <li className="flex items-center h-full" key={item.text}>
+        <div className="flex items-center h-full" key={item.text}>
           {item.children ? (
             // With subMenu
             <div
@@ -70,9 +70,9 @@ const HeaderMenu: FC<IProps> = memo(() => {
               <span className="text">{item.text}</span>
             </Link>
           )}
-        </li>
+        </div>
       ))}
-    </ul>
+    </nav>
   )
 })
 

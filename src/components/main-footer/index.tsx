@@ -8,16 +8,16 @@ export interface IProps {
 const MainFooter: FC<IProps> = memo(() => {
   return (
     <footer className="p-5 bg-white/80 border-t-2 border-black/8">
-      <div className="flex py-3">
+      <section className="flex py-3">
         {/* Left Area */}
-        <div></div>
+        <article></article>
 
         {/* Center Area */}
-        <div className="flex-1 flex justify-center items-center">footer content</div>
+        <article className="flex-1 flex justify-center items-center">footer content</article>
 
         {/* Right Area */}
-        <div></div>
-      </div>
+        <article></article>
+      </section>
     </footer>
   )
 })
