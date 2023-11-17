@@ -2,16 +2,20 @@ import { memo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import classNames from 'classnames'
-import menuList from '@/assets/data/main-header-menu'
-
-// Import Types
+import menuList from './menu-list-data'
 import type { FC } from 'react'
-import type { IMenuListItem } from '@/assets/data/main-header-menu'
+import type { IMenuListItem } from '@/components/main-header/c-cpns/header-menu-v1/menu-list-data'
+
+// Types
+export interface IProps {
+  children?: React.ReactElement
+}
 
 const HeaderMenu: FC<IProps> = memo(() => {
-  const pathname = usePathname()
+  const actPathname = usePathname()
 
   function showSubMenu(subMenu: IMenuListItem[]) {
+    // 展示子菜单
     return (
       <nav className="hidden flex-col absolute top-full left-0 w-full p-[0.1333vw] bg-white rounded-[10px] group-hover:flex">
         {subMenu.map((item: IMenuListItem) => (
@@ -35,10 +39,13 @@ const HeaderMenu: FC<IProps> = memo(() => {
   }
 
   function isActivePath(item: IMenuListItem) {
+    // 当前路径的根路径等于某个菜单（或子菜单）路径时，菜单高亮
+    const actPathList = actPathname.split('/')
+    const actRootPath = `/${actPathList[1]}`
     if (item.children) {
-      return !!item.children.find((subItem) => subItem.path === pathname)
+      return !!item.children.find((subItem) => actRootPath === subItem.path!)
     } else {
-      return item.path === pathname
+      return actRootPath === item.path
     }
   }
 
@@ -66,7 +73,7 @@ const HeaderMenu: FC<IProps> = memo(() => {
               })}
               href={item.path ?? '#'}
             >
-              <i className={`icon iconfont ${item.icon}`} />
+              <i className={`icon iconfont ${item.icon} mr-1`} />
               <span className="text">{item.text}</span>
             </Link>
           )}
@@ -78,8 +85,3 @@ const HeaderMenu: FC<IProps> = memo(() => {
 
 export default HeaderMenu
 HeaderMenu.displayName = 'HeaderMenu'
-
-// Types
-export interface IProps {
-  children?: React.ReactElement
-}

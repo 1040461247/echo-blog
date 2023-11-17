@@ -4,7 +4,7 @@ const menuList: IMenuListItem[] = [
   {
     icon: `${prefix}home`,
     text: '首页',
-    path: '/'
+    path: '/home'
   },
   {
     icon: `${prefix}article`,

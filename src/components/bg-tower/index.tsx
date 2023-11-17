@@ -11,33 +11,55 @@ export interface IProps {
 const BgTower: FC<IProps> = memo(() => {
   const parallax = useParallax()!
   const firstTowersOption: IOption = {
-    speed: -3,
+    speed: -4,
     isTransparent: true,
-    startShowPct: 0.4,
-    solidPct: 0.9
+    startShowPct: 0.3,
+    solidPct: 0.6,
+    adapter: {
+      sm: {
+        speed: -3
+      },
+      lg: {
+        speed: -2
+      },
+      xl: {
+        speed: -1
+      }
+    }
   }
   const secondTowersOption: IOption = {
-    speed: 4
+    speed: 6,
+    adapter: {
+      md: {
+        speed: 7
+      },
+      lg: {
+        speed: 8
+      },
+      xl: {
+        speed: 10
+      }
+    }
   }
 
   return (
     <section className="overflow-hidden absolute inset-0 -z-50">
       {/* Left Towers */}
       <article className="absolute inset-y-0 left-0 w-4/12">
-        <div ref={(elRef) => parallax(elRef, firstTowersOption)}>
+        <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
           <img className="w-full" src="/images/bg-tower/bgBuilding1.png" alt="tower" />
         </div>
-        <div ref={(elRef) => parallax(elRef, secondTowersOption)}>
+        <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
           <img className="w-full" src="/images/bg-tower/bgBuilding2.png" alt="tower" />
         </div>
       </article>
 
       {/* Right Towers */}
       <article className="absolute inset-y-0 right-0 w-4/12">
-        <div ref={(elRef) => parallax(elRef, firstTowersOption)}>
+        <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
           <img className="w-full" src="/images/bg-tower/bgBuilding3.png" alt="tower" />
         </div>
-        <div ref={(elRef) => parallax(elRef, secondTowersOption)}>
+        <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
           <img className="w-full" src="/images/bg-tower/bgBuilding4.png" alt="tower" />
         </div>
       </article>

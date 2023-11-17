@@ -1,6 +1,5 @@
 import { memo } from 'react'
-import HomeMain from './c-cpns/home-main'
-import HomeContent from './c-cpns/home-content'
+
 // Types import
 import type { FC } from 'react'
 
@@ -10,12 +9,7 @@ export interface IProps {
 }
 
 const IndexPage: FC<IProps> = memo(() => {
-  return (
-    <div className="index-page">
-      <HomeMain />
-      <HomeContent />
-    </div>
-  )
+  return <div className="index-page"></div>
 })
 
 export default IndexPage

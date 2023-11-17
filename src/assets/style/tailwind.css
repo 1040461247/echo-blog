@@ -13,6 +13,17 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+  .ellipsis-4-line {
+    @apply overflow-hidden text-ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+
+  /* BgTower */
+  .second-tower {
+    @apply mt-[120vh] xl:mt-[50vh];
+  }
 
   /* MainHeader */
   .header-active-link {
