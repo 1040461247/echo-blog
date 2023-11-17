@@ -2,9 +2,9 @@ import { memo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import classNames from 'classnames'
-import menuList from './menu-list-data'
+import menuList from '@/assets/data/menu-list-data'
 import type { FC } from 'react'
-import type { IMenuListItem } from '@/components/main-header/c-cpns/header-menu-v1/menu-list-data'
+import type { IMenuListItem } from '@/assets/data/menu-list-data'
 
 // Types
 export interface IProps {

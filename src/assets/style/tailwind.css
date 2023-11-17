@@ -7,6 +7,13 @@
   .hover-highlight {
     @apply hover:text-[--primary-color] transition-colors;
   }
+  .hide-scroll {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  .hide-scroll::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
   .ellipsis-2-line {
     @apply overflow-hidden text-ellipsis;
     display: -webkit-box;

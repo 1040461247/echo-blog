@@ -59,15 +59,15 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
           {/* Drawer Header */}
           <header className="flex justify-end">
             <button
-              className="hover:text-gray-300 focus:outline-none transition-colors"
+              className="hover:text-gray-300 focus:outline-none transition-colors p-1"
               onClick={handleClose}
             >
-              <Image src="/images/common-icons/close.svg" width={30} height={30} alt="exit" />
+              <Image src="/images/common-icons/close.svg" width={20} height={20} alt="exit" />
             </button>
           </header>
 
           {/* Drawer Main Content */}
-          <main className="mt-4">{children}</main>
+          <main className="overflow-y-auto hide-scroll h-full mt-4">{children}</main>
         </div>
       </Transition>
     </div>

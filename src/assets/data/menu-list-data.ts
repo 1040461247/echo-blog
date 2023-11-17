@@ -11,6 +11,11 @@ const menuList: IMenuListItem[] = [
     text: '文章',
     children: [
       {
+        icon: `${prefix}archives`,
+        text: '时间轴',
+        path: '/archives'
+      },
+      {
         icon: `${prefix}category`,
         text: '分类',
         path: '/category'
@@ -19,11 +24,6 @@ const menuList: IMenuListItem[] = [
         icon: `${prefix}tags`,
         text: '标签',
         path: '/tags'
-      },
-      {
-        icon: `${prefix}archives`,
-        text: '时间轴',
-        path: '/archives'
       }
     ]
   },
@@ -47,14 +47,14 @@ const menuList: IMenuListItem[] = [
         path: '/me'
       },
       {
-        icon: `${prefix}github`,
-        text: 'github',
-        path: 'https://github.com/1040461247'
-      },
-      {
         icon: `${prefix}friends`,
         text: '友链',
         path: '/friends'
+      },
+      {
+        icon: `${prefix}github`,
+        text: 'github',
+        path: 'https://github.com/1040461247'
       }
     ]
   }
