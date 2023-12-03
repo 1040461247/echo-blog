@@ -1,9 +1,11 @@
 import Request from './request/index'
-import { API_BASEURL } from '@/global/config'
+import { AxiosRequestConfig } from './request/types'
 
-const request = new Request({
-  baseURL: API_BASEURL,
-  timeout: 1000 * 5
-})
+const baseConfig: AxiosRequestConfig = {
+  baseURL: process.env.NEXT_PUBLIC_API_BASEURL,
+  timeout: 5000
+}
+
+const request = new Request(baseConfig)
 
 export default request

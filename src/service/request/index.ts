@@ -31,8 +31,6 @@ class Request {
   }
 
   get(url: string, config?: InternalAxiosRequestConfig) {
-    console.log(process.env)
-
     let baseConfig: AxiosRequestConfig
     if (config) {
       baseConfig = { method: 'GET', url, ...config }

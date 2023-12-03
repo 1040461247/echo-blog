@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { counterSlice } from './slices'
+import { homeSlice } from './slices'
 
 const store = configureStore({
   reducer: {
-    [counterSlice.name]: counterSlice.reducer
+    [homeSlice.name]: homeSlice.reducer
   }
 })
 

@@ -1,8 +1,10 @@
 import { memo } from 'react'
 import Image from 'next/image'
-import articlesData from './articles-data.json'
 import type { FC } from 'react'
 import Link from 'next/link'
+import { useAppSelector } from '@/hooks'
+import { shallowEqual } from 'react-redux'
+import formatDate from '@/utils/format-date'
 
 // Types
 export interface IProps {
@@ -10,19 +12,26 @@ export interface IProps {
 }
 
 const ContentMain: FC<IProps> = memo(() => {
+  const { articleList } = useAppSelector(
+    (state) => ({
+      articleList: state.home.articleList
+    }),
+    shallowEqual
+  )
+
   return (
     <div className="content-main flex-1">
-      {articlesData.map((item) => (
+      {articleList.map((item) => (
         <div className="article c-card mb-[38px]" key={item.id}>
           {/* Article Album */}
-          {item.album && (
+          {item.cover_url && (
             <Link
               className="article-album group block relative overflow-hidden h-[150px]"
               href={`/articles/${item.id}`}
             >
               <Image
                 className="object-cover"
-                src={item.album}
+                src={item.cover_url}
                 fill
                 sizes="100%"
                 alt="article-album"
@@ -47,29 +56,30 @@ const ContentMain: FC<IProps> = memo(() => {
               <div className="footer-left flex flex-wrap gap-3 text-left">
                 <span className="article-info-date">
                   <i className="iconfont icon-archives mr-1" />
-                  <span>{item.createAt}</span>
+                  <span>{formatDate(item.create_time)}</span>
                 </span>
 
                 <span className="article-info-category hidden sm:inline-block">
                   <i className="iconfont icon-category mr-1" />
-                  <Link className="hover-highlight" href={`/category/${item.category.cateName}`}>
-                    {item.category.cateName}
+                  <Link className="hover-highlight" href={`/category/${item.category.name}`}>
+                    {item.category.name}
                   </Link>
                 </span>
 
-                <span className="article-info-tags hidden md:inline-block">
-                  <i className="iconfont icon-tags mr-1" />
-                  <nav className="inline-block">
-                    {item.tags.map((tag, index) => (
-                      <span key={tag}>
-                        <Link className="hover-highlight" href={`/tags/${tag}`}>
-                          {tag}
-                        </Link>
-                        {index !== item.tags.length - 1 && ' | '}
-                      </span>
-                    ))}
-                  </nav>
-                </span>
+                {item.tags &&
+                  item.tags.map((tag, index) => (
+                    <span className="article-info-tags hidden md:inline-block" key={tag.id}>
+                      <i className="iconfont icon-tags mr-1" />
+                      <nav className="inline-block">
+                        <span>
+                          <Link className="hover-highlight" href={`/tags/${tag.name}`}>
+                            {tag.name}
+                          </Link>
+                          {index !== item.tags!.length - 1 && ' | '}
+                        </span>
+                      </nav>
+                    </span>
+                  ))}
               </div>
 
               <div className="article-read-more flex-1 text-right whitespace-nowrap">
