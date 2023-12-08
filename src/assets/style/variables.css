@@ -15,6 +15,9 @@
   --ssm-sticky: calc(var(--header-height-ssm) + 20px);
   --sm-sticky: calc(var(--header-height-sm) + 20px);
   --md-sticky: calc(var(--header-height-md) + 20px);
+  --ssm-full-height: calc(100vh - var(--header-height-ssm));
+  --sm-full-height: calc(100vh - var(--header-height-sm));
+  --md-full-height: calc(100vh - var(--header-height-md));
 
   /* btn */
   --btn-gray: #3c3c47;

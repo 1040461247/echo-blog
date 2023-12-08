@@ -61,25 +61,26 @@ const ContentMain: FC<IProps> = memo(() => {
 
                 <span className="article-info-category hidden sm:inline-block">
                   <i className="iconfont icon-category mr-1" />
-                  <Link className="hover-highlight" href={`/category/${item.category.name}`}>
+                  <Link className="hover-highlight" href={`/category/${item.category.id}`}>
                     {item.category.name}
                   </Link>
                 </span>
 
-                {item.tags &&
-                  item.tags.map((tag, index) => (
-                    <span className="article-info-tags hidden md:inline-block" key={tag.id}>
-                      <i className="iconfont icon-tags mr-1" />
-                      <nav className="inline-block">
-                        <span>
-                          <Link className="hover-highlight" href={`/tags/${tag.name}`}>
+                {item.tags && (
+                  <span className="article-info-tags hidden md:flex">
+                    <i className="iconfont icon-tags mr-1" />
+                    <nav className="inline-block">
+                      {item.tags?.map((tag, index) => (
+                        <span key={tag.id}>
+                          <Link className="hover-highlight" href={`/tags/${tag.id}`}>
                             {tag.name}
                           </Link>
                           {index !== item.tags!.length - 1 && ' | '}
                         </span>
-                      </nav>
-                    </span>
-                  ))}
+                      ))}
+                    </nav>
+                  </span>
+                )}
               </div>
 
               <div className="article-read-more flex-1 text-right whitespace-nowrap">

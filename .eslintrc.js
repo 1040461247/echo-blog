@@ -31,6 +31,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     'react/react-in-jsx-scope': 0,
     '@typescript-eslint/no-var-requires': 0,
-    'react/prop-types': 0
+    'react/prop-types': 0,
+    'prettier/prettier': ['error', { endOfLine: 'auto' }]
   }
 }

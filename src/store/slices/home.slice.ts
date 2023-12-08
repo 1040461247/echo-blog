@@ -11,6 +11,7 @@ interface IInitialState {
   articleListPage: number
 }
 
+// Thunks
 const fetchStatisticsAction = createAsyncThunk('home/fetchStatistics', async () => {
   const statistics = await getStatistics()
   return statistics

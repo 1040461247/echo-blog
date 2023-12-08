@@ -4,6 +4,9 @@
 
 @layer components {
   /* Common */
+  .inner-layout {
+    @apply flex justify-between w-4/5 max-w-[1200px] h-full mx-auto;
+  }
   .hover-highlight {
     @apply hover:text-[--primary-color] transition-colors;
   }
@@ -54,5 +57,20 @@
   .big-word-art {
     @apply text-[#1d1e2c] text-[4.1667vw] font-black text-center rotate-[-8deg] translate-y-[-11vh];
     text-shadow: -0.2083vw 0.2083vw var(--primary-color);
+  }
+
+  /* Articles Display */
+  .art-font-v1 {
+    @apply !text-4xl sm:!text-5xl md:!text-6xl text-[#d3d7eb] tracking-[5px] font-black;
+    text-shadow:
+      -2px -2px 0 var(--primary-color),
+      2px -2px 0 var(--primary-color),
+      -2px 2px 0 var(--primary-color),
+      2px 2px 0 var(--primary-color),
+      -4px -4px 0 black,
+      4px -4px 0 black,
+      -4px 4px 0 black,
+      4px 4px 0 black,
+      8px 8px 0 rgb(0 0 0 / 0.5);
   }
 }

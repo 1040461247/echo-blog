@@ -16,7 +16,7 @@ const HomeContent: FC<IProps> = memo(() => {
     <div className="relative z-10 text-center -mt-2 pt-10 bg-[--bg-dark-blue]">
       <BgTower />
 
-      <div className="flex h-full w-4/5 max-w-[1200px] mx-auto">
+      <div className="inner-layout">
         <ContentSidebar />
         <ContentMain />
       </div>
