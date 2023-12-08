@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { homeSlice, categorySlice } from './slices'
+import { homeSlice, categorySlice, tagSlice } from './slices'
 
 const store = configureStore({
   reducer: {
     [homeSlice.name]: homeSlice.reducer,
-    [categorySlice.name]: categorySlice.reducer
+    [categorySlice.name]: categorySlice.reducer,
+    [tagSlice.name]: tagSlice.reducer
   }
 })
 

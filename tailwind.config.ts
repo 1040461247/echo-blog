@@ -16,7 +16,10 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        desk: "url('/images/articles-display/bg.png')"
+        desk: "url('/images/articles-display/bg.png')",
+        'card-gray': "url('/images/articles-display/card_gray.png')",
+        'card-blue': "url('/images/articles-display/card_blue.png')",
+        'card-red': "url('/images/articles-display/card_red.png')"
       }
     }
   },

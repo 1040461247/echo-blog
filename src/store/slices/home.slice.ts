@@ -5,7 +5,7 @@ import type { IStatistics, IArticle } from '@/service/modules/home.request'
 import type { ReduxState } from '..'
 
 // Types
-interface IInitialState {
+export interface IHomeSliceState {
   statistics: IStatistics | Record<string, never>
   articleList: IArticle[] | []
   articleListPage: number
@@ -29,7 +29,7 @@ export const homeSlice = createSlice({
     statistics: {},
     articleList: [],
     articleListPage: 1
-  } as IInitialState,
+  } as IHomeSliceState,
   reducers: {
     articleListPageAction(state, { payload }) {
       state.articleListPage = payload
@@ -38,10 +38,10 @@ export const homeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchStatisticsAction.fulfilled, (state, { payload }) => {
-        state.statistics = payload
+        state.statistics = payload ?? {}
       })
       .addCase(fetchArticlesAction.fulfilled, (state, { payload }) => {
-        state.articleList = payload
+        state.articleList = payload ?? []
       })
   }
 })

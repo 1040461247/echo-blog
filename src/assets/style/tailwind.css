@@ -17,6 +17,9 @@
   .hide-scroll::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
   }
+  .ellipsis-1-line {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+  }
   .ellipsis-2-line {
     @apply overflow-hidden text-ellipsis;
     display: -webkit-box;
@@ -71,6 +74,6 @@
       4px -4px 0 black,
       -4px 4px 0 black,
       4px 4px 0 black,
-      8px 8px 0 rgb(0 0 0 / 0.5);
+      10px 10px 0 rgb(0 0 0 / 0.5);
   }
 }

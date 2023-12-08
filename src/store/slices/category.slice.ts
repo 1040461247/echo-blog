@@ -4,7 +4,7 @@ import type { IArticle } from '@/service/modules/home.request'
 import type { ICategory } from '@/service/modules/category.request'
 
 // Types
-export interface IInitialState {
+export interface ICategorySliceState {
   articles: IArticle[] | []
   category: ICategory | Record<string, never>
 }
@@ -28,7 +28,7 @@ export const categorySlice = createSlice({
   initialState: {
     articles: [],
     category: {}
-  } as IInitialState,
+  } as ICategorySliceState,
   reducers: {},
   extraReducers: (builder) => {
     builder

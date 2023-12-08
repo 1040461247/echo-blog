@@ -1,10 +1,11 @@
 import { memo } from 'react'
 import Image from 'next/image'
-import type { FC } from 'react'
 import Link from 'next/link'
 import { useAppSelector } from '@/hooks'
 import { shallowEqual } from 'react-redux'
 import formatDate from '@/utils/format-date'
+import { ARTICLE_PATH, CATEGORY_PATH, TAG_PATH } from '@/constants'
+import type { FC } from 'react'
 
 // Types
 export interface IProps {
@@ -27,7 +28,7 @@ const ContentMain: FC<IProps> = memo(() => {
           {item.cover_url && (
             <Link
               className="article-album group block relative overflow-hidden h-[150px]"
-              href={`/articles/${item.id}`}
+              href={`${ARTICLE_PATH}/${item.id}`}
             >
               <Image
                 className="object-cover"
@@ -43,7 +44,7 @@ const ContentMain: FC<IProps> = memo(() => {
           {/* Article Main */}
           <main className="flex flex-col gap-5 justify-between px-7 pt-5 pb-7">
             <header className="article-title text-left">
-              <Link className="hover-highlight" href={`/article/${item.id}`}>
+              <Link className="hover-highlight" href={`${ARTICLE_PATH}/${item.id}`}>
                 <h3 className="text-2xl">{item.title}</h3>
               </Link>
             </header>
@@ -61,7 +62,7 @@ const ContentMain: FC<IProps> = memo(() => {
 
                 <span className="article-info-category hidden sm:inline-block">
                   <i className="iconfont icon-category mr-1" />
-                  <Link className="hover-highlight" href={`/category/${item.category.id}`}>
+                  <Link className="hover-highlight" href={`${CATEGORY_PATH}/${item.category.id}`}>
                     {item.category.name}
                   </Link>
                 </span>
@@ -72,7 +73,7 @@ const ContentMain: FC<IProps> = memo(() => {
                     <nav className="inline-block">
                       {item.tags?.map((tag, index) => (
                         <span key={tag.id}>
-                          <Link className="hover-highlight" href={`/tags/${tag.id}`}>
+                          <Link className="hover-highlight" href={`${TAG_PATH}/${tag.id}`}>
                             {tag.name}
                           </Link>
                           {index !== item.tags!.length - 1 && ' | '}
@@ -84,7 +85,7 @@ const ContentMain: FC<IProps> = memo(() => {
               </div>
 
               <div className="article-read-more flex-1 text-right whitespace-nowrap">
-                <Link className="hover-highlight" href={`/articles/${item.id}`}>
+                <Link className="hover-highlight" href={`${ARTICLE_PATH}/${item.id}`}>
                   Read more &gt;
                 </Link>
               </div>

@@ -14,6 +14,7 @@ export interface IArticle {
   cover_url: string
   create_time: string
   update_time: string
+  is_sticky: boolean
   author: {
     id: number
     name: string

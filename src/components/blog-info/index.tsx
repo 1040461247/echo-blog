@@ -5,6 +5,7 @@ import { shallowEqual } from 'react-redux'
 import { useAppSelector } from '@/hooks'
 import profileJson from '@/assets/data/profile.json'
 import type { FC } from 'react'
+import { ARCHIVES_PATH, CATEGORY_PATH, TAG_PATH } from '@/constants'
 
 // Types
 export interface IProps {
@@ -43,15 +44,15 @@ const BlogInfo: FC<IProps> = memo(() => {
       </div>
 
       <nav className="statistics flex items-center h-12 my-[10px] text-center">
-        <Link href="/archives" className="flex-1 flex flex-col">
+        <Link href={ARCHIVES_PATH} className="flex-1 flex flex-col">
           <span className="text-xl">{statistics.articlesCount}</span>
           <span className="text-xs opacity-70">文章</span>
         </Link>
-        <Link href="/category" className="flex-1 flex flex-col">
+        <Link href={CATEGORY_PATH} className="flex-1 flex flex-col">
           <span className="text-xl">{statistics.categoriesCount}</span>
           <span className="text-xs opacity-70">分类</span>
         </Link>
-        <Link href="/tags" className="flex-1 flex flex-col">
+        <Link href={TAG_PATH} className="flex-1 flex flex-col">
           <span className="text-xl">{statistics.tagsCount}</span>
           <span className="text-xs opacity-70">标签</span>
         </Link>
