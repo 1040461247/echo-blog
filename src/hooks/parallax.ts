@@ -8,6 +8,7 @@ export interface IOption {
   solidPct?: number
   adapter?: {
     [key: string]: TAdapterOption | undefined
+    xs?: TAdapterOption
     sm?: TAdapterOption
     md?: TAdapterOption
     lg?: TAdapterOption
@@ -19,7 +20,6 @@ export type TAdapterOption = Partial<IOption>
 
 export default function useParallax() {
   if (typeof window === 'undefined') return
-
   const [scrollY, setScrollY] = useState(0)
   const viewportHeight = window.innerHeight || document.documentElement.clientHeight
   const viewportWidth = window.innerWidth || document.documentElement.clientWidth
@@ -104,6 +104,7 @@ export default function useParallax() {
 
     // 响应式断点
     const breakpoints: {
+      xs: number
       sm: number
       md: number
       lg: number
@@ -111,6 +112,7 @@ export default function useParallax() {
       xxl: number
       [key: string]: number
     } = {
+      xs: 475,
       sm: 640,
       md: 768,
       lg: 1024,

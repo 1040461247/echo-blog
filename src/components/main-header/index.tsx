@@ -11,7 +11,7 @@ import type { FC } from 'react'
 
 const MainHeader: FC<IProps> = memo(() => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-[--header-height-ssm] sm:h-[--header-height-sm] md:h-[--header-height-md] bg-[#2a2a39] shadow-md ">
+    <header className="main-header fixed top-0 left-0 right-0 z-50 h-[--header-height-ssm] sm:h-[--header-height-sm] md:h-[--header-height-md] bg-[#2a2a39] shadow-md ">
       <div className="inner inner-layout">
         <HeaderLogo />
         <HeaderMenuV1 />

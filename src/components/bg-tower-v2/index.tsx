@@ -14,16 +14,33 @@ const BgTowerV2: FC<IProps> = memo(() => {
   const parallax = useParallax()
 
   const parallaxOption: IOption = {
-    speed: -4,
+    speed: -8,
     isTransparent: true,
-    startShowPct: 0.3,
-    solidPct: 0.8
+    startShowPct: 0.7,
+    solidPct: 0.9,
+    adapter: {
+      xs: {
+        speed: -7
+      },
+      sm: {
+        speed: -6
+      },
+      md: {
+        speed: -5
+      },
+      lg: {
+        speed: -4
+      },
+      xl: {
+        speed: -3
+      }
+    }
   }
 
   return (
-    <div className="bg-tower-v2 absolute inset-0">
+    <div className="bg-tower-v2 overflow-hidden absolute inset-0">
       <img
-        className="absolute inset-x-0 bottom-0 mx-auto w-2/3 xs:w-1/2 sm:w-1/3 md:w-1/4"
+        className="opacity-0 absolute right-0 left-1 top-[30vh] w-2/3 sm:w-1/2 md:w-2/5 lg:w-2/6 xl:w-1/4 mx-auto"
         src="/images/bg-tower/GuangzhouTower.png"
         alt="guangzhou-tower"
         ref={(el) => parallax!(el, parallaxOption)}
