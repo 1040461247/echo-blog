@@ -13,7 +13,7 @@ export interface IProps {
 
 const ArticleCard: FC<IProps> = memo(({ articleData }) => {
   console.log(articleData)
-  const durationVal = 500
+  const duration = 'duration-500'
 
   function rotateCard(el: HTMLDivElement | null) {
     // 随机旋转card
@@ -31,12 +31,12 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
 
   return (
     <div
-      className={`article-card group relative transition-transform duration-${durationVal} hover:!rotate-0`}
+      className={`article-card group relative transition-transform ${duration} hover:!rotate-0`}
       ref={(el) => rotateCard(el)}
     >
       {/* Card Shadow */}
       <div
-        className={`card-shadow relative left-5 top-5 transition-transform duration-${durationVal} group-hover:translate-x-10 group-hover:translate-y-20`}
+        className={`card-shadow relative left-5 top-5 transition-transform ${duration} group-hover:translate-x-10 group-hover:translate-y-20`}
       >
         <img className="w-full" src="/images/articles-display/card_shadow.png" alt="card-shadow" />
       </div>

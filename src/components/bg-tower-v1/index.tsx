@@ -8,7 +8,7 @@ export interface IProps {
   children?: React.ReactElement
 }
 
-const BgTower: FC<IProps> = memo(() => {
+const BgTowerV1: FC<IProps> = memo(() => {
   const parallax = useParallax()!
   const firstTowersOption: IOption = {
     speed: -4,
@@ -67,5 +67,5 @@ const BgTower: FC<IProps> = memo(() => {
   )
 })
 
-export default BgTower
-BgTower.displayName = 'BgTower'
+export default BgTowerV1
+BgTowerV1.displayName = 'BgTower'

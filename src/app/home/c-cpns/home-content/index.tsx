@@ -1,7 +1,7 @@
 'use client'
 
 import { memo } from 'react'
-import BgTower from '@/components/bg-tower'
+import BgTower from '@/components/bg-tower-v1'
 import ContentSidebar from './c-cpns/content-sidebar'
 import ContentMain from './c-cpns/content-main'
 import type { FC } from 'react'
