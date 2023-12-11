@@ -12,7 +12,6 @@ export interface IProps {
 }
 
 const ArticleCard: FC<IProps> = memo(({ articleData }) => {
-  console.log(articleData)
   const duration = 'duration-500'
 
   function rotateCard(el: HTMLDivElement | null) {
