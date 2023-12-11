@@ -33,9 +33,9 @@ const ArchivesPage: FC<IProps> = memo(() => {
       <BgTowerV2 />
 
       <div className="archives-content inner-layout flex-col justify-start items-center">
-        <header className="pt-7 text-[var(--font-light-blue)] text-center">
+        <header className="pt-7 text-gray-200 text-center">
           <h2 className="text-5xl mb-3">时间轴</h2>
-          <h3 className="text-2xl">({statistics.articlesCount})</h3>
+          <h3>-共发布了{statistics.articlesCount}篇文章-</h3>
         </header>
         <main className="">
           <Timeline articlesData={articles} />

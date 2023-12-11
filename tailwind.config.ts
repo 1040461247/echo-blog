@@ -19,7 +19,15 @@ const config: Config = {
         desk: "url('/images/articles-display/bg.png')",
         'card-gray': "url('/images/articles-display/card_gray.png')",
         'card-blue': "url('/images/articles-display/card_blue.png')",
-        'card-red': "url('/images/articles-display/card_red.png')"
+        'card-red': "url('/images/articles-display/card_red.png')",
+        room: "url('/images/classification/bg.png')",
+        window: "url('/images/classification/window.png')",
+        'book-purpel': "url('/images/classification/book_purpel.png')",
+        'book-purpel-cur': "url('/images/classification/book_purpel_cur.png')",
+        'book-red': "url('/images/classification/book_red.png')",
+        'book-red-cur': "url('/images/classification/book_red_cur.png')",
+        'book-yellow': "url('/images/classification/book_yellow.png')",
+        'book-yellow-cur': "url('/images/classification/book_yellow_cur.png')"
       }
     }
   },

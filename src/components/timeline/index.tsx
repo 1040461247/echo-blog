@@ -37,7 +37,7 @@ const Timeline: FC<IProps> = memo(({ articlesData }) => {
               <div className="flag-wrapper relative text-center md:inline-block">
                 <span
                   className={`hexa absolute inset-x-0 top-[-30px] w-4 h-[10px] mx-auto mt-0 bg-[--primary-color] z-[5] before:content-[''] before:absolute before:top-[-4px] before:inset-x-0 before:h-0 before:border-b-[4px] before:border-solid before:border-b-[--primary-color] before:border-x-[8px] before:border-x-[transparent] after:absolute after:bottom-[-4px] after:inset-x-0 after:h-0 after:border-t-[4px] after:border-solid after:border-t-[--primary-color] after:border-x-[8px] after:border-x-[transparent] md:-left-2 md:right-auto md:top-2 ${
-                    isLeft(index) ? 'md:left-auto md:mr-0 md:-right-2' : ''
+                    isLeft(index) ? 'md:left-auto md:mr-0 md:!-right-2' : ''
                   } `}
                 ></span>
                 <span

@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .inner-layout {
+    @apply flex justify-between w-4/5 max-w-[1200px] h-full mx-auto;
+  }
+
+  .c-card {
+    --card-bg-color: rgb(255 255 255 / 0.1);
+    @apply overflow-hidden bg-[--card-bg-color] rounded-[18px] text-gray-200 backdrop-blur-md border border-gray-50/5 shadow shadow-gray-50/10;
+  }
+}
+
 @layer utilities {
   .hover-highlight {
     @apply hover:text-[--primary-color] transition-colors;
@@ -27,16 +38,5 @@
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
-  }
-}
-
-@layer components {
-  .inner-layout {
-    @apply flex justify-between w-4/5 max-w-[1200px] h-full mx-auto;
-  }
-
-  .c-card {
-    --card-bg-color: rgb(255 255 255 / 0.1);
-    @apply overflow-hidden bg-[--card-bg-color] rounded-[18px] text-gray-200 backdrop-blur-md border border-gray-50/5 shadow shadow-gray-50/10;
   }
 }
