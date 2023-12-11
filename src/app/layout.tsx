@@ -6,7 +6,7 @@ import 'normalize.css'
 import '@/assets/style/reset.css'
 import '@/assets/style/variables.css'
 import '@/assets/style/common.css'
-import '@/assets/style/tailwind.scss'
+import '@/assets/style/tailwind.css'
 import MainHeader from '../components/main-header'
 // import MainFooter from '../components/main-footer'
 

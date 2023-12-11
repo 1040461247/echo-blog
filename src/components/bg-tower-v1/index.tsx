@@ -42,6 +42,8 @@ const BgTowerV1: FC<IProps> = memo(() => {
     }
   }
 
+  const secondTowerStyle = `mt-[120vh] xl:mt-[50vh]`
+
   return (
     <section className="overflow-hidden absolute inset-0 -z-50">
       {/* Left Towers */}
@@ -49,7 +51,10 @@ const BgTowerV1: FC<IProps> = memo(() => {
         <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
           <img className="w-full" src="/images/bg-tower/bgBuilding1.png" alt="tower" />
         </div>
-        <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
+        <div
+          className={`second-tower ${secondTowerStyle}`}
+          ref={(elRef) => parallax(elRef, secondTowersOption)}
+        >
           <img className="w-full" src="/images/bg-tower/bgBuilding2.png" alt="tower" />
         </div>
       </article>
@@ -59,7 +64,10 @@ const BgTowerV1: FC<IProps> = memo(() => {
         <div className="first-tower" ref={(elRef) => parallax(elRef, firstTowersOption)}>
           <img className="w-full" src="/images/bg-tower/bgBuilding3.png" alt="tower" />
         </div>
-        <div className="second-tower" ref={(elRef) => parallax(elRef, secondTowersOption)}>
+        <div
+          className={`second-tower ${secondTowerStyle}`}
+          ref={(elRef) => parallax(elRef, secondTowersOption)}
+        >
           <img className="w-full" src="/images/bg-tower/bgBuilding4.png" alt="tower" />
         </div>
       </article>

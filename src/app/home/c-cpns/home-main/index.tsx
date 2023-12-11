@@ -13,10 +13,10 @@ const HomeMain: FC<IProps> = memo(() => {
   const parallax = useParallax()!
 
   return (
-    <div className="overflow-hidden relative h-[calc(100vh+31.25vw)] bg-[--bg-light-blue]">
+    <div className="home-main overflow-hidden relative h-[calc(100vh+31.25vw)] bg-[--bg-light-blue]">
       {/* Main Content */}
       <main className="flex justify-center items-center h-[100vh]">
-        <div className="big-word-art">
+        <div className="big-word-art text-[#1d1e2c] text-[4.1667vw] font-black text-center rotate-[-8deg] translate-y-[-11vh] [text-shadow:_-0.2083vw_0.2083vw_var(--primary-color)]">
           <span className="block text-left">你好啊，我是Cheems</span>
           <span className="block text-center text-[9.2917vw]">一名软件开发工程师</span>
           <span className="block text-right">很高兴认识你^_^</span>

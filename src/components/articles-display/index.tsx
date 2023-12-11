@@ -12,12 +12,20 @@ export interface IProps {
 }
 
 const ArticlesDisplay: FC<IProps> = memo(({ titleIcon, titleText, articlesData }) => {
+  // Common Styles
+  const wordArtStyle = `
+    !text-4xl sm:!text-5xl md:!text-6xl !text-[#d3d7eb] !tracking-[5px] !font-black
+    [text-shadow:-2px_-2px_0_var(--primary-color),2px_-2px_0_var(--primary-color),-2px_2px_0_var(--primary-color),2px_2px_0_var(--primary-color),-4px_-4px_0_black,4px_-4px_0_black,-4px_4px_0_black,4px_4px_0_black,10px_10px_0_rgb(0_0_0_/_0.5)]
+  `
+
   return (
     <div className="articles-display overflow-y-scroll h-[--ssm-full-height] sm:h-[--sm-full-height] md:h-[--md-full-height] bg-desk bg-no-repeat bg-center bg-cover">
       <div className="inner-layout justify-start flex-col">
         {/* Header */}
-        <header className="title flex justify-center w-full pt-[40px] md:pt-[70px] art-font-v1 text-left">
-          <div className="title-icon">{titleIcon('art-font-v1')}</div>
+        <header
+          className={`title flex justify-center w-full pt-[40px] md:pt-[70px] text-left ${wordArtStyle}`}
+        >
+          <div className="title-icon">{titleIcon(wordArtStyle)}</div>
           <h2 className="title-text">{titleText}</h2>
         </header>
 

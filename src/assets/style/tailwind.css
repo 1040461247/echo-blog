@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .hover-highlight {
+    @apply hover:text-[--primary-color] transition-colors;
+  }
+  .hide-scroll {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  .hide-scroll::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  .ellipsis-1-line {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+  }
+  .ellipsis-2-line {
+    @apply overflow-hidden text-ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .ellipsis-4-line {
+    @apply overflow-hidden text-ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+}
+
+@layer components {
+  .inner-layout {
+    @apply flex justify-between w-4/5 max-w-[1200px] h-full mx-auto;
+  }
+
+  .c-card {
+    --card-bg-color: rgb(255 255 255 / 0.1);
+    @apply overflow-hidden bg-[--card-bg-color] rounded-[18px] text-gray-200 backdrop-blur-md border border-gray-50/5 shadow shadow-gray-50/10;
+  }
+}

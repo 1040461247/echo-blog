@@ -14,6 +14,24 @@ export interface IProps {
 const HeaderMenu: FC<IProps> = memo(() => {
   const actPathname = usePathname()
 
+  // Common Styles
+  const activeLinkStyle = `!text-[--primary-color] border-b-[3px] border-solid border-[--primary-color]`
+  const linkStyle = `
+    relative flex items-center px-[1.3021vw] py-2.5 text-gray-400 cursor-pointer
+    hover:!text-[--primary-color] hover:border-b-[3px] hover:border-solid hover:border-[--primary-color]
+  `
+
+  function isActivePath(item: IMenuListItem) {
+    // 当前路径的根路径等于某个菜单（或子菜单）路径时，菜单高亮
+    const actPathList = actPathname.split('/')
+    const actRootPath = `/${actPathList[1]}`
+    if (item.children) {
+      return !!item.children.find((subItem) => actRootPath === subItem.path!)
+    } else {
+      return actRootPath === item.path
+    }
+  }
+
   function showSubMenu(subMenu: IMenuListItem[]) {
     // 展示子菜单
     return (
@@ -21,9 +39,10 @@ const HeaderMenu: FC<IProps> = memo(() => {
         {subMenu.map((item: IMenuListItem) => (
           <div
             className={classNames(
-              'w-full h-[30px] px-[15px] py-[3px] text-center whitespace-nowrap rounded-xl text-black hover:header-active-sublink transition-colors',
+              `w-full h-[30px] px-[15px] py-[3px] text-center whitespace-nowrap rounded-xl text-black transition-colors
+              hover:!text-[--primary-color] hover:bg-gray-100`,
               {
-                'header-active-sublink': isActivePath(item)
+                '!text-[--primary-color] bg-gray-100': isActivePath(item)
               }
             )}
             key={item.text}
@@ -38,17 +57,6 @@ const HeaderMenu: FC<IProps> = memo(() => {
     )
   }
 
-  function isActivePath(item: IMenuListItem) {
-    // 当前路径的根路径等于某个菜单（或子菜单）路径时，菜单高亮
-    const actPathList = actPathname.split('/')
-    const actRootPath = `/${actPathList[1]}`
-    if (item.children) {
-      return !!item.children.find((subItem) => actRootPath === subItem.path!)
-    } else {
-      return actRootPath === item.path
-    }
-  }
-
   return (
     <nav className="hidden items-center md:flex">
       {menuList.map((item) => (
@@ -56,8 +64,8 @@ const HeaderMenu: FC<IProps> = memo(() => {
           {item.children ? (
             // With subMenu
             <div
-              className={classNames(`group header-item-link`, {
-                'header-active-link': isActivePath(item)
+              className={classNames(`group header-item-link ${linkStyle}`, {
+                [activeLinkStyle]: isActivePath(item)
               })}
             >
               <i className={`iconfont ${item.icon} mr-1`} />
@@ -68,8 +76,8 @@ const HeaderMenu: FC<IProps> = memo(() => {
           ) : (
             // No subMenu
             <Link
-              className={classNames('header-item-link', {
-                'header-active-link': isActivePath(item)
+              className={classNames(`header-item-link ${linkStyle}`, {
+                [activeLinkStyle]: isActivePath(item)
               })}
               href={item.path ?? '#'}
             >
