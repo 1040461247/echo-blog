@@ -21,6 +21,7 @@ const config: Config = {
         'card-blue': "url('/images/articles-display/card_blue.png')",
         'card-red': "url('/images/articles-display/card_red.png')",
         room: "url('/images/classification/bg.png')",
+        'room-static': "url('/images/classification/bg_static.png')",
         window: "url('/images/classification/window.png')",
         'book-purpel': "url('/images/classification/book_purpel.png')",
         'book-purpel-cur': "url('/images/classification/book_purpel_cur.png')",
