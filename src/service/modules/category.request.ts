@@ -7,6 +7,7 @@ export interface ICategory {
   name: string
   create_time: string
   update_time: string
+  article_count: number
 }
 
 const MODULE_BASE_URL = '/categories'
@@ -29,4 +30,13 @@ async function getArticlesByCategoryId(categoryId: number) {
   }
 }
 
-export { getArticlesByCategoryId, getCategoryById }
+async function getCategoryList() {
+  try {
+    const res: any = await request.get(`${MODULE_BASE_URL}`)
+    return res.data as ICategory[]
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { getArticlesByCategoryId, getCategoryById, getCategoryList }

@@ -7,6 +7,7 @@ export interface ITag {
   name: string
   create_time: string
   update_time: string
+  article_count: number
 }
 
 const MODULE_BASE_URL = '/tags'
@@ -29,4 +30,13 @@ async function getArticlesByTagId(tagId: number) {
   }
 }
 
-export { getArticlesByTagId, getTagById }
+async function getTagList() {
+  try {
+    const res: any = await request.get(`${MODULE_BASE_URL}`)
+    return res.data as ITag[]
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { getArticlesByTagId, getTagById, getTagList }

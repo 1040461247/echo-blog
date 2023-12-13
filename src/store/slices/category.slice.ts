@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getArticlesByCategoryId, getCategoryById } from '@/service/modules/category.request'
+import {
+  getArticlesByCategoryId,
+  getCategoryById,
+  getCategoryList
+} from '@/service/modules/category.request'
 import type { IArticle } from '@/service/modules/home.request'
 import type { ICategory } from '@/service/modules/category.request'
 
@@ -7,6 +11,7 @@ import type { ICategory } from '@/service/modules/category.request'
 export interface ICategorySliceState {
   articles: IArticle[] | []
   category: ICategory | Record<string, never>
+  categories: ICategory[] | []
 }
 
 // Thunks
@@ -22,12 +27,16 @@ const fetchCategoryByIdAction = createAsyncThunk(
     return await getCategoryById(categoryId)
   }
 )
+const fetchCategoryListAction = createAsyncThunk('category/fetchCategoryListAction', async () => {
+  return await getCategoryList()
+})
 
 export const categorySlice = createSlice({
   name: 'category',
   initialState: {
     articles: [],
-    category: {}
+    category: {},
+    categories: []
   } as ICategorySliceState,
   reducers: {},
   extraReducers: (builder) => {
@@ -38,7 +47,10 @@ export const categorySlice = createSlice({
       .addCase(fetchCategoryByIdAction.fulfilled, (state, { payload }) => {
         state.category = payload ?? {}
       })
+      .addCase(fetchCategoryListAction.fulfilled, (state, { payload }) => {
+        state.categories = payload ?? []
+      })
   }
 })
 
-export { fetchArticlesByCategoryIdAction, fetchCategoryByIdAction }
+export { fetchArticlesByCategoryIdAction, fetchCategoryByIdAction, fetchCategoryListAction }

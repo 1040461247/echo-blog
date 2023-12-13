@@ -20,15 +20,7 @@ const config: Config = {
         'card-gray': "url('/images/articles-display/card_gray.png')",
         'card-blue': "url('/images/articles-display/card_blue.png')",
         'card-red': "url('/images/articles-display/card_red.png')",
-        room: "url('/images/classification/bg.png')",
-        'room-static': "url('/images/classification/bg_static.png')",
-        window: "url('/images/classification/window.png')",
-        'book-purpel': "url('/images/classification/book_purpel.png')",
-        'book-purpel-cur': "url('/images/classification/book_purpel_cur.png')",
-        'book-red': "url('/images/classification/book_red.png')",
-        'book-red-cur': "url('/images/classification/book_red_cur.png')",
-        'book-yellow': "url('/images/classification/book_yellow.png')",
-        'book-yellow-cur': "url('/images/classification/book_yellow_cur.png')"
+        room: "url('/images/tag-cloud-page/bg_static.png')"
       }
     }
   },

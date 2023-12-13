@@ -53,6 +53,9 @@ dependencies:
   react-redux:
     specifier: ^8.1.2
     version: 8.1.2(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+  react-tagcloud:
+    specifier: ^2.3.3
+    version: 2.3.3(react@18.2.0)
   tailwindcss:
     specifier: 3.3.3
     version: 3.3.3
@@ -61,6 +64,9 @@ dependencies:
     version: 5.2.2
 
 devDependencies:
+  '@types/react-tagcloud':
+    specifier: ^2.3.1
+    version: 2.3.1
   '@types/rellax':
     specifier: ^1.7.6
     version: 1.7.6
@@ -370,7 +376,6 @@ packages:
 
   /@types/prop-types@15.7.6:
     resolution: {integrity: sha512-RK/kBbYOQQHLYj9Z95eh7S6t7gq4Ojt/NT8HTk8bWVhA5DaF+5SMnxHKkP4gPNN3wAZkKP+VjAf0ebtYzf+fxg==}
-    dev: false
 
   /@types/react-dom@18.2.7:
     resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
@@ -378,13 +383,18 @@ packages:
       '@types/react': 18.2.22
     dev: false
 
+  /@types/react-tagcloud@2.3.1:
+    resolution: {integrity: sha512-JXqEXhZfQHQc0FVeztj6YbFLoTARjfEaLDYJueGxbKOwodrN9CP0jvWob4jzGpNlPlM6fRE9ypeP+1h8IoXWqg==}
+    dependencies:
+      '@types/react': 18.2.22
+    dev: true
+
   /@types/react@18.2.22:
     resolution: {integrity: sha512-60fLTOLqzarLED2O3UQImc/lsNRgG0jE/a1mPW9KjMemY0LMITWEsbS4VvZ4p6rorEHd5YKxxmMKSDK505GHpA==}
     dependencies:
       '@types/prop-types': 15.7.6
       '@types/scheduler': 0.16.3
       csstype: 3.1.2
-    dev: false
 
   /@types/rellax@1.7.6:
     resolution: {integrity: sha512-NDzpJXKZVlouFPN29j9m3/x3oDZjcs0Yccn60h3diXPnZCmRYR2ik9quwYkmUHg7AEmgU+jow0y9kXzfbfx+3Q==}
@@ -392,7 +402,6 @@ packages:
 
   /@types/scheduler@0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
-    dev: false
 
   /@types/semver@7.5.2:
     resolution: {integrity: sha512-7aqorHYgdNO4DM36stTiGO3DvKoex9TQRwsJU6vMaFGyqpBA1MNZkz+PG3gaNUPpTAOYhT1WR7M1JyA3fbS9Cw==}
@@ -850,7 +859,6 @@ packages:
 
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
-    dev: false
 
   /damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
@@ -2397,6 +2405,10 @@ packages:
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  /randomcolor@0.6.2:
+    resolution: {integrity: sha512-Mn6TbyYpFgwFuQ8KJKqf3bqqY9O1y37/0jgSK/61PUxV4QfIMv0+K2ioq8DfOjkBslcjwSzRfIDEXfzA9aCx7A==}
+    dev: false
+
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -2446,6 +2458,18 @@ packages:
       react-is: 18.2.0
       redux: 4.2.1
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  /react-tagcloud@2.3.3(react@18.2.0):
+    resolution: {integrity: sha512-4E2lTU7wYU0bisi2x3xInueufHzYFkSuqoKsY0Ky8U4Ki60StVX0MicYtsiScvY2QcFbSULWt6evbEwYVKXl4g==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      prop-types: 15.8.1
+      randomcolor: 0.6.2
+      react: 18.2.0
+      seedrandom: 3.0.5
+      shuffle-array: 1.0.1
     dev: false
 
   /react@18.2.0:
@@ -2586,6 +2610,10 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
+  /seedrandom@3.0.5:
+    resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
+    dev: false
+
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
@@ -2614,6 +2642,10 @@ packages:
   /shebang-regex@3.0.0:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
+
+  /shuffle-array@1.0.1:
+    resolution: {integrity: sha512-0TFRU8zVQaLatWKr0/czo19VyPNgb/a3sBc1GAjVfivfzEGaS54vueNgtAu/8/pW7EM/VF5fwq9zgpLdGyRmVw==}
+    dev: false
 
   /side-channel@1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
