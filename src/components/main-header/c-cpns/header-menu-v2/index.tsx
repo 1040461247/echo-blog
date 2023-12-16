@@ -26,6 +26,7 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
             className="menu-item flex justify-center items-center overflow-hidden rounded-md h-9 p-[1px] mb-2 bg-[--btn-gray]"
             href={menu.path!}
             key={menu.text}
+            onClick={() => setIsDrawerOpen(false)}
           >
             <span className="menu-item-inner flex-1 overflow-hidden rounded-md text-gray-300 text-center active:text-white">
               <i className={`iconfont ${menu.icon} mr-1`}></i>
@@ -49,7 +50,7 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
       <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <div className="drawer-content pb-8">
           <div className="blog-info-wrap text-gray-200">
-            <BlogInfo />
+            <BlogInfo clouseDrawer={() => setIsDrawerOpen(false)} />
           </div>
           <nav className="menu-list">{showMenuList(menuListData)}</nav>
         </div>

@@ -10,15 +10,22 @@ import { ARCHIVES_PATH, CATEGORY_PATH, TAG_PATH } from '@/constants'
 // Types
 export interface IProps {
   children?: React.ReactElement
+  clouseDrawer?: () => void
 }
 
-const BlogInfo: FC<IProps> = memo(() => {
+const BlogInfo: FC<IProps> = memo(({ clouseDrawer }) => {
   const { statistics } = useAppSelector(
     (state) => ({
       statistics: state.home.statistics
     }),
     shallowEqual
   )
+
+  function handleClouseDrawer() {
+    if (clouseDrawer) {
+      clouseDrawer()
+    }
+  }
 
   return (
     <div className="blog-info">
@@ -44,15 +51,15 @@ const BlogInfo: FC<IProps> = memo(() => {
       </div>
 
       <nav className="statistics flex items-center h-12 my-[10px] text-center">
-        <Link href={ARCHIVES_PATH} className="flex-1 flex flex-col">
+        <Link href={ARCHIVES_PATH} className="flex-1 flex flex-col" onClick={handleClouseDrawer}>
           <span className="text-xl">{statistics.articlesCount}</span>
           <span className="text-xs opacity-70">文章</span>
         </Link>
-        <Link href={CATEGORY_PATH} className="flex-1 flex flex-col">
+        <Link href={CATEGORY_PATH} className="flex-1 flex flex-col" onClick={handleClouseDrawer}>
           <span className="text-xl">{statistics.categoriesCount}</span>
           <span className="text-xs opacity-70">分类</span>
         </Link>
-        <Link href={TAG_PATH} className="flex-1 flex flex-col">
+        <Link href={TAG_PATH} className="flex-1 flex flex-col" onClick={handleClouseDrawer}>
           <span className="text-xl">{statistics.tagsCount}</span>
           <span className="text-xs opacity-70">标签</span>
         </Link>

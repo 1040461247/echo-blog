@@ -86,10 +86,10 @@ export default function useParallax() {
 
         opacity = opacity >= 1 ? 1 : opacity <= 0 ? 0 : opacity
 
-        if (elRef.style.opacity != opacity) {
+        if (elRef.style.opacity !== opacity) {
           elRef.style.opacity = opacity
         }
-      } else if (!enteredViewport && elRef.style.opacity !== '0') {
+      } else if (!enteredViewport && elRef.style.opacity !== 0) {
         // 元素未进入视口前，若opacity!==0，则初始化元素的opacity
         elRef.style.opacity = 0
       }

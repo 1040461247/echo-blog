@@ -67,10 +67,10 @@ const Timeline: FC<IProps> = memo(({ articlesData }) => {
                         sizes="100%"
                         alt="article-cover"
                       />
-                      <div className="desc-cover-mask absolute inset-0 bg-black/30"></div>
+                      {/* <div className="desc-cover-mask absolute inset-0 bg-black/30"></div> */}
                     </div>
                     <div className="desc-cover-title absolute inset-x-0 bottom-0 flex w-full px-2 pb-2">
-                      <h3 className="ellipsis-1-line px-5 py-3 max-w-full border border-black/10 bg-white/60 backdrop-blur-lg rounded-xl text-[#343a3c] text-2xl text-center">
+                      <h3 className="px-5 py-3 max-w-full border border-gray-100/10 bg-black/20 backdrop-blur rounded text-gray-200 text-2xl text-center">
                         {item.title}
                       </h3>
                     </div>

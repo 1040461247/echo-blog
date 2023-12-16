@@ -29,7 +29,7 @@ const ArchivesPage: FC<IProps> = memo(() => {
   )
 
   return (
-    <div className="archives-page relative">
+    <div className="archives-page relative bg-[--bg-dark-blue]">
       <BgTowerV2 />
 
       <div className="archives-content inner-layout flex-col justify-start items-center">

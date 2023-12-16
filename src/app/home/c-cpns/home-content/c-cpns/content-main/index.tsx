@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { useAppSelector } from '@/hooks'
 import { shallowEqual } from 'react-redux'
 import formatDate from '@/utils/format-date'
-import { ARTICLE_PATH, CATEGORY_PATH, TAG_PATH } from '@/constants'
+import { ARTICLE_PATH } from '@/constants'
+import ArticleTags from '@/components/article-tags'
 import type { FC } from 'react'
+import ArticleCategory from '@/components/article-category'
 
 // Types
 export interface IProps {
@@ -59,29 +61,8 @@ const ContentMain: FC<IProps> = memo(() => {
                   <i className="iconfont icon-archives mr-1" />
                   <span>{formatDate(item.create_time)}</span>
                 </span>
-
-                <span className="article-info-category hidden sm:inline-block">
-                  <i className="iconfont icon-category mr-1" />
-                  <Link className="hover-highlight" href={`${CATEGORY_PATH}/${item.category.id}`}>
-                    {item.category.name}
-                  </Link>
-                </span>
-
-                {item.tags && (
-                  <span className="article-info-tags hidden md:flex">
-                    <i className="iconfont icon-tags mr-1" />
-                    <nav className="inline-block">
-                      {item.tags?.map((tag, index) => (
-                        <span key={tag.id}>
-                          <Link className="hover-highlight" href={`${TAG_PATH}/${tag.id}`}>
-                            {tag.name}
-                          </Link>
-                          {index !== item.tags!.length - 1 && ' | '}
-                        </span>
-                      ))}
-                    </nav>
-                  </span>
-                )}
+                <ArticleCategory mobileHide categoryInfo={item.category} />
+                <ArticleTags mobileHide tagList={item.tags} />
               </div>
 
               <div className="article-read-more flex-1 text-right whitespace-nowrap">

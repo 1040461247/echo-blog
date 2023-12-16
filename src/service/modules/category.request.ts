@@ -35,7 +35,7 @@ async function getCategoryList() {
     const res: any = await request.get(`${MODULE_BASE_URL}`)
     return res.data as ICategory[]
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
