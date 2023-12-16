@@ -1,8 +1,47 @@
 body {
   min-width: 375px;
   padding-top: var(--header-height-ssm);
-  background-color: var(--bg-dark-blue);
+  /* background-color: var(--bg-dark-blue); */
   color: var(--font-gray);
+}
+
+/* cursor */
+html {
+  cursor: url('/images/common/cursor.png'), auto;
+}
+a:hover {
+  cursor: url('/images/common/pointer.png'), pointer;
+}
+
+/* scroll bar */
+::-webkit-scrollbar {
+  width: 30px; /* 宽度可以根据需要调整 */
+}
+
+/* 轨道样式 */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* 滚动条上的按钮样式（上下箭头按钮） */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* 增加滚动条宽度以容纳自定义图片 */
+::-webkit-scrollbar-corner {
+  background-color: #f1f1f1; /* 可视区域和滚动条角之间的颜色 */
+}
+
+::-webkit-scrollbar-thumb {
+  border: none;
+  background-image: url('/images/common/scrollbar.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-image: url('/images/common/scrollbar_act.png');
 }
 
 @media (min-width: 640px) {

@@ -62,7 +62,7 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
               className="hover:text-gray-300 focus:outline-none transition-colors p-1"
               onClick={handleClose}
             >
-              <Image src="/images/common-icons/close.svg" width={20} height={20} alt="exit" />
+              <Image src="/images/common/close.svg" width={20} height={20} alt="exit" />
             </button>
           </header>
 

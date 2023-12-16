@@ -46,8 +46,8 @@ const CategoryPage: FC<IProps> = memo(() => {
 
   const tagCloudProps: ITagCloudPageProps = {
     tagCloudOption: {
-      minSize: 26,
-      maxSize: 26,
+      minSize: 28,
+      maxSize: 28,
       tags: tagsMapTagCloud(categories),
       renderer: customRenderer,
       colorOptions: {

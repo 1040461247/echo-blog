@@ -17,7 +17,7 @@ const HeaderMenu: FC<IProps> = memo(() => {
   // Common Styles
   const activeLinkStyle = `!text-[--primary-color] border-b-[3px] border-solid border-[--primary-color]`
   const linkStyle = `
-    relative flex items-center px-[1.3021vw] py-2.5 text-gray-400 cursor-pointer
+    relative flex items-center px-[1.3021vw] py-2.5 text-gray-400
     hover:!text-[--primary-color] hover:border-b-[3px] hover:border-solid hover:border-[--primary-color]
   `
 
@@ -39,7 +39,7 @@ const HeaderMenu: FC<IProps> = memo(() => {
         {subMenu.map((item: IMenuListItem) => (
           <div
             className={classNames(
-              `w-full h-[30px] px-[15px] py-[3px] text-center whitespace-nowrap rounded-xl text-black transition-colors
+              `w-full h-[30px] text-center whitespace-nowrap rounded-xl text-black transition-colors
               hover:!text-[--primary-color] hover:bg-gray-100`,
               {
                 '!text-[--primary-color] bg-gray-100': isActivePath(item)
@@ -47,7 +47,10 @@ const HeaderMenu: FC<IProps> = memo(() => {
             )}
             key={item.text}
           >
-            <Link className="submenu-item-link  " href={item.path!}>
+            <Link
+              className="submenu-item-link inline-block w-full h-full px-[15px] py-[3px]"
+              href={item.path!}
+            >
               <i className={classNames('icon', 'iconfont', item.icon)} />
               <span className="text">{item.text}</span>
             </Link>
