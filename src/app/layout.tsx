@@ -7,6 +7,8 @@ import '@/assets/style/reset.css'
 import '@/assets/style/variables.css'
 import '@/assets/style/common.css'
 import '@/assets/style/tailwind.css'
+import '@uiw/react-md-editor/markdown-editor.css'
+import '@uiw/react-markdown-preview/markdown.css'
 import MainHeader from '../components/main-header'
 // import MainFooter from '../components/main-footer'
 

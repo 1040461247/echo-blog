@@ -11,6 +11,7 @@ import ArticleMainHeader from './c-cpns/article-main-header'
 import type { IProps as IArticleMainHeaderProps } from './c-cpns/article-main-header'
 import ArticleMainInfo from './c-cpns/article-main-info'
 import type { IProps as IArticleMainInfoProps } from './c-cpns/article-main-info'
+import ArticleContent from './c-cpns/article-content'
 
 // Types
 export interface IProps {
@@ -39,7 +40,8 @@ const ArticlePage: FC<IProps> = memo((props) => {
     create_time: createTime,
     update_time: updateTime,
     tags,
-    category
+    category,
+    content
   } = article
 
   // Sub Components Props
@@ -57,9 +59,10 @@ const ArticlePage: FC<IProps> = memo((props) => {
       <BgTower className="mt-[100vh]" />
 
       <div className="inner-layout items-start text-gray-300">
-        <main className="article-main overflow-hidden flex-1 px-2 sm:px-6 md:px-8 md:mr-10 rounded-[18px] border border-gray-500/40 transition-all duration-300 [box-shadow:0_0_5px_rgb(255_255_255/0.1)]">
+        <main className="article-main overflow-hidden flex-1 px-2 sm:px-6 md:px-8 md:mr-10 rounded-[18px] bg-black/20 backdrop-blur border border-gray-500/40 transition-all duration-300 [box-shadow:0_0_5px_rgb(255_255_255/0.1)]">
           <ArticleMainHeader {...articleMainHeaderProps} />
           <ArticleMainInfo {...articleMainInfoProps} />
+          <ArticleContent articleContent={content} />
         </main>
 
         <ArticleAside />
