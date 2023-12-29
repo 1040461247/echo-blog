@@ -19,11 +19,17 @@ export interface IProps {
   category: ITagAndCate
 }
 
-const ArticleMainInfo: FC<IProps> = memo(({ author, createTime, updateTime, tags, category }) => {
+const ArticleInfo: FC<IProps> = memo(({ author, createTime, updateTime, tags, category }) => {
   return (
-    <div className="article-main-info flex items-center gap-2 mt-4">
+    <div className="article-info flex items-center gap-2 mt-4">
       <div className="article-info-left overflow-hidden relative w-10 h-10 p-[1px] rounded-md border border-solid border-gray-500 shadow-lg">
-        <Image src={author?.avatar_url} fill sizes="100%" alt="avatar" className="object-contain" />
+        <Image
+          src={author?.avatar_url ?? '/images/common/avatar.png'}
+          fill
+          sizes="100%"
+          alt="avatar"
+          className="object-contain"
+        />
       </div>
       <div className="article-info-right flex-1">
         <div className="author-name text-lg">{author?.name}</div>
@@ -38,5 +44,5 @@ const ArticleMainInfo: FC<IProps> = memo(({ author, createTime, updateTime, tags
   )
 })
 
-export default ArticleMainInfo
-ArticleMainInfo.displayName = 'ArticleMainInfo'
+export default ArticleInfo
+ArticleInfo.displayName = 'ArticleInfo'
