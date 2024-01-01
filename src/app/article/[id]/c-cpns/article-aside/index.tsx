@@ -32,7 +32,7 @@ const ArticleAside: FC<IProps> = memo(({ articleContent }) => {
         }
       }
       // 在文章末尾时，最后一个标题高亮
-      if (curTitleTemp === lineList[lineList.length - 1].title && curTitleTemp !== curTitle) {
+      if (curTitleTemp === lineList[lineList.length - 1]?.title && curTitleTemp !== curTitle) {
         setCurTitle(curTitleTemp)
       }
     }
@@ -50,7 +50,7 @@ const ArticleAside: FC<IProps> = memo(({ articleContent }) => {
 
   function showToc(tocList: ITocItem[]) {
     if (!tocList) return
-    const olLevel = tocList[0].level
+    const olLevel = tocList[0]?.level
 
     return (
       <ol className={`toc-wrap `}>

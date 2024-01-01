@@ -1,3 +1,5 @@
+'use client'
+
 import { memo } from 'react'
 import type { FC } from 'react'
 
@@ -10,7 +12,7 @@ const ArticleComments: FC<IProps> = memo(() => {
   return (
     <div className="article-comments">
       <div className="article-comments-title text-3xl mb-3">评论</div>
-      <div className="article-comments-demo">评论</div>
+      <div className="article-comments-content">hello</div>
     </div>
   )
 })
