@@ -52,7 +52,7 @@ const ContentMain: FC<IProps> = memo(() => {
             </header>
 
             <div className="article-content text-left">
-              <span className="ellipsis-4-line md:ellipsis-2-line">{item.content}</span>
+              <span className="ellipsis-4-line md:ellipsis-2-line">{item.description}</span>
             </div>
 
             <footer className="article-info flex text-sm text-gray-200/70">

@@ -1,11 +1,14 @@
-import { memo, useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import menuListData from '@/assets/data/menu-list-data'
-import Drawer from '@/components/drawer'
-import BlogInfo from '@/components/blog-info'
 import type { IMenuListItem } from '@/assets/data/menu-list-data'
+import menuListData from '@/assets/data/menu-list-data'
+import BlogInfo from '@/components/blog-info'
+import Drawer from '@/components/drawer'
+import { PROFILE_PATH } from '@/constants'
+import { useAppSelector } from '@/hooks'
+import Image from 'next/image'
 import type { FC } from 'react'
+import { memo, useState } from 'react'
+import { shallowEqual } from 'react-redux'
+import V2MenuItem from './c-cpns/v2-menu-item'
 
 // Types
 export interface IProps {
@@ -14,6 +17,12 @@ export interface IProps {
 
 const HeaderMenubutton: FC<IProps> = memo(() => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const { userInfo } = useAppSelector(
+    (state) => ({
+      userInfo: state.user.userInfo
+    }),
+    shallowEqual
+  )
 
   function showMenuList(menuList: IMenuListItem[], res: any[] = []) {
     for (const menu of menuList) {
@@ -22,17 +31,14 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
         showMenuList(menu.children, res)
       } else {
         res.push(
-          <Link
-            className="menu-item flex justify-center items-center overflow-hidden rounded-md h-9 p-[1px] mb-2 bg-[--btn-gray]"
-            href={menu.path!}
+          <V2MenuItem
+            isLink
+            path={menu.path!}
+            iconName={menu.icon}
+            text={menu.text}
             key={menu.text}
-            onClick={() => setIsDrawerOpen(false)}
-          >
-            <span className="menu-item-inner flex-1 overflow-hidden rounded-md text-gray-300 text-center active:text-white">
-              <i className={`iconfont ${menu.icon} mr-1`}></i>
-              <span>{menu.text}</span>
-            </span>
-          </Link>
+            handleClick={() => setIsDrawerOpen(false)}
+          />
         )
       }
     }
@@ -52,7 +58,30 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
           <div className="blog-info-wrap text-gray-200">
             <BlogInfo clouseDrawer={() => setIsDrawerOpen(false)} />
           </div>
-          <nav className="menu-list">{showMenuList(menuListData)}</nav>
+          <div className="menu-list">
+            <nav className="normal-list">{showMenuList(menuListData)}</nav>
+            <nav className="user-list">
+              {userInfo ? (
+                <div className="user-info">
+                  <V2MenuItem
+                    text="个人中心"
+                    isLink
+                    path={PROFILE_PATH}
+                    iconName="icon-home"
+                    handleClick={() => setIsDrawerOpen(false)}
+                  />
+                  <V2MenuItem
+                    text="退出"
+                    isLink={false}
+                    iconName="icon-tags"
+                    handleClick={() => setIsDrawerOpen(false)}
+                  />
+                </div>
+              ) : (
+                <div className="oauth">oauth</div>
+              )}
+            </nav>
+          </div>
         </div>
       </Drawer>
     </div>

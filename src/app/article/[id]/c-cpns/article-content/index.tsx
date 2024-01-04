@@ -8,11 +8,15 @@ import type { FC } from 'react'
 export interface IProps {
   children?: React.ReactElement
   articleContent: string
+  articleDescription: string
 }
 
-const ArticleContent: FC<IProps> = memo(({ articleContent = '' }) => {
+const ArticleContent: FC<IProps> = memo(({ articleContent = '', articleDescription = '' }) => {
   return (
     <div className="article-content mt-9">
+      <div className="article-content-description mb-3">
+        <p>{articleDescription}</p>
+      </div>
       <MDEditor.Markdown
         className="!bg-transparent !text-inherit"
         source={articleContent}

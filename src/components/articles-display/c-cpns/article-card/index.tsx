@@ -28,6 +28,8 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
     el.style.transform = `${scale} ${rotate}`
   }
 
+  console.log(articleData)
+
   return (
     <div
       className={`article-card group relative transition-transform ${duration} hover:!rotate-0`}
@@ -66,7 +68,7 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
             {articleData.title}
           </div>
           <div className="desc ellipsis-1-line text-xl sm:text-lg text-[#4e4e56]">
-            {articleData.content}
+            {articleData.description || '作者太懒啦，没有写简介！'}
           </div>
         </div>
 

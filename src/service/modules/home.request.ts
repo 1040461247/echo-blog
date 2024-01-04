@@ -10,7 +10,8 @@ export interface IStatistics {
 export interface IArticle {
   id: number
   title: string
-  content: string
+  content?: string
+  description: string
   cover_url: string
   create_time: string
   update_time: string

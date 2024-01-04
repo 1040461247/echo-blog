@@ -78,7 +78,7 @@ const Timeline: FC<IProps> = memo(({ articlesData }) => {
                 )}
                 <div className="desc-content p-4 bg-white text-[#333]">
                   {!item.cover_url && <h3 className="text-2xl font-bold">{item.title}</h3>}
-                  <span className="ellipsis-4-line">{item.content}</span>
+                  <span className="ellipsis-4-line">{item.description}</span>
                 </div>
               </Link>
             </div>

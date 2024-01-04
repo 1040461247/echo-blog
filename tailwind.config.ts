@@ -21,7 +21,8 @@ const config: Config = {
         'card-blue': "url('/images/articles-display/card_blue.png')",
         'card-red': "url('/images/articles-display/card_red.png')",
         room: "url('/images/tag-cloud-page/bg_static.png')"
-      }
+      },
+      cursor: { pointer: 'url(/images/common/pointer.png), auto' }
     }
   },
   plugins: []

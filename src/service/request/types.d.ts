@@ -1,4 +1,4 @@
-import { InternalAxiosRequestConfig, AxiosResponse, AxiosRequestHeaders } from 'axios'
+import { InternalAxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from 'axios'
 
 export interface Interceptors {
   requestInterceptor?: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig
@@ -9,5 +9,5 @@ export interface Interceptors {
 
 export interface AxiosRequestConfig extends InternalAxiosRequestConfig {
   interceptors?: Interceptors
-  headers?: AxiosRequestHeaders
+  headers?: RawAxiosRequestHeaders
 }

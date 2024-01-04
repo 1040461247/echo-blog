@@ -30,7 +30,7 @@ class Request {
     return this.instance.request(config)
   }
 
-  get(url: string, config?: InternalAxiosRequestConfig) {
+  get(url: string, config?: AxiosRequestConfig) {
     let baseConfig: AxiosRequestConfig
     if (config) {
       baseConfig = { method: 'GET', url, ...config }
@@ -41,7 +41,7 @@ class Request {
     return this.request(baseConfig)
   }
 
-  post(url: string, config: InternalAxiosRequestConfig) {
+  post(url: string, config: AxiosRequestConfig) {
     return this.request({ method: 'POST', url, ...config })
   }
 }
