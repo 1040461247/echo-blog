@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { TOKEN } from '@/constants'
 import { IUserInfo, login, verifyAuth } from '@/service/modules/user.request'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 // Types
 export interface IUserSliceState {
@@ -20,13 +21,18 @@ const fetchLoginAction = createAsyncThunk(
     const { name, password, browser_info, os_info, ip_address } = paramaters
     const loginRes = await login(name, password, browser_info, os_info, ip_address)
     if (loginRes?.token) {
-      localStorage.setItem('token', loginRes.token)
+      localStorage.setItem(TOKEN, loginRes.token)
     }
   }
 )
-const fetchVerifyAuthAction = createAsyncThunk('user/fetchVerifyAuthAction', async () => {
-  return await verifyAuth()
-})
+const fetchVerifyAuthAction = createAsyncThunk(
+  'user/fetchVerifyAuthAction',
+  async (token?: string | null) => {
+    token ??= localStorage.getItem(TOKEN)
+    if (!token) return
+    return await verifyAuth(token)
+  }
+)
 
 export const userSlice = createSlice({
   name: 'user',

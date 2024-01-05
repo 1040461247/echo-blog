@@ -1,8 +1,9 @@
-import { memo, useState, useEffect } from 'react'
-import Image from 'next/image'
-import classNames from 'classnames'
+import usePreventScroll from '@/hooks/prevent-scroll'
 import { Transition } from '@headlessui/react'
+import classNames from 'classnames'
+import Image from 'next/image'
 import type { FC } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 // Types
 export interface IProps {
@@ -15,11 +16,13 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(isOpen)
   const durationTime = 300
 
+  usePreventScroll(isOpen)
   useEffect(() => {
+    // 添加延迟以确保过渡效果正常
     if (isOpen) {
-      setTimeout(() => setIsDrawerOpen(true), 50) // 添加延迟以确保过渡效果正常
+      setTimeout(() => setIsDrawerOpen(true), 50)
     } else {
-      setTimeout(() => setIsDrawerOpen(false), durationTime) // 添加延迟以确保过渡效果正常
+      setTimeout(() => setIsDrawerOpen(false), durationTime)
     }
   }, [isOpen])
 
@@ -54,7 +57,7 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
         leaveTo="translate-x-full"
       >
         <div
-          className={`fixed inset-y-0 right-0 max-w-full w-full xs:w-64 h-[100vh] p-4 bg-[--bg-dark-blue] text-gray-400 shadow-lg transition-all duration-300`}
+          className={`fixed inset-y-0 right-0 max-w-full w-full xs:w-64 h-[100vh] p-4 bg-[--bg-dark-blue] text-gray-300 shadow-lg transition-all duration-300`}
         >
           {/* Drawer Header */}
           <header className="flex justify-end">

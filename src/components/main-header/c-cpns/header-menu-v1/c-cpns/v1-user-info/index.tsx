@@ -2,6 +2,7 @@ import SubmenuItem from '@/components/submenu-item'
 import SubmenuWrap from '@/components/submenu-wrap'
 import { PROFILE_PATH } from '@/constants'
 import type { IUserInfo } from '@/service/modules/user.request'
+import logout from '@/utils/logout'
 import Avatar from 'boring-avatars'
 import Image from 'next/image'
 import type { FC } from 'react'
@@ -45,7 +46,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
           iconName="icon-home"
           text="个人中心"
         />
-        <SubmenuItem isActive={false}>
+        <SubmenuItem isActive={false} handleClick={logout}>
           <div className="submenu-item-link inline-block w-full h-full px-[15px] py-[3px] cursor-pointer">
             <i className={`icon iconfont icon-tags mr-1`} />
             <span className="text">退出</span>

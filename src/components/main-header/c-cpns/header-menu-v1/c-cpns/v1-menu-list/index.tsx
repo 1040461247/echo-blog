@@ -1,10 +1,10 @@
 import menuList, { IMenuListItem } from '@/assets/data/menu-list-data'
 import SubmenuItem from '@/components/submenu-item'
 import SubmenuWrap from '@/components/submenu-wrap'
-import Link from 'next/link'
 import type { FC } from 'react'
 
 import { memo } from 'react'
+import V1MenuItem from '../v1-menu-item'
 // Types
 export interface IProps {
   children?: React.ReactElement
@@ -12,10 +12,6 @@ export interface IProps {
 }
 
 const V1MenuList: FC<IProps> = memo(({ isActivePath }) => {
-  // Common Styles
-  const activeLinkStyle = `!text-[--primary-color] border-b-[3px] border-solid border-[--primary-color]`
-  const linkStyle = `relative flex items-center px-[1.3021vw] py-2.5 text-gray-400 hover:!text-[--primary-color] hover:border-b-[3px] hover:border-solid hover:border-[--primary-color]`
-
   function showSubMenu(subMenu: IMenuListItem[]) {
     // Show Submenu
     return (
@@ -39,27 +35,26 @@ const V1MenuList: FC<IProps> = memo(({ isActivePath }) => {
         <div className="header-menu-item flex items-center h-full" key={item.text}>
           {item.children ? (
             // With subMenu
-            <div
-              className={`group relative flex justify-center header-item-link cursor-pointer ${linkStyle} ${
-                isActivePath(item) ? activeLinkStyle : ''
-              }`}
+            <V1MenuItem
+              isLink={false}
+              isActive={isActivePath(item)}
+              iconName={item.icon}
+              text={item.text}
             >
-              <i className={`iconfont ${item.icon} mr-1`} />
-              <span>{item.text}</span>
-              <i className="arrow iconfont icon-arrow ml-[2px] !text-xs font-bold transition-transform duration-200 group-hover:rotate-180" />
-              {showSubMenu(item.children)}
-            </div>
+              <>
+                <i className="arrow iconfont icon-arrow ml-1 !text-xs font-bold transition-transform duration-200 group-hover:rotate-180" />
+                {showSubMenu(item.children)}
+              </>
+            </V1MenuItem>
           ) : (
             // No subMenu
-            <Link
-              className={`header-item-link ${linkStyle} ${
-                isActivePath(item) ? activeLinkStyle : ''
-              }`}
-              href={item.path ?? '#'}
-            >
-              <i className={`icon iconfont ${item.icon} mr-1`} />
-              <span className="text">{item.text}</span>
-            </Link>
+            <V1MenuItem
+              isLink
+              path={item.path}
+              isActive={isActivePath(item)}
+              iconName={item.icon}
+              text={item.text}
+            />
           )}
         </div>
       ))}

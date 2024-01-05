@@ -37,10 +37,8 @@ async function login(
   }
 }
 
-async function verifyAuth() {
+async function verifyAuth(token: string) {
   try {
-    const token = localStorage.getItem('token')
-    if (!token) return
     const res: any = await request.get('/authorized', { headers: { Authorization: token } })
     return res.data as IUserInfo
   } catch (error) {

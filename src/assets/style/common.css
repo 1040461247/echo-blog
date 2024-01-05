@@ -4,11 +4,16 @@ body {
   color: var(--font-gray);
 }
 
+body.prevent-scroll {
+  overflow: hidden;
+}
+
 /* cursor */
 html {
   cursor: url('/images/common/cursor.png'), auto;
 }
-a:hover {
+a:hover,
+button:hover {
   cursor: url('/images/common/pointer.png'), pointer;
 }
 
