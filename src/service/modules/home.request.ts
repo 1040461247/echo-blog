@@ -30,8 +30,12 @@ export interface IArticle {
 
 async function getStatistics() {
   try {
-    const statistics: any = await request.get('/statistics')
-    return statistics.data as IStatistics
+    const res = await request.get('/statistics')
+    if (res.code >= 200 && res.code < 300) {
+      return res.data as IStatistics[]
+    } else {
+      console.error(res)
+    }
   } catch (error) {
     console.error(error)
   }
@@ -39,11 +43,15 @@ async function getStatistics() {
 
 async function getArticleList(offset = 0, limit = 10) {
   try {
-    const statistics: any = await request.get(`/articles?offset=${offset}&limit=${limit}`)
-    return statistics.data as IArticle[]
+    const res = await request.get(`/articles?offset=${offset}&limit=${limit}`)
+    if (res.code >= 200 && res.code < 300) {
+      return res.data as IArticle[]
+    } else {
+      console.error(res)
+    }
   } catch (error) {
     console.error(error)
   }
 }
 
-export { getStatistics, getArticleList }
+export { getArticleList, getStatistics }

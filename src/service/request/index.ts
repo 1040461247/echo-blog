@@ -1,6 +1,12 @@
+import type { AxiosInstance } from 'axios'
 import axios from 'axios'
-import type { InternalAxiosRequestConfig, AxiosInstance } from 'axios'
 import { AxiosRequestConfig } from './types'
+
+export interface IRequest {
+  code: number
+  msg: string
+  data?: any
+}
 
 class Request {
   instance: AxiosInstance
@@ -26,7 +32,7 @@ class Request {
     )
   }
 
-  request(config: AxiosRequestConfig) {
+  request(config: AxiosRequestConfig): Promise<IRequest> {
     return this.instance.request(config)
   }
 

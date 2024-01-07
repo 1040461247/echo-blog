@@ -8,7 +8,7 @@ import HeaderMenuV2 from './c-cpns/header-menu-v2'
 import { useAppDispatch } from '@/hooks'
 import { fetchVerifyAuthAction } from '@/store/slices'
 import type { FC } from 'react'
-import ModalBox from '../modal-box'
+import OauthMoal from './c-cpns/oauth-modal'
 
 const MainHeader: FC<IProps> = memo(() => {
   const dispatch = useAppDispatch()
@@ -24,7 +24,7 @@ const MainHeader: FC<IProps> = memo(() => {
         <HeaderLogo />
         <HeaderMenuV1 handleModal={setModalOpened} />
         <HeaderMenuV2 handleModal={setModalOpened} />
-        <ModalBox isOpen={modalOpened} handleModal={setModalOpened} />
+        <OauthMoal isOpen={modalOpened} handleModal={setModalOpened} />
       </div>
     </header>
   )

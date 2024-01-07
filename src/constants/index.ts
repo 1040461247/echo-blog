@@ -1,3 +1,4 @@
+export * from './reg.consant'
 export * from './router.constant'
 
 export const TOKEN = 'token'
