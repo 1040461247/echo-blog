@@ -43,6 +43,8 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
     validationRules
   )
 
+  console.log(setCanSendOtp, formData)
+
   function handleSendOtp(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
     console.log('send otp')
