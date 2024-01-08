@@ -25,11 +25,7 @@ function useFormValidation<T extends Record<string, any>>(
 
   function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>) {
     const { name } = e.target
-    const error = valiedateField(name)
-    setErrors({
-      ...errors,
-      [name]: error
-    })
+    valiedateField(name)
   }
 
   function valiedateField(field: string) {
@@ -43,6 +39,10 @@ function useFormValidation<T extends Record<string, any>>(
         break
       }
     }
+    setErrors({
+      ...errors,
+      [field]: error
+    })
     return error
   }
 
@@ -64,7 +64,7 @@ function useFormValidation<T extends Record<string, any>>(
     return errorsTemp
   }
 
-  return { formData, errors, handleChange, handleBlur, validateAll }
+  return { formData, errors, handleChange, handleBlur, validateAll, valiedateField }
 }
 
 export default useFormValidation

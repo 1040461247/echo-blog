@@ -1,4 +1,4 @@
-import usePreventScroll from '@/hooks/prevent-scroll'
+import usePreventScroll from '@/hooks/use-prevent-scroll'
 import { Transition } from '@headlessui/react'
 import classNames from 'classnames'
 import Image from 'next/image'

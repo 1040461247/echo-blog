@@ -1,6 +1,6 @@
 'use client'
 
-import usePreventScroll from '@/hooks/prevent-scroll'
+import usePreventScroll from '@/hooks/use-prevent-scroll'
 import Image from 'next/image'
 import type { FC } from 'react'
 import { memo } from 'react'

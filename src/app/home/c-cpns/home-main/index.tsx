@@ -1,8 +1,8 @@
 'use client'
 
-import { memo } from 'react'
-import useParallax from '@/hooks/parallax'
+import useParallax from '@/hooks/use-parallax'
 import type { FC } from 'react'
+import { memo } from 'react'
 
 // Types
 export interface IProps {

@@ -1,13 +1,13 @@
-import { memo } from 'react'
+import ArticleCategory from '@/components/article-category'
+import ArticleTags from '@/components/article-tags'
+import { ARTICLE_PATH } from '@/constants'
+import { useAppSelector } from '@/hooks/use-store'
+import formatDate from '@/utils/format-date'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useAppSelector } from '@/hooks'
-import { shallowEqual } from 'react-redux'
-import formatDate from '@/utils/format-date'
-import { ARTICLE_PATH } from '@/constants'
-import ArticleTags from '@/components/article-tags'
 import type { FC } from 'react'
-import ArticleCategory from '@/components/article-category'
+import { memo } from 'react'
+import { shallowEqual } from 'react-redux'
 
 // Types
 export interface IProps {

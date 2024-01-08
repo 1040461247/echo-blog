@@ -5,7 +5,7 @@ import HeaderLogo from './c-cpns/header-logo'
 import HeaderMenuV1 from './c-cpns/header-menu-v1'
 import HeaderMenuV2 from './c-cpns/header-menu-v2'
 
-import { useAppDispatch } from '@/hooks'
+import { useAppDispatch } from '@/hooks/use-store'
 import { fetchVerifyAuthAction } from '@/store/slices'
 import type { FC } from 'react'
 import OauthMoal from './c-cpns/oauth-modal'

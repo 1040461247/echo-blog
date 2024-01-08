@@ -1,11 +1,11 @@
-import { memo } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { shallowEqual } from 'react-redux'
-import { useAppSelector } from '@/hooks'
 import profileJson from '@/assets/data/profile.json'
-import type { FC } from 'react'
 import { ARCHIVES_PATH, CATEGORY_PATH, TAG_PATH } from '@/constants'
+import { useAppSelector } from '@/hooks/use-store'
+import Image from 'next/image'
+import Link from 'next/link'
+import type { FC } from 'react'
+import { memo } from 'react'
+import { shallowEqual } from 'react-redux'
 
 // Types
 export interface IProps {

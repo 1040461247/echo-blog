@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/hooks'
+import { useAppSelector } from '@/hooks/use-store'
 import { usePathname } from 'next/navigation'
 import { memo, type FC } from 'react'
 import { shallowEqual } from 'react-redux'

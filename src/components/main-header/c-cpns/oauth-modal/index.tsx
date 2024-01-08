@@ -1,9 +1,11 @@
+import Message from '@/components/message'
 import Modal from '@/components/modal'
 import { REG_OTP, REG_PHONE } from '@/constants'
-import useFormValidation, { IValidationRule } from '@/hooks/form-validation'
+import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
 import type { FC } from 'react'
 import { memo, useState } from 'react'
-import ErrorMessage from './error-message'
+import ErrorMessage from './c-cpns/error-message'
+import OauthInput from './c-cpns/oauth-input'
 
 // Types
 export interface IProps {
@@ -38,16 +40,17 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
       }
     ]
   }
-  const { formData, errors, handleChange, handleBlur, validateAll } = useFormValidation(
-    initialFormData,
-    validationRules
-  )
-
-  console.log(setCanSendOtp, formData)
+  const { formData, errors, handleChange, handleBlur, validateAll, valiedateField } =
+    useFormValidation(initialFormData, validationRules)
 
   function handleSendOtp(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
-    console.log('send otp')
+    const phoneError = valiedateField('phone')
+    if (phoneError) {
+      Message.error(phoneError)
+    } else {
+      console.log('send otp')
+    }
   }
   function handleCommit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
@@ -67,12 +70,10 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
       >
         <form className="modal-content-form">
           <div className="form-phone mb-5">
-            <input
-              type="text"
+            <OauthInput
               placeholder="请输入电话号码"
-              className="w-full h-11 bg-transparent p-4 placeholder:text-sm rounded-md border-gray-400 border focus:border-white hover:border-white transition-colors"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               name="phone"
             />
             {errors.phone && <ErrorMessage text={errors.phone} />}
@@ -80,13 +81,12 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
 
           <div className="form-otp mb-5">
             <div className="flex justify-between w-full h-11">
-              <input
-                type="text"
+              <OauthInput
                 placeholder="请输入验证码"
-                className="w-full h-11 bg-transparent flex-1 p-4 placeholder:text-sm rounded-l-md border-gray-400 border focus:border-white hover:border-white transition-colors"
-                onChange={handleChange}
-                onBlur={handleBlur}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
                 name="otp"
+                customClass="flex-1 rounded-r-none"
               />
               <button
                 className="px-4 bg-gray-300 text-[--bg-dark-blue] rounded-r-md whitespace-nowrap hover:bg-gray-200 transition-colors"
