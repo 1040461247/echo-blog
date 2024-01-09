@@ -43,12 +43,12 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
         <SubmenuItem
           isActive={isActivePath({ path: PROFILE_PATH })}
           path={PROFILE_PATH}
-          iconName="icon-home"
+          iconName="icon-user"
           text="个人中心"
         />
         <SubmenuItem isActive={false} handleClick={logout}>
           <div className="submenu-item-link inline-block w-full h-full px-[15px] py-[3px] cursor-pointer">
-            <i className={`icon iconfont icon-tags mr-1`} />
+            <i className={`icon iconfont icon-exit mr-[2px]`} />
             <span className="text">退出</span>
           </div>
         </SubmenuItem>

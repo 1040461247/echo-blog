@@ -1,4 +1,4 @@
-import '@/assets/iconfont/main-header/iconfont.css'
+import '@/assets/iconfont/iconfont.css'
 import '@/assets/style/common.css'
 import '@/assets/style/reset.css'
 import '@/assets/style/tailwind.css'

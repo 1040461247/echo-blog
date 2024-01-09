@@ -58,7 +58,7 @@ const ContentMain: FC<IProps> = memo(() => {
             <footer className="article-info flex text-sm text-gray-200/70">
               <div className="footer-left flex flex-wrap gap-3 text-left">
                 <span className="article-info-date">
-                  <i className="iconfont icon-archives mr-1" />
+                  <i className="iconfont icon-time mr-1" />
                   <span>{formatDate(item.create_time)}</span>
                 </span>
                 <ArticleCategory mobileHide categoryInfo={item.category} />

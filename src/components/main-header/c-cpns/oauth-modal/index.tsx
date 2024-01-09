@@ -2,8 +2,9 @@ import Message from '@/components/message'
 import Modal from '@/components/modal'
 import { REG_OTP, REG_PHONE } from '@/constants'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
+import { sendOtp } from '@/service/modules/user.request'
 import type { FC } from 'react'
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import ErrorMessage from './c-cpns/error-message'
 import OauthInput from './c-cpns/oauth-input'
 
@@ -15,8 +16,7 @@ export interface IProps {
 }
 
 const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
-  const [canSendOtp, setCanSendOtp] = useState(true)
-
+  // 表单初始化及验证规则配置
   const initialFormData = { phone: '', otp: '' }
   const validationRules: Record<keyof typeof initialFormData, IValidationRule[]> = {
     phone: [
@@ -43,20 +43,50 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
   const { formData, errors, handleChange, handleBlur, validateAll, valiedateField } =
     useFormValidation(initialFormData, validationRules)
 
-  function handleSendOtp(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  // 发送验证码
+  const [otpDisabled, setOtpDisabled] = useState(false)
+  const [countdown, setCountdown] = useState(60)
+  async function handleSendOtp(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
     const phoneError = valiedateField('phone')
-    if (phoneError) {
-      Message.error(phoneError)
+    if (!phoneError) {
+      const sendOtpRes = await sendOtp(formData.phone)
+      if (sendOtpRes) {
+        Message.success('验证码已发送:)')
+        setOtpDisabled(true)
+      }
     } else {
-      console.log('send otp')
+      Message.error(phoneError)
     }
   }
+  useEffect(() => {
+    let timer: NodeJS.Timeout
+    if (otpDisabled) {
+      timer = setInterval(() => {
+        setCountdown((countdown) => countdown - 1)
+      }, 1000)
+    }
+    return () => clearInterval(timer)
+  }, [otpDisabled])
+  useEffect(() => {
+    if (countdown <= 0) {
+      setOtpDisabled(false)
+      setCountdown(60)
+    }
+  }, [countdown])
+
+  // 提交表单
   function handleCommit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
     const errors = validateAll()
-    if (Object.keys(errors).length === 0) {
+    const errorKeys = Object.keys(errors)
+
+    if (errorKeys.length === 0) {
+      // 表单验证成功，执行提交操作
       console.log('commit')
+    } else {
+      // 打印第一个错误
+      Message.error(errors[errorKeys[0]])
     }
   }
 
@@ -89,11 +119,11 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
                 customClass="flex-1 rounded-r-none"
               />
               <button
-                className="px-4 bg-gray-300 text-[--bg-dark-blue] rounded-r-md whitespace-nowrap hover:bg-gray-200 transition-colors"
+                className="px-4 bg-gray-300 text-[--bg-dark-blue] rounded-r-md whitespace-nowrap hover:bg-gray-200 transition-colors disabled:hover:bg-gray-300 disabled:hover:cursor-not-allowed"
                 onClick={(e) => handleSendOtp(e)}
-                disabled={!canSendOtp}
+                disabled={otpDisabled}
               >
-                验证码
+                {otpDisabled ? `${countdown}秒后重新获取` : '验证码'}
               </button>
             </div>
             {errors.otp && <ErrorMessage text={errors.otp} />}

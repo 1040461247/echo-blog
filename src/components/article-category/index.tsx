@@ -1,7 +1,7 @@
-import { memo } from 'react'
-import Link from 'next/link'
 import { CATEGORY_PATH } from '@/constants'
+import Link from 'next/link'
 import type { FC } from 'react'
+import { memo } from 'react'
 
 // Types
 export interface IProps {
@@ -16,7 +16,7 @@ export interface IProps {
 const ArticleCategory: FC<IProps> = memo(({ categoryInfo = {}, mobileHide = false }) => {
   return (
     <span className={`article-categories ${mobileHide ? 'hidden md:flex' : 'flex items-center'}`}>
-      <i className="iconfont icon-category mr-1" />
+      <i className="iconfont icon-folder mr-1" />
       <Link className="hover-highlight" href={`${CATEGORY_PATH}/${categoryInfo.id}`}>
         {categoryInfo.name}
       </Link>

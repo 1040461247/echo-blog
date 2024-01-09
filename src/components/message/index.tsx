@@ -28,6 +28,10 @@ interface IMessageOption {
 interface IMessageQueueItem extends IMessageOption {
   id: string
 }
+interface ITypeStyle {
+  customClass: string
+  iconName: string
+}
 
 const MESSAGE_QUEUE: IMessageQueueItem[] = []
 const CONTAINER_ID = 'message-container'
@@ -53,7 +57,7 @@ function createContainer() {
   if (!containerEl) {
     containerEl = document.createElement('div')
     containerEl.setAttribute('id', CONTAINER_ID)
-    containerEl.className = 'flex flex-col items-center fixed inset-x-0 top-0 z-50'
+    containerEl.className = 'fixed left-1/2 -translate-x-1/2 top-0 z-50'
     document.body.appendChild(containerEl)
   }
 
@@ -86,12 +90,26 @@ const BaseMessage: FC<IProps> = memo(({ type, message, id }) => {
   // 当过渡动画执行完毕后，移除消息组件
   const clear = () => removeMessage(id)
 
-  const typeStyle: Record<keyof IPropsMessage, string> = {
-    info: 'text-[#7e7e7e] bg-[#efefef] border-[#bababa]',
-    success: 'text-[#0d8a0d] bg-[#c9f3c9] border-[#50b250]',
-    warn: 'text-[#9f9f00] bg-[#ffe89c] border-[#dddd00]',
-    error: 'text-[#db1a1a] bg-[#ffbdbd] border-[#eb5757]'
+  const typeStyle: Record<keyof IPropsMessage, ITypeStyle> = {
+    info: {
+      customClass: 'text-[#909399] bg-[#f4f4f5] border-[#e9e9eb]',
+      iconName: 'icon-info'
+    },
+    success: {
+      customClass: 'text-[#67c23a] bg-[#f0f9eb] border-[#e1f3d8]',
+      iconName: 'icon-success'
+    },
+    warn: {
+      customClass: 'text-[#e6a23c] bg-[#fdf6ec] border-[#faecd8]',
+      iconName: 'icon-warn'
+    },
+    error: {
+      customClass: 'text-[#f56c6c] bg-[#fef0f0] border-[#fde2e2]',
+      iconName: 'icon-error'
+    }
   }
+
+  const { customClass, iconName } = typeStyle[type]
 
   return (
     <Transition
@@ -104,10 +122,11 @@ const BaseMessage: FC<IProps> = memo(({ type, message, id }) => {
       leaveTo="opacity-0 -translate-y-full"
       afterLeave={clear}
       appear
-      className={`base-message mt-3 py-[9px] px-3 rounded-lg ${typeStyle[type]}`}
+      className={`base-message flex items-center mt-3 py-[15px] px-[19px] rounded-lg text-sm border border-solid ${customClass}`}
       ref={messageRef}
     >
-      {message}
+      <i className={`iconfont ${iconName} mr-2`} />
+      <span>{message}</span>
     </Transition>
   )
 })

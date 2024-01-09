@@ -19,16 +19,16 @@ const menuList: IMenuListItem[] = [
     path: HOME_PATH
   },
   {
-    icon: `${prefix}article`,
+    icon: `${prefix}read`,
     text: '文章',
     children: [
       {
-        icon: `${prefix}archives`,
+        icon: `${prefix}time`,
         text: '时间轴',
         path: ARCHIVES_PATH
       },
       {
-        icon: `${prefix}category`,
+        icon: `${prefix}folder`,
         text: '分类',
         path: CATEGORY_PATH
       },
@@ -40,26 +40,26 @@ const menuList: IMenuListItem[] = [
     ]
   },
   {
-    icon: `${prefix}mood`,
+    icon: `${prefix}smile`,
     text: '心情',
     path: MOOD_PATH
   },
   {
-    icon: `${prefix}messages`,
+    icon: `${prefix}message`,
     text: '留言',
     path: MESSAGES_PATH
   },
   {
-    icon: `${prefix}about`,
+    icon: `${prefix}info`,
     text: '关于',
     children: [
       {
-        icon: `${prefix}messages`,
+        icon: `${prefix}astronaut`,
         text: '我',
         path: ME_PATH
       },
       {
-        icon: `${prefix}friends`,
+        icon: `${prefix}link`,
         text: '友链',
         path: FRIENDS_PATH
       },

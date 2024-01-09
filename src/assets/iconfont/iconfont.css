@@ -1,0 +1,87 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4308818 */
+  src: url('iconfont.woff2?t=1704769493748') format('woff2'),
+       url('iconfont.woff?t=1704769493748') format('woff'),
+       url('iconfont.ttf?t=1704769493748') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-warn:before {
+  content: "\e849";
+}
+
+.icon-astronaut:before {
+  content: "\e7c0";
+}
+
+.icon-exit:before {
+  content: "\e659";
+}
+
+.icon-arrow:before {
+  content: "\e8ec";
+}
+
+.icon-link:before {
+  content: "\e69a";
+}
+
+.icon-close:before {
+  content: "\e7fc";
+}
+
+.icon-user:before {
+  content: "\e618";
+}
+
+.icon-smile:before {
+  content: "\e847";
+}
+
+.icon-time:before {
+  content: "\e848";
+}
+
+.icon-message:before {
+  content: "\e84a";
+}
+
+.icon-folder:before {
+  content: "\e85e";
+}
+
+.icon-read:before {
+  content: "\e861";
+}
+
+.icon-home:before {
+  content: "\e867";
+}
+
+.icon-tags:before {
+  content: "\e86e";
+}
+
+.icon-success:before {
+  content: "\e844";
+}
+
+.icon-error:before {
+  content: "\e845";
+}
+
+.icon-info:before {
+  content: "\e846";
+}
+
+.icon-github:before {
+  content: "\e885";
+}
+

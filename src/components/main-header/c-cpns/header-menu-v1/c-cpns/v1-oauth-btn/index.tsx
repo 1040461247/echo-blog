@@ -14,7 +14,7 @@ const V1OauthBtn: FC<IProps> = memo(({ handleModal }) => {
       <V1MenuItem
         isLink={false}
         isActive={false}
-        iconName="icon-home"
+        iconName="icon-user"
         text="登录/注册"
         handleClick={() => handleModal(true)}
       />

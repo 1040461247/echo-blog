@@ -25,7 +25,7 @@ const SubmenuItem: FC<IProps> = memo(
             children
           ) : (
             <Link className="inline-block w-full h-full px-[15px] py-[3px]" href={path}>
-              <i className={`icon iconfont ${iconName} mr-1`} />
+              <i className={`icon iconfont ${iconName} mr-[2px]`} />
               <span className="text">{text}</span>
             </Link>
           )}
