@@ -2,7 +2,7 @@ import Message from '@/components/message'
 import Modal from '@/components/modal'
 import { REG_OTP, REG_PHONE } from '@/constants'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
-import { sendOtp } from '@/service/modules/user.request'
+import { loginPhone, sendOtp } from '@/service/modules/user.request'
 import type { FC } from 'react'
 import { memo, useEffect, useState } from 'react'
 import ErrorMessage from './c-cpns/error-message'
@@ -76,7 +76,7 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
   }, [countdown])
 
   // 提交表单
-  function handleCommit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function handleCommit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
     const errors = validateAll()
     const errorKeys = Object.keys(errors)
@@ -84,8 +84,10 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
     if (errorKeys.length === 0) {
       // 表单验证成功，执行提交操作
       console.log('commit')
+      const { phone, otp } = formData
+      const res = await loginPhone(phone, otp)
+      console.log(res)
     } else {
-      // 打印第一个错误
       Message.error(errors[errorKeys[0]])
     }
   }

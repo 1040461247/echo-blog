@@ -67,4 +67,19 @@ async function sendOtp(phone: string) {
   }
 }
 
-export { login, sendOtp, verifyAuth }
+async function loginPhone(phone: string, otp: string) {
+  try {
+    const res = await request.post('/login-phone', {
+      data: { phone, otp }
+    })
+    if (res.code >= 200 && res.code < 300) {
+      return res
+    } else {
+      console.error(res)
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export { login, loginPhone, sendOtp, verifyAuth }
