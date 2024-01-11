@@ -2,9 +2,9 @@ import type { IMenuListItem } from '@/assets/data/menu-list-data'
 import menuListData from '@/assets/data/menu-list-data'
 import BlogInfo from '@/components/blog-info'
 import Drawer from '@/components/drawer'
-import { PROFILE_PATH } from '@/constants'
+import { LOGIN_PATH, PROFILE_PATH } from '@/constants'
 import { useAppSelector } from '@/hooks/use-store'
-import logout from '@/utils/logout'
+import logout from '@/utils/user-logout'
 import Image from 'next/image'
 import type { FC } from 'react'
 import { memo, useState } from 'react'
@@ -14,10 +14,9 @@ import V2MenuItem from './c-cpns/v2-menu-item'
 // Types
 export interface IProps {
   children?: React.ReactElement
-  handleModal: (isOpen: boolean) => void
 }
 
-const HeaderMenubutton: FC<IProps> = memo(({ handleModal }) => {
+const HeaderMenubutton: FC<IProps> = memo(() => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const { userInfo } = useAppSelector(
     (state) => ({
@@ -51,10 +50,6 @@ const HeaderMenubutton: FC<IProps> = memo(({ handleModal }) => {
   function handleLogout() {
     setIsDrawerOpen(false)
     logout()
-  }
-  function handleOauth() {
-    setIsDrawerOpen(false)
-    handleModal(true)
   }
 
   return (
@@ -92,10 +87,12 @@ const HeaderMenubutton: FC<IProps> = memo(({ handleModal }) => {
               ) : (
                 <div className="oauth">
                   <V2MenuItem
-                    isLink={false}
+                    isLink
+                    path={LOGIN_PATH}
                     iconName="icon-home"
                     text="登录/注册"
-                    handleClick={() => handleOauth(true)}
+                    handleClick={() => setIsDrawerOpen(false)}
+                    scroll={false}
                   />
                 </div>
               )}

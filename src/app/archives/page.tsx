@@ -1,12 +1,12 @@
 'use client'
 
-import { memo, useEffect } from 'react'
-import { shallowEqual } from 'react-redux'
-import { fetchStatisticsAction, fetchArticlesAction } from '@/store/slices/home.slice'
 import BgTowerV2 from '@/components/bg-tower-v2'
 import Timeline from '@/components/timeline'
-import { useAppDispatch, useAppSelector } from '@/hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
+import { fetchArticlesAction, fetchStatisticsAction } from '@/store/slices/home.slice'
 import type { FC } from 'react'
+import { memo, useEffect } from 'react'
+import { shallowEqual } from 'react-redux'
 
 // Types
 export interface IProps {
@@ -37,7 +37,7 @@ const ArchivesPage: FC<IProps> = memo(() => {
           <h2 className="text-5xl mb-3">时间轴</h2>
           <h3>-共发布了{statistics.articlesCount}篇文章-</h3>
         </header>
-        <main className="">
+        <main className="w-full">
           <Timeline articlesData={articles} />
         </main>
       </div>

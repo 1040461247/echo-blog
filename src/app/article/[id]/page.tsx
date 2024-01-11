@@ -1,6 +1,6 @@
 'use client'
 
-import { useAppDispatch, useAppSelector } from '@/hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import { fetchArticleByIdAction } from '@/store/slices'
 import { memo, useEffect } from 'react'
 import { shallowEqual } from 'react-redux'

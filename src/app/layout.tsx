@@ -1,6 +1,6 @@
 import '@/assets/iconfont/iconfont.css'
-import '@/assets/style/common.css'
 import '@/assets/style/reset.css'
+import '@/assets/style/common.css'
 import '@/assets/style/tailwind.css'
 import '@/assets/style/variables.css'
 import Providers from '@/store/providers'
@@ -8,9 +8,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import 'normalize.css'
 import React from 'react'
-
-import MainHeader from '../components/main-header'
-// import MainFooter from '../components/main-footer'
+import MainHeader from './(c-cpns)/main-header'
 
 const myFont = localFont({
   src: [
@@ -33,14 +31,20 @@ export const metadata: Metadata = {
   description: 'Welcome to my blog. this is Echo.'
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+  auth
+}: {
+  children: React.ReactNode
+  auth: React.ReactNode
+}) {
   return (
     <Providers>
       <html lang="zh" className={myFont.className}>
         <body>
           <MainHeader />
           {children}
-          {/* <MainFooter /> */}
+          {auth}
         </body>
       </html>
     </Providers>

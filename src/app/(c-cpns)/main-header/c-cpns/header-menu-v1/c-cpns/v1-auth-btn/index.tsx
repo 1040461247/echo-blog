@@ -1,22 +1,23 @@
 import type { FC } from 'react'
 import { memo } from 'react'
 import V1MenuItem from '../v1-menu-item'
+import { LOGIN_PATH } from '@/constants'
 
 // Types
 export interface IProps {
   children?: React.ReactElement
-  handleModal: (isOpen: boolean) => void
 }
 
-const V1OauthBtn: FC<IProps> = memo(({ handleModal }) => {
+const V1OauthBtn: FC<IProps> = memo(() => {
   return (
     <div className="v1-oauth-btn">
       <V1MenuItem
-        isLink={false}
+        isLink
+        path={LOGIN_PATH}
         isActive={false}
         iconName="icon-user"
         text="登录/注册"
-        handleClick={() => handleModal(true)}
+        scroll={false}
       />
     </div>
   )

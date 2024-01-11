@@ -1,7 +1,7 @@
 'use client'
 
 import { memo, useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '@/hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import { shallowEqual } from 'react-redux'
 import { fetchArticlesByCategoryIdAction, fetchCategoryByIdAction } from '@/store/slices'
 import ArticlesDisplay from '@/components/articles-display'

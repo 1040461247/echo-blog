@@ -1,21 +1,24 @@
+'use client'
+
+import { memo, useEffect, useState, type FC } from 'react'
+import { useRouter } from 'next/navigation'
 import Message from '@/components/message'
 import Modal from '@/components/modal'
-import { REG_OTP, REG_PHONE } from '@/constants'
+import { REG_OTP, REG_PHONE, SIGNUP_PATH } from '@/constants'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
 import { loginPhone, sendOtp } from '@/service/modules/user.request'
-import type { FC } from 'react'
-import { memo, useEffect, useState } from 'react'
+import userLogin from '@/utils/user-login'
 import ErrorMessage from './c-cpns/error-message'
-import OauthInput from './c-cpns/oauth-input'
+import OauthInput from './c-cpns/auth-input'
 
 // Types
 export interface IProps {
   children?: React.ReactElement
-  isOpen: boolean
-  handleModal: (isOpen: boolean) => void
 }
 
-const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
+const LoginPage: FC<IProps> = memo(() => {
+  const router = useRouter()
+
   // 表单初始化及验证规则配置
   const initialFormData = { phone: '', otp: '' }
   const validationRules: Record<keyof typeof initialFormData, IValidationRule[]> = {
@@ -51,9 +54,11 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
     const phoneError = valiedateField('phone')
     if (!phoneError) {
       const sendOtpRes = await sendOtp(formData.phone)
-      if (sendOtpRes) {
+      if (sendOtpRes?.code === 200) {
         Message.success('验证码已发送:)')
         setOtpDisabled(true)
+      } else {
+        Message.error(sendOtpRes!.msg)
       }
     } else {
       Message.error(phoneError)
@@ -81,25 +86,34 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
     const errors = validateAll()
     const errorKeys = Object.keys(errors)
 
-    if (errorKeys.length === 0) {
-      // 表单验证成功，执行提交操作
-      console.log('commit')
+    const noErrors = errorKeys.length === 0
+    if (noErrors) {
       const { phone, otp } = formData
       const res = await loginPhone(phone, otp)
       console.log(res)
+
+      // 验证码错误
+      const codeError = res?.code !== 200
+      if (codeError) {
+        Message.error(res!.msg)
+        return
+      }
+
+      const isRegisteredUser = res?.data.status === 1
+      if (isRegisteredUser) {
+        userLogin(res.data.user.token)
+        router.back()
+      } else {
+        router.replace(`${SIGNUP_PATH}?phone=${phone}`, { scroll: false })
+      }
     } else {
       Message.error(errors[errorKeys[0]])
     }
   }
 
   return (
-    <div className="oauth-modal">
-      <Modal
-        isOpen={isOpen}
-        handleModal={handleModal}
-        title="请输入电话号码"
-        subTitle="-以进入EchoBlog-"
-      >
+    <div className="login-page">
+      <Modal handleClose={() => router.back()} title="请输入电话号码" subTitle="-以进入EchoBlog-">
         <form className="modal-content-form">
           <div className="form-phone mb-5">
             <OauthInput
@@ -145,5 +159,5 @@ const OauthModal: FC<IProps> = memo(({ isOpen, handleModal }) => {
   )
 })
 
-export default OauthModal
-OauthModal.displayName = 'OauthModal'
+export default LoginPage
+LoginPage.displayName = 'LoginPage'

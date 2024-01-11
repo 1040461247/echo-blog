@@ -56,12 +56,7 @@ async function verifyAuth(token: string) {
 
 async function sendOtp(phone: string) {
   try {
-    const res = await request.post('/send-otp', { data: { phone } })
-    if (res.code >= 200 && res.code < 300) {
-      return res
-    } else {
-      console.error(res)
-    }
+    return await request.post('/send-otp', { data: { phone } })
   } catch (error) {
     console.error(error)
   }
@@ -69,14 +64,9 @@ async function sendOtp(phone: string) {
 
 async function loginPhone(phone: string, otp: string) {
   try {
-    const res = await request.post('/login-phone', {
+    return await request.post('/login-phone', {
       data: { phone, otp }
     })
-    if (res.code >= 200 && res.code < 300) {
-      return res
-    } else {
-      console.error(res)
-    }
   } catch (error) {
     console.error(error)
   }

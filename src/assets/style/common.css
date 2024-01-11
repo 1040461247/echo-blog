@@ -32,8 +32,6 @@ button:hover {
 }
 ::-webkit-scrollbar-thumb {
   border: none;
-  /* background: var(--primary-color); */
-  /* background: var(--bg-dark-blue); */
   background: linear-gradient(to bottom, #ff5a79, #d45796, #9c5ca0, #655c95, #3c557a, #2f4858);
   border-radius: 10px;
 }

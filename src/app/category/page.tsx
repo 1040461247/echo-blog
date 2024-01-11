@@ -1,16 +1,16 @@
 'use client'
 
+import type { IProps as ITagCloudPageProps } from '@/components/tag-cloud-page'
+import TagCloudPage from '@/components/tag-cloud-page'
+import { CATEGORY_PATH } from '@/constants'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
+import { fetchCategoryListAction } from '@/store/slices'
+import { tagsMapTagCloud } from '@/utils/map-data'
+import Link from 'next/link'
+import type { FC } from 'react'
 import { memo, useEffect } from 'react'
 import { shallowEqual } from 'react-redux'
-import Link from 'next/link'
-import { fetchCategoryListAction } from '@/store/slices'
-import { CATEGORY_PATH } from '@/constants'
-import { useAppSelector, useAppDispatch } from '@/hooks'
-import { tagsMapTagCloud } from '@/utils/map-data'
-import TagCloudPage from '@/components/tag-cloud-page'
-import type { FC } from 'react'
 import type { ColorOptions, RendererFunction } from 'react-tagcloud'
-import type { IProps as ITagCloudPageProps } from '@/components/tag-cloud-page'
 
 // Types
 export interface IProps {
@@ -55,7 +55,7 @@ const CategoryPage: FC<IProps> = memo(() => {
       } as ColorOptions,
       shuffle: false
     },
-    titleIconName: 'icon-category',
+    titleIconName: 'icon-folder',
     titleText: '分类',
     titleColor: 'text-red-400'
   }

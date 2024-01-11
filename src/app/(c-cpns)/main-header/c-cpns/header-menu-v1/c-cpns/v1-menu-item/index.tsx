@@ -11,10 +11,20 @@ export interface IProps {
   iconName: string
   text: string
   handleClick?: () => void
+  scroll?: boolean
 }
 
 const V1MenuItem: FC<IProps> = memo(
-  ({ children, isLink = true, isActive, path = '#', iconName, text, handleClick }) => {
+  ({
+    children,
+    isLink = true,
+    isActive,
+    path = '#',
+    iconName,
+    text,
+    handleClick,
+    scroll = true
+  }) => {
     // Common Styles
     const activeLinkStyle = `!text-[--primary-color] border-b-[3px] border-solid border-[--primary-color]`
     const linkStyle = `relative flex items-center px-[0.8vw] py-2.5 text-gray-300 hover:!text-[--primary-color] hover:border-b-[3px] hover:border-solid hover:border-[--primary-color]`
@@ -33,6 +43,7 @@ const V1MenuItem: FC<IProps> = memo(
         className={`header-item-link ${linkStyle} ${isActive ? activeLinkStyle : ''}`}
         href={path}
         onClick={handleClick}
+        scroll={scroll}
       >
         {showContent()}
         {children}

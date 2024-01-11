@@ -3,16 +3,15 @@ import { usePathname } from 'next/navigation'
 import { memo, type FC } from 'react'
 import { shallowEqual } from 'react-redux'
 import V1MenuList from './c-cpns/v1-menu-list'
-import V1OauthBtn from './c-cpns/v1-oauth-btn'
+import V1OauthBtn from './c-cpns/v1-auth-btn'
 import V1UserInfo from './c-cpns/v1-user-info'
 
 // Types
 export interface IProps {
   children?: React.ReactElement
-  handleModal: (isOpen: boolean) => void
 }
 
-const HeaderMenuV1: FC<IProps> = memo(({ handleModal }) => {
+const HeaderMenuV1: FC<IProps> = memo(() => {
   const { userInfo } = useAppSelector(
     (state) => ({
       userInfo: state.user.userInfo
@@ -35,12 +34,9 @@ const HeaderMenuV1: FC<IProps> = memo(({ handleModal }) => {
   return (
     <div className="header-menu-v1 hidden items-center md:flex">
       <V1MenuList isActivePath={isActivePath} />
+
       <div className="header-menu-user flex justify-center items-center ml-[0.5vw]">
-        {userInfo ? (
-          <V1UserInfo userInfo={userInfo} isActivePath={isActivePath} />
-        ) : (
-          <V1OauthBtn handleModal={handleModal} />
-        )}
+        {userInfo ? <V1UserInfo userInfo={userInfo} isActivePath={isActivePath} /> : <V1OauthBtn />}
       </div>
     </div>
   )
