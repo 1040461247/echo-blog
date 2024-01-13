@@ -29,7 +29,8 @@ async function login(
 ) {
   try {
     const res = await request.post('/login', {
-      body: JSON.stringify({ name, password, browser_info, os_info, ip_address })
+      body: JSON.stringify({ name, password, browser_info, os_info, ip_address }),
+      cache: 'no-store'
     })
     if (!res.ok) return console.error(res)
     const jsonData = await res.json()
@@ -41,7 +42,10 @@ async function login(
 
 async function verifyAuth(token: string) {
   try {
-    const res = await request.get('/authorized', { headers: { Authorization: token } })
+    const res = await request.get('/authorized', {
+      headers: { Authorization: token },
+      cache: 'no-store'
+    })
     if (!res.ok) return console.error(res)
     const jsonData = await res.json()
     return jsonData.data as IUserInfo
@@ -52,7 +56,10 @@ async function verifyAuth(token: string) {
 
 async function sendOtp(phone: string) {
   try {
-    const res = await request.post('/send-otp', { body: JSON.stringify({ phone }) })
+    const res = await request.post('/send-otp', {
+      body: JSON.stringify({ phone }),
+      cache: 'no-store'
+    })
     if (!res.ok) return console.error(res)
     const jsonData = await res.json()
     return jsonData
@@ -64,7 +71,8 @@ async function sendOtp(phone: string) {
 async function loginPhone(phone: string, otp: string) {
   try {
     const res = await request.post('/login-phone', {
-      body: JSON.stringify({ phone, otp })
+      body: JSON.stringify({ phone, otp }),
+      cache: 'no-store'
     })
     if (!res.ok) return console.error(res)
     const jsonData = await res.json()
@@ -74,4 +82,18 @@ async function loginPhone(phone: string, otp: string) {
   }
 }
 
-export { login, loginPhone, sendOtp, verifyAuth }
+async function signup(name: string, password: string, phone_num: string) {
+  try {
+    const res = await request.post('/users', {
+      body: JSON.stringify({ name, password, phone_num }),
+      cache: 'no-store'
+    })
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export { login, loginPhone, sendOtp, verifyAuth, signup }

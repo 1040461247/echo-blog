@@ -8,8 +8,10 @@ import { REG_OTP, REG_PHONE, SIGNUP_PATH } from '@/constants'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
 import { loginPhone, sendOtp } from '@/service/modules/user.request'
 import userLogin from '@/utils/user-login'
-import ErrorMessage from './c-cpns/error-message'
-import OauthInput from './c-cpns/auth-input'
+import ErrorMessage from '../c-cpns/error-message'
+import AuthInput from '../c-cpns/auth-input'
+import { useAppDispatch } from '@/hooks/use-store'
+import { setRegisteringPhoneAction } from '@/store/slices'
 
 // Types
 export interface IProps {
@@ -17,6 +19,7 @@ export interface IProps {
 }
 
 const LoginPage: FC<IProps> = memo(() => {
+  const dispatch = useAppDispatch()
   const router = useRouter()
 
   // 表单初始化及验证规则配置
@@ -81,8 +84,8 @@ const LoginPage: FC<IProps> = memo(() => {
   }, [countdown])
 
   // 提交表单
-  async function handleCommit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault()
+  async function handleCommit(e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e && e.preventDefault()
     const errors = validateAll()
     const errorKeys = Object.keys(errors)
 
@@ -90,7 +93,6 @@ const LoginPage: FC<IProps> = memo(() => {
     if (noErrors) {
       const { phone, otp } = formData
       const res = await loginPhone(phone, otp)
-      console.log(res)
 
       // 验证码错误
       const codeError = res?.code !== 200
@@ -101,10 +103,13 @@ const LoginPage: FC<IProps> = memo(() => {
 
       const isRegisteredUser = res?.data.status === 1
       if (isRegisteredUser) {
+        Message.success(`欢迎回来，${res.data.user.name}`)
         userLogin(res.data.user.token)
         router.back()
+        router.refresh()
       } else {
-        router.replace(`${SIGNUP_PATH}?phone=${phone}`, { scroll: false })
+        dispatch(setRegisteringPhoneAction(phone))
+        router.replace(`${SIGNUP_PATH}`, { scroll: false })
       }
     } else {
       Message.error(errors[errorKeys[0]])
@@ -114,21 +119,22 @@ const LoginPage: FC<IProps> = memo(() => {
   return (
     <div className="login-page">
       <Modal handleClose={() => router.back()} title="请输入电话号码" subTitle="-以进入EchoBlog-">
-        <form className="modal-content-form">
+        <form className="login-form">
           <div className="form-phone mb-5">
-            <OauthInput
-              placeholder="请输入电话号码"
+            <AuthInput
+              placeholder="电话号码"
               handleChange={handleChange}
               handleBlur={handleBlur}
               name="phone"
+              autoFocus
             />
             {errors.phone && <ErrorMessage text={errors.phone} />}
           </div>
 
           <div className="form-otp mb-5">
             <div className="flex justify-between w-full h-11">
-              <OauthInput
-                placeholder="请输入验证码"
+              <AuthInput
+                placeholder="验证码"
                 handleChange={handleChange}
                 handleBlur={handleBlur}
                 name="otp"

@@ -10,7 +10,7 @@ export interface IProps {
   children: React.ReactElement
   handleClose: () => void
   title: string
-  subTitle?: string
+  subTitle?: string | null
 }
 
 const Modal: FC<IProps> = memo(({ children, handleClose, title, subTitle }) => {

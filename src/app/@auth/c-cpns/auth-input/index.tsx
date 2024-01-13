@@ -1,30 +1,44 @@
-import type { ChangeEventHandler, FC, FocusEventHandler } from 'react'
+import type { ChangeEventHandler, FC, FocusEventHandler, KeyboardEventHandler } from 'react'
 import { memo } from 'react'
 
 // Types
 export interface IProps {
   children?: React.ReactElement
   handleChange: ChangeEventHandler
+  handleKeyUp?: KeyboardEventHandler
   handleBlur: FocusEventHandler
   placeholder: string
   customClass?: string
   name: string
+  type?: 'text' | 'password'
+  autoFocus?: boolean
 }
 
-const OauthInput: FC<IProps> = memo(
-  ({ handleChange, handleBlur, placeholder, customClass, name }) => {
+const AuthInput: FC<IProps> = memo(
+  ({
+    handleChange,
+    handleBlur,
+    placeholder,
+    customClass,
+    name,
+    type = 'text',
+    handleKeyUp,
+    autoFocus = false
+  }) => {
     return (
       <input
-        type="text"
+        type={type}
         placeholder={placeholder}
         className={`w-full h-11 bg-transparent p-4 placeholder:text-sm rounded-md border-gray-400 border focus:border-white hover:border-white transition-colors ${customClass}`}
         onChange={handleChange}
         onBlur={handleBlur}
         name={name}
+        onKeyUp={handleKeyUp}
+        autoFocus={autoFocus}
       />
     )
   }
 )
 
-export default OauthInput
-OauthInput.displayName = 'OauthInput'
+export default AuthInput
+AuthInput.displayName = 'AuthInput'

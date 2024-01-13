@@ -5,6 +5,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 // Types
 export interface IUserSliceState {
   userInfo: IUserInfo | null
+  registeringPhone: string | null
 }
 export interface ILoginParamasters {
   name: string
@@ -37,9 +38,14 @@ const fetchVerifyAuthAction = createAsyncThunk(
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    userInfo: null
+    userInfo: null,
+    registeringPhone: null
   } as IUserSliceState,
-  reducers: {},
+  reducers: {
+    setRegisteringPhoneAction(state, { payload }) {
+      state.registeringPhone = payload ?? null
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchVerifyAuthAction.fulfilled, (state, { payload }) => {
       state.userInfo = payload ?? null
@@ -48,3 +54,4 @@ export const userSlice = createSlice({
 })
 
 export { fetchLoginAction, fetchVerifyAuthAction }
+export const { setRegisteringPhoneAction } = userSlice.actions
