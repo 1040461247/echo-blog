@@ -15,11 +15,9 @@ const MODULE_BASE_URL = '/tags'
 async function getTagById(tagId: number) {
   try {
     const res = await request.get(`${MODULE_BASE_URL}/${tagId}`)
-    if (res.code >= 200 && res.code < 300) {
-      return res.data as ITag
-    } else {
-      console.error(res)
-    }
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData.data as ITag
   } catch (error) {
     console.error(error)
   }
@@ -28,11 +26,9 @@ async function getTagById(tagId: number) {
 async function getArticlesByTagId(tagId: number) {
   try {
     const res = await request.get(`${MODULE_BASE_URL}/${tagId}/articles`)
-    if (res.code >= 200 && res.code < 300) {
-      return res.data as IArticle[]
-    } else {
-      console.error(res)
-    }
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData.data as IArticle[]
   } catch (error) {
     console.error(error)
   }
@@ -41,11 +37,9 @@ async function getArticlesByTagId(tagId: number) {
 async function getTagList() {
   try {
     const res = await request.get(`${MODULE_BASE_URL}`)
-    if (res.code >= 200 && res.code < 300) {
-      return res.data as ITag[]
-    } else {
-      console.error(res)
-    }
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData.data as ITag[]
   } catch (error) {
     console.error(error)
   }

@@ -28,8 +28,6 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
     el.style.transform = `${scale} ${rotate}`
   }
 
-  console.log(articleData)
-
   return (
     <div
       className={`article-card group relative transition-transform ${duration} hover:!rotate-0`}

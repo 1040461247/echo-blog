@@ -16,7 +16,7 @@ const RegisterPage: FC<IProps> = memo((props, searchParams) => {
 
   return (
     <div className="register-page">
-      <Modal handleClose={() => router.back()} title="创建您的账号" subTitle="">
+      <Modal handleClose={() => router.back()} title="创建您的账号">
         <>哈哈哈</>
       </Modal>
     </div>

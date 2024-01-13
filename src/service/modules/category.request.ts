@@ -15,11 +15,9 @@ const MODULE_BASE_URL = '/categories'
 async function getCategoryById(categoryId: number) {
   try {
     const res = await request.get(`${MODULE_BASE_URL}/${categoryId}`)
-    if (res.code >= 200 && res.code < 300) {
-      return res.data as ICategory
-    } else {
-      console.error(res)
-    }
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData.data as ICategory
   } catch (error) {
     console.error(error)
   }
@@ -28,11 +26,9 @@ async function getCategoryById(categoryId: number) {
 async function getArticlesByCategoryId(categoryId: number) {
   try {
     const res = await request.get(`${MODULE_BASE_URL}/${categoryId}/articles`)
-    if (res.code >= 200 && res.code < 300) {
-      return res.data as IArticle[]
-    } else {
-      console.error(res)
-    }
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData.data as IArticle[]
   } catch (error) {
     console.error(error)
   }
@@ -41,11 +37,9 @@ async function getArticlesByCategoryId(categoryId: number) {
 async function getCategoryList() {
   try {
     const res = await request.get(`${MODULE_BASE_URL}`)
-    if (res.code >= 200 && res.code < 300) {
-      return res.data as ICategory[]
-    } else {
-      console.error(res)
-    }
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData.data as ICategory[]
   } catch (error) {
     console.error(error)
   }

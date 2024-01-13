@@ -1,11 +1,22 @@
-import Request from './request/index'
-import { AxiosRequestConfig } from './request/types'
+import { RequestInit } from 'next/dist/server/web/spec-extension/request'
 
-const baseConfig: AxiosRequestConfig = {
-  baseURL: process.env.NEXT_PUBLIC_API_BASEURL,
-  timeout: 5000
+class myRequest {
+  constructor(public baseUrl: string) {
+    this.baseUrl = baseUrl
+  }
+
+  async get(path: string, init?: RequestInit) {
+    return await fetch(`${this.baseUrl}${path}`, { method: 'GET', ...init })
+  }
+
+  async post(path: string, init?: RequestInit) {
+    if (init?.body) {
+      init.headers = {
+        'Content-Type': 'application/json'
+      }
+    }
+    return await fetch(`${this.baseUrl}${path}`, { method: 'POST', ...init })
+  }
 }
 
-const request = new Request(baseConfig)
-
-export default request
+export default new myRequest(process.env.NEXT_PUBLIC_API_BASEURL)

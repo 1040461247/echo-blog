@@ -10,7 +10,7 @@ export interface IProps {
   children: React.ReactElement
   handleClose: () => void
   title: string
-  subTitle: string
+  subTitle?: string
 }
 
 const Modal: FC<IProps> = memo(({ children, handleClose, title, subTitle }) => {
@@ -18,7 +18,7 @@ const Modal: FC<IProps> = memo(({ children, handleClose, title, subTitle }) => {
   usePreventScroll(true)
 
   return (
-    <div className={`modal-box fixed inset-0 z-50`}>
+    <div className={`modal-box fixed inset-0 z-40`}>
       {/* Mask */}
       <div className="modal-mask absolute inset-0 bg-black/50" onClick={handleClose}></div>
 
@@ -27,7 +27,7 @@ const Modal: FC<IProps> = memo(({ children, handleClose, title, subTitle }) => {
         <header className="modal-content-header mb-5">
           <div className="moal-content-header-title flex flex-col text-center">
             <span className="text-xl mb-1">{title}</span>
-            <span className="text-sm text-gray-300/80">{subTitle}</span>
+            {subTitle && <span className="text-sm text-gray-300/80">{subTitle}</span>}
           </div>
           <button
             className="absolute top-3 right-3 hover:text-gray-300 focus:outline-none transition-colors p-1"

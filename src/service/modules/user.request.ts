@@ -29,13 +29,11 @@ async function login(
 ) {
   try {
     const res = await request.post('/login', {
-      data: { name, password, browser_info, os_info, ip_address }
+      body: JSON.stringify({ name, password, browser_info, os_info, ip_address })
     })
-    if (res.code >= 200 && res.code < 300) {
-      return res.data as ILoginRes
-    } else {
-      console.error(res)
-    }
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData.data as ILoginRes
   } catch (error) {
     console.error(error)
   }
@@ -44,11 +42,9 @@ async function login(
 async function verifyAuth(token: string) {
   try {
     const res = await request.get('/authorized', { headers: { Authorization: token } })
-    if (res.code >= 200 && res.code < 300) {
-      return res.data as IUserInfo
-    } else {
-      console.error(res)
-    }
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData.data as IUserInfo
   } catch (error) {
     console.error(error)
   }
@@ -56,7 +52,10 @@ async function verifyAuth(token: string) {
 
 async function sendOtp(phone: string) {
   try {
-    return await request.post('/send-otp', { data: { phone } })
+    const res = await request.post('/send-otp', { body: JSON.stringify({ phone }) })
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData
   } catch (error) {
     console.error(error)
   }
@@ -64,9 +63,12 @@ async function sendOtp(phone: string) {
 
 async function loginPhone(phone: string, otp: string) {
   try {
-    return await request.post('/login-phone', {
-      data: { phone, otp }
+    const res = await request.post('/login-phone', {
+      body: JSON.stringify({ phone, otp })
     })
+    if (!res.ok) return console.error(res)
+    const jsonData = await res.json()
+    return jsonData
   } catch (error) {
     console.error(error)
   }
