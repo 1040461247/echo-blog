@@ -25,7 +25,7 @@ interface IMessageOption {
   type: TMessage
   message: string
 }
-interface IMessageQueueItem extends IMessageOption {
+export interface IMessageQueueItem extends IMessageOption {
   id: string
 }
 interface ITypeStyle {

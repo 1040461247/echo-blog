@@ -1,8 +1,9 @@
+import Message from '@/components/message'
 import SubmenuItem from '@/components/submenu-item'
 import SubmenuWrap from '@/components/submenu-wrap'
 import { PROFILE_PATH } from '@/constants'
+import useLogout from '@/hooks/use-logout'
 import type { IUserInfo } from '@/service/modules/user.request'
-import logout from '@/utils/user-logout'
 import Avatar from 'boring-avatars'
 import Image from 'next/image'
 import type { FC } from 'react'
@@ -16,6 +17,13 @@ export interface IProps {
 }
 
 const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
+  const logout = useLogout()
+
+  function handleLogout() {
+    logout()
+    Message.success('用户已退出')
+  }
+
   return (
     <div className="v1-user-info group relative flex justify-center cursor-pointer">
       {/* Avatar */}
@@ -46,7 +54,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
           iconName="icon-user"
           text="个人中心"
         />
-        <SubmenuItem isActive={false} handleClick={logout}>
+        <SubmenuItem isActive={false} handleClick={handleLogout}>
           <div className="submenu-item-link inline-block w-full h-full px-[15px] py-[3px] cursor-pointer">
             <i className={`icon iconfont icon-exit mr-[2px]`} />
             <span className="text">退出</span>

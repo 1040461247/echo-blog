@@ -7,11 +7,11 @@ import Modal from '@/components/modal'
 import { REG_OTP, REG_PHONE, SIGNUP_PATH } from '@/constants'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
 import { loginPhone, sendOtp } from '@/service/modules/user.request'
-import userLogin from '@/utils/user-login'
 import ErrorMessage from '../c-cpns/error-message'
 import AuthInput from '../c-cpns/auth-input'
 import { useAppDispatch } from '@/hooks/use-store'
 import { setRegisteringPhoneAction } from '@/store/slices'
+import { useLogin } from '@/hooks/use-login'
 
 // Types
 export interface IProps {
@@ -21,6 +21,7 @@ export interface IProps {
 const LoginPage: FC<IProps> = memo(() => {
   const dispatch = useAppDispatch()
   const router = useRouter()
+  const login = useLogin()
 
   // 表单初始化及验证规则配置
   const initialFormData = { phone: '', otp: '' }
@@ -103,10 +104,9 @@ const LoginPage: FC<IProps> = memo(() => {
 
       const isRegisteredUser = res?.data.status === 1
       if (isRegisteredUser) {
-        Message.success(`欢迎回来，${res.data.user.name}`)
-        userLogin(res.data.user.token)
+        login(res.data.user.token)
         router.back()
-        router.refresh()
+        Message.success(`欢迎回来，${res.data.user.name}`)
       } else {
         dispatch(setRegisteringPhoneAction(phone))
         router.replace(`${SIGNUP_PATH}`, { scroll: false })

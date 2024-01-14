@@ -8,11 +8,12 @@ import type { FC } from 'react'
 import { shallowEqual } from 'react-redux'
 import AuthInput from '../c-cpns/auth-input'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
-import { REG_NAME_CHARACTER, REG_NAME_LENGTH, REG_PASSWORD_LENGTH, TOKEN } from '@/constants'
+import { REG_NAME_CHARACTER, REG_NAME_LENGTH, REG_PASSWORD_LENGTH } from '@/constants'
 import ErrorMessage from '../c-cpns/error-message'
 import { signup } from '@/service/modules/user.request'
 import Message from '@/components/message'
 import encryptPhone from '@/utils/encrypt-phone'
+import { useLogin } from '@/hooks/use-login'
 
 // Types
 export interface IProps {
@@ -22,6 +23,7 @@ export interface IProps {
 const RegisterPage: FC<IProps> = memo(() => {
   const router = useRouter()
   const [isShowPwd, setIsShowPwd] = useState(false)
+  const login = useLogin()
 
   const { registeringPhone } = useAppSelector(
     (state) => ({
@@ -91,11 +93,10 @@ const RegisterPage: FC<IProps> = memo(() => {
         return
       }
 
-      // 存储token并返回上层目录
-      Message.success(`注册成功！欢迎您——${res.data.name}！`)
-      localStorage.setItem(TOKEN, res.data.token)
+      // 用户登录并返回上层目录
+      login(res.data.token)
       router.back()
-      router.refresh()
+      Message.success(`注册成功！欢迎您-${res.data.name}！`)
     } else {
       Message.error(errors[errorKeys[0]])
     }
@@ -106,7 +107,7 @@ const RegisterPage: FC<IProps> = memo(() => {
       <Modal
         handleClose={() => router.back()}
         title="创建您的账号"
-        subTitle={registeringPhone && `你好啊，${encryptPhone(registeringPhone)}`}
+        subTitle={registeringPhone && `${encryptPhone(registeringPhone)}`}
       >
         <form className="signup-form">
           <div className="form-name mb-5">

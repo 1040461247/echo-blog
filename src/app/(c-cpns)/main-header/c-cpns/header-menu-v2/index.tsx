@@ -4,12 +4,13 @@ import BlogInfo from '@/components/blog-info'
 import Drawer from '@/components/drawer'
 import { LOGIN_PATH, PROFILE_PATH } from '@/constants'
 import { useAppSelector } from '@/hooks/use-store'
-import logout from '@/utils/user-logout'
 import Image from 'next/image'
 import type { FC } from 'react'
 import { memo, useState } from 'react'
 import { shallowEqual } from 'react-redux'
 import V2MenuItem from './c-cpns/v2-menu-item'
+import useLogout from '@/hooks/use-logout'
+import Message from '@/components/message'
 
 // Types
 export interface IProps {
@@ -17,6 +18,7 @@ export interface IProps {
 }
 
 const HeaderMenubutton: FC<IProps> = memo(() => {
+  const logout = useLogout()
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const { userInfo } = useAppSelector(
     (state) => ({
@@ -50,6 +52,7 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
   function handleLogout() {
     setIsDrawerOpen(false)
     logout()
+    Message.success('用户已退出')
   }
 
   return (
