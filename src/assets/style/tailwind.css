@@ -15,7 +15,7 @@
 
 @layer utilities {
   .hover-highlight {
-    @apply hover:text-[--primary-color] transition-colors;
+    @apply hover:text-[--primary-color] hover:border-[--primary-color] transition-colors duration-300;
   }
   .hide-scroll {
     scrollbar-width: none; /* Firefox */

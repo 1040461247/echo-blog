@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@emoji-mart/data':
+    specifier: ^1.1.2
+    version: 1.1.2
+  '@emoji-mart/react':
+    specifier: ^1.1.1
+    version: 1.1.1(emoji-mart@5.5.2)(react@18.2.0)
   '@headlessui/react':
     specifier: ^1.7.17
     version: 1.7.17(react-dom@18.2.0)(react@18.2.0)
@@ -38,6 +44,9 @@ dependencies:
   echo-blog:
     specifier: 'link:'
     version: 'link:'
+  emoji-mart:
+    specifier: ^5.5.2
+    version: 5.5.2
   eslint-config-next:
     specifier: 13.5.1
     version: 13.5.1(eslint@8.49.0)(typescript@5.2.2)
@@ -117,6 +126,20 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+    dev: false
+
+  /@emoji-mart/data@1.1.2:
+    resolution: {integrity: sha512-1HP8BxD2azjqWJvxIaWAMyTySeZY0Osr83ukYjltPVkNXeJvTz7yDrPLBtnrD5uqJ3tg4CcLuuBW09wahqL/fg==}
+    dev: false
+
+  /@emoji-mart/react@1.1.1(emoji-mart@5.5.2)(react@18.2.0):
+    resolution: {integrity: sha512-NMlFNeWgv1//uPsvLxvGQoIerPuVdXwK/EUek8OOkJ6wVOWPUizRBJU0hDqWZCOROVpfBgCemaC3m6jDOXi03g==}
+    peerDependencies:
+      emoji-mart: ^5.2
+      react: ^16.8 || ^17 || ^18
+    dependencies:
+      emoji-mart: 5.5.2
+      react: 18.2.0
     dev: false
 
   /@eslint-community/eslint-utils@4.4.0(eslint@8.49.0):
@@ -1111,6 +1134,10 @@ packages:
 
   /electron-to-chromium@1.4.525:
     resolution: {integrity: sha512-GIZ620hDK4YmIqAWkscG4W6RwY6gOx1y5J6f4JUQwctiJrqH2oxZYU4mXHi35oV32tr630UcepBzSBGJ/WYcZA==}
+    dev: false
+
+  /emoji-mart@5.5.2:
+    resolution: {integrity: sha512-Sqc/nso4cjxhOwWJsp9xkVm8OF5c+mJLZJFoFfzRuKO+yWiN7K8c96xmtughYb0d/fZ8UC6cLIQ/p4BR6Pv3/A==}
     dev: false
 
   /emoji-regex@9.2.2:

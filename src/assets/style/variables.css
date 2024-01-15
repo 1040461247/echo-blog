@@ -2,7 +2,9 @@
   /* bg color */
   --primary-color: #ff5a79;
   --primary-color-dark: #ec516d;
-  --bg-dark-blue: #1f1f2e;
+  --bg-dark-blue: rgb(31, 31, 46);
+  --bg-dark-blue-deep: rgb(29, 29, 43);
+  --bg-dark-blue-opacity: #1f1f2ebe;
   --bg-light-blue: #d7ddfa;
 
   /* font color */

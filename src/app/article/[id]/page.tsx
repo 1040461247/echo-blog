@@ -70,7 +70,7 @@ const ArticlePage: FC<IProps> = memo((props) => {
       <BgTower className="mt-[100vh]" />
 
       <div className="inner-layout items-start text-gray-300">
-        <main className="article-main overflow-hidden flex-1 px-2 sm:px-6 md:px-8 md:mr-10 sm:rounded-[18px] sm:bg-black/20 backdrop-blur sm:border border-gray-500/40 transition-all duration-300 sm:[box-shadow:0_0_5px_rgb(255_255_255/0.1)]">
+        <main className="article-main overflow-hidden flex-1 px-2 sm:px-6 md:px-8 md:mr-10 bg-[--bg-dark-blue-opacity] sm:rounded-[18px] sm:border border-gray-600 hover:border-gray-500 transition-all duration-300 sm:[box-shadow:0_0_7px_rgb(255_255_255/0.1)]">
           <ArticleHeader {...articleHeaderProps} />
           <ArticleInfo {...articleInfoProps} />
           <ArticleContent {...articleContentProps} />
