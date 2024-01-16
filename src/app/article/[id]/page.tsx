@@ -1,7 +1,7 @@
 'use client'
 
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
-import { fetchArticleByIdAction } from '@/store/slices'
+import { fetchArticleByIdAction, fetchCommentsByArticleIdAction } from '@/store/slices'
 import { memo, useEffect } from 'react'
 import { shallowEqual } from 'react-redux'
 import BgTower from '@/components/bg-tower-v1'
@@ -25,12 +25,13 @@ export interface IHeadOffset {
   offsetTop: number
 }
 
-const ArticlePage: FC<IProps> = memo((props) => {
-  const articleId = Number(props.params.id)
+const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
+  const articleId = Number(id)
 
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchArticleByIdAction(articleId))
+    dispatch(fetchCommentsByArticleIdAction(articleId))
   }, [])
 
   const { article } = useAppSelector(

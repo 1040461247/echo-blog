@@ -1,5 +1,12 @@
 import { RequestInit } from 'next/dist/server/web/spec-extension/request'
 
+// Types
+export interface IResponse {
+  code: number
+  msg: string
+  data?: any
+}
+
 class myRequest {
   constructor(public baseUrl: string) {
     this.baseUrl = baseUrl
@@ -7,6 +14,17 @@ class myRequest {
 
   async get(path: string, init?: RequestInit) {
     return await fetch(`${this.baseUrl}${path}`, { method: 'GET', ...init })
+      .then((res) => {
+        if (!res.ok) {
+          console.error(res)
+          throw new Error(res.statusText)
+        }
+        return res.json() as Promise<IResponse>
+      })
+      .catch((err) => {
+        console.error(err)
+        throw new Error(err)
+      })
   }
 
   async post(path: string, init?: RequestInit) {
@@ -16,6 +34,17 @@ class myRequest {
       }
     }
     return await fetch(`${this.baseUrl}${path}`, { method: 'POST', ...init })
+      .then((res) => {
+        if (!res.ok) {
+          console.error(res)
+          throw new Error(res.statusText)
+        }
+        return res.json() as Promise<IResponse>
+      })
+      .catch((err) => {
+        console.error(err)
+        throw new Error(err)
+      })
   }
 }
 

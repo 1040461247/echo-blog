@@ -13,36 +13,18 @@ export interface ICategory {
 const MODULE_BASE_URL = '/categories'
 
 async function getCategoryById(categoryId: number) {
-  try {
-    const res = await request.get(`${MODULE_BASE_URL}/${categoryId}`)
-    if (!res.ok) return console.error(res)
-    const jsonData = await res.json()
-    return jsonData.data as ICategory
-  } catch (error) {
-    console.error(error)
-  }
+  const res = await request.get(`${MODULE_BASE_URL}/${categoryId}`)
+  return res.data as ICategory
 }
 
 async function getArticlesByCategoryId(categoryId: number) {
-  try {
-    const res = await request.get(`${MODULE_BASE_URL}/${categoryId}/articles`)
-    if (!res.ok) return console.error(res)
-    const jsonData = await res.json()
-    return jsonData.data as IArticle[]
-  } catch (error) {
-    console.error(error)
-  }
+  const res = await request.get(`${MODULE_BASE_URL}/${categoryId}/articles`)
+  return res.data as IArticle[]
 }
 
 async function getCategoryList() {
-  try {
-    const res = await request.get(`${MODULE_BASE_URL}`)
-    if (!res.ok) return console.error(res)
-    const jsonData = await res.json()
-    return jsonData.data as ICategory[]
-  } catch (error) {
-    console.error(error)
-  }
+  const res = await request.get(`${MODULE_BASE_URL}`)
+  return res.data as ICategory[]
 }
 
 export { getArticlesByCategoryId, getCategoryById, getCategoryList }

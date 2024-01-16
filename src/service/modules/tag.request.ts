@@ -13,36 +13,18 @@ export interface ITag {
 const MODULE_BASE_URL = '/tags'
 
 async function getTagById(tagId: number) {
-  try {
-    const res = await request.get(`${MODULE_BASE_URL}/${tagId}`)
-    if (!res.ok) return console.error(res)
-    const jsonData = await res.json()
-    return jsonData.data as ITag
-  } catch (error) {
-    console.error(error)
-  }
+  const res = await request.get(`${MODULE_BASE_URL}/${tagId}`)
+  return res.data as ITag
 }
 
 async function getArticlesByTagId(tagId: number) {
-  try {
-    const res = await request.get(`${MODULE_BASE_URL}/${tagId}/articles`)
-    if (!res.ok) return console.error(res)
-    const jsonData = await res.json()
-    return jsonData.data as IArticle[]
-  } catch (error) {
-    console.error(error)
-  }
+  const res = await request.get(`${MODULE_BASE_URL}/${tagId}/articles`)
+  return res.data as IArticle[]
 }
 
 async function getTagList() {
-  try {
-    const res = await request.get(`${MODULE_BASE_URL}`)
-    if (!res.ok) return console.error(res)
-    const jsonData = await res.json()
-    return jsonData.data as ITag[]
-  } catch (error) {
-    console.error(error)
-  }
+  const res = await request.get(`${MODULE_BASE_URL}`)
+  return res.data as ITag[]
 }
 
 export { getArticlesByTagId, getTagById, getTagList }

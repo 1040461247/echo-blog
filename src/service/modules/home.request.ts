@@ -29,25 +29,13 @@ export interface IArticle {
 }
 
 async function getStatistics() {
-  try {
-    const res = await request.get('/statistics')
-    if (!res.ok) return console.error(res)
-    const jsonData = await res.json()
-    return jsonData.data as IStatistics[]
-  } catch (error) {
-    console.error(error)
-  }
+  const res = await request.get('/statistics')
+  return res.data as IStatistics[]
 }
 
 async function getArticleList(offset = 0, limit = 10) {
-  try {
-    const res = await request.get(`/articles?offset=${offset}&limit=${limit}`)
-    if (!res.ok) return console.error(res)
-    const jsonData = await res.json()
-    return jsonData.data as IArticle[]
-  } catch (error) {
-    console.error(error)
-  }
+  const res = await request.get(`/articles?offset=${offset}&limit=${limit}`)
+  return res.data as IArticle[]
 }
 
 export { getArticleList, getStatistics }

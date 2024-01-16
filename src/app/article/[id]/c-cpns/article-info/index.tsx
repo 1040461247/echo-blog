@@ -34,8 +34,14 @@ const ArticleInfo: FC<IProps> = memo(({ author, createTime, updateTime, tags, ca
       <div className="article-info-right flex-1">
         <div className="author-name text-lg">{author?.name}</div>
         <div className="other-info flex flex-wrap items-center gap-x-2 text-[13px] text-gray-300/60">
-          <span className="create-time">{formatDate(createTime, 'YYYY-MM-DD hh:mm')}</span>
-          <span className="update-time">{formatDate(updateTime, 'YYYY-MM-DD hh:mm')}</span>
+          <span className="create-time">
+            <i className="iconfont icon-pen mr-1" />
+            <span>{formatDate(createTime, 'YYYY-MM-DD hh:mm')}</span>
+          </span>
+          <span className="update-time">
+            <i className="iconfont icon-wrench mr-1" />
+            <span>{formatDate(updateTime, 'YYYY-MM-DD hh:mm')}</span>
+          </span>
           <ArticleTags tagList={tags} />
           <ArticleCategory categoryInfo={category} />
         </div>
