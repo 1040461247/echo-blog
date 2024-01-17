@@ -14,6 +14,7 @@ import type { FC } from 'react'
 import type { IProps as IArticleHeaderProps } from './c-cpns/article-header'
 import type { IProps as IArticleInfoProps } from './c-cpns/article-info'
 import type { IProps as IArticleContentProps } from './c-cpns/article-content'
+import DividerLine from './c-cpns/divider-line'
 
 // Types
 export interface IProps {
@@ -66,16 +67,19 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
     articleDescription: description
   }
 
+  const mainCommonStyle = 'px-2 sm:px-6 md:px-8'
+
   return (
     <div className="article-page relative z-0 py-[18px] sm:py-[30px] md:py-[38px] bg-[--bg-dark-blue] w-full">
       <BgTower className="mt-[100vh]" />
 
       <div className="inner-layout items-start text-gray-300">
-        <main className="article-main overflow-hidden flex-1 px-2 sm:px-6 md:px-8 md:mr-10 bg-[--bg-dark-blue-opacity] sm:rounded-[18px] sm:border border-gray-600 hover:border-gray-500 transition-all duration-300 sm:[box-shadow:0_0_7px_rgb(255_255_255/0.1)]">
-          <ArticleHeader {...articleHeaderProps} />
-          <ArticleInfo {...articleInfoProps} />
-          <ArticleContent {...articleContentProps} />
-          <ArticleComments />
+        <main className="article-main flex-1 md:mr-10 bg-[--bg-dark-blue-opacity] sm:rounded-[18px] sm:border border-gray-600 hover:border-gray-500 transition-all duration-300 sm:[box-shadow:0_0_7px_rgb(255_255_255/0.1)]">
+          <ArticleHeader {...articleHeaderProps} customStyle={mainCommonStyle} />
+          <ArticleInfo {...articleInfoProps} customStyle={mainCommonStyle} />
+          <ArticleContent {...articleContentProps} customStyle={mainCommonStyle} />
+          <DividerLine />
+          <ArticleComments customStyle={mainCommonStyle} />
         </main>
 
         <ArticleAside articleContent={content!} />

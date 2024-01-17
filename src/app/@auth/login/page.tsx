@@ -153,7 +153,7 @@ const LoginPage: FC<IProps> = memo(() => {
 
           <div className="form-commit">
             <button
-              className="w-full h-11 rounded-md bg-[--primary-color] text-white hover:bg-[--primary-color-dark] transition-colors"
+              className="w-full h-11 rounded-md bg-[--primary-color] text-white hover:bg-[--primary-color-dark] transition-colors duration-200"
               onClick={handleCommit}
             >
               注册或登录

@@ -30,10 +30,32 @@ class myRequest {
   async post(path: string, init?: RequestInit) {
     if (init?.body) {
       init.headers = {
+        ...init.headers,
         'Content-Type': 'application/json'
       }
     }
     return await fetch(`${this.baseUrl}${path}`, { method: 'POST', ...init })
+      .then((res) => {
+        if (!res.ok) {
+          console.error(res)
+          throw new Error(res.statusText)
+        }
+        return res.json() as Promise<IResponse>
+      })
+      .catch((err) => {
+        console.error(err)
+        throw new Error(err)
+      })
+  }
+
+  async delete(path: string, init?: RequestInit) {
+    if (init?.body) {
+      init.headers = {
+        ...init.headers,
+        'Content-Type': 'application/json'
+      }
+    }
+    return await fetch(`${this.baseUrl}${path}`, { method: 'DELETE', ...init })
       .then((res) => {
         if (!res.ok) {
           console.error(res)

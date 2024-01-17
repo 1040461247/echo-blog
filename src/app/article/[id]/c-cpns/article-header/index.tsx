@@ -7,11 +7,12 @@ export interface IProps {
   children?: React.ReactElement
   coverUrl: string
   title: string
+  customStyle?: string
 }
 
-const ArticleHeader: FC<IProps> = memo(({ coverUrl, title }) => {
+const ArticleHeader: FC<IProps> = memo(({ coverUrl, title, customStyle }) => {
   return (
-    <div className="article-header">
+    <div className={`article-header ${customStyle}`}>
       {coverUrl ? (
         <header className="h-80 relative -mx-2 sm:-mx-6 md:-mx-8">
           <div className="article-cover absolute inset-x-0 h-full">

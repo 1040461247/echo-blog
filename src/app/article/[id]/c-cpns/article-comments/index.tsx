@@ -6,11 +6,12 @@ import CommentList from './c-cpns/comment-list'
 // Types
 export interface IProps {
   children?: React.ReactElement
+  customStyle?: string
 }
 
-const ArticleComments: FC<IProps> = memo(() => {
+const ArticleComments: FC<IProps> = memo(({ customStyle }) => {
   return (
-    <div className="article-comments">
+    <div className={`article-comments ${customStyle}`}>
       <CommentPanel />
       <CommentList />
     </div>
