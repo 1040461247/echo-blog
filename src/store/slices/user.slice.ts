@@ -1,5 +1,6 @@
 import { TOKEN } from '@/constants'
-import { IUserInfo, login, verifyAuth } from '@/service/modules/user.request'
+import { createAppAsyncThunk } from '@/hooks/use-store'
+import { IUserInfo, getUserById, login, verifyAuth } from '@/service/modules/user.request'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 // Types
@@ -31,9 +32,35 @@ const fetchVerifyAuthAction = createAsyncThunk(
   async (token?: string | null) => {
     token ??= localStorage.getItem(TOKEN)
     if (!token) return
-    return await verifyAuth(token)
+    const tokenSalt = await verifyAuth(token)
+    return await getUserById(tokenSalt.id)
   }
 )
+const fetchUserInfoAction = createAppAsyncThunk(
+  'user/fetchUserInfoAction',
+  async (_, { getState }) => {
+    const state = getState()
+    if (state.user.userInfo) {
+      const tokenSalt = await getUserById(state.user.userInfo.id)
+      return await getUserById(tokenSalt.id)
+    }
+  }
+)
+
+// const fetchUserInfoAction = createAsyncThunk<
+//   IUserInfo | undefined,
+//   number,
+//   {
+//     dispatch: ReduxDispath
+//     state: ReduxState
+//   }
+// >('user/fetchUserInfoAction', async (_, { getState }) => {
+//   const state = getState()
+//   if (state.user.userInfo) {
+//     const tokenSalt = await getUserById(state.user.userInfo.id)
+//     return await getUserById(tokenSalt.id)
+//   }
+// })
 
 export const userSlice = createSlice({
   name: 'user',
@@ -47,11 +74,15 @@ export const userSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchVerifyAuthAction.fulfilled, (state, { payload }) => {
-      state.userInfo = payload ?? null
-    })
+    builder
+      .addCase(fetchVerifyAuthAction.fulfilled, (state, { payload }) => {
+        state.userInfo = payload ?? null
+      })
+      .addCase(fetchUserInfoAction.fulfilled, (state, { payload }) => {
+        state.userInfo = payload ?? null
+      })
   }
 })
 
-export { fetchLoginAction, fetchVerifyAuthAction }
+export { fetchLoginAction, fetchVerifyAuthAction, fetchUserInfoAction }
 export const { setRegisteringPhoneAction } = userSlice.actions

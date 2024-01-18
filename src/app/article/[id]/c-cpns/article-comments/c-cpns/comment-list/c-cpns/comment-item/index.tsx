@@ -1,16 +1,17 @@
-import { IComment, delComment } from '@/service/modules/article.request'
+import { IComment, addLikes, delComment, remLikes } from '@/service/modules/article.request'
 import formatDate from '@/utils/format-date'
 import Avatar from 'boring-avatars'
 import Image from 'next/image'
 import Link from 'next/link'
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import type { FC } from 'react'
 import CommentItemSystemTag from '../comment-item-system-tag'
 import CommentPanel from '../../../comment-panel'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import { shallowEqual } from 'react-redux'
 import Message from '@/components/message'
-import { fetchCommentsByArticleIdAction } from '@/store/slices'
+import { fetchCommentsByArticleIdAction, fetchUserInfoAction } from '@/store/slices'
+import { IResponse } from '@/service'
 
 // Types
 export interface IProps {
@@ -24,6 +25,7 @@ export interface IProps {
 const CommentItem: FC<IProps> = memo(
   ({ children, comment, replyName, setCurReplyId, curReplyId }) => {
     const dispatch = useAppDispatch()
+    const [isLike, setIsLike] = useState(false)
 
     const { article, userInfo } = useAppSelector(
       (state) => ({
@@ -32,6 +34,12 @@ const CommentItem: FC<IProps> = memo(
       }),
       shallowEqual
     )
+
+    useEffect(() => {
+      if (userInfo) {
+        setIsLike(userInfo?.commentLikesId?.includes(comment.id))
+      }
+    }, [userInfo])
 
     // getIcon
     function getBroserIcon(browserInfo: string) {
@@ -77,6 +85,24 @@ const CommentItem: FC<IProps> = memo(
       }
     }
 
+    async function handleLikes() {
+      let res: IResponse
+      if (isLike) {
+        // 取消点赞
+        res = await remLikes(comment.id)
+      } else {
+        // 点赞
+        res = await addLikes(comment.id)
+      }
+
+      if (res.code === 200) {
+        dispatch(fetchUserInfoAction())
+        dispatch(fetchCommentsByArticleIdAction(article.id))
+      } else {
+        Message.error(res.msg)
+      }
+    }
+
     return (
       <div className="comment-item group flex p-2 pr-0" id={comment.user.name}>
         {/* 头像 */}
@@ -87,7 +113,7 @@ const CommentItem: FC<IProps> = memo(
             ) : (
               <Avatar
                 size={52}
-                name={comment.user.name}
+                name={String(comment.user.id)}
                 variant="beam"
                 colors={['#FF85A0', '#FB8351', '#FFAD64', '#E9E2DA', '#ADD4D3']}
                 square
@@ -101,7 +127,7 @@ const CommentItem: FC<IProps> = memo(
           <div className="acpi-top flex justify-between">
             <div className="acpi-top-left flex items-center gap-2 mb-1 leading-normal">
               <span className="text-sm text-gray-300">{comment.user.name}</span>
-              {article?.author.id === comment.user.id && (
+              {article?.author?.id === comment.user.id && (
                 <span className="px-1 py-[2px] border border-[#3498db] rounded-[4px] text-xs text-[#3498db] whitespace-nowrap">
                   博主
                 </span>
@@ -112,8 +138,17 @@ const CommentItem: FC<IProps> = memo(
             </div>
 
             <div className="acpi-top-right flex items-center">
-              <span className="thumbsup mr-2 hover-highlight cursor-pointer" title="点赞">
-                <i className="iconfont icon-heart text-xl" />
+              <span
+                className="likes flex items-center mr-2 hover-highlight cursor-pointer"
+                title="点赞"
+                onClick={handleLikes}
+              >
+                {isLike ? (
+                  <i className="iconfont icon-heart-fill mr-[2px] text-xl text-[--primary-color]" />
+                ) : (
+                  <i className="iconfont icon-heart mr-[2px] text-xl" />
+                )}
+                <span>{comment.totalLikes}</span>
               </span>
               <span
                 className={`comment-icon mr-2 hover-highlight cursor-pointer ${

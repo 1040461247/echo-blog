@@ -4,7 +4,7 @@ import { RequestInit } from 'next/dist/server/web/spec-extension/request'
 export interface IResponse {
   code: number
   msg: string
-  data?: any
+  data: any
 }
 
 class myRequest {

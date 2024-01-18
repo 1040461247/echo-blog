@@ -6,6 +6,11 @@ export interface ILoginRes {
   name: string
   token: string
 }
+export interface IAuthSalt {
+  id: number
+  iat: number
+  exp: number
+}
 export interface IUserInfo {
   id: number
   name: string
@@ -16,8 +21,7 @@ export interface IUserInfo {
   ip_address: string
   update_time: string
   create_time: string
-  iat: number
-  exp: number
+  commentLikesId: number[]
 }
 
 async function login(
@@ -39,7 +43,7 @@ async function verifyAuth(token: string) {
     headers: { Authorization: token },
     cache: 'no-store'
   })
-  return res.data as IUserInfo
+  return res.data as IAuthSalt
 }
 
 async function sendOtp(phone: string) {
@@ -66,4 +70,9 @@ async function signup(name: string, password: string, phone_num: string) {
   return res
 }
 
-export { login, loginPhone, sendOtp, verifyAuth, signup }
+async function getUserById(userId: number) {
+  const res = await request.get(`/users/${userId}`)
+  return res.data as IUserInfo
+}
+
+export { login, loginPhone, sendOtp, verifyAuth, signup, getUserById }

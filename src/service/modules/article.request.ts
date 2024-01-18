@@ -9,6 +9,7 @@ export interface IComment {
   comment_id: number | null
   create_time: string
   update_time: string
+  totalLikes: number
   user: {
     id: number
     name: string
@@ -60,10 +61,27 @@ async function delComment(commentId: number) {
   return res
 }
 
+async function addLikes(comment_id: number) {
+  const res = await request.post(`${COMMENT_BASE_URL}/likes`, {
+    headers: getAuthHeader(),
+    body: JSON.stringify({ comment_id: comment_id })
+  })
+  return res
+}
+
+async function remLikes(comment_id: number) {
+  const res = await request.delete(`${COMMENT_BASE_URL}/likes/${comment_id}`, {
+    headers: getAuthHeader()
+  })
+  return res
+}
+
 export {
   getArticleById,
   getCommentsByArticleId,
   addCommentToArticle,
   addReplyToComment,
-  delComment
+  delComment,
+  addLikes,
+  remLikes
 }

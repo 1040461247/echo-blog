@@ -13,7 +13,7 @@ import MainHeader from './(c-cpns)/main-header'
 const myFont = localFont({
   src: [
     {
-      path: '../../public/fonts/Alimama_DongFangDaKai_Regular.woff2',
+      path: '../../public/fonts/Alimama_DongFangDaKai_Regular.woff',
       weight: '400',
       style: 'normal'
     },

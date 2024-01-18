@@ -39,7 +39,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
         ) : (
           <Avatar
             size={40}
-            name={userInfo?.name}
+            name={String(userInfo?.id)}
             variant="beam"
             colors={['#FF85A0', '#FB8351', '#FFAD64', '#E9E2DA', '#ADD4D3']}
           />
