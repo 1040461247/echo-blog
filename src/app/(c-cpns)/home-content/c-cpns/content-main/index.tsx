@@ -1,12 +1,15 @@
+'use client'
+
 import ArticleCategory from '@/components/article-category'
 import ArticleTags from '@/components/article-tags'
 import { ARTICLE_PATH } from '@/constants'
-import { useAppSelector } from '@/hooks/use-store'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
+import { fetchArticlesAction } from '@/store/slices'
 import formatDate from '@/utils/format-date'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { FC } from 'react'
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 import { shallowEqual } from 'react-redux'
 
 // Types
@@ -15,6 +18,11 @@ export interface IProps {
 }
 
 const ContentMain: FC<IProps> = memo(() => {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(fetchArticlesAction())
+  }, [])
+
   const { articleList } = useAppSelector(
     (state) => ({
       articleList: state.home.articleList

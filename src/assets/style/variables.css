@@ -3,7 +3,7 @@
   --primary-color: #ff5a79;
   /* --primary-color-dark: #ec516d; */
   --primary-color-dark: #ff4164;
-  --bg-dark-blue: rgb(31, 31, 46);
+  --bg-dark-blue: #1f1f2e;
   --bg-dark-blue-deep: rgb(29, 29, 43);
   --bg-dark-blue-opacity: #1f1f2ebe;
   --bg-light-blue: #d7ddfa;
@@ -13,9 +13,12 @@
   --font-light-blue: #abb0c9;
 
   /* header-height */
-  --header-height-ssm: 54px;
+  /* --header-height-ssm: 54px;
   --header-height-sm: 61px;
-  --header-height-md: 70px;
+  --header-height-md: 70px; */
+  --header-height-ssm: 38px;
+  --header-height-sm: 43px;
+  --header-height-md: 48px;
   --ssm-sticky: calc(var(--header-height-ssm) + 20px);
   --sm-sticky: calc(var(--header-height-sm) + 20px);
   --md-sticky: calc(var(--header-height-md) + 20px);

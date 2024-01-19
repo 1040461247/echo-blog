@@ -1,6 +1,5 @@
 body {
   min-width: 375px;
-  padding-top: var(--header-height-ssm);
   color: var(--font-gray);
 }
 
@@ -20,6 +19,7 @@ button:hover {
 /* scroll bar */
 ::-webkit-scrollbar {
   width: 5px;
+  background-color: #2a2a39;
 }
 ::-webkit-scrollbar-track {
   background-color: transparent;
@@ -32,19 +32,11 @@ button:hover {
 }
 ::-webkit-scrollbar-thumb {
   border: none;
-  background: linear-gradient(to bottom, #ff5a79, #d45796, #9c5ca0, #655c95, #3c557a, #2f4858);
+  background: linear-gradient(to bottom, #2a2a39, var(--primary-color), #2a2a39);
   border-radius: 10px;
 }
 
-@media (min-width: 640px) {
-  body {
-    padding-top: var(--header-height-sm);
-  }
-}
 @media (min-width: 768px) {
-  body {
-    padding-top: var(--header-height-md);
-  }
   ::-webkit-scrollbar {
     width: 10px;
   }

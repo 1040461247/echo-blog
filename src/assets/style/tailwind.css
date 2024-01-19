@@ -8,8 +8,12 @@
   }
 
   .c-card {
-    --card-bg-color: rgb(255 255 255 / 0.1);
-    @apply overflow-hidden bg-[--card-bg-color] rounded-[18px] text-gray-200 backdrop-blur-md border border-gray-50/5 shadow shadow-gray-50/10;
+    --card-bg-color: rgb(51 51 66 / 0.8);
+    box-shadow: 0 0 2px 0 rgb(255 255 255 / 0.05);
+    @apply overflow-hidden bg-[--card-bg-color] rounded-[18px] text-gray-200 border border-gray-50/5 transition-all duration-300;
+  }
+  .c-card:hover {
+    box-shadow: 0 0 1px 0 rgb(255 255 255 / 0.5);
   }
 }
 

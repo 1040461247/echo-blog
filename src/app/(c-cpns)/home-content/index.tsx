@@ -1,5 +1,3 @@
-'use client'
-
 import { memo } from 'react'
 import BgTower from '@/components/bg-tower-v1'
 import ContentSidebar from './c-cpns/content-sidebar'

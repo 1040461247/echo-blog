@@ -39,16 +39,16 @@ const menuList: IMenuListItem[] = [
       }
     ]
   },
-  {
-    icon: `${prefix}smile`,
-    text: '心情',
-    path: MOOD_PATH
-  },
-  {
-    icon: `${prefix}message`,
-    text: '留言',
-    path: MESSAGES_PATH
-  },
+  // {
+  //   icon: `${prefix}smile`,
+  //   text: '心情',
+  //   path: MOOD_PATH
+  // },
+  // {
+  //   icon: `${prefix}message`,
+  //   text: '留言',
+  //   path: MESSAGES_PATH
+  // },
   {
     icon: `${prefix}info`,
     text: '关于',

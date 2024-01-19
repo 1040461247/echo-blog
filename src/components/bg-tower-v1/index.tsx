@@ -1,3 +1,5 @@
+'use client'
+
 import type { IOption } from '@/hooks/use-parallax'
 import useParallax from '@/hooks/use-parallax'
 import type { FC } from 'react'

@@ -1,10 +1,13 @@
+'use client'
+
 import profileJson from '@/assets/data/profile.json'
 import { ARCHIVES_PATH, CATEGORY_PATH, TAG_PATH } from '@/constants'
-import { useAppSelector } from '@/hooks/use-store'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
+import { fetchStatisticsAction } from '@/store/slices'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { FC } from 'react'
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 import { shallowEqual } from 'react-redux'
 
 // Types
@@ -14,6 +17,11 @@ export interface IProps {
 }
 
 const BlogInfo: FC<IProps> = memo(({ clouseDrawer }) => {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(fetchStatisticsAction())
+  }, [])
+
   const { statistics } = useAppSelector(
     (state) => ({
       statistics: state.home.statistics

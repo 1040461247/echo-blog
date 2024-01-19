@@ -27,7 +27,7 @@ const V1MenuItem: FC<IProps> = memo(
   }) => {
     // Common Styles
     const activeLinkStyle = `!text-[--primary-color] border-b-[3px] border-solid border-[--primary-color]`
-    const linkStyle = `relative flex items-center px-[0.8vw] py-2.5 text-gray-300 hover:!text-[--primary-color] hover:border-b-[3px] hover:border-solid hover:border-[--primary-color]`
+    const linkStyle = `relative flex items-center px-[1.5vw] py-1.5 text-lg text-gray-300 border-solid hover-highlight hover:border-b-[3px]`
 
     function showContent() {
       return (
