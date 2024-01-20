@@ -98,7 +98,7 @@ const CommentPanel: FC<IProps> = memo(({ handleClose, replyCommentId }) => {
 
   return (
     showPanel && (
-      <div className="comment-panel relative m-2 p-2 bg-[--bg-dark-blue-deep] rounded-xl border border-gray-600 hover:border-gray-500 transition-color duration-300">
+      <div className="comment-panel relative m-2 p-2 bg-[--bg-dark-blue-deep] rounded-xl border border-gray-600/40 hover:border-gray-600 transition-color duration-300">
         {/* CloseIcon */}
         {handleClose && (
           <div

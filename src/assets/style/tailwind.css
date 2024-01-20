@@ -8,12 +8,11 @@
   }
 
   .c-card {
-    --card-bg-color: rgb(51 51 66 / 0.8);
-    box-shadow: 0 0 2px 0 rgb(255 255 255 / 0.05);
-    @apply overflow-hidden bg-[--card-bg-color] rounded-[18px] text-gray-200 border border-gray-50/5 transition-all duration-300;
+    @apply overflow-hidden bg-[#333342cc] rounded-[18px] text-gray-200 border border-gray-600/40 transition-all duration-300 hover:border-gray-600 shadow-xl;
   }
-  .c-card:hover {
-    box-shadow: 0 0 1px 0 rgb(255 255 255 / 0.5);
+
+  .content-card {
+    @apply bg-[--bg-dark-blue-opacity] sm:rounded-[18px] sm:border border-gray-600/40 hover:border-gray-600 transition-all duration-300 sm:[box-shadow:rgba(255,255,255,0.05)_0px_6px_24px_0px,rgba(255,255,255,0.08)_0px_0px_0px_1px];
   }
 }
 

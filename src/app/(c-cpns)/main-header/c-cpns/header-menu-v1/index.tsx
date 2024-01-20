@@ -3,8 +3,9 @@ import { usePathname } from 'next/navigation'
 import { memo, type FC } from 'react'
 import { shallowEqual } from 'react-redux'
 import V1MenuList from './c-cpns/v1-menu-list'
-import V1OauthBtn from './c-cpns/v1-auth-btn'
+import V1AuthBtn from './c-cpns/v1-auth-btn'
 import V1UserInfo from './c-cpns/v1-user-info'
+import { IMenuListItem } from '@/assets/data/menu-list-data'
 
 // Types
 export interface IProps {
@@ -20,14 +21,21 @@ const HeaderMenuV1: FC<IProps> = memo(() => {
   )
 
   const actPathname = usePathname()
-  function isActivePath(item: any) {
+  function isActivePath(
+    item: string[] | { path: string; children?: IMenuListItem[] } | IMenuListItem
+  ) {
     // 当前路径的根路径等于某个菜单（或子菜单）路径时，菜单高亮
     const actPathList = actPathname.split('/')
     const actRootPath = `/${actPathList[1]}`
-    if (item.children) {
-      return !!item.children.find((subItem: any) => actRootPath === subItem.path!)
+
+    if (Array.isArray(item)) {
+      return item.includes(actRootPath)
     } else {
-      return actRootPath === item.path
+      if (item.children) {
+        return !!item.children.find((subItem: any) => actRootPath === subItem.path!)
+      } else {
+        return actRootPath === item.path
+      }
     }
   }
 
@@ -36,7 +44,11 @@ const HeaderMenuV1: FC<IProps> = memo(() => {
       <V1MenuList isActivePath={isActivePath} />
 
       <div className="header-menu-user flex justify-center items-center ml-[0.5vw]">
-        {userInfo ? <V1UserInfo userInfo={userInfo} isActivePath={isActivePath} /> : <V1OauthBtn />}
+        {userInfo ? (
+          <V1UserInfo userInfo={userInfo} isActivePath={isActivePath} />
+        ) : (
+          <V1AuthBtn isActivePath={isActivePath} />
+        )}
       </div>
     </div>
   )
