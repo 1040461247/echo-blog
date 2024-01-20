@@ -28,7 +28,7 @@ const myFont = localFont({
 
 export const metadata: Metadata = {
   title: 'Echo - 欢迎来到我的思维广场',
-  description: 'Welcome to my blog. this is Echo.'
+  description: 'Welcome to my blog. this is Echo Blog.'
 }
 
 export default function RootLayout({
