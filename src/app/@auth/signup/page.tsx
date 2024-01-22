@@ -6,10 +6,10 @@ import { useRouter } from 'next/navigation'
 import { memo, useState } from 'react'
 import type { FC } from 'react'
 import { shallowEqual } from 'react-redux'
-import AuthInput from '../c-cpns/auth-input'
+import ModalInput from '@/components/modal/c-cpns/modal-input'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
 import { REG_NAME_CHARACTER, REG_NAME_LENGTH, REG_PASSWORD_LENGTH } from '@/constants'
-import ErrorMessage from '../c-cpns/error-message'
+import ErrorMessage from '../../../components/modal/c-cpns/error-message'
 import { signup } from '@/service/modules/user.request'
 import Message from '@/components/message'
 import encryptPhone from '@/utils/encrypt-phone'
@@ -111,7 +111,7 @@ const RegisterPage: FC<IProps> = memo(() => {
       >
         <form className="signup-form">
           <div className="form-name mb-5">
-            <AuthInput
+            <ModalInput
               placeholder="用户名"
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -122,7 +122,7 @@ const RegisterPage: FC<IProps> = memo(() => {
 
           <div className="form-password mb-5">
             <div className="input-wrap relative">
-              <AuthInput
+              <ModalInput
                 placeholder="密码"
                 handleChange={handleChange}
                 handleBlur={handleBlur}
@@ -141,7 +141,7 @@ const RegisterPage: FC<IProps> = memo(() => {
 
           <div className="form-repassword mb-5">
             <div className="input-wrap relative">
-              <AuthInput
+              <ModalInput
                 placeholder="再次输入密码"
                 handleChange={handleChange}
                 handleBlur={handleBlur}

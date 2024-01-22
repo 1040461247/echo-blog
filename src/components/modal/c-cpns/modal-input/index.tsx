@@ -14,7 +14,7 @@ export interface IProps {
   autoFocus?: boolean
 }
 
-const AuthInput: FC<IProps> = memo(
+const ModalInput: FC<IProps> = memo(
   ({
     handleChange,
     handleBlur,
@@ -40,5 +40,5 @@ const AuthInput: FC<IProps> = memo(
   }
 )
 
-export default AuthInput
-AuthInput.displayName = 'AuthInput'
+export default ModalInput
+ModalInput.displayName = 'ModalInput'

@@ -7,8 +7,8 @@ import Modal from '@/components/modal'
 import { REG_OTP, REG_PHONE, SIGNUP_PATH } from '@/constants'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
 import { loginPhone, sendOtp } from '@/service/modules/user.request'
-import ErrorMessage from '../c-cpns/error-message'
-import AuthInput from '../c-cpns/auth-input'
+import ErrorMessage from '../../../components/modal/c-cpns/error-message'
+import ModalInput from '@/components/modal/c-cpns/modal-input'
 import { useAppDispatch } from '@/hooks/use-store'
 import { setRegisteringPhoneAction } from '@/store/slices'
 import { useLogin } from '@/hooks/use-login'
@@ -121,7 +121,7 @@ const LoginPage: FC<IProps> = memo(() => {
       <Modal handleClose={() => router.back()} title="请输入电话号码" subTitle="-以进入EchoBlog-">
         <form className="login-form">
           <div className="form-phone mb-5">
-            <AuthInput
+            <ModalInput
               placeholder="电话号码"
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -133,7 +133,7 @@ const LoginPage: FC<IProps> = memo(() => {
 
           <div className="form-otp mb-5">
             <div className="flex justify-between w-full h-11">
-              <AuthInput
+              <ModalInput
                 placeholder="验证码"
                 handleChange={handleChange}
                 handleBlur={handleBlur}

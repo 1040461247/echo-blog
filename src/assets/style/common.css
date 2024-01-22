@@ -1,6 +1,7 @@
 body {
   min-width: 375px;
   color: var(--font-gray);
+  background: var(--bg-dark-blue);
 }
 
 body.prevent-scroll {

@@ -14,7 +14,6 @@ export interface IProps {
 }
 
 const Modal: FC<IProps> = memo(({ children, handleClose, title, subTitle }) => {
-  // isOpen = true
   usePreventScroll(true)
 
   return (
