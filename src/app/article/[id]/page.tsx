@@ -74,7 +74,7 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
       <BgTower className="mt-[100vh]" />
 
       <div className="inner-layout items-start text-gray-300">
-        <main className="article-main overflow-hidden flex-1 md:mr-10 content-card">
+        <main className="article-main overflow-hidden flex-1 pb-5 md:mr-10 content-card">
           <ArticleHeader {...articleHeaderProps} customStyle={mainCommonStyle} />
           <ArticleInfo {...articleInfoProps} customStyle={mainCommonStyle} />
           <ArticleContent {...articleContentProps} customStyle={mainCommonStyle} />

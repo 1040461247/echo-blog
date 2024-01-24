@@ -1,8 +1,7 @@
-// 'use client'
-
 import { useEffect, useState } from 'react'
 
 // Types
+export type TAdapterOption = Partial<IOption>
 export interface IOption {
   speed: number
   isTransparent?: boolean
@@ -18,19 +17,27 @@ export interface IOption {
     xxl?: TAdapterOption
   }
 }
-export type TAdapterOption = Partial<IOption>
+interface IBreakpoints {
+  [key: string]: number
+  xs: number
+  sm: number
+  md: number
+  lg: number
+  xl: number
+  xxl: number
+}
 
 export default function useParallax() {
-  if (typeof window === 'undefined') return
+  if (typeof window !== 'object') return
   const [scrollY, setScrollY] = useState(0)
   const viewportHeight = window.innerHeight || document.documentElement.clientHeight
   const viewportWidth = window.innerWidth || document.documentElement.clientWidth
 
+  // 监听滚动
   useEffect(() => {
     function handleScroll() {
       setScrollY(window.scrollY)
     }
-
     window.addEventListener('scroll', handleScroll)
 
     return () => {
@@ -38,8 +45,8 @@ export default function useParallax() {
     }
   }, [])
 
+  // 转化速度值为偏移量基数：(-10 ~ 10) ->（-1 ~ 1）
   function transformSpeedToBase(speed: number) {
-    // 将速度值(-10 ~ 10)转化成基数值（-1 ~ 1）
     let base = -speed / 10
     if (speed >= 10) {
       base = -1
@@ -49,18 +56,18 @@ export default function useParallax() {
     return base
   }
 
-  const defaultOption: IOption = {
-    speed: -2,
-    isTransparent: false,
-    startShowPct: 0.2,
-    solidPct: 0.5
-  }
-
   function setParallax(elRef: any, option: IOption | TAdapterOption) {
     const { speed, isTransparent, startShowPct, solidPct } = option
+    const { top, bottom } = elRef.getBoundingClientRect() // 元素距离视口顶/底部的距离
+    const enteredViewport = top <= viewportHeight && bottom >= 0 // 元素是否已进入视口
+
+    // 增加动画以优化滚动视觉
+    if (!elRef.style.transition) {
+      elRef.style.transition = 'all 1s cubic-bezier(0.215, 0.61, 0.355, 1)'
+    }
 
     // 根据速度设置偏移量
-    if (speed) {
+    if (enteredViewport && speed) {
       const base = transformSpeedToBase(speed)
       const offset = scrollY * base
       elRef.style.transform = `translate3d(0, ${offset}px, 0)`
@@ -68,14 +75,11 @@ export default function useParallax() {
 
     // 设置透明度
     if (isTransparent && startShowPct) {
-      const { top, bottom } = elRef.getBoundingClientRect()
-      const enteredViewport = top <= viewportHeight && bottom >= 0
-
       let opacity = 0
-      const elReachTopDistance = 1 - top / viewportHeight
-      const isInInterval = elReachTopDistance >= startShowPct && elReachTopDistance <= 1
 
       if (enteredViewport) {
+        const elReachTopDistance = 1 - top / viewportHeight // 元素到达顶部的距离
+        const isInInterval = elReachTopDistance >= startShowPct && elReachTopDistance <= 1 // 元素是否到达需要显示的区间
         if (isInInterval) {
           // 元素在区间内，opacity跟随滚动偏移量增加
           opacity = (elReachTopDistance - startShowPct) / (solidPct! - startShowPct)
@@ -84,18 +88,20 @@ export default function useParallax() {
         } else {
           opacity = 1
         }
-        // elRef.style.transition = 'opacity 150ms'
-
         opacity = opacity >= 1 ? 1 : opacity <= 0 ? 0 : opacity
+      }
 
-        if (elRef.style.opacity !== opacity) {
-          elRef.style.opacity = opacity
-        }
-      } else if (!enteredViewport && elRef.style.opacity !== 0) {
-        // 元素未进入视口前，若opacity!==0，则初始化元素的opacity
-        elRef.style.opacity = 0
+      if (elRef.style.opacity !== String(opacity)) {
+        elRef.style.opacity = opacity
       }
     }
+  }
+
+  const defaultOption: IOption = {
+    speed: -2,
+    isTransparent: false,
+    startShowPct: 0.2,
+    solidPct: 0.5
   }
 
   return function parallax(elRef: any, option = defaultOption) {
@@ -105,15 +111,7 @@ export default function useParallax() {
     }
 
     // 响应式断点
-    const breakpoints: {
-      xs: number
-      sm: number
-      md: number
-      lg: number
-      xl: number
-      xxl: number
-      [key: string]: number
-    } = {
+    const breakpoints: IBreakpoints = {
       xs: 475,
       sm: 640,
       md: 768,
@@ -127,10 +125,10 @@ export default function useParallax() {
       // 当屏幕宽度符合适配断点时，使用各自断点的option
       if (viewportWidth >= breakpoints[breakPoint]) {
         // 当子option中没有选项时使用父选项
-        const defaultOption = { ...option }
+        const supOption = { ...option }
         const subOption = adapters[breakPoint]!
-        const assignOption = Object.assign(defaultOption, subOption)
-        return setParallax(elRef, assignOption)
+        const endOption = Object.assign(supOption, subOption)
+        return setParallax(elRef, endOption)
       } else {
         return setParallax(elRef, option)
       }

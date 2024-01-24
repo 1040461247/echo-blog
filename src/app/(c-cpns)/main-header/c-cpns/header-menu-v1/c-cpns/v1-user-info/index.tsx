@@ -25,7 +25,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
   }
 
   return (
-    <div className="v1-user-info group relative flex justify-center items-center cursor-pointer">
+    <div className="v1-user-info group relative flex justify-center items-center ml-1 cursor-pointer">
       {/* Avatar */}
       <div className="user-avatar flex items-center overflow-hidden rounded-full w-10 h-10">
         {userInfo?.avatar_url ? (

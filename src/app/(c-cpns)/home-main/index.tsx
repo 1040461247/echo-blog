@@ -14,17 +14,20 @@ const HomeMain: FC<IProps> = memo(() => {
   const parallaxOption: IParallaxOption = {
     speed: -3,
     adapter: {
+      xs: {
+        speed: -4
+      },
       sm: {
         speed: -4
       },
       md: {
-        speed: -5
+        speed: -4
       }
     }
   }
 
   return (
-    <div className="home-main overflow-hidden relative h-[calc(100vh+75vw)] sm:h-[calc(100vh+65vw)] md:h-[calc(100vh+45vw)] bg-[--bg-light-blue]">
+    <div className="home-main overflow-hidden relative h-[calc(100vh+45vw)] md:h-[calc(100vh+40vw)] bg-[--bg-light-blue]">
       {/* Main Content */}
       <div className="flex justify-center items-center h-[110vh]">
         <div className="big-word-art text-[#1d1e2c] text-[5vw] font-black text-center rotate-[-8deg] translate-y-[-11vh] [text-shadow:_-0.2083vw_0.2083vw_var(--primary-color)]">
@@ -38,11 +41,11 @@ const HomeMain: FC<IProps> = memo(() => {
       <div className="absolute inset-x-0 bottom-0">
         {/* Astronaut Area */}
         <div
-          className="absolute bottom-[5vw] sm:bottom-[10vw] md:bottom-[5vw] lg:bottom-[5vw] xl:bottom-[3vw] inset-x-0 mx-auto w-5/6 sm:w-4/6 md:w-1/2"
+          className="absolute bottom-[-10vw] sm:bottom-0 md:bottom-[1vw] lg:bottom-[5vw] xl:bottom-[3vw] inset-x-0 mx-auto w-5/6 sm:w-4/6 md:w-7/12 lg:w-1/2"
           ref={(elRef) => parallax(elRef, parallaxOption)}
         >
           {/* Astronaut Mask */}
-          <div className="overflow-hidden absolute top-[1.8229vw] inset-0 bottom-0 mx-auto w-1/2 h-1/2">
+          <div className="overflow-hidden absolute top-[3.5vw] inset-0 bottom-0 mx-auto w-1/2 h-1/2">
             <img
               className="absolute bottom-0 w-full"
               src="/images/home/astronaut-sta.png"

@@ -43,7 +43,7 @@ const HeaderMenuV1: FC<IProps> = memo(() => {
     <div className="header-menu-v1 hidden items-center md:flex">
       <V1MenuList isActivePath={isActivePath} />
 
-      <div className="header-menu-user flex justify-center items-center ml-[0.5vw]">
+      <div className="header-menu-user flex justify-center items-center">
         {userInfo ? (
           <V1UserInfo userInfo={userInfo} isActivePath={isActivePath} />
         ) : (

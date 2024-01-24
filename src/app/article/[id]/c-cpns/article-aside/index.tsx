@@ -56,7 +56,7 @@ const ArticleAside: FC<IProps> = memo(({ articleContent }) => {
       <ol className={`toc-wrap `}>
         {tocList?.map((item) => (
           <li
-            className={`relative pl-3 text-gray-500 ${
+            className={`relative pl-3 text-gray-300 ${
               olLevel === 1 ? '' : 'border-l-2 border-dotted border-gray-500'
             }`}
             key={item.title}

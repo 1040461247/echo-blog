@@ -14,16 +14,16 @@ export interface IProps {
 const BgTowerV1: FC<IProps> = memo(({ className }) => {
   const parallax = useParallax()!
   const firstTowersOption: IOption = {
-    speed: -4,
+    speed: -3.5,
     isTransparent: true,
     startShowPct: 0.3,
     solidPct: 0.6,
     adapter: {
       sm: {
-        speed: -3
+        speed: -2.5
       },
       lg: {
-        speed: -2
+        speed: -1.5
       },
       xl: {
         speed: -1
@@ -31,21 +31,15 @@ const BgTowerV1: FC<IProps> = memo(({ className }) => {
     }
   }
   const secondTowersOption: IOption = {
-    speed: 6,
+    speed: 3,
     adapter: {
       md: {
-        speed: 7
-      },
-      lg: {
-        speed: 8
-      },
-      xl: {
-        speed: 10
+        speed: 4
       }
     }
   }
 
-  const secondTowerStyle = `mt-[120vh] xl:mt-[50vh]`
+  const secondTowerStyle = `mt-[35vh] md:mt-0 lg:mt-[-35vh] 2xl:mt-[-70vh]`
 
   return (
     <div className={`overflow-hidden absolute inset-0 -z-50 ${className}`}>
