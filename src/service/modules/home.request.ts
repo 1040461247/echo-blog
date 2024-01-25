@@ -30,7 +30,7 @@ export interface IArticle {
 
 async function getStatistics() {
   const res = await request.get('/statistics')
-  return res.data as IStatistics[]
+  return res.data as IStatistics
 }
 
 async function getArticleList(offset = 0, limit = 10) {

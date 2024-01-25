@@ -11,7 +11,7 @@ export interface IProps {
 
 const HomeContent: FC<IProps> = memo(() => {
   return (
-    <div className="relative z-10 text-center -mt-2 pt-10 bg-[--bg-dark-blue]">
+    <div className="relative z-10 text-center -mt-2 py-10 bg-[--bg-dark-blue]">
       <BgTower />
 
       <div className="inner-layout">

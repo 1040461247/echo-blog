@@ -1,16 +1,12 @@
 'use client'
 
-import ArticleCategory from '@/components/article-category'
-import ArticleTags from '@/components/article-tags'
-import { ARTICLE_PATH } from '@/constants'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
-import { fetchArticlesAction } from '@/store/slices'
-import formatDate from '@/utils/format-date'
-import Image from 'next/image'
-import Link from 'next/link'
+import { addArticleListPageAction, fetchArticlesAction } from '@/store/slices'
 import type { FC } from 'react'
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useRef } from 'react'
 import { shallowEqual } from 'react-redux'
+import ContentMainArticleItem from '../content-main-article-item'
+import useReachBottom from '@/hooks/use-reach-bottom'
 
 // Types
 export interface IProps {
@@ -18,70 +14,43 @@ export interface IProps {
 }
 
 const ContentMain: FC<IProps> = memo(() => {
+  const contentMainRef = useRef<HTMLDivElement>(null)
+  const [reachedBottom] = useReachBottom()
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     dispatch(fetchArticlesAction())
   }, [])
 
-  const { articleList } = useAppSelector(
+  useEffect(() => {
+    if (reachedBottom) {
+      dispatch(addArticleListPageAction())
+      dispatch(fetchArticlesAction())
+    }
+  }, [reachedBottom])
+
+  const { articleList, statistics } = useAppSelector(
     (state) => ({
-      articleList: state.home.articleList
+      articleList: state.home.articleList,
+      statistics: state.home.statistics
     }),
     shallowEqual
   )
 
   return (
-    <div className="content-main flex-1">
-      {articleList.map((item) => (
-        <div className="article c-card mb-[38px]" key={item.id}>
-          {/* Article Album */}
-          {item.cover_url && (
-            <Link
-              className="article-album group block relative overflow-hidden h-[150px]"
-              href={`${ARTICLE_PATH}/${item.id}`}
-            >
-              <Image
-                className="object-cover"
-                src={item.cover_url}
-                fill
-                sizes="100%"
-                alt="article-album"
-              />
-              <div className="mask absolute inset-0 group-hover:bg-black/10 transition-colors"></div>
-            </Link>
-          )}
-
-          {/* Article Main */}
-          <main className="flex flex-col gap-5 justify-between px-7 pt-5 pb-7">
-            <header className="article-title text-left">
-              <Link className="hover-highlight" href={`${ARTICLE_PATH}/${item.id}`}>
-                <h3 className="text-2xl">{item.title}</h3>
-              </Link>
-            </header>
-
-            <div className="article-content text-left">
-              <span className="ellipsis-4-line md:ellipsis-2-line">{item.description}</span>
-            </div>
-
-            <footer className="article-info flex text-sm text-gray-200/70">
-              <div className="footer-left flex flex-wrap gap-3 text-left">
-                <span className="article-info-date">
-                  <i className="iconfont icon-time mr-1" />
-                  <span>{formatDate(item.create_time)}</span>
-                </span>
-                <ArticleCategory mobileHide categoryInfo={item.category} />
-                <ArticleTags mobileHide tagList={item.tags} />
-              </div>
-
-              <div className="article-read-more flex-1 text-right whitespace-nowrap">
-                <Link className="hover-highlight" href={`${ARTICLE_PATH}/${item.id}`}>
-                  Read more &gt;
-                </Link>
-              </div>
-            </footer>
-          </main>
+    <div className="content-main flex-1" ref={contentMainRef}>
+      <div className="article-list">
+        {articleList.map((item) => (
+          <ContentMainArticleItem articleData={item} key={item.id} />
+        ))}
+      </div>
+      {statistics.articlesCount === articleList.length && (
+        <div className="flex justify-center items-center text-gray-600 text-xs">
+          <span>——</span>
+          <span className="mx-2">下面没有内容了，千万不要往下看</span>
+          <span>——</span>
         </div>
-      ))}
+      )}
     </div>
   )
 })

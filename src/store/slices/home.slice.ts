@@ -13,14 +13,12 @@ export interface IHomeSliceState {
 
 // Thunks
 const fetchStatisticsAction = createAsyncThunk('home/fetchStatistics', async () => {
-  const statistics = await getStatistics()
-  return statistics
+  return await getStatistics()
 })
 const fetchArticlesAction = createAsyncThunk('home/fetchArticlesAction', async (_, thunkAPI) => {
   const articleListPage = (thunkAPI.getState() as ReduxState).home.articleListPage
   const { offset, limit } = pageToOffsetlimit(articleListPage)
-  const statistics = await getArticleList(offset, limit)
-  return statistics
+  return await getArticleList(offset, limit)
 })
 
 export const homeSlice = createSlice({
@@ -31,8 +29,8 @@ export const homeSlice = createSlice({
     articleListPage: 1
   } as IHomeSliceState,
   reducers: {
-    articleListPageAction(state, { payload }) {
-      state.articleListPage = payload
+    addArticleListPageAction(state) {
+      state.articleListPage += 1
     }
   },
   extraReducers: (builder) => {
@@ -41,10 +39,14 @@ export const homeSlice = createSlice({
         state.statistics = payload ?? {}
       })
       .addCase(fetchArticlesAction.fulfilled, (state, { payload }) => {
-        state.articleList = payload ?? []
+        if (state.articleListPage === 1) {
+          state.articleList = payload ?? []
+        } else {
+          state.articleList = [...state.articleList, ...(payload ?? [])]
+        }
       })
   }
 })
 
 export { fetchStatisticsAction, fetchArticlesAction }
-export const { articleListPageAction } = homeSlice.actions
+export const { addArticleListPageAction } = homeSlice.actions
