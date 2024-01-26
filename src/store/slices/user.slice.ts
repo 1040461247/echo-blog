@@ -1,12 +1,15 @@
 import { TOKEN } from '@/constants'
 import { createAppAsyncThunk } from '@/hooks/use-store'
+import { getMessageUnreadCount } from '@/service/modules/message-record.request'
 import { IUserInfo, getUserById, login, verifyAuth } from '@/service/modules/user.request'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { ReduxDispath } from '..'
 
 // Types
 export interface IUserSliceState {
   userInfo: IUserInfo | null
   registeringPhone: string | null
+  unreadMessageCount: number
 }
 export interface ILoginParamasters {
   name: string
@@ -29,10 +32,13 @@ const fetchLoginAction = createAsyncThunk(
 )
 const fetchVerifyAuthAction = createAsyncThunk(
   'user/fetchVerifyAuthAction',
-  async (token?: string | null) => {
-    token ??= localStorage.getItem(TOKEN)
+  async (_, thunkApi) => {
+    const token = localStorage.getItem(TOKEN)
     if (!token) return
+
     const tokenSalt = await verifyAuth(token)
+    const dispatch = thunkApi.dispatch as ReduxDispath
+    dispatch(fetchMessageUnreadCountAction(tokenSalt.id))
     return await getUserById(tokenSalt.id)
   }
 )
@@ -46,27 +52,19 @@ const fetchUserInfoAction = createAppAsyncThunk(
     }
   }
 )
-
-// const fetchUserInfoAction = createAsyncThunk<
-//   IUserInfo | undefined,
-//   number,
-//   {
-//     dispatch: ReduxDispath
-//     state: ReduxState
-//   }
-// >('user/fetchUserInfoAction', async (_, { getState }) => {
-//   const state = getState()
-//   if (state.user.userInfo) {
-//     const tokenSalt = await getUserById(state.user.userInfo.id)
-//     return await getUserById(tokenSalt.id)
-//   }
-// })
+const fetchMessageUnreadCountAction = createAsyncThunk(
+  'user/fetchMessageUnreadCountAction',
+  async (userId: number) => {
+    return await getMessageUnreadCount(userId)
+  }
+)
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
     userInfo: null,
-    registeringPhone: null
+    registeringPhone: null,
+    unreadMessageCount: 0
   } as IUserSliceState,
   reducers: {
     setRegisteringPhoneAction(state, { payload }) {
@@ -81,8 +79,16 @@ export const userSlice = createSlice({
       .addCase(fetchUserInfoAction.fulfilled, (state, { payload }) => {
         state.userInfo = payload ?? null
       })
+      .addCase(fetchMessageUnreadCountAction.fulfilled, (state, { payload }) => {
+        state.unreadMessageCount = payload?.unreadCount ?? 0
+      })
   }
 })
 
-export { fetchLoginAction, fetchVerifyAuthAction, fetchUserInfoAction }
+export {
+  fetchLoginAction,
+  fetchVerifyAuthAction,
+  fetchUserInfoAction,
+  fetchMessageUnreadCountAction
+}
 export const { setRegisteringPhoneAction } = userSlice.actions

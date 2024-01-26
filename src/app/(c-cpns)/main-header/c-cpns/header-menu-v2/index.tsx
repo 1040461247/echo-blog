@@ -2,7 +2,7 @@ import type { IMenuListItem } from '@/assets/data/menu-list-data'
 import menuListData from '@/assets/data/menu-list-data'
 import BlogInfo from '@/components/blog-info'
 import Drawer from '@/components/drawer'
-import { LOGIN_PATH, PROFILE_PATH } from '@/constants'
+import { LOGIN_PATH, NOTIFICATION_PATH, PROFILE_PATH } from '@/constants'
 import { useAppSelector } from '@/hooks/use-store'
 import Image from 'next/image'
 import type { FC } from 'react'
@@ -78,6 +78,13 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
                     isLink
                     path={PROFILE_PATH}
                     iconName="icon-home"
+                    handleClick={() => setIsDrawerOpen(false)}
+                  />
+                  <V2MenuItem
+                    text="消息"
+                    isLink
+                    path={NOTIFICATION_PATH}
+                    iconName="icon-notification"
                     handleClick={() => setIsDrawerOpen(false)}
                   />
                   <V2MenuItem

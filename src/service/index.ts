@@ -13,7 +13,7 @@ class myRequest {
   }
 
   async get(path: string, init?: RequestInit) {
-    return await fetch(`${this.baseUrl}${path}`, { method: 'GET', ...init })
+    return await fetch(`${this.baseUrl}${path}`, { ...init })
       .then((res) => {
         if (!res.ok) {
           console.error(res)

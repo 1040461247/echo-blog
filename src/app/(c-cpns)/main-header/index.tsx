@@ -4,24 +4,45 @@ import { memo, useEffect, useState } from 'react'
 import HeaderLogo from './c-cpns/header-logo'
 import HeaderMenuV1 from './c-cpns/header-menu-v1'
 import HeaderMenuV2 from './c-cpns/header-menu-v2'
-import { useAppDispatch } from '@/hooks/use-store'
-import { fetchVerifyAuthAction } from '@/store/slices'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
+import { fetchMessageUnreadCountAction, fetchVerifyAuthAction } from '@/store/slices'
 import type { FC } from 'react'
+import { shallowEqual } from 'react-redux'
 
 const MainHeader: FC<IProps> = memo(() => {
   const [reachedTop, setReachedTop] = useState(true)
-
   const dispatch = useAppDispatch()
+  const { userInfo } = useAppSelector(
+    (state) => ({
+      userInfo: state.user.userInfo
+    }),
+    shallowEqual
+  )
+
   useEffect(() => {
     dispatch(fetchVerifyAuthAction())
+
+    // polling - 5min
+    const timer = setInterval(
+      () => dispatch(fetchMessageUnreadCountAction(userInfo!.id)),
+      5 * 60 * 1000
+    )
 
     function handleScroll() {
       const scrollTop = document.documentElement.scrollTop
       scrollTop === 0 ? setReachedTop(true) : setReachedTop(false)
     }
     addEventListener('scroll', handleScroll)
-    return () => removeEventListener('scroll', handleScroll)
+
+    return () => {
+      removeEventListener('scroll', handleScroll)
+      clearInterval(timer)
+    }
   }, [])
+
+  useEffect(() => {
+    userInfo?.id && dispatch(fetchMessageUnreadCountAction(userInfo.id))
+  }, [userInfo])
 
   return (
     <div

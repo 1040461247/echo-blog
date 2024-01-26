@@ -39,9 +39,8 @@ export const homeSlice = createSlice({
         state.statistics = payload ?? {}
       })
       .addCase(fetchArticlesAction.fulfilled, (state, { payload }) => {
-        if (state.articleListPage === 1) {
-          state.articleList = payload ?? []
-        } else {
+        const headItemId = payload[0]?.id
+        if (!state.articleList.find((item) => item.id === headItemId)) {
           state.articleList = [...state.articleList, ...(payload ?? [])]
         }
       })
