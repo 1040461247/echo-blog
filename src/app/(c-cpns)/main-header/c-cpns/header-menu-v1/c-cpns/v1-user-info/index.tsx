@@ -29,7 +29,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
 
   const { unreadMessageCount } = useAppSelector(
     (state) => ({
-      unreadMessageCount: state.user.unreadMessageCount
+      unreadMessageCount: state.messageRecord.unreadMessageCount
     }),
     shallowEqual
   )

@@ -6,7 +6,8 @@ import {
   articleSlice,
   userSlice,
   globalSlice,
-  friendsSlice
+  friendsSlice,
+  messageRecordSlice
 } from './slices'
 
 const store = configureStore({
@@ -17,7 +18,8 @@ const store = configureStore({
     [articleSlice.name]: articleSlice.reducer,
     [userSlice.name]: userSlice.reducer,
     [globalSlice.name]: globalSlice.reducer,
-    [friendsSlice.name]: friendsSlice.reducer
+    [friendsSlice.name]: friendsSlice.reducer,
+    [messageRecordSlice.name]: messageRecordSlice.reducer
   }
 })
 

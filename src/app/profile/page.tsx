@@ -22,7 +22,7 @@ const ProfilePage: FC<IProps> = memo(() => {
 
   useEffect(() => {
     if (!userInfo) redirect(LOGIN_PATH)
-  }, [userInfo])
+  }, [])
 
   return (
     <div className="profile-page sm:pt-[38px]">

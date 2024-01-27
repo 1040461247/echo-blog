@@ -22,7 +22,7 @@ const MainHeader: FC<IProps> = memo(() => {
   useEffect(() => {
     dispatch(fetchVerifyAuthAction())
 
-    // polling - 5min
+    // polling
     const timer = setInterval(
       () => dispatch(fetchMessageUnreadCountAction(userInfo!.id)),
       5 * 60 * 1000
