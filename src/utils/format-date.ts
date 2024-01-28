@@ -10,7 +10,7 @@ function formatDate(date: string | number, formatStr = 'YYYY-MM-DD ') {
   const diffDay = now.diff(targetDate, 'day')
 
   if (diffSeconds < 60) {
-    return `${diffSeconds}秒前`
+    return `${diffSeconds < 0 ? 1 : diffSeconds}秒前`
   } else if (diffMinute < 60) {
     return `${diffMinute}分钟前`
   } else if (diffHoure < 24) {

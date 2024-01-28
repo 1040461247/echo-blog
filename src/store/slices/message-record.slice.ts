@@ -1,60 +1,92 @@
 import {
   IMessageListItem,
+  IMessageTotal,
   getMessageListByState,
-  getMessageUnreadCount
+  getMessageTotal
 } from '@/service/modules/message-record.request'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { ReduxState } from '..'
+import sortMessages from '@/utils/sort-messages'
+import pageToOffsetLimit from '@/utils/page-to-offsetlimit'
 
 // Types
 export interface IMessaegRecordSliceState {
-  unreadMessageCount: number
+  total: IMessageTotal
   unReadMessageList: IMessageListItem[] | []
   allMessageList: IMessageListItem[] | []
+  pages: {
+    unReadPage: number
+    allPage: number
+  }
 }
 
 // Thunks
-const fetchMessageUnreadCountAction = createAsyncThunk(
-  'messageRecord/fetchMessageUnreadCountAction',
+const fetchMessageTotalAction = createAsyncThunk(
+  'messageRecord/fetchMessageTotalAction',
   async (userId: number) => {
-    return await getMessageUnreadCount(userId)
+    return await getMessageTotal(userId)
   }
 )
 const fetchUnreadMessageListAction = createAsyncThunk(
   'messageRecord/fetchUnreadMessagesAction',
   async (_, { getState }) => {
     const userId = (getState() as ReduxState).user.userInfo?.id
-    return await getMessageListByState(userId!, '0')
+    const messages = await getMessageListByState(userId!, '0', 0, 100)
+    return sortMessages(messages)
   }
 )
 const fetchAllMessageListAction = createAsyncThunk(
   'messageRecord/fetchAllMessageListAction',
   async (_, { getState }) => {
     const userId = (getState() as ReduxState).user.userInfo?.id
-    return await getMessageListByState(userId!)
+    const allPage = (getState() as ReduxState).messageRecord.pages.allPage
+    const { offset, limit } = pageToOffsetLimit(allPage)
+    const messages = await getMessageListByState(userId!, undefined, offset, limit)
+    return sortMessages(messages)
   }
 )
 
 export const messageRecordSlice = createSlice({
   name: 'messageRecord',
   initialState: {
-    unreadMessageCount: 0,
+    total: {
+      unreadCount: 0,
+      allCount: 0
+    },
     unReadMessageList: [],
-    allMessageList: []
+    allMessageList: [],
+    pages: {
+      unReadPage: 1,
+      allPage: 1
+    }
   } as IMessaegRecordSliceState,
-  reducers: {},
+  reducers: {
+    tempClearUnreadCountAction(state) {
+      state.total = { ...state.total, unreadCount: 0 }
+    },
+    addUnreadPage(state) {
+      state.pages = { ...state.pages, unReadPage: state.pages.unReadPage + 1 }
+    },
+    addAllPage(state) {
+      state.pages = { ...state.pages, allPage: state.pages.allPage + 1 }
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMessageUnreadCountAction.fulfilled, (state, { payload }) => {
-        state.unreadMessageCount = payload?.unreadCount ?? 0
+      .addCase(fetchMessageTotalAction.fulfilled, (state, { payload }) => {
+        state.total = payload ?? {}
       })
       .addCase(fetchUnreadMessageListAction.fulfilled, (state, { payload }) => {
         state.unReadMessageList = payload ?? []
       })
       .addCase(fetchAllMessageListAction.fulfilled, (state, { payload }) => {
-        state.allMessageList = payload ?? []
+        const headItemId = payload[0]?.id
+        if (!state.allMessageList.find((item) => item.id === headItemId)) {
+          state.allMessageList = [...state.allMessageList, ...(payload ?? [])]
+        }
       })
   }
 })
 
-export { fetchMessageUnreadCountAction, fetchUnreadMessageListAction, fetchAllMessageListAction }
+export { fetchMessageTotalAction, fetchUnreadMessageListAction, fetchAllMessageListAction }
+export const { tempClearUnreadCountAction, addAllPage, addUnreadPage } = messageRecordSlice.actions

@@ -8,23 +8,24 @@ export interface IMessageListItem {
   messageType: TMessageType
   content: string
   linkAtcId: number
-  creteTime: string
+  createTime: string
   sendUser: {
     id: number
     name: string
     avatarUrl: string
   }
 }
-export interface IUnreadCount {
+export interface IMessageTotal {
   unreadCount: number
+  allCount: number
 }
 export type TState = '0' | '1'
 
 const MODULE_BASE_URL = '/message-record'
 
-async function getMessageUnreadCount(userId: number) {
-  const res = await request.get(`${MODULE_BASE_URL}/${userId}/unread`)
-  return res.data as IUnreadCount
+async function getMessageTotal(userId: number) {
+  const res = await request.get(`${MODULE_BASE_URL}/${userId}/total`)
+  return res.data as IMessageTotal
 }
 
 async function clearUnread() {
@@ -32,9 +33,11 @@ async function clearUnread() {
   return res
 }
 
-async function getMessageListByState(userId: number, state?: TState) {
-  const res = await request.get(`${MODULE_BASE_URL}/${userId}${state ? `?state=${state}` : ''}`)
+async function getMessageListByState(userId: number, state?: TState, offset = 0, limit = 10) {
+  const res = await request.get(
+    `${MODULE_BASE_URL}/${userId}?offset=${offset}&limit=${limit}${state ? `&state=${state}` : ''}`
+  )
   return res.data as IMessageListItem[]
 }
 
-export { getMessageUnreadCount, clearUnread, getMessageListByState }
+export { getMessageTotal, clearUnread, getMessageListByState }

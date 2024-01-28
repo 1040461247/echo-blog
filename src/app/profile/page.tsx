@@ -1,11 +1,5 @@
-'use client'
-
-import { LOGIN_PATH } from '@/constants'
-import { useAppSelector } from '@/hooks/use-store'
-import { redirect } from 'next/navigation'
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 import type { FC } from 'react'
-import { shallowEqual } from 'react-redux'
 
 // Types
 export interface IProps {
@@ -13,17 +7,6 @@ export interface IProps {
 }
 
 const ProfilePage: FC<IProps> = memo(() => {
-  const { userInfo } = useAppSelector(
-    (state) => ({
-      userInfo: state.user.userInfo
-    }),
-    shallowEqual
-  )
-
-  useEffect(() => {
-    if (!userInfo) redirect(LOGIN_PATH)
-  }, [])
-
   return (
     <div className="profile-page sm:pt-[38px]">
       <div className="inner-layout flex-col justify-start content-card p-8 text-gray-300">

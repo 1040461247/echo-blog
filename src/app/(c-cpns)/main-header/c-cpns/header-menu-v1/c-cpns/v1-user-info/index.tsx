@@ -27,9 +27,9 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
     Message.success('用户已退出')
   }
 
-  const { unreadMessageCount } = useAppSelector(
+  const { total } = useAppSelector(
     (state) => ({
-      unreadMessageCount: state.messageRecord.unreadMessageCount
+      total: state.messageRecord.total
     }),
     shallowEqual
   )
@@ -56,7 +56,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
             />
           )}
         </div>
-        {unreadMessageCount !== 0 && <NoticeDot />}
+        {total.unreadCount !== 0 && <NoticeDot />}
       </div>
 
       {/* Submenu */}
@@ -72,7 +72,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
           isActive={isActivePath({ path: NOTIFICATION_PATH })}
           path={NOTIFICATION_PATH}
           iconName="icon-notification"
-          text={unreadMessageCount === 0 ? '消息' : `未读消息(${unreadMessageCount})`}
+          text={total.unreadCount === 0 ? '消息' : `未读消息(${total.unreadCount})`}
         />
 
         <SubmenuItem isActive={false} handleClick={handleLogout}>

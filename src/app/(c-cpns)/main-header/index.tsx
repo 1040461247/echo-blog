@@ -5,7 +5,7 @@ import HeaderLogo from './c-cpns/header-logo'
 import HeaderMenuV1 from './c-cpns/header-menu-v1'
 import HeaderMenuV2 from './c-cpns/header-menu-v2'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
-import { fetchMessageUnreadCountAction, fetchVerifyAuthAction } from '@/store/slices'
+import { fetchMessageTotalAction, fetchVerifyAuthAction } from '@/store/slices'
 import type { FC } from 'react'
 import { shallowEqual } from 'react-redux'
 
@@ -22,12 +22,6 @@ const MainHeader: FC<IProps> = memo(() => {
   useEffect(() => {
     dispatch(fetchVerifyAuthAction())
 
-    // polling
-    const timer = setInterval(
-      () => dispatch(fetchMessageUnreadCountAction(userInfo!.id)),
-      5 * 60 * 1000
-    )
-
     function handleScroll() {
       const scrollTop = document.documentElement.scrollTop
       scrollTop === 0 ? setReachedTop(true) : setReachedTop(false)
@@ -36,12 +30,20 @@ const MainHeader: FC<IProps> = memo(() => {
 
     return () => {
       removeEventListener('scroll', handleScroll)
-      clearInterval(timer)
     }
   }, [])
 
   useEffect(() => {
-    userInfo?.id && dispatch(fetchMessageUnreadCountAction(userInfo.id))
+    let timer: NodeJS.Timeout
+    if (userInfo) {
+      dispatch(fetchMessageTotalAction(userInfo.id))
+      // polling
+      timer = setInterval(() => dispatch(fetchMessageTotalAction(userInfo!.id)), 60 * 1000)
+    }
+
+    return () => {
+      clearInterval(timer)
+    }
   }, [userInfo])
 
   return (

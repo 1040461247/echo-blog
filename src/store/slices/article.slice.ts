@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { IComment, getArticleById, getCommentsByArticleId } from '@/service/modules/article.request'
 import { IArticle } from '@/service/modules/home.request'
 import sortComments from '@/utils/sort-comments'
-import { comment } from '@uiw/react-md-editor'
+import { ReduxState } from '..'
 
 // Types
 export interface IArticleSliceState {
@@ -19,8 +19,10 @@ const fetchArticleByIdAction = createAsyncThunk(
 )
 const fetchCommentsByArticleIdAction = createAsyncThunk(
   'article/fetchCommentsByArticleIdAction',
-  async (id: number) => {
-    return await getCommentsByArticleId(id)
+  async (id: number, { getState }) => {
+    const comments = await getCommentsByArticleId(id)
+    const state = getState() as ReduxState
+    return sortComments(comments, state.user.userInfo?.id)
   }
 )
 
@@ -37,7 +39,6 @@ export const articleSlice = createSlice({
         state.article = payload ?? {}
       })
       .addCase(fetchCommentsByArticleIdAction.fulfilled, (state, { payload }) => {
-        console.log(payload)
         state.articleComments = payload ?? []
       })
   }

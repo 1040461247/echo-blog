@@ -15,7 +15,7 @@ const MessageItemHeader: FC<IProps> = memo(({ url, userId }) => {
     <header className="message-item-header">
       {url ? (
         <div className="relative overflow-hidden w-[50px] h-[50px] rounded-full">
-          <Image className="object-cover" fill sizes="50px" src={url} alt="send-user-avater" />
+          <Image className="object-cover" fill sizes="100px" src={url} alt="send-user-avater" />
         </div>
       ) : (
         <Avatar

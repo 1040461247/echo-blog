@@ -7,6 +7,7 @@ import { memo, useEffect, useRef } from 'react'
 import { shallowEqual } from 'react-redux'
 import ContentMainArticleItem from '../content-main-article-item'
 import useReachBottom from '@/hooks/use-reach-bottom'
+import NoContent from '@/components/no-content'
 
 // Types
 export interface IProps {
@@ -44,13 +45,7 @@ const ContentMain: FC<IProps> = memo(() => {
           <ContentMainArticleItem articleData={item} key={item.id} />
         ))}
       </div>
-      {statistics.articlesCount === articleList.length && (
-        <div className="flex justify-center items-center text-gray-600 text-xs">
-          <span>——</span>
-          <span className="mx-2">下面没有内容了，千万不要往下看</span>
-          <span>——</span>
-        </div>
-      )}
+      {statistics.articlesCount === articleList.length && <NoContent />}
     </div>
   )
 })

@@ -12,7 +12,7 @@ export default function useReachBottom() {
       const distanceToBottom = totalHeight - (scrollY + viewportHeight)
       distanceToBottom <= 50 ? setReachedBottom(true) : setReachedBottom(false)
     }
-    window.addEventListener('scroll', throttle(handleScroll, 50))
+    window.addEventListener('scroll', throttle(handleScroll, 20))
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
