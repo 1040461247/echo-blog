@@ -80,7 +80,7 @@ export const messageRecordSlice = createSlice({
         state.unReadMessageList = payload ?? []
       })
       .addCase(fetchAllMessageListAction.fulfilled, (state, { payload }) => {
-        const headItemId = payload[0]?.id
+        const headItemId = payload && payload[0]?.id
         if (!state.allMessageList.find((item) => item.id === headItemId)) {
           state.allMessageList = [...state.allMessageList, ...(payload ?? [])]
         }

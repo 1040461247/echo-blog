@@ -10,6 +10,7 @@ import NoMessage from './c-cpns/no-message'
 import useReachBottom from '@/hooks/use-reach-bottom'
 import NoContent from '@/components/no-content'
 import BackTop from '@/components/backtop'
+import LoadMore from '@/components/load-more'
 
 // Types
 export interface IProps {
@@ -17,19 +18,20 @@ export interface IProps {
 }
 
 const NotificationPage: FC<IProps> = memo(() => {
+  const { allMessageList, total, userInfo } = useAppSelector(
+    (state) => ({
+      allMessageList: state.messageRecord.allMessageList,
+      total: state.messageRecord.total,
+      userInfo: state.user.userInfo
+    }),
+    shallowEqual
+  )
+
   // 获取数据
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchAllMessageListAction())
-  }, [])
-
-  const { allMessageList, total } = useAppSelector(
-    (state) => ({
-      allMessageList: state.messageRecord.allMessageList,
-      total: state.messageRecord.total
-    }),
-    shallowEqual
-  )
+  }, [userInfo])
 
   // 滚动到底部加载更多
   const [reachedBottom] = useReachBottom()
@@ -51,7 +53,7 @@ const NotificationPage: FC<IProps> = memo(() => {
               ))}
             </nav>
           </div>
-          {total.allCount === allMessageList.length && <NoContent />}
+          {total.allCount === allMessageList.length ? <NoContent /> : <LoadMore />}
         </>
       ) : (
         <div className="content-card overflow-hidden w-full text-gray-300">

@@ -12,6 +12,10 @@ export interface IProps {
 const ArticleComments: FC<IProps> = memo(({ customStyle }) => {
   return (
     <div className={`article-comments ${customStyle}`}>
+      <header className="comment-header mt-10 mb-6">
+        <h2 className="text-3xl mb-3">评论</h2>
+      </header>
+
       <CommentPanel />
       <CommentList />
     </div>

@@ -14,7 +14,9 @@ import type { FC } from 'react'
 import type { IProps as IArticleHeaderProps } from './c-cpns/article-header'
 import type { IProps as IArticleInfoProps } from './c-cpns/article-info'
 import type { IProps as IArticleContentProps } from './c-cpns/article-content'
+import type { IProps as IArticleCopyrightProps } from './c-cpns/article-copyright'
 import DividerLine from './c-cpns/divider-line'
+import ArticleCopyright from './c-cpns/article-copyright'
 
 // Types
 export interface IProps {
@@ -66,6 +68,12 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
     articleContent: content!,
     articleDescription: description
   }
+  const articleCopyrightProps: IArticleCopyrightProps = {
+    title,
+    author: author?.name,
+    createTime,
+    updateTime
+  }
 
   const mainCommonStyle = 'px-2 sm:px-6 md:px-8'
 
@@ -79,6 +87,7 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
           <ArticleInfo {...articleInfoProps} customStyle={mainCommonStyle} />
           <ArticleContent {...articleContentProps} customStyle={mainCommonStyle} />
           <DividerLine />
+          <ArticleCopyright {...articleCopyrightProps} customStyle={mainCommonStyle} />
           <ArticleComments customStyle={mainCommonStyle} />
         </main>
 

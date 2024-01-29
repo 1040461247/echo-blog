@@ -1,7 +1,5 @@
 import { IComment, addLikes, delComment, remLikes } from '@/service/modules/article.request'
 import formatDate from '@/utils/format-date'
-import Avatar from 'boring-avatars'
-import Image from 'next/image'
 import Link from 'next/link'
 import { memo, useEffect, useState } from 'react'
 import type { FC } from 'react'
@@ -12,6 +10,7 @@ import { shallowEqual } from 'react-redux'
 import Message from '@/components/message'
 import { fetchCommentsByArticleIdAction, fetchUserInfoAction } from '@/store/slices'
 import { IResponse } from '@/service'
+import UserAvatar from '@/components/user-avatar'
 
 // Types
 export interface IProps {
@@ -107,18 +106,13 @@ const CommentItem: FC<IProps> = memo(
       <div className="comment-item group flex p-2 pr-0" id={comment.user.name}>
         {/* 头像 */}
         <div className="item-avatar mr-3">
-          <div className="rounded-2xl overflow-hidden">
-            {comment.user.avatar_url ? (
-              <Image src={comment.user.avatar_url} width={52} height={52} alt="avatar" />
-            ) : (
-              <Avatar
-                size={52}
-                name={String(comment.user.id)}
-                variant="beam"
-                colors={['#FF85A0', '#FB8351', '#FFAD64', '#E9E2DA', '#ADD4D3']}
-                square
-              />
-            )}
+          <div className="overflow-hidden rounded-2xl">
+            <UserAvatar
+              avatarUrl={comment.user.avatar_url}
+              userId={comment.user.id}
+              size={52}
+              square
+            />
           </div>
         </div>
 

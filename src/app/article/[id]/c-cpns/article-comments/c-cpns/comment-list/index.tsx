@@ -38,8 +38,8 @@ const CommentList: FC<IProps> = memo(() => {
 
   return (
     <div className="comment-list">
-      <header className="comment-list-header my-6">
-        <h2 className="text-3xl mb-3">{articleComments.length}评论</h2>
+      <header className="comment-list-header my-4">
+        <h3 className="text-xl mb-3">{articleComments.length}评论</h3>
       </header>
 
       <div className="comment-list-content">

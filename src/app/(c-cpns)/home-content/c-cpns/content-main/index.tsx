@@ -8,6 +8,7 @@ import { shallowEqual } from 'react-redux'
 import ContentMainArticleItem from '../content-main-article-item'
 import useReachBottom from '@/hooks/use-reach-bottom'
 import NoContent from '@/components/no-content'
+import LoadMore from '@/components/load-more'
 
 // Types
 export interface IProps {
@@ -45,7 +46,7 @@ const ContentMain: FC<IProps> = memo(() => {
           <ContentMainArticleItem articleData={item} key={item.id} />
         ))}
       </div>
-      {statistics.articlesCount === articleList.length && <NoContent />}
+      {statistics.articlesCount === articleList.length ? <NoContent /> : <LoadMore />}
     </div>
   )
 })
