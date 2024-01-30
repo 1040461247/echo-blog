@@ -14,7 +14,8 @@ a,
 ul,
 ol,
 li,
-div {
+div,
+input {
   margin: 0;
   padding: 0;
 }

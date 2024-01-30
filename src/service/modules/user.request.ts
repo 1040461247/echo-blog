@@ -1,3 +1,4 @@
+import getAuthHeader from '@/utils/get-auth-header'
 import request from '../index'
 
 // Types
@@ -75,4 +76,12 @@ async function getUserById(userId: number) {
   return res.data as IUserInfo
 }
 
-export { login, loginPhone, sendOtp, verifyAuth, signup, getUserById }
+async function uploadAvatar(formData: FormData) {
+  const res = await request.post(`/upload/avatar`, {
+    headers: getAuthHeader(),
+    body: formData
+  })
+  return res
+}
+
+export { login, loginPhone, sendOtp, verifyAuth, signup, getUserById, uploadAvatar }

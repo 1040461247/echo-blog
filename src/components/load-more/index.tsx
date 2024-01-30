@@ -1,6 +1,4 @@
-'use client'
-
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
 import type { FC } from 'react'
 
 // Types
@@ -9,20 +7,10 @@ export interface IProps {
 }
 
 const LoadMore: FC<IProps> = memo(() => {
-  const [val, setVal] = useState('火速加载中...')
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setVal('太久没反应？刷新一下试试~')
-    }, 5000)
-
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
     <div className="load-more flex justify-center items-center">
       <i className="iconfont icon-loading animate-spin mr-2 text-xl text-[--primary-color]" />
-      <span className="text-gray-300">{val}</span>
+      <span className="text-gray-300">火速加载中...</span>
     </div>
   )
 })

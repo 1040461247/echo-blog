@@ -28,10 +28,10 @@ class myRequest {
   }
 
   async post(path: string, init?: RequestInit) {
-    if (init?.body) {
+    if (init?.body && !(init?.body instanceof FormData)) {
       init.headers = {
-        ...init.headers,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        ...init.headers
       }
     }
     return await fetch(`${this.baseUrl}${path}`, { method: 'POST', ...init })

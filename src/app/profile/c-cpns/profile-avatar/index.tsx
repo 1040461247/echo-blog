@@ -1,26 +1,25 @@
 import UserAvatar from '@/components/user-avatar'
 import { useAppSelector } from '@/hooks/use-store'
 import Image from 'next/image'
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import type { FC } from 'react'
 import { shallowEqual } from 'react-redux'
 
 // Types
 export interface IProps {
   children?: React.ReactElement
+  setSelectedAvatar: (arg: File | null) => void
+  previewUrl: string | ArrayBuffer | null
+  setPreviewUrl: (arg: string | ArrayBuffer | null) => void
 }
 
-const ProfileAvatar: FC<IProps> = memo(() => {
+const ProfileAvatar: FC<IProps> = memo(({ setSelectedAvatar, previewUrl, setPreviewUrl }) => {
   const { userInfo } = useAppSelector(
     (state) => ({
       userInfo: state.user.userInfo
     }),
     shallowEqual
   )
-
-  // 用户头像上传和预览
-  const [selectedAvatar, setSelectedAvatar] = useState<File | null>(null)
-  const [previewUrl, setPreviewUrl] = useState<string | ArrayBuffer | null>('')
 
   function handleAvatarChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files && event.target.files[0]

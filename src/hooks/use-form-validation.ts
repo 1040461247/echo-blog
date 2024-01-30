@@ -28,6 +28,11 @@ function useFormValidation<T extends Record<string, any>>(
     valiedateField(name)
   }
 
+  function handleReset() {
+    setFormData(initialState)
+    setErrors({})
+  }
+
   function valiedateField(field: string) {
     let error = ''
     const rules = validationRules[field]
@@ -59,12 +64,12 @@ function useFormValidation<T extends Record<string, any>>(
         }
       }
     }
-    // console.log(errorsTemp)
+
     setErrors(errorsTemp)
     return errorsTemp
   }
 
-  return { formData, errors, handleChange, handleBlur, validateAll, valiedateField }
+  return { formData, errors, handleChange, handleBlur, validateAll, valiedateField, handleReset }
 }
 
 export default useFormValidation
