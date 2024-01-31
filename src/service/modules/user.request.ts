@@ -84,4 +84,16 @@ async function uploadAvatar(formData: FormData) {
   return res
 }
 
-export { login, loginPhone, sendOtp, verifyAuth, signup, getUserById, uploadAvatar }
+async function updateUserInfo(name?: string, password?: string) {
+  const bodyData = { name, password }
+  const entriesBody = Object.entries(bodyData)
+  const endBodyData = Object.fromEntries(entriesBody.filter(([_, value]) => value))
+
+  const res = await request.post(`/users/update`, {
+    headers: getAuthHeader(),
+    body: JSON.stringify(endBodyData)
+  })
+  return res
+}
+
+export { login, loginPhone, sendOtp, verifyAuth, signup, getUserById, uploadAvatar, updateUserInfo }

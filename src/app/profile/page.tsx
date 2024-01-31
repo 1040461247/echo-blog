@@ -1,7 +1,7 @@
 'use client'
 
-import { useAppSelector } from '@/hooks/use-store'
-import { memo, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
+import { memo, useEffect, useState } from 'react'
 import type { FC } from 'react'
 import { shallowEqual } from 'react-redux'
 import ProfileAvatar from './c-cpns/profile-avatar'
@@ -9,8 +9,9 @@ import encryptPhone from '@/utils/encrypt-phone'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
 import { REG_NAME_CHARACTER, REG_NAME_LENGTH } from '@/constants'
 import ErrorMessage from '@/components/modal/c-cpns/error-message'
-import { uploadAvatar } from '@/service/modules/user.request'
+import { updateUserInfo, uploadAvatar } from '@/service/modules/user.request'
 import Message from '@/components/message'
+import { fetchUserInfoAction } from '@/store/slices'
 
 // Types
 export interface IProps {
@@ -18,12 +19,18 @@ export interface IProps {
 }
 
 const ProfilePage: FC<IProps> = memo(() => {
+  const dispatch = useAppDispatch()
+
   const { userInfo } = useAppSelector(
     (state) => ({
       userInfo: state.user.userInfo
     }),
     shallowEqual
   )
+
+  useEffect(() => {
+    dispatch(fetchUserInfoAction())
+  }, [])
 
   // 表单初始化及验证规则配置
   const initialFormData = { name: userInfo?.name }
@@ -43,8 +50,10 @@ const ProfilePage: FC<IProps> = memo(() => {
       }
     ]
   }
-  const { formData, errors, handleReset, handleChange, handleBlur, validateAll } =
-    useFormValidation(initialFormData, validationRules)
+  const { formData, errors, handleReset, handleChange, handleBlur } = useFormValidation(
+    initialFormData,
+    validationRules
+  )
 
   // 用户头像上传和预览
   const [selectedAvatar, setSelectedAvatar] = useState<File | null>(null)
@@ -57,15 +66,31 @@ const ProfilePage: FC<IProps> = memo(() => {
     handleReset()
   }
   async function handleSubmit() {
+    let hasError = false
+    // 上传头像
     if (selectedAvatar) {
-      // 上传头像
-      const formData = new FormData()
-      formData.append('avatar', selectedAvatar)
-      const uploadRes = await uploadAvatar(formData)
-      uploadRes.code !== 200 && Message.error(uploadRes.msg)
+      const avatarFormData = new FormData()
+      avatarFormData.append('avatar', selectedAvatar)
+      const uploadRes = await uploadAvatar(avatarFormData)
+      if (uploadRes.code !== 200) {
+        Message.error(uploadRes.msg)
+        hasError = true
+      }
     }
+
     // 修改用户信息
-    console.log('submit')
+    if (formData.name !== userInfo?.name) {
+      const updateRes = await updateUserInfo(formData.name)
+      if (updateRes.code !== 200) {
+        Message.error(updateRes.msg)
+        hasError = true
+      }
+    }
+
+    if (selectedAvatar || formData.name !== userInfo?.name) {
+      dispatch(fetchUserInfoAction())
+      !hasError && Message.success('信息更新成功')
+    }
   }
 
   return (
