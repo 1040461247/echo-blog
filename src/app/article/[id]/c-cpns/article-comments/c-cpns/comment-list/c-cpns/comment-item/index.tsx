@@ -118,55 +118,59 @@ const CommentItem: FC<IProps> = memo(
 
         {/* 评论信息 */}
         <div className="item-info w-full border-b border-dashed border-gray-600/50 group-last:border-none">
-          <div className="acpi-top flex justify-between">
-            <div className="acpi-top-left flex items-center gap-2 mb-1 leading-normal">
+          <div className="acpi-top flex flex-wrap items-center">
+            <div className="acpi-top-left flex mr-2">
               <span className="text-sm text-gray-300">{comment.user.name}</span>
               {article?.author?.id === comment.user.id && (
                 <span className="px-1 py-[2px] border border-[#3498db] rounded-[4px] text-xs text-[#3498db] whitespace-nowrap">
                   博主
                 </span>
               )}
-              <span className="text-xs text-gray-400">
-                {formatDate(comment.create_time, 'YYYY-MM-DD')}
-              </span>
             </div>
 
-            <div className="acpi-top-right flex items-center">
-              <span
-                className="likes flex items-center mr-2 hover-highlight cursor-pointer"
-                title="点赞"
-                onClick={handleLikes}
-              >
-                {isLike ? (
-                  <i className="iconfont icon-heart-fill mr-[2px] text-xl text-[--primary-color]" />
-                ) : (
-                  <i className="iconfont icon-heart mr-[2px] text-xl" />
-                )}
-                <span>{comment.totalLikes}</span>
-              </span>
-              <span
-                className={`comment-icon mr-2 hover-highlight cursor-pointer ${
-                  curReplyId === comment.id ? 'text-[--primary-color]' : ''
-                }`}
-                onClick={handleReply}
-                title="评论"
-              >
-                <i className="iconfont icon-comment text-xl" />
-              </span>
-              {userInfo?.id === comment.user.id && (
-                <span
-                  className="delete hover-highlight cursor-pointer"
-                  onClick={handleDelete}
-                  title="删除评论"
-                >
-                  <i className="iconfont icon-delete text-xl" />
+            <div className="acpi-top-right flex-1 flex justify-between items-center">
+              <div className="mr-1">
+                <span className="text-xs text-gray-400 ellipsis-1-line">
+                  {formatDate(comment.create_time, 'YYYY-MM-DD')}
                 </span>
-              )}
+              </div>
+              <div className="flex pr-2">
+                <span
+                  className="likes flex items-center mr-2 hover-highlight cursor-pointer"
+                  title="点赞"
+                  onClick={handleLikes}
+                >
+                  {isLike ? (
+                    <i className="iconfont icon-heart-fill mr-[2px] text-xl text-[--primary-color]" />
+                  ) : (
+                    <i className="iconfont icon-heart mr-[2px] text-xl" />
+                  )}
+                  <span>{comment.totalLikes}</span>
+                </span>
+                <span
+                  className={`comment-icon mr-2 hover-highlight cursor-pointer ${
+                    curReplyId === comment.id ? 'text-[--primary-color]' : ''
+                  }`}
+                  onClick={handleReply}
+                  title="评论"
+                >
+                  <i className="iconfont icon-comment text-xl" />
+                </span>
+                {userInfo?.id === comment.user.id && (
+                  <span
+                    className="delete hover-highlight cursor-pointer"
+                    onClick={handleDelete}
+                    title="删除评论"
+                  >
+                    <i className="iconfont icon-delete text-xl" />
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
           {/* 用户系统信息 */}
-          <div className="acpi-system flex items-center gap-1 text-[10px] text-gray-500 leading-normal">
+          <div className="acpi-system flex flex-wrap items-center gap-1 text-[10px] text-gray-500 leading-normal">
             <CommentItemSystemTag iconName="icon-position" info={comment.user.ip_address} />
             <CommentItemSystemTag
               iconName={getBroserIcon(comment.user.browser_info)}

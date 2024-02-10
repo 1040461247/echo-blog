@@ -22,7 +22,26 @@ const config: Config = {
         'card-red': "url('/images/articles-display/card_red.png')",
         room: "url('/images/tag-cloud-page/bg_static.png')"
       },
-      cursor: { pointer: 'url(/images/common/pointer.png), auto' }
+      cursor: { pointer: 'url(/images/common/pointer.png), auto' },
+      keyframes: {
+        throught: {
+          '0, 10%': {
+            transform: 'translateY(100%)',
+            opacity: '0'
+          },
+          '30%, 70%': {
+            transform: 'translateY(0)',
+            opacity: '1'
+          },
+          '90%, 100%': {
+            transform: 'translateY(-100%)',
+            opacity: '0'
+          }
+        }
+      },
+      animation: {
+        throught: 'throught 4s ease infinite'
+      }
     }
   },
   plugins: []

@@ -11,6 +11,7 @@ import React, { Suspense } from 'react'
 import MainHeader from './c-cpns/main-header'
 import MainFooter from './c-cpns/main-footer'
 import { NavigationEvents } from './c-cpns/navigation-events'
+import PageLoading from '@/components/page-loading'
 
 const myFont = localFont({
   src: [

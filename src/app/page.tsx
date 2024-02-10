@@ -1,8 +1,9 @@
 import type { FC } from 'react'
-import { memo } from 'react'
+import { Suspense, memo } from 'react'
 import HomeContent from './c-cpns/home-content'
 import HomeMain from './c-cpns/home-main'
 import BackTop from '@/components/backtop'
+import PageLoading from '@/components/page-loading'
 
 // Types
 export interface IProps {}

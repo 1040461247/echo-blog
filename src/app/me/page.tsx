@@ -26,7 +26,10 @@ const MePage: FC<IProps> = memo(() => {
       </section>
 
       <section className="mt-[40vh]">
-        <p className="relative z-30" ref={(elRef) => parallax(elRef, { ...normalOps, speed: -4 })}>
+        <p
+          className="opacity-0 relative z-30"
+          ref={(elRef) => parallax(elRef, { ...normalOps, speed: -4 })}
+        >
           <span className="block text-[22vw]">你好啊</span>
           <span className="block text-right text-[15vw]">我是Cheems</span>
         </p>

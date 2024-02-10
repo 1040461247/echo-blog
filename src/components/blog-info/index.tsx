@@ -9,6 +9,7 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { memo, useEffect } from 'react'
 import { shallowEqual } from 'react-redux'
+import UserAvatar from '../user-avatar'
 
 // Types
 export interface IProps {
@@ -37,17 +38,11 @@ const BlogInfo: FC<IProps> = memo(({ clouseDrawer }) => {
 
   return (
     <div className="blog-info">
-      <div className="profile flex flex-col items-center">
+      <div className="profile flex flex-col gap-1 items-center">
         <div className="pt-5">
           {/* Avatar */}
-          <div className="overflow-hidden relative w-20 h-20 inline-block p-[1px] rounded-[18px] border border-solid border-gray-500 shadow-lg">
-            <Image
-              src={profileJson.avatar_url}
-              fill
-              sizes="100%"
-              alt="avatar"
-              className="object-contain"
-            />
+          <div className="overflow-hidden p-[1px] rounded-[18px] border border-solid border-gray-500 shadow-lg">
+            <UserAvatar avatarUrl={profileJson.avatar_url} size={70} square />
           </div>
         </div>
         {/* NickName */}
