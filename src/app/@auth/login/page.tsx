@@ -14,9 +14,7 @@ import { setRegisteringPhoneAction } from '@/store/slices'
 import { useLogin } from '@/hooks/use-login'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const LoginPage: FC<IProps> = memo(() => {
   const dispatch = useAppDispatch()

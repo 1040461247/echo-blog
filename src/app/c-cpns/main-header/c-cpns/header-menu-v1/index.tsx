@@ -40,7 +40,7 @@ const HeaderMenuV1: FC<IProps> = memo(() => {
   }
 
   return (
-    <div className="header-menu-v1 hidden items-center md:flex">
+    <div className="header-menu-v1 hidden items-center sm:flex">
       <V1MenuList isActivePath={isActivePath} />
 
       <div className="header-menu-user flex justify-center items-center">

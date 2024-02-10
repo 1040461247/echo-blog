@@ -1,44 +1,58 @@
 'use client'
 
 import BgTowerV2 from '@/components/bg-tower-v2'
+import LoadMore from '@/components/load-more'
+import NoContent from '@/components/no-content'
 import Timeline from '@/components/timeline'
+import useReachBottom from '@/hooks/use-reach-bottom'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
-import { fetchArticlesAction, fetchStatisticsAction } from '@/store/slices/home.slice'
+import {
+  addArticleListPageAction,
+  fetchArticlesAction,
+  fetchStatisticsAction
+} from '@/store/slices/home.slice'
 import type { FC } from 'react'
 import { memo, useEffect } from 'react'
 import { shallowEqual } from 'react-redux'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const ArchivesPage: FC<IProps> = memo(() => {
   const dispatch = useAppDispatch()
+  const [reachedBottom] = useReachBottom()
+
+  const { statistics, articleList } = useAppSelector(
+    (state) => ({
+      statistics: state.home.statistics,
+      articleList: state.home.articleList
+    }),
+    shallowEqual
+  )
+
   useEffect(() => {
     dispatch(fetchStatisticsAction())
     dispatch(fetchArticlesAction())
   }, [])
 
-  const { statistics, articles } = useAppSelector(
-    (state) => ({
-      statistics: state.home.statistics,
-      articles: state.home.articleList
-    }),
-    shallowEqual
-  )
+  useEffect(() => {
+    if (reachedBottom && statistics.articlesCount !== articleList.length) {
+      dispatch(addArticleListPageAction())
+      dispatch(fetchArticlesAction())
+    }
+  }, [reachedBottom])
 
   return (
     <div className="archives-page relative bg-[--bg-dark-blue]">
-      <BgTowerV2 />
-
-      <div className="archives-content inner-layout flex-col justify-start items-center">
+      <div className="archives-content inner-layout flex-col justify-start items-center pt-5 content-card border-y-0 rounded-none">
+        <BgTowerV2 />
         <header className="pt-7 text-gray-200 text-center">
           <h2 className="text-5xl mb-3">时间轴</h2>
           <h3>-共发布了{statistics.articlesCount}篇文章-</h3>
         </header>
         <main className="w-full">
-          <Timeline articlesData={articles} />
+          <Timeline articlesData={articleList} />
+          {statistics.articlesCount !== articleList.length && <LoadMore />}
         </main>
       </div>
     </div>

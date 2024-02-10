@@ -71,7 +71,7 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
         </div>
 
         {/* Card Footer */}
-        <div className="card-footer flex justify-between gap-5 mt-14 sm:mt-8 text-lg sm:text-base text-black/30">
+        <div className="card-footer flex justify-between gap-5 mt-11 sm:mt-8 text-lg sm:text-base text-black/30">
           <div className="card-footer-left flex-1 text-center">{articleData.category.name}</div>
           <div className="card-footer-right flex-1 text-center">
             {formatDate(articleData.create_time, 'YYYY-MM')}

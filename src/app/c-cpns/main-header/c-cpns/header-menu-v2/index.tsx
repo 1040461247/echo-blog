@@ -56,7 +56,7 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
   }
 
   return (
-    <div className="md:hidden">
+    <div className="sm:hidden">
       {/* MenuBtn */}
       <div className="flex items-center h-full px-2" onClick={() => setIsDrawerOpen(true)}>
         <Image src="/images/main-header/menu.svg" width={25} height={25} alt="menubtn"></Image>

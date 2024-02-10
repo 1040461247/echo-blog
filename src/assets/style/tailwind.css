@@ -42,4 +42,11 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   }
+  .text-vertical {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+  }
+  .simple-scrollbar {
+    /* @apply scrollbar-thumb:bg-slate-300 scrollbar-thumb:!rounded scrollbar-track:bg-slate-100 scrollbar-track:rounded scrollbar:h-1.5 scrollbar:w-1.5 scrollbar:bg-transparent; */
+  }
 }

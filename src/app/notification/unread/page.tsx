@@ -15,9 +15,7 @@ import { clearUnread } from '@/service/modules/message-record.request'
 import useReachBottom from '@/hooks/use-reach-bottom'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const NotificationUnreadPage: FC<IProps> = memo(() => {
   // 获取数据

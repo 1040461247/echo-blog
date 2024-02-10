@@ -1,7 +1,6 @@
 :root {
   /* bg color */
   --primary-color: #ff5a79;
-  /* --primary-color-dark: #ec516d; */
   --primary-color-dark: #ff4164;
   --bg-dark-blue: #1f1f2e;
   --bg-dark-blue-deep: rgb(29, 29, 43);
@@ -12,20 +11,22 @@
   --font-gray: #8a8b9a;
   --font-light-blue: #abb0c9;
 
-  /* header-height */
-  /* --header-height-ssm: 54px;
-  --header-height-sm: 61px;
-  --header-height-md: 70px; */
+  /* height */
+  --header-fheight-ssm: 54px;
+  --header-fheight-sm: 61px;
+  --header-fheight-md: 70px;
   --header-height-ssm: 38px;
   --header-height-sm: 43px;
   --header-height-md: 48px;
   --ssm-sticky: calc(var(--header-height-ssm) + 20px);
   --sm-sticky: calc(var(--header-height-sm) + 20px);
   --md-sticky: calc(var(--header-height-md) + 20px);
-  --ssm-full-height: calc(100vh - 54px);
-  --sm-full-height: calc(100vh - 61px);
-  --md-full-height: calc(100vh - 70px);
   --ssm-modal-pt: calc(var(--header-height-ssm) + 40px);
+  --min-height: calc(100vh - var(--header-fheight-md) - var(--footer-height-lg));
+
+  /* footer height */
+  --footer-height: 122px;
+  --footer-height-lg: 94px;
 
   /* btn */
   --btn-gray: #3c3c47;

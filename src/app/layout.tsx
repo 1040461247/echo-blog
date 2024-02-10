@@ -7,8 +7,10 @@ import Providers from '@/store/providers'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import 'normalize.css'
-import React from 'react'
-import MainHeader from './(c-cpns)/main-header'
+import React, { Suspense } from 'react'
+import MainHeader from './c-cpns/main-header'
+import MainFooter from './c-cpns/main-footer'
+import { NavigationEvents } from './c-cpns/navigation-events'
 
 const myFont = localFont({
   src: [
@@ -41,10 +43,17 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="zh" className={myFont.className}>
-        <body>
+        <body className="flex flex-col">
           <MainHeader />
-          {children}
-          {auth}
+          <div className="flex-1">
+            {children}
+            {auth}
+          </div>
+          <MainFooter />
+
+          <Suspense fallback={null}>
+            <NavigationEvents />
+          </Suspense>
         </body>
       </html>
     </Providers>

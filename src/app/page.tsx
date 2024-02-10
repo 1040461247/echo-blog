@@ -1,13 +1,11 @@
 import type { FC } from 'react'
 import { memo } from 'react'
-import HomeContent from './(c-cpns)/home-content'
-import HomeMain from './(c-cpns)/home-main'
+import HomeContent from './c-cpns/home-content'
+import HomeMain from './c-cpns/home-main'
 import BackTop from '@/components/backtop'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const HomePage: FC<IProps> = memo(() => {
   return (

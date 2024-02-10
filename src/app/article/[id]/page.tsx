@@ -20,7 +20,6 @@ import ArticleCopyright from './c-cpns/article-copyright'
 
 // Types
 export interface IProps {
-  children?: React.ReactElement
   params: { id: string }
 }
 export interface IHeadOffset {

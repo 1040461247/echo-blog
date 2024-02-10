@@ -1,9 +1,10 @@
 body {
   min-width: 375px;
+  min-height: 100vh;
   color: var(--font-gray);
   background: var(--bg-dark-blue);
 
-  --demo-a: #ea1c26;
+  --demo-a: #2f2f3e;
 }
 
 body.prevent-scroll {
@@ -19,28 +20,43 @@ button:hover {
   cursor: url('/images/common/pointer.png'), pointer;
 }
 
-/* scroll bar */
-::-webkit-scrollbar {
+/* body scroll bar */
+body::-webkit-scrollbar {
   width: 5px;
   background-color: #2a2a39;
 }
-::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   background-color: transparent;
 }
-::-webkit-scrollbar-button {
+body::-webkit-scrollbar-button {
   display: none;
 }
-::-webkit-scrollbar-corner {
+body::-webkit-scrollbar-corner {
   background-color: #f1f1f1;
 }
-::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   border: none;
   background: linear-gradient(to bottom, #2a2a39, var(--primary-color), #2a2a39);
   border-radius: 10px;
 }
 
-@media (min-width: 768px) {
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
+/* silple scroll bar */
+.simple-scrollbar::-webkit-scrollbar {
+  width: 3px;
+  background-color: rgb(195 195 195 / 0.3);
+  border-radius: 10px;
+}
+.simple-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.simple-scrollbar::-webkit-scrollbar-button {
+  display: none;
+}
+.simple-scrollbar::-webkit-scrollbar-corner {
+  background-color: #f1f1f1;
+}
+.simple-scrollbar::-webkit-scrollbar-thumb {
+  border: none;
+  background: rgb(195 195 195 / 0.5);
+  border-radius: 10px;
 }

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-function formatDate(date: string | number, formatStr = 'YYYY-MM-DD ') {
+export default function formatDate(date: string | number, formatStr = 'YYYY-MM-DD ') {
   const now = dayjs()
   const targetDate = dayjs(Date.parse(String(date)))
 
@@ -22,4 +22,11 @@ function formatDate(date: string | number, formatStr = 'YYYY-MM-DD ') {
   }
 }
 
-export default formatDate
+export function formatDiff(seconds: number) {
+  const days = Math.floor(seconds / (3600 * 24))
+  const hours = Math.floor((seconds % (3600 * 24)) / 3600)
+  const minutes = Math.floor((seconds % 3600) / 60)
+  const remainingSeconds = seconds % 60
+
+  return { days, hours, minutes, remainingSeconds }
+}

@@ -13,9 +13,7 @@ import { shallowEqual } from 'react-redux'
 import type { ColorOptions, RendererFunction } from 'react-tagcloud'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const CategoryPage: FC<IProps> = memo(() => {
   const dispatch = useAppDispatch()

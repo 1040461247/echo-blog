@@ -20,17 +20,6 @@ const ContentMain: FC<IProps> = memo(() => {
   const [reachedBottom] = useReachBottom()
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(fetchArticlesAction())
-  }, [])
-
-  useEffect(() => {
-    if (reachedBottom) {
-      dispatch(addArticleListPageAction())
-      dispatch(fetchArticlesAction())
-    }
-  }, [reachedBottom])
-
   const { articleList, statistics } = useAppSelector(
     (state) => ({
       articleList: state.home.articleList,
@@ -38,6 +27,17 @@ const ContentMain: FC<IProps> = memo(() => {
     }),
     shallowEqual
   )
+
+  useEffect(() => {
+    dispatch(fetchArticlesAction())
+  }, [])
+
+  useEffect(() => {
+    if (reachedBottom && statistics.articlesCount !== articleList.length) {
+      dispatch(addArticleListPageAction())
+      dispatch(fetchArticlesAction())
+    }
+  }, [reachedBottom])
 
   return (
     <div className="content-main flex-1" ref={contentMainRef}>

@@ -5,9 +5,7 @@ import FriendsContent from './c-cpns/friends-content'
 import AuditFriends from './c-cpns/audit-friends'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const FriendsPage: FC<IProps> = memo(() => {
   return (

@@ -1,3 +1,4 @@
+import { PREVENT_SCROLL_CLASSNAME } from '@/constants'
 import { useEffect, useState } from 'react'
 
 // Types
@@ -7,6 +8,7 @@ export interface IOption {
   isTransparent?: boolean
   startShowPct?: number
   solidPct?: number
+  animation?: boolean
   adapter?: {
     [key: string]: TAdapterOption | undefined
     xs?: TAdapterOption
@@ -56,13 +58,14 @@ export default function useParallax() {
     return base
   }
 
-  function setParallax(elRef: any, option: IOption | TAdapterOption) {
-    const { speed, isTransparent, startShowPct, solidPct } = option
+  function setParallax(elRef: HTMLElement, option: IOption | TAdapterOption) {
+    const { speed, isTransparent, startShowPct, solidPct, animation = true } = option
     const { top, bottom } = elRef.getBoundingClientRect() // 元素距离视口顶/底部的距离
     const enteredViewport = top <= viewportHeight && bottom >= 0 // 元素是否已进入视口
+    const elReachTopDistance = 1 - top / viewportHeight // 元素到达顶部距离的百分比
 
     // 增加动画以优化滚动视觉
-    if (!elRef.style.transition) {
+    if (!elRef.style.transition && animation) {
       elRef.style.transition = 'all 1s cubic-bezier(0.215, 0.61, 0.355, 1)'
     }
 
@@ -78,7 +81,6 @@ export default function useParallax() {
       let opacity = 0
 
       if (enteredViewport) {
-        const elReachTopDistance = 1 - top / viewportHeight // 元素到达顶部的距离
         const isInInterval = elReachTopDistance >= startShowPct && elReachTopDistance <= 1 // 元素是否到达需要显示的区间
         if (isInInterval) {
           // 元素在区间内，opacity跟随滚动偏移量增加
@@ -92,7 +94,7 @@ export default function useParallax() {
       }
 
       if (elRef.style.opacity !== String(opacity)) {
-        elRef.style.opacity = opacity
+        elRef.style.opacity = String(opacity)
       }
     }
   }

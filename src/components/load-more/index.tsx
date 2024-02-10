@@ -10,7 +10,7 @@ const LoadMore: FC<IProps> = memo(() => {
   return (
     <div className="load-more flex justify-center items-center">
       <i className="iconfont icon-loading animate-spin mr-2 text-xl text-[--primary-color]" />
-      <span className="text-gray-300">火速加载中...</span>
+      <span className="text-gray-300 text-sm">火速加载中...</span>
     </div>
   )
 })

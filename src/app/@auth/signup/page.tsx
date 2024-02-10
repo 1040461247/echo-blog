@@ -16,9 +16,7 @@ import encryptPhone from '@/utils/encrypt-phone'
 import { useLogin } from '@/hooks/use-login'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const RegisterPage: FC<IProps> = memo(() => {
   const router = useRouter()

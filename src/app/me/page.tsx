@@ -7,9 +7,7 @@ import { memo } from 'react'
 import type { FC } from 'react'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const MePage: FC<IProps> = memo(() => {
   const parallax = useParallax()!

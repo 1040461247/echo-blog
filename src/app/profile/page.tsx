@@ -14,9 +14,7 @@ import Message from '@/components/message'
 import { fetchUserInfoAction } from '@/store/slices'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const ProfilePage: FC<IProps> = memo(() => {
   const dispatch = useAppDispatch()

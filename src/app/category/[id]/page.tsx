@@ -10,7 +10,6 @@ import type { FC } from 'react'
 
 // Types
 export interface IProps {
-  children?: React.ReactElement
   params: { id: string }
 }
 

@@ -13,7 +13,7 @@ const BackTop: FC<IProps> = memo(() => {
   const [showBacktop, setShowBacktop] = useState(false)
 
   useEffect(() => {
-    const viewportHeight = window.innerHeight // 视口高度
+    const viewportHeight = window.innerHeight * 2 // 2倍视口高度
 
     function handleScroll() {
       const scrollY = window.scrollY || document.documentElement.scrollTop
@@ -30,7 +30,7 @@ const BackTop: FC<IProps> = memo(() => {
   return (
     showBacktop && (
       <button
-        className="backtop fixed right-5 bottom-5 z-50 rotate-180 p-2"
+        className="backtop fixed right-5 bottom-20 sm:right-10 sm:bottom-[20vh] z-50 rotate-180 p-2"
         onClick={handleBacktop}
       >
         <Image

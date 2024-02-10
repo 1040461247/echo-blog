@@ -33,7 +33,11 @@ const fetchVerifyAuthAction = createAsyncThunk('user/fetchVerifyAuthAction', asy
   if (!token) return
 
   const tokenSalt = await verifyAuth(token)
-  return await getUserById(tokenSalt.id)
+  if (tokenSalt) {
+    return await getUserById(tokenSalt.id)
+  } else {
+    localStorage.removeItem(TOKEN)
+  }
 })
 const fetchUserInfoAction = createAppAsyncThunk(
   'user/fetchUserInfoAction',

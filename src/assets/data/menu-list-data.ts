@@ -4,9 +4,9 @@ import {
   FRIENDS_PATH,
   GITHUB_URL,
   HOME_PATH,
-  MESSAGES_PATH,
+  // MESSAGES_PATH,
   ME_PATH,
-  MOOD_PATH,
+  // MOOD_PATH,
   TAG_PATH
 } from '@/constants'
 

@@ -30,7 +30,7 @@ const V1MenuList: FC<IProps> = memo(({ isActivePath }) => {
   }
 
   return (
-    <nav className="v1-menu-list hidden items-center md:flex">
+    <nav className="v1-menu-list hidden items-center sm:flex">
       {menuList.map((item) => (
         <div className="header-menu-item flex items-center h-full" key={item.text}>
           {item.children ? (

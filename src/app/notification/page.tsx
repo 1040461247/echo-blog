@@ -13,9 +13,7 @@ import BackTop from '@/components/backtop'
 import LoadMore from '@/components/load-more'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const NotificationPage: FC<IProps> = memo(() => {
   const { allMessageList, total, userInfo } = useAppSelector(

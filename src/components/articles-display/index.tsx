@@ -19,8 +19,8 @@ const ArticlesDisplay: FC<IProps> = memo(({ titleIcon, titleText, articlesData }
   `
 
   return (
-    <div className="articles-display overflow-y-scroll h-[--ssm-full-height] sm:h-[--sm-full-height] md:h-[--md-full-height] bg-desk bg-no-repeat bg-center bg-cover">
-      <div className="inner-layout justify-start flex-col">
+    <div className="articles-display min-h-[--min-height] pt-[--header-fheight-ssm] sm:pt-[--header-fheight-sm] md:pt-[--header-fheight-md] bg-desk bg-no-repeat bg-center bg-cover [background-attachment:fixed]">
+      <div className="articles-display-inner">
         {/* Header */}
         <header
           className={`title flex justify-center w-full pt-[40px] md:pt-[70px] text-left ${wordArtStyle}`}
@@ -33,7 +33,7 @@ const ArticlesDisplay: FC<IProps> = memo(({ titleIcon, titleText, articlesData }
         <main className="articles sm:mt-6 md:mt-8">
           <nav className="flex flex-wrap justify-center">
             {articlesData.map((item) => (
-              <div className="card-wrap w-[300px] sm:w-[240px]" key={item.id}>
+              <div className="card-wrap w-[280px] sm:w-[240px]" key={item.id}>
                 <ArticleCard articleData={item} />
               </div>
             ))}
