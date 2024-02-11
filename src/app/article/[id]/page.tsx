@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import { fetchArticleByIdAction, fetchCommentsByArticleIdAction } from '@/store/slices'
-import { memo, useEffect } from 'react'
+import { Suspense, memo, useEffect } from 'react'
 import { shallowEqual } from 'react-redux'
 import BgTower from '@/components/bg-tower-v1'
 import ArticleAside from './c-cpns/article-aside'
@@ -17,6 +17,7 @@ import type { IProps as IArticleContentProps } from './c-cpns/article-content'
 import type { IProps as IArticleCopyrightProps } from './c-cpns/article-copyright'
 import DividerLine from './c-cpns/divider-line'
 import ArticleCopyright from './c-cpns/article-copyright'
+import ComponentLoading from '@/components/component-loading'
 
 // Types
 export interface IProps {
@@ -82,12 +83,27 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
 
       <div className="inner-layout items-start text-gray-300">
         <main className="article-main overflow-hidden flex-1 pb-5 md:mr-10 content-card">
-          <ArticleHeader {...articleHeaderProps} customStyle={mainCommonStyle} />
-          <ArticleInfo {...articleInfoProps} customStyle={mainCommonStyle} />
-          <ArticleContent {...articleContentProps} customStyle={mainCommonStyle} />
+          <Suspense fallback={<ComponentLoading />}>
+            <ArticleHeader {...articleHeaderProps} customStyle={mainCommonStyle} />
+          </Suspense>
+
+          <Suspense fallback={<ComponentLoading />}>
+            <ArticleInfo {...articleInfoProps} customStyle={mainCommonStyle} />
+          </Suspense>
+
+          <Suspense fallback={<ComponentLoading />}>
+            <ArticleContent {...articleContentProps} customStyle={mainCommonStyle} />
+          </Suspense>
+
           <DividerLine />
-          <ArticleCopyright {...articleCopyrightProps} customStyle={mainCommonStyle} />
-          <ArticleComments customStyle={mainCommonStyle} />
+
+          <Suspense fallback={<ComponentLoading />}>
+            <ArticleCopyright {...articleCopyrightProps} customStyle={mainCommonStyle} />
+          </Suspense>
+
+          <Suspense fallback={<ComponentLoading />}>
+            <ArticleComments customStyle={mainCommonStyle} />
+          </Suspense>
         </main>
 
         <ArticleAside articleContent={content!} />

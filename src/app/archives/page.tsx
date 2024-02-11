@@ -2,7 +2,6 @@
 
 import BgTowerV2 from '@/components/bg-tower-v2'
 import LoadMore from '@/components/load-more'
-import NoContent from '@/components/no-content'
 import Timeline from '@/components/timeline'
 import useReachBottom from '@/hooks/use-reach-bottom'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'

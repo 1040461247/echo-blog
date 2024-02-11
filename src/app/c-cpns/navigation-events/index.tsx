@@ -15,7 +15,6 @@ export function NavigationEvents() {
     if (prePathRef.current === url) return
     prePathRef.current = url
     recordPageview(url)
-    console.log(pathname)
   }, [pathname, searchParams])
 
   return null
