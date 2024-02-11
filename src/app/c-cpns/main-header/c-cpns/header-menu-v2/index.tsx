@@ -1,16 +1,25 @@
-import type { IMenuListItem } from '@/assets/data/menu-list-data'
 import menuListData from '@/assets/data/menu-list-data'
 import BlogInfo from '@/components/blog-info'
 import Drawer from '@/components/drawer'
-import { LOGIN_PATH, NOTIFICATION_PATH, PROFILE_PATH } from '@/constants'
 import { useAppSelector } from '@/hooks/use-store'
 import Image from 'next/image'
-import type { FC } from 'react'
 import { memo, useState } from 'react'
 import { shallowEqual } from 'react-redux'
 import V2MenuItem from './c-cpns/v2-menu-item'
 import useLogout from '@/hooks/use-logout'
 import Message from '@/components/message'
+import dynamic from 'next/dynamic'
+import ComponentLoading from '@/components/component-loading'
+import type { IMenuListItem } from '@/assets/data/menu-list-data'
+import type { FC } from 'react'
+
+// Dynamic Import
+const V2UserNav = dynamic(() => import('./c-cpns/v2-user-nav'), {
+  loading: () => <ComponentLoading />
+})
+const V2AuthNav = dynamic(() => import('./c-cpns/v2-auth-nav'), {
+  loading: () => <ComponentLoading />
+})
 
 // Types
 export interface IProps {
@@ -68,43 +77,14 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
           <div className="blog-info-wrap text-gray-200">
             <BlogInfo clouseDrawer={() => setIsDrawerOpen(false)} />
           </div>
+
           <div className="menu-list">
             <nav className="normal-list">{showMenuList(menuListData)}</nav>
             <nav className="user-list">
               {userInfo ? (
-                <div className="user-info">
-                  <V2MenuItem
-                    text="个人中心"
-                    isLink
-                    path={PROFILE_PATH}
-                    iconName="icon-home"
-                    handleClick={() => setIsDrawerOpen(false)}
-                  />
-                  <V2MenuItem
-                    text="消息"
-                    isLink
-                    path={NOTIFICATION_PATH}
-                    iconName="icon-notification"
-                    handleClick={() => setIsDrawerOpen(false)}
-                  />
-                  <V2MenuItem
-                    text="退出"
-                    isLink={false}
-                    iconName="icon-tags"
-                    handleClick={handleLogout}
-                  />
-                </div>
+                <V2UserNav setIsDrawerOpen={setIsDrawerOpen} handleLogout={handleLogout} />
               ) : (
-                <div className="oauth">
-                  <V2MenuItem
-                    isLink
-                    path={LOGIN_PATH}
-                    iconName="icon-home"
-                    text="登录/注册"
-                    handleClick={() => setIsDrawerOpen(false)}
-                    scroll={false}
-                  />
-                </div>
+                <V2AuthNav setIsDrawerOpen={setIsDrawerOpen} />
               )}
             </nav>
           </div>

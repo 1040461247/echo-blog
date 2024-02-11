@@ -3,7 +3,7 @@ interface OffsetLimit {
   limit: number
 }
 
-function pageToOffsetLimit(page: number, itemsPerPage = 10): OffsetLimit {
+function pageToOffsetLimit(page: number, itemsPerPage: number): OffsetLimit {
   // 确保页面数不小于1
   page = Math.max(1, page)
 

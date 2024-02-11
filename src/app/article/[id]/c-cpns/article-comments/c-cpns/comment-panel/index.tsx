@@ -1,16 +1,28 @@
 'use client'
 
 import { memo, useEffect, useRef, useState } from 'react'
-import type { FC } from 'react'
-import data from '@emoji-mart/data'
-import Picker from '@emoji-mart/react'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import { shallowEqual } from 'react-redux'
-import Link from 'next/link'
-import { LOGIN_PATH } from '@/constants'
 import { addCommentToArticle, addReplyToComment } from '@/service/modules/article.request'
 import Message from '@/components/message'
 import { fetchCommentsByArticleIdAction } from '@/store/slices'
+import dynamic from 'next/dynamic'
+import ComponentLoading from '@/components/component-loading'
+import type { FC } from 'react'
+
+// Dynamic Import
+const CommentPanelClose = dynamic(() => import('../comment-panel-close'), {
+  loading: () => <ComponentLoading />
+})
+const CommentPanelFooter = dynamic(() => import('../comment-panel-footer'), {
+  loading: () => <ComponentLoading />
+})
+const CommentPanelAuth = dynamic(() => import('../comment-panel-auth'), {
+  loading: () => <ComponentLoading />
+})
+const CommentPanelEmojiPicker = dynamic(() => import('../comment-panel-emoji-picker'), {
+  loading: () => <ComponentLoading />
+})
 
 // Types
 export interface IProps {
@@ -41,17 +53,21 @@ const CommentPanel: FC<IProps> = memo(({ handleClose, replyCommentId }) => {
     shallowEqual
   )
 
+  // Handles
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     const value = e.target.value
     setComment(value)
   }
+
   function handleEmojiSelect(e: any) {
     insertEmoji(e.native)
   }
+
   function handleCloseIconClick() {
     setShowPanel(false)
     handleClose && handleClose()
   }
+
   async function handleCommit() {
     if (!userInfo) return
 
@@ -97,78 +113,42 @@ const CommentPanel: FC<IProps> = memo(({ handleClose, replyCommentId }) => {
   }, [selectionPos])
 
   return (
-    showPanel && (
-      <div className="comment-panel relative m-2 p-2 bg-[--bg-dark-blue-deep] rounded-xl border border-gray-600/40 hover:border-gray-600 transition-color duration-300">
-        {/* CloseIcon */}
-        {handleClose && (
-          <div
-            className="close absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 cursor-pointer text-gray-400"
-            onClick={handleCloseIconClick}
-          >
-            <i className="iconfont icon-error !text-xl" />
-          </div>
-        )}
+    <div
+      className={`${
+        showPanel ? '' : 'hidden'
+      } comment-panel relative m-2 p-2 bg-[--bg-dark-blue-deep] rounded-xl border border-gray-600/40 hover:border-gray-600 transition-color duration-300`}
+    >
+      {/* CloseIcon */}
+      {handleClose && <CommentPanelClose handleCloseIconClick={handleCloseIconClick} />}
 
-        <textarea
-          className={`w-full p-3 bg-transparent rounded-xl outline-none transition-colors duration-300 ${
-            userInfo ? 'h-[122px] focus:bg-white/5' : 'h-20 '
-          }`}
-          placeholder="说点什么吧~"
-          onChange={(e) => handleChange(e)}
-          value={comment}
-          ref={textareaRes}
-          disabled={!userInfo}
+      <textarea
+        className={`w-full p-3 bg-transparent rounded-xl outline-none transition-colors duration-300 ${
+          userInfo ? 'h-[122px] focus:bg-white/5' : 'h-20 '
+        }`}
+        placeholder="说点什么吧~"
+        onChange={(e) => handleChange(e)}
+        value={comment}
+        ref={textareaRes}
+        disabled={!userInfo}
+      />
+
+      {userInfo ? (
+        <CommentPanelFooter
+          setShowEmojiPicker={setShowEmojiPicker}
+          setComment={setComment}
+          handleCommit={handleCommit}
         />
+      ) : (
+        <CommentPanelAuth />
+      )}
 
-        {userInfo ? (
-          <footer className="flex justify-between items-center px-2 mt-2">
-            <div className="comment-footer-left">
-              <i
-                className="iconfont icon-smile cursor-pointer px-1 mr-1 hover-highlight text-xl"
-                onClick={() => setShowEmojiPicker(true)}
-                title="选择表情"
-              />
-              <i
-                className="iconfont icon-clean cursor-pointer px-1 hover-highlight text-xl"
-                onClick={() => setComment('')}
-                title="清空评论"
-              />
-            </div>
-            <div className="comment-footer-right">
-              <button
-                className="py-1 px-3 rounded-lg border border-gray-600 text-white hover-highlight"
-                onClick={handleCommit}
-              >
-                发表
-              </button>
-            </div>
-          </footer>
-        ) : (
-          <Link
-            href={LOGIN_PATH}
-            className="absolute inset-x-0 top-10 w-40 h-10 m-auto py-1 px-3 rounded-lg bg-[--primary-color] text-white hover:bg-[--primary-color-dark] text-center leading-8 transition-colors duration-200"
-          >
-            登录/注册
-          </Link>
-        )}
-
-        {showEmojiPicker && (
-          <div className="picker absolute" onBlur={() => setShowEmojiPicker(false)}>
-            <Picker
-              data={data}
-              onEmojiSelect={handleEmojiSelect}
-              locale="zh"
-              icons="solid"
-              previewPosition="none"
-              skinTonePosition="search"
-              theme="dark"
-              perLine={7}
-              autoFocus
-            />
-          </div>
-        )}
-      </div>
-    )
+      {showEmojiPicker && (
+        <CommentPanelEmojiPicker
+          setShowEmojiPicker={setShowEmojiPicker}
+          handleEmojiSelect={handleEmojiSelect}
+        />
+      )}
+    </div>
   )
 })
 

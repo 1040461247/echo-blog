@@ -101,9 +101,7 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
             <ArticleCopyright {...articleCopyrightProps} customStyle={mainCommonStyle} />
           </Suspense>
 
-          <Suspense fallback={<ComponentLoading />}>
-            <ArticleComments customStyle={mainCommonStyle} />
-          </Suspense>
+          <ArticleComments customStyle={mainCommonStyle} />
         </main>
 
         <ArticleAside articleContent={content!} />

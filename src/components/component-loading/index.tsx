@@ -8,7 +8,7 @@ export interface IProps {
 
 const ComponentLoading: FC<IProps> = memo(() => {
   return (
-    <div className="component-loading flex justify-center items-center h-52 bg-black/10 text-[--primary-color]">
+    <div className="component-loading flex justify-center items-center h-52 text-[--primary-color]">
       <i className="iconfont icon-loading text-3xl animate-spin" />
     </div>
   )

@@ -33,6 +33,7 @@ const ArticleInfo: FC<IProps> = memo(
             className="object-contain"
           />
         </div>
+
         <div className="article-info-right flex-1">
           <div className="author-name text-lg">{author?.name}</div>
           <div className="other-info flex flex-wrap items-center gap-x-2 text-[13px] text-gray-300/60">

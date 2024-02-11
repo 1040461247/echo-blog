@@ -19,6 +19,7 @@ const ArticleContent: FC<IProps> = memo(
         <div className="article-content-description mb-3">
           <p>{articleDescription}</p>
         </div>
+
         <MDEditor.Markdown
           className="!bg-transparent !text-inherit"
           source={articleContent}
