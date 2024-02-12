@@ -1,24 +1,26 @@
 'use client'
 
-import { memo, useEffect, useState, type FC } from 'react'
-import { useRouter } from 'next/navigation'
 import Message from '@/components/message'
-import Modal from '@/components/modal'
+import ErrorMessage from '@/components/modal/c-cpns/error-message'
+import ModalInput from '@/components/modal/c-cpns/modal-input'
 import { REG_OTP, REG_PHONE, SIGNUP_PATH } from '@/constants'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
-import { loginPhone, sendOtp } from '@/service/modules/user.request'
-import ErrorMessage from '../../../components/modal/c-cpns/error-message'
-import ModalInput from '@/components/modal/c-cpns/modal-input'
-import { useAppDispatch } from '@/hooks/use-store'
-import { setRegisteringPhoneAction } from '@/store/slices'
 import { useLogin } from '@/hooks/use-login'
+import { useAppDispatch } from '@/hooks/use-store'
+import { loginPhone, sendOtp } from '@/service/modules/user.request'
+import { setRegisteringPhoneAction } from '@/store/slices'
+import { useRouter } from 'next/navigation'
+import { memo, useEffect, useState } from 'react'
+import type { FC } from 'react'
 
 // Types
-export interface IProps {}
+export interface IProps {
+  children?: React.ReactElement
+}
 
-const LoginPage: FC<IProps> = memo(() => {
-  const dispatch = useAppDispatch()
+const LoginContent: FC<IProps> = memo(() => {
   const router = useRouter()
+  const dispatch = useAppDispatch()
   const login = useLogin()
 
   // 表单初始化及验证规则配置
@@ -115,53 +117,51 @@ const LoginPage: FC<IProps> = memo(() => {
   }
 
   return (
-    <div className="login-page">
-      <Modal handleClose={() => router.back()} title="请输入电话号码" subTitle="-以进入EchoBlog-">
-        <form className="login-form">
-          <div className="form-phone mb-5">
+    <div className="login-content">
+      <form className="login-form">
+        <div className="form-phone mb-5">
+          <ModalInput
+            placeholder="电话号码"
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            name="phone"
+            autoFocus
+          />
+          {errors.phone && <ErrorMessage text={errors.phone} />}
+        </div>
+
+        <div className="form-otp mb-5">
+          <div className="flex justify-between w-full h-11">
             <ModalInput
-              placeholder="电话号码"
+              placeholder="验证码"
               handleChange={handleChange}
               handleBlur={handleBlur}
-              name="phone"
-              autoFocus
+              name="otp"
+              customClass="flex-1 rounded-r-none"
             />
-            {errors.phone && <ErrorMessage text={errors.phone} />}
-          </div>
-
-          <div className="form-otp mb-5">
-            <div className="flex justify-between w-full h-11">
-              <ModalInput
-                placeholder="验证码"
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                name="otp"
-                customClass="flex-1 rounded-r-none"
-              />
-              <button
-                className="px-4 bg-gray-300 text-[--bg-dark-blue] rounded-r-md whitespace-nowrap hover:bg-gray-200 transition-colors disabled:hover:bg-gray-300 disabled:hover:cursor-not-allowed"
-                onClick={(e) => handleSendOtp(e)}
-                disabled={otpDisabled}
-              >
-                {otpDisabled ? `${countdown}秒后重新获取` : '验证码'}
-              </button>
-            </div>
-            {errors.otp && <ErrorMessage text={errors.otp} />}
-          </div>
-
-          <div className="form-commit">
             <button
-              className="w-full h-11 rounded-md bg-[--primary-color] text-white hover:bg-[--primary-color-dark] transition-colors duration-200"
-              onClick={handleCommit}
+              className="px-4 bg-gray-300 text-[--bg-dark-blue] rounded-r-md whitespace-nowrap hover:bg-gray-200 transition-colors disabled:hover:bg-gray-300 disabled:hover:cursor-not-allowed"
+              onClick={(e) => handleSendOtp(e)}
+              disabled={otpDisabled}
             >
-              注册或登录
+              {otpDisabled ? `${countdown}秒后重新获取` : '验证码'}
             </button>
           </div>
-        </form>
-      </Modal>
+          {errors.otp && <ErrorMessage text={errors.otp} />}
+        </div>
+
+        <div className="form-commit">
+          <button
+            className="w-full h-11 rounded-md bg-[--primary-color] text-white hover:bg-[--primary-color-dark] transition-colors duration-200"
+            onClick={handleCommit}
+          >
+            注册或登录
+          </button>
+        </div>
+      </form>
     </div>
   )
 })
 
-export default LoginPage
-LoginPage.displayName = 'LoginPage'
+export default LoginContent
+LoginContent.displayName = 'LoginContent'

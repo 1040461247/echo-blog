@@ -3,12 +3,12 @@
 import Modal from '@/components/modal'
 import { useAppSelector } from '@/hooks/use-store'
 import { useRouter } from 'next/navigation'
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import type { FC } from 'react'
 import { shallowEqual } from 'react-redux'
 import ModalInput from '@/components/modal/c-cpns/modal-input'
 import useFormValidation, { IValidationRule } from '@/hooks/use-form-validation'
-import { REG_NAME_CHARACTER, REG_NAME_LENGTH, REG_PASSWORD_LENGTH } from '@/constants'
+import { LOGIN_PATH, REG_NAME_CHARACTER, REG_NAME_LENGTH, REG_PASSWORD_LENGTH } from '@/constants'
 import ErrorMessage from '../../../components/modal/c-cpns/error-message'
 import { signup } from '@/service/modules/user.request'
 import Message from '@/components/message'
@@ -29,6 +29,13 @@ const RegisterPage: FC<IProps> = memo(() => {
     }),
     shallowEqual
   )
+
+  useEffect(() => {
+    if (!registeringPhone) {
+      router.replace(LOGIN_PATH)
+      Message.warn('请先完成手机号验证')
+    }
+  }, [registeringPhone])
 
   // 表单初始化及验证规则配置
   const initialFormData = { name: '', password: '', rePassword: '' }

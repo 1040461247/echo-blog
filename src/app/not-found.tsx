@@ -4,7 +4,7 @@ import { memo, type FC } from 'react'
 
 const NotFound: FC<IProps> = memo(() => {
   return (
-    <div className="not-found mt-[10vh]">
+    <div className="not-found fixed inset-0 bg-red-200">
       <h2>Not Found</h2>
       <p>Could not find requested resource</p>
       <Link href={HOME_PATH}>Return Home</Link>
