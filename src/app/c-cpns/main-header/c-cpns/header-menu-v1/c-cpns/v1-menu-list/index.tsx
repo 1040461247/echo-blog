@@ -42,7 +42,7 @@ const V1MenuList: FC<IProps> = memo(({ isActivePath }) => {
               text={item.text}
             >
               <>
-                <i className="arrow iconfont icon-arrow ml-1 !text-xs font-bold transition-transform duration-200 group-hover:rotate-180" />
+                <i className="arrow iconfont icon-arrow ml-1 !text-xs font-bold transition-transform duration-300 group-hover:rotate-180" />
                 {showSubMenu(item.children)}
               </>
             </V1MenuItem>

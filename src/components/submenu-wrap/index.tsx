@@ -9,7 +9,7 @@ export interface IProps {
 
 const SubmenuWrap: FC<IProps> = memo(({ children }) => {
   return (
-    <nav className="submenu-wrap hidden flex-col absolute top-full p-[0.1333vw] bg-white rounded-[10px] group-hover:flex">
+    <nav className="submenu-wrap invisible opacity-0 flex flex-col absolute top-full p-1 bg-white rounded-xl translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
       {children}
     </nav>
   )
