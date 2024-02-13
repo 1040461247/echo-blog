@@ -17,7 +17,7 @@ const SubmenuItem: FC<IProps> = memo(
     return (
       <div className="submenu-item" onClick={handleClick}>
         <div
-          className={`w-full leading-9 h-9 text-center whitespace-nowrap rounded-xl text-black transition-colors duration-300 hover:!text-[--primary-color] hover:bg-gray-100 ${
+          className={`w-full leading-9 h-9 text-center whitespace-nowrap rounded-xl text-black transition-colors hover:!text-[--primary-color] hover:bg-gray-100 ${
             isActive ? '!text-[--primary-color] bg-gray-100' : ''
           }`}
         >

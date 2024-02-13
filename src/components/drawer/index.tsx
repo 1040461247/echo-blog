@@ -1,5 +1,4 @@
 import usePreventScroll from '@/hooks/use-prevent-scroll'
-import { Transition } from '@headlessui/react'
 import classNames from 'classnames'
 import Image from 'next/image'
 import type { FC } from 'react'
@@ -47,32 +46,22 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
       ></div>
 
       {/* Drawer Wrap */}
-      <Transition
-        show={isDrawerOpen}
-        enter={`transition-transform duration-${durationTime} ease-out`}
-        enterFrom="translate-x-full"
-        enterTo="translate-x-0"
-        leave={`transition-transform duration-${durationTime} ease-in`}
-        leaveFrom="translate-x-0"
-        leaveTo="translate-x-full"
+      <div
+        className={`fixed inset-y-0 right-0 max-w-full w-full xs:w-64 h-[100vh] p-4 bg-[--bg-dark-blue] text-gray-300 shadow-lg transition-all duration-300 ${
+          isDrawerOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
       >
-        <div
-          className={`fixed inset-y-0 right-0 max-w-full w-full xs:w-64 h-[100vh] p-4 bg-[--bg-dark-blue] text-gray-300 shadow-lg transition-all duration-300`}
-        >
-          {/* Drawer Header */}
-          <header className="flex justify-end">
-            <button
-              className="hover:text-gray-300 focus:outline-none transition-colors p-1"
-              onClick={handleClose}
-            >
-              <Image src="/images/common/close.svg" width={20} height={20} alt="exit" />
-            </button>
-          </header>
+        <header className="flex justify-end">
+          <button
+            className="hover:text-gray-300 focus:outline-none transition-colors p-1"
+            onClick={handleClose}
+          >
+            <Image src="/images/common/close.svg" width={20} height={20} alt="exit" />
+          </button>
+        </header>
 
-          {/* Drawer Main Content */}
-          <main className="overflow-y-auto hide-scroll h-full mt-4">{children}</main>
-        </div>
-      </Transition>
+        <main className="overflow-y-auto hide-scroll h-full mt-4">{children}</main>
+      </div>
     </div>
   )
 })

@@ -1,7 +1,6 @@
 'use client'
 
 import uuid from '@/utils/uuid'
-import { Transition } from '@headlessui/react'
 import type { FC } from 'react'
 import { memo, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -78,17 +77,24 @@ function renderMessage(messageQueue: IMessageQueueItem[]) {
 // 消息组件
 const BaseMessage: FC<IProps> = memo(({ type, message, id }) => {
   const messageRef = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(true)
+  const isInitial = useRef(true)
+  const [isVisible, setIsVisible] = useState(false)
 
   // 消息组件显示三秒
   useEffect(() => {
+    setIsVisible(true)
     setTimeout(() => {
       setIsVisible(false)
     }, 3000)
   }, [])
 
   // 当过渡动画执行完毕后，移除消息组件
-  const clear = () => removeMessage(id)
+  useEffect(() => {
+    if (!isVisible && !isInitial.current) {
+      setTimeout(() => removeMessage(id), 300)
+    }
+    isInitial.current = false
+  }, [isVisible])
 
   const typeStyle: Record<keyof IPropsMessage, ITypeStyle> = {
     info: {
@@ -112,22 +118,15 @@ const BaseMessage: FC<IProps> = memo(({ type, message, id }) => {
   const { customClass, iconName } = typeStyle[type]
 
   return (
-    <Transition
-      show={isVisible}
-      enter="transition-all duration-300"
-      enterFrom="opacity-0 -translate-y-full"
-      enterTo="opacity-100 translate-y-0"
-      leave="transition-all duration-300"
-      leaveFrom="opacity-100 translate-y-0"
-      leaveTo="opacity-0 -translate-y-full"
-      afterLeave={clear}
-      appear
-      className={`base-message flex items-center mt-3 py-[15px] px-[19px] rounded-lg text-sm border border-solid ${customClass}`}
+    <div
+      className={`base-message flex items-center mt-3 py-[15px] px-[19px] rounded-lg text-sm border border-solid ${customClass} transition-all duration-300 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
+      }`}
       ref={messageRef}
     >
       <i className={`iconfont ${iconName} mr-2`} />
       <span>{message}</span>
-    </Transition>
+    </div>
   )
 })
 
