@@ -3,6 +3,8 @@ import '@/assets/style/reset.css'
 import '@/assets/style/common.css'
 import '@/assets/style/tailwind.css'
 import '@/assets/style/variables.css'
+// import '@uiw/react-md-editor/markdown-editor.css'
+// import '@uiw/react-markdown-preview/markdown.css'
 import Providers from '@/store/providers'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
@@ -11,7 +13,6 @@ import React, { Suspense } from 'react'
 import MainHeader from './c-cpns/main-header'
 import MainFooter from './c-cpns/main-footer'
 import { NavigationEvents } from './c-cpns/navigation-events'
-import PageLoading from '@/components/page-loading'
 
 const myFont = localFont({
   src: [

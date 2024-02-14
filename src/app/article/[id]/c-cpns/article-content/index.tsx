@@ -20,11 +20,7 @@ const ArticleContent: FC<IProps> = memo(
           <p>{articleDescription}</p>
         </div>
 
-        <MDEditor.Markdown
-          className="!bg-transparent !text-inherit"
-          source={articleContent}
-          style={{ whiteSpace: 'pre-wrap' }}
-        />
+        <MDEditor.Markdown source={articleContent} />
       </div>
     )
   }
