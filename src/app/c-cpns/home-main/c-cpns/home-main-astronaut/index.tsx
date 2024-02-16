@@ -54,6 +54,7 @@ const HomeMainAstronaut: FC<IProps> = memo(() => {
           height={0}
           alt="astronaut"
           sizes="100vw"
+          priority
         />
       </div>
 

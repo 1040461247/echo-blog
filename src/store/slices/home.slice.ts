@@ -6,7 +6,7 @@ import type { ReduxState } from '..'
 
 // Types
 export interface IHomeSliceState {
-  statistics: IStatistics | Record<string, never>
+  statistics: IStatistics | null
   articleList: IArticle[] | []
   articleListPage: number
   articleLimit: number
@@ -25,7 +25,7 @@ const fetchArticlesAction = createAsyncThunk('home/fetchArticlesAction', async (
 export const homeSlice = createSlice({
   name: 'home',
   initialState: {
-    statistics: {},
+    statistics: null,
     articleList: [],
     articleListPage: 1,
     articleLimit: 10
@@ -42,7 +42,7 @@ export const homeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchStatisticsAction.fulfilled, (state, { payload }) => {
-        state.statistics = payload ?? {}
+        state.statistics = payload ?? null
       })
       .addCase(fetchArticlesAction.fulfilled, (state, { payload }) => {
         const headItemId = payload && payload[0]?.id

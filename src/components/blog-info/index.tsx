@@ -1,15 +1,8 @@
-'use client'
-
 import profileJson from '@/assets/data/profile.json'
-import { ARCHIVES_PATH, CATEGORY_PATH, TAG_PATH } from '@/constants'
-import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
-import { fetchStatisticsAction } from '@/store/slices'
-import Image from 'next/image'
-import Link from 'next/link'
 import type { FC } from 'react'
-import { memo, useEffect } from 'react'
-import { shallowEqual } from 'react-redux'
+import { memo } from 'react'
 import UserAvatar from '../user-avatar'
+import BlogInfoStatistics from './blog-info-statistics'
 
 // Types
 export interface IProps {
@@ -18,24 +11,6 @@ export interface IProps {
 }
 
 const BlogInfo: FC<IProps> = memo(({ clouseDrawer }) => {
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(fetchStatisticsAction())
-  }, [])
-
-  const { statistics } = useAppSelector(
-    (state) => ({
-      statistics: state.home.statistics
-    }),
-    shallowEqual
-  )
-
-  function handleClouseDrawer() {
-    if (clouseDrawer) {
-      clouseDrawer()
-    }
-  }
-
   return (
     <div className="blog-info">
       <div className="profile flex flex-col gap-1 items-center">
@@ -53,7 +28,9 @@ const BlogInfo: FC<IProps> = memo(({ clouseDrawer }) => {
         <div className="text-xs opacity-70">{profileJson.motto}</div>
       </div>
 
-      <nav className="statistics flex items-center h-12 my-[10px] text-center">
+      <BlogInfoStatistics handleClouseDrawer={clouseDrawer} />
+
+      {/* <nav className="statistics flex items-center h-12 my-[10px] text-center">
         <Link href={ARCHIVES_PATH} className="flex-1 flex flex-col" onClick={handleClouseDrawer}>
           <span className="text-xl">{statistics.articlesCount}</span>
           <span className="text-xs opacity-70">文章</span>
@@ -66,7 +43,7 @@ const BlogInfo: FC<IProps> = memo(({ clouseDrawer }) => {
           <span className="text-xl">{statistics.tagsCount}</span>
           <span className="text-xs opacity-70">标签</span>
         </Link>
-      </nav>
+      </nav> */}
     </div>
   )
 })

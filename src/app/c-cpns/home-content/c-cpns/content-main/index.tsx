@@ -33,7 +33,7 @@ const ContentMain: FC<IProps> = memo(() => {
   }, [])
 
   useEffect(() => {
-    if (reachBottom && statistics.articlesCount !== articleList.length) {
+    if (reachBottom && statistics?.articlesCount !== articleList.length) {
       dispatch(addArticleListPageAction())
       dispatch(fetchArticlesAction())
     }
@@ -46,7 +46,7 @@ const ContentMain: FC<IProps> = memo(() => {
           <ContentMainArticleItem articleData={item} key={item.id} />
         ))}
       </div>
-      {statistics.articlesCount === articleList.length ? <NoContent /> : <LoadMore />}
+      {statistics?.articlesCount === articleList.length ? <NoContent /> : <LoadMore />}
     </div>
   )
 })
