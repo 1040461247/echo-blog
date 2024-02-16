@@ -12,7 +12,7 @@ import {
 } from '@/store/slices'
 import NoMessage from '../c-cpns/no-message'
 import { clearUnread } from '@/service/modules/message-record.request'
-import useReachBottom from '@/hooks/use-reach-bottom'
+import useScroll from '@/hooks/use-scroll'
 
 // Types
 export interface IProps {}
@@ -34,13 +34,13 @@ const NotificationUnreadPage: FC<IProps> = memo(() => {
   )
 
   // 滚动到底部加载更多
-  const [reachedBottom] = useReachBottom()
+  const { reachBottom } = useScroll()
   useEffect(() => {
-    if (reachedBottom) {
+    if (reachBottom) {
       dispatch(addUnreadPage())
       dispatch(fetchUnreadMessageListAction())
     }
-  }, [reachedBottom])
+  }, [reachBottom])
 
   return (
     <div className="notification-unread-page">

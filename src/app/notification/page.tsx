@@ -7,10 +7,10 @@ import type { FC } from 'react'
 import MessageItem from './c-cpns/message-item'
 import { shallowEqual } from 'react-redux'
 import NoMessage from './c-cpns/no-message'
-import useReachBottom from '@/hooks/use-reach-bottom'
 import NoContent from '@/components/no-content'
 import BackTop from '@/components/backtop'
 import LoadMore from '@/components/load-more'
+import useScroll from '@/hooks/use-scroll'
 
 // Types
 export interface IProps {}
@@ -32,13 +32,13 @@ const NotificationPage: FC<IProps> = memo(() => {
   }, [userInfo])
 
   // 滚动到底部加载更多
-  const [reachedBottom] = useReachBottom()
+  const { reachBottom } = useScroll()
   useEffect(() => {
-    if (reachedBottom) {
+    if (reachBottom) {
       dispatch(addAllPage())
       dispatch(fetchAllMessageListAction())
     }
-  }, [reachedBottom])
+  }, [reachBottom])
 
   return (
     <div className="notification-page">

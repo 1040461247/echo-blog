@@ -7,7 +7,7 @@ import ComponentLoading from '@/components/component-loading'
 // Types
 export interface IProps {}
 
-const HomePage: FC<IProps> = memo(() => {
+const HomePage: FC<IProps> = memo(async () => {
   return (
     <div className="home-page">
       <HomeMain />

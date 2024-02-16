@@ -1,8 +1,8 @@
 :root {
   /* bg color */
   --primary-color: #ff5a79;
-  --primary-color-dark: #ff4164;
-  --bg-dark-blue: #1f1f2e;
+  --primary-color-dark: #ff5272;
+  --bg-dark-blue: rgb(30, 30, 44);
   --bg-dark-blue-deep: rgb(29, 29, 43);
   --bg-dark-blue-opacity: #1f1f2ebe;
   --bg-light-blue: #d7ddfa;

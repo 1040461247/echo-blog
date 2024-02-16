@@ -96,4 +96,21 @@ async function updateUserInfo(name?: string, password?: string) {
   return res
 }
 
-export { login, loginPhone, sendOtp, verifyAuth, signup, getUserById, uploadAvatar, updateUserInfo }
+async function logout() {
+  const res = await request.post(`/users/logout`, {
+    headers: getAuthHeader()
+  })
+  return res
+}
+
+export {
+  login,
+  loginPhone,
+  sendOtp,
+  verifyAuth,
+  signup,
+  getUserById,
+  uploadAvatar,
+  updateUserInfo,
+  logout
+}

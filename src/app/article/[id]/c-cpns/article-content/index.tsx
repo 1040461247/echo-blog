@@ -1,7 +1,7 @@
 'use client'
 
 import { memo } from 'react'
-import MDEditor from '@uiw/react-md-editor'
+import MarkdownPreview from '@uiw/react-markdown-preview'
 import type { FC } from 'react'
 
 // Types
@@ -20,7 +20,13 @@ const ArticleContent: FC<IProps> = memo(
           <p>{articleDescription}</p>
         </div>
 
-        <MDEditor.Markdown source={articleContent} />
+        <MarkdownPreview
+          className="!bg-transparent"
+          wrapperElement={{
+            'data-color-mode': 'dark'
+          }}
+          source={articleContent}
+        />
       </div>
     )
   }

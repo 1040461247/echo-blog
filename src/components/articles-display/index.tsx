@@ -22,9 +22,7 @@ const ArticlesDisplay: FC<IProps> = memo(({ titleIcon, titleText, articlesData }
     <div className="articles-display min-h-[--min-height] pt-[--header-fheight-ssm] sm:pt-[--header-fheight-sm] md:pt-[--header-fheight-md] bg-desk bg-no-repeat bg-center bg-cover [background-attachment:fixed]">
       <div className="articles-display-inner">
         {/* Header */}
-        <header
-          className={`title flex justify-center w-full pt-[40px] md:pt-[70px] text-left ${wordArtStyle}`}
-        >
+        <header className={`title flex justify-center w-full pt-4 text-left ${wordArtStyle}`}>
           <div className="title-icon">{titleIcon(wordArtStyle)}</div>
           <h2 className="title-text">{titleText}</h2>
         </header>

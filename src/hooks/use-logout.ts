@@ -1,12 +1,14 @@
 import { TOKEN } from '@/constants'
 import { useAppDispatch } from './use-store'
-import { fetchVerifyAuthAction } from '@/store/slices'
+import { clearUserInfoAction } from '@/store/slices'
+import { logout } from '@/service/modules/user.request'
 
 export default function useLogout() {
   const dispatch = useAppDispatch()
 
-  return () => {
+  return async () => {
+    await logout()
+    dispatch(clearUserInfoAction())
     localStorage.removeItem(TOKEN)
-    dispatch(fetchVerifyAuthAction())
   }
 }

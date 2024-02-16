@@ -85,14 +85,7 @@ const CommentItem: FC<IProps> = memo(
     }
 
     async function handleLikes() {
-      let res: IResponse
-      if (isLike) {
-        // 取消点赞
-        res = await remLikes(comment.id)
-      } else {
-        // 点赞
-        res = await addLikes(comment.id)
-      }
+      const res = isLike ? await remLikes(comment.id) : await addLikes(comment.id)
 
       if (res.code === 200) {
         dispatch(fetchUserInfoAction())

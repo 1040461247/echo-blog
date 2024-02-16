@@ -25,7 +25,7 @@ const config: Config = {
       cursor: { pointer: 'url(/images/common/pointer.png), auto' },
       keyframes: {
         throught: {
-          '0, 10%': {
+          '0%, 10%': {
             transform: 'translateY(100%)',
             opacity: '0'
           },
@@ -37,10 +37,19 @@ const config: Config = {
             transform: 'translateY(-100%)',
             opacity: '0'
           }
+        },
+        blink: {
+          '0%, 100%': {
+            opacity: '1'
+          },
+          '50%': {
+            opacity: '0'
+          }
         }
       },
       animation: {
-        throught: 'throught 4s ease infinite'
+        throught: 'throught 3s ease infinite',
+        blink: 'blink 1s step-end infinite'
       }
     }
   },

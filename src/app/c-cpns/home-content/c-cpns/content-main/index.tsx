@@ -6,9 +6,9 @@ import type { FC } from 'react'
 import { memo, useEffect, useRef } from 'react'
 import { shallowEqual } from 'react-redux'
 import ContentMainArticleItem from '../content-main-article-item'
-import useReachBottom from '@/hooks/use-reach-bottom'
 import NoContent from '@/components/no-content'
 import LoadMore from '@/components/load-more'
+import useScroll from '@/hooks/use-scroll'
 
 // Types
 export interface IProps {
@@ -17,7 +17,7 @@ export interface IProps {
 
 const ContentMain: FC<IProps> = memo(() => {
   const contentMainRef = useRef<HTMLDivElement>(null)
-  const [reachedBottom] = useReachBottom()
+  const { reachBottom } = useScroll()
   const dispatch = useAppDispatch()
 
   const { articleList, statistics } = useAppSelector(
@@ -33,11 +33,11 @@ const ContentMain: FC<IProps> = memo(() => {
   }, [])
 
   useEffect(() => {
-    if (reachedBottom && statistics.articlesCount !== articleList.length) {
+    if (reachBottom && statistics.articlesCount !== articleList.length) {
       dispatch(addArticleListPageAction())
       dispatch(fetchArticlesAction())
     }
-  }, [reachedBottom])
+  }, [reachBottom])
 
   return (
     <div className="content-main flex-1" ref={contentMainRef}>

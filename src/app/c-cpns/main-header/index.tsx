@@ -8,9 +8,11 @@ import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import { fetchMessageTotalAction, fetchVerifyAuthAction } from '@/store/slices'
 import type { FC } from 'react'
 import { shallowEqual } from 'react-redux'
+import useScroll from '@/hooks/use-scroll'
 
 const MainHeader: FC<IProps> = memo(() => {
   const [reachedTop, setReachedTop] = useState(true)
+
   const dispatch = useAppDispatch()
   const { userInfo } = useAppSelector(
     (state) => ({
@@ -21,34 +23,32 @@ const MainHeader: FC<IProps> = memo(() => {
 
   useEffect(() => {
     dispatch(fetchVerifyAuthAction())
-
-    function handleScroll() {
-      const scrollTop = document.documentElement.scrollTop
-      scrollTop === 0 ? setReachedTop(true) : setReachedTop(false)
-    }
-    addEventListener('scroll', handleScroll)
-
-    return () => {
-      removeEventListener('scroll', handleScroll)
-    }
   }, [])
 
+  // 页面是否滚动到顶部
+  const { scrollY } = useScroll()
+  useEffect(() => {
+    if (scrollY <= 10) {
+      reachedTop || setReachedTop(true)
+    } else {
+      reachedTop && setReachedTop(false)
+    }
+  }, [scrollY])
+
+  // 用户登录时请求消息队列
   useEffect(() => {
     let timer: NodeJS.Timeout
     if (userInfo) {
       dispatch(fetchMessageTotalAction(userInfo.id))
-      // polling
-      timer = setInterval(() => dispatch(fetchMessageTotalAction(userInfo!.id)), 60 * 1000)
+      timer = setInterval(() => dispatch(fetchMessageTotalAction(userInfo!.id)), 60 * 1000) // polling
     }
 
-    return () => {
-      clearInterval(timer)
-    }
+    return () => clearInterval(timer)
   }, [userInfo])
 
   return (
     <div
-      className={`main-header-wrap bg-[--bg-dark-blue] ${
+      className={`main-header-wrap transition-all duration-200 ${
         reachedTop ? 'pt-[54px] sm:pt-[61px] md:pt-[70px]' : 'pt-[38px] sm:pt-[43px] md:pt-[48px]'
       }`}
     >

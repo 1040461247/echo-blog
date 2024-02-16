@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { LOGIN_PATH } from '@/constants'
 import dynamic from 'next/dynamic'
 
+// Dynamic Import
 const LoginModalContent = dynamic(() => import('./c-cpns/login-modal-content'))
 
 // Types

@@ -3,7 +3,7 @@
 import BgTowerV2 from '@/components/bg-tower-v2'
 import LoadMore from '@/components/load-more'
 import Timeline from '@/components/timeline'
-import useReachBottom from '@/hooks/use-reach-bottom'
+import useScroll from '@/hooks/use-scroll'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import {
   addArticleListPageAction,
@@ -19,7 +19,7 @@ export interface IProps {}
 
 const ArchivesPage: FC<IProps> = memo(() => {
   const dispatch = useAppDispatch()
-  const [reachedBottom] = useReachBottom()
+  const { reachBottom } = useScroll()
 
   const { statistics, articleList } = useAppSelector(
     (state) => ({
@@ -35,11 +35,11 @@ const ArchivesPage: FC<IProps> = memo(() => {
   }, [])
 
   useEffect(() => {
-    if (reachedBottom && statistics.articlesCount !== articleList.length) {
+    if (reachBottom && statistics.articlesCount !== articleList.length) {
       dispatch(addArticleListPageAction())
       dispatch(fetchArticlesAction())
     }
-  }, [reachedBottom])
+  }, [reachBottom])
 
   return (
     <div className="archives-page relative bg-[--bg-dark-blue]">

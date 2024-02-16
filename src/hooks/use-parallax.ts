@@ -1,5 +1,6 @@
 import { PREVENT_SCROLL_CLASSNAME } from '@/constants'
 import { useEffect, useState } from 'react'
+import useScroll from './use-scroll'
 
 // Types
 export type TAdapterOption = Partial<IOption>
@@ -31,21 +32,9 @@ interface IBreakpoints {
 
 export default function useParallax() {
   if (typeof window !== 'object') return
-  const [scrollY, setScrollY] = useState(0)
+  const { scrollY } = useScroll()
   const viewportHeight = window.innerHeight || document.documentElement.clientHeight
   const viewportWidth = window.innerWidth || document.documentElement.clientWidth
-
-  // 监听滚动
-  useEffect(() => {
-    function handleScroll() {
-      setScrollY(window.scrollY)
-    }
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
 
   // 转化速度值为偏移量基数：(-10 ~ 10) ->（-1 ~ 1）
   function transformSpeedToBase(speed: number) {
@@ -106,7 +95,7 @@ export default function useParallax() {
     solidPct: 0.5
   }
 
-  return function parallax(elRef: any, option = defaultOption) {
+  return function parallax(elRef: HTMLElement | null, option = defaultOption) {
     if (!elRef) return
     if (!option.adapter || Object.keys(option.adapter).length === 0) {
       return setParallax(elRef, option)

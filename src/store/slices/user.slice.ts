@@ -60,6 +60,9 @@ export const userSlice = createSlice({
   reducers: {
     setRegisteringPhoneAction(state, { payload }) {
       state.registeringPhone = payload ?? null
+    },
+    clearUserInfoAction(state) {
+      state.userInfo = null
     }
   },
   extraReducers: (builder) => {
@@ -74,4 +77,4 @@ export const userSlice = createSlice({
 })
 
 export { fetchLoginAction, fetchVerifyAuthAction, fetchUserInfoAction }
-export const { setRegisteringPhoneAction } = userSlice.actions
+export const { setRegisteringPhoneAction, clearUserInfoAction } = userSlice.actions
