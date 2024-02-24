@@ -30,11 +30,11 @@ async function login(
   password: string,
   browser_info: string,
   os_info: string,
-  ip_address: string
+  ip_address: string,
 ) {
   const res = await request.post('/login', {
     body: JSON.stringify({ name, password, browser_info, os_info, ip_address }),
-    cache: 'no-store'
+    cache: 'no-store',
   })
   return res.data as ILoginRes
 }
@@ -42,7 +42,7 @@ async function login(
 async function verifyAuth(token: string) {
   const res = await request.get('/authorized', {
     headers: { Authorization: token },
-    cache: 'no-store'
+    cache: 'no-store',
   })
   return res.data as IAuthSalt
 }
@@ -50,7 +50,7 @@ async function verifyAuth(token: string) {
 async function sendOtp(phone: string) {
   const res = await request.post('/send-otp', {
     body: JSON.stringify({ phone }),
-    cache: 'no-store'
+    cache: 'no-store',
   })
   return res
 }
@@ -58,7 +58,7 @@ async function sendOtp(phone: string) {
 async function loginPhone(phone: string, otp: string) {
   const res = await request.post('/login-phone', {
     body: JSON.stringify({ phone, otp }),
-    cache: 'no-store'
+    cache: 'no-store',
   })
   return res
 }
@@ -66,7 +66,7 @@ async function loginPhone(phone: string, otp: string) {
 async function signup(name: string, password: string, phone_num: string) {
   const res = await request.post('/users', {
     body: JSON.stringify({ name, password, phone_num }),
-    cache: 'no-store'
+    cache: 'no-store',
   })
   return res
 }
@@ -79,7 +79,7 @@ async function getUserById(userId: number) {
 async function uploadAvatar(formData: FormData) {
   const res = await request.post(`/upload/avatar`, {
     headers: getAuthHeader(),
-    body: formData
+    body: formData,
   })
   return res
 }
@@ -91,14 +91,14 @@ async function updateUserInfo(name?: string, password?: string) {
 
   const res = await request.post(`/users/update`, {
     headers: getAuthHeader(),
-    body: JSON.stringify(endBodyData)
+    body: JSON.stringify(endBodyData),
   })
   return res
 }
 
 async function logout() {
   const res = await request.post(`/users/logout`, {
-    headers: getAuthHeader()
+    headers: getAuthHeader(),
   })
   return res
 }
@@ -112,5 +112,5 @@ export {
   getUserById,
   uploadAvatar,
   updateUserInfo,
-  logout
+  logout,
 }

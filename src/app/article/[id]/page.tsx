@@ -1,7 +1,11 @@
 'use client'
 
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
-import { fetchArticleByIdAction, fetchCommentsByArticleIdAction } from '@/store/slices'
+import {
+  fetchArticleByIdAction,
+  fetchCommentLikeByIdAction,
+  fetchCommentsByArticleIdAction,
+} from '@/store/slices'
 import { Suspense, memo, useEffect } from 'react'
 import { shallowEqual } from 'react-redux'
 import BgTower from '@/components/bg-tower-v1'
@@ -31,18 +35,26 @@ export interface IHeadOffset {
 const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
   const articleId = Number(id)
 
+  const { article, userInfo } = useAppSelector(
+    (state) => ({
+      article: state.article.article,
+      userInfo: state.user.userInfo,
+    }),
+    shallowEqual,
+  )
+
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchArticleByIdAction(articleId))
     dispatch(fetchCommentsByArticleIdAction(articleId))
   }, [])
 
-  const { article } = useAppSelector(
-    (state) => ({
-      article: state.article.article
-    }),
-    shallowEqual
-  )
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchCommentLikeByIdAction())
+    }
+  }, [userInfo])
+
   const {
     cover_url: coverUrl,
     title,
@@ -52,7 +64,7 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
     tags,
     category,
     content,
-    description
+    description,
   } = article
 
   // Sub Components Props
@@ -62,17 +74,17 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
     updateTime,
     author,
     tags,
-    category
+    category,
   }
   const articleContentProps: IArticleContentProps = {
     articleContent: content!,
-    articleDescription: description
+    articleDescription: description,
   }
   const articleCopyrightProps: IArticleCopyrightProps = {
     title,
     author: author?.name,
     createTime,
-    updateTime
+    updateTime,
   }
 
   const mainCommonStyle = 'px-2 sm:px-6 md:px-8'

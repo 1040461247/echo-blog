@@ -19,6 +19,7 @@ export interface IComment {
     os_info: string
   }
 }
+export type TCommentLikes = number[]
 
 const MODULE_BASE_URL = '/articles'
 const COMMENT_BASE_URL = '/articles-comments'
@@ -36,7 +37,7 @@ async function getCommentsByArticleId(id: number) {
 async function addCommentToArticle(user_id: number, article_id: number, content: string) {
   const res = await request.post(`${COMMENT_BASE_URL}`, {
     headers: getAuthHeader(),
-    body: JSON.stringify({ user_id, article_id, content })
+    body: JSON.stringify({ user_id, article_id, content }),
   })
   return res
 }
@@ -45,18 +46,18 @@ async function addReplyToComment(
   user_id: number,
   article_id: number,
   content: string,
-  comment_id: number
+  comment_id: number,
 ) {
   const res = await request.post(`${COMMENT_BASE_URL}/${comment_id}/reply`, {
     headers: getAuthHeader(),
-    body: JSON.stringify({ user_id, article_id, content })
+    body: JSON.stringify({ user_id, article_id, content }),
   })
   return res
 }
 
 async function delComment(commentId: number) {
   const res = await request.delete(`${COMMENT_BASE_URL}/${commentId}`, {
-    headers: getAuthHeader()
+    headers: getAuthHeader(),
   })
   return res
 }
@@ -64,16 +65,21 @@ async function delComment(commentId: number) {
 async function addLikes(comment_id: number) {
   const res = await request.post(`${COMMENT_BASE_URL}/likes`, {
     headers: getAuthHeader(),
-    body: JSON.stringify({ comment_id: comment_id })
+    body: JSON.stringify({ comment_id: comment_id }),
   })
   return res
 }
 
 async function remLikes(comment_id: number) {
   const res = await request.delete(`${COMMENT_BASE_URL}/likes/${comment_id}`, {
-    headers: getAuthHeader()
+    headers: getAuthHeader(),
   })
   return res
+}
+
+async function getCommentLikesById(userId: number) {
+  const res = await request.get(`${COMMENT_BASE_URL}/${userId}/likes`)
+  return res.data as TCommentLikes
 }
 
 export {
@@ -83,5 +89,6 @@ export {
   addReplyToComment,
   delComment,
   addLikes,
-  remLikes
+  remLikes,
+  getCommentLikesById,
 }

@@ -26,7 +26,7 @@ const fetchLoginAction = createAsyncThunk(
     if (loginRes?.token) {
       localStorage.setItem(TOKEN, loginRes.token)
     }
-  }
+  },
 )
 const fetchVerifyAuthAction = createAsyncThunk('user/fetchVerifyAuthAction', async () => {
   const token = localStorage.getItem(TOKEN)
@@ -47,7 +47,7 @@ const fetchUserInfoAction = createAppAsyncThunk(
       const tokenSalt = await getUserById(state.user.userInfo.id)
       return await getUserById(tokenSalt.id)
     }
-  }
+  },
 )
 
 export const userSlice = createSlice({
@@ -55,7 +55,7 @@ export const userSlice = createSlice({
   initialState: {
     userInfo: null,
     registeringPhone: null,
-    unreadMessageCount: 0
+    unreadMessageCount: 0,
   } as IUserSliceState,
   reducers: {
     setRegisteringPhoneAction(state, { payload }) {
@@ -63,7 +63,7 @@ export const userSlice = createSlice({
     },
     clearUserInfoAction(state) {
       state.userInfo = null
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -73,7 +73,7 @@ export const userSlice = createSlice({
       .addCase(fetchUserInfoAction.fulfilled, (state, { payload }) => {
         state.userInfo = payload ?? null
       })
-  }
+  },
 })
 
 export { fetchLoginAction, fetchVerifyAuthAction, fetchUserInfoAction }

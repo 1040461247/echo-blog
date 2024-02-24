@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import { shallowEqual } from 'react-redux'
 import Message from '@/components/message'
 import { fetchCommentsByArticleIdAction, fetchUserInfoAction } from '@/store/slices'
-import { IResponse } from '@/service'
 import UserAvatar from '@/components/user-avatar'
 
 // Types
@@ -26,19 +25,20 @@ const CommentItem: FC<IProps> = memo(
     const dispatch = useAppDispatch()
     const [isLike, setIsLike] = useState(false)
 
-    const { article, userInfo } = useAppSelector(
+    const { article, userInfo, userCommentLikes } = useAppSelector(
       (state) => ({
         article: state.article.article,
-        userInfo: state.user.userInfo
+        userInfo: state.user.userInfo,
+        userCommentLikes: state.article.userCommentLikes,
       }),
-      shallowEqual
+      shallowEqual,
     )
 
     useEffect(() => {
-      if (userInfo) {
-        setIsLike(userInfo?.commentLikesId?.includes(comment.id))
+      if (userCommentLikes) {
+        setIsLike(userCommentLikes.includes(comment.id))
       }
-    }, [userInfo])
+    }, [userCommentLikes])
 
     // getIcon
     function getBroserIcon(browserInfo: string) {
@@ -198,7 +198,7 @@ const CommentItem: FC<IProps> = memo(
         </div>
       </div>
     )
-  }
+  },
 )
 
 export default CommentItem

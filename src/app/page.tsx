@@ -8,8 +8,6 @@ import ComponentLoading from '@/components/component-loading'
 export interface IProps {}
 
 const HomePage: FC<IProps> = memo(async () => {
-  await new Promise((resolve) => setTimeout(() => resolve('ok'), 3000))
-
   return (
     <div className="home-page">
       <HomeMain />

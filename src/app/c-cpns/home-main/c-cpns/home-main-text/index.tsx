@@ -11,7 +11,7 @@ export interface IProps {
 
 const HomeMainText: FC<IProps> = memo(() => {
   // 打字效果
-  const typeText = '一名软件开发攻城狮'
+  const typeText = '一名软件开发工程师'
   const typeSpeed = 150
   const typeIndex = useRef(0)
   const [showText, setShowText] = useState('')
@@ -46,7 +46,7 @@ const HomeMainText: FC<IProps> = memo(() => {
         <div
           className={`text-left text-[4.5vw] transition-transform duration-1000 ease-out`}
           style={{
-            transform: `translate3D(${showSubText ? `${-(scrollY * speed)}px` : '-100%'}, 0, 0)`
+            transform: `translate3D(${showSubText ? `${-(scrollY * speed)}px` : '-100%'}, 0, 0)`,
           }}
         >
           你好啊，我是Cheems
@@ -62,7 +62,7 @@ const HomeMainText: FC<IProps> = memo(() => {
             showSubText ? 'translate-x-0' : 'translate-x-full'
           }`}
           style={{
-            transform: `translate3D(${showSubText ? `${scrollY * speed}px` : '100%'}, 0, 0)`
+            transform: `translate3D(${showSubText ? `${scrollY * speed}px` : '100%'}, 0, 0)`,
           }}
         >
           很高兴认识你^_^

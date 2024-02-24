@@ -15,9 +15,9 @@ export interface IProps {
 const CommentList: FC<IProps> = memo(() => {
   const { articleComments } = useAppSelector(
     (state) => ({
-      articleComments: state.article.articleComments
+      articleComments: state.article.articleComments,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const [curReplyId, setCurReplyId] = useState(-1)
