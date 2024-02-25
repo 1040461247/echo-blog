@@ -97,7 +97,7 @@ async function updateUserInfo(name?: string, password?: string) {
 }
 
 async function logout() {
-  const res = await request.post(`/users/logout`, {
+  const res = await request.post(`/logout`, {
     headers: getAuthHeader(),
   })
   return res
