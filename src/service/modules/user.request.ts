@@ -15,28 +15,43 @@ export interface IAuthSalt {
 export interface IUserInfo {
   id: number
   name: string
-  avatar_url: string
-  phone_num: string
-  browser_info: string
-  os_info: string
-  ip_address: string
-  update_time: string
-  create_time: string
+  avatarUrl: string
+  phoneNum: string
+  browserInfo: string
+  osInfo: string
+  ipAddress: string
+  updateTime: string
+  createTime: string
   commentLikesId: number[]
 }
 
 async function login(
   name: string,
   password: string,
-  browser_info: string,
-  os_info: string,
-  ip_address: string,
+  browserInfo: string,
+  osInfo: string,
+  ipAddress: string,
 ) {
   const res = await request.post('/login', {
-    body: JSON.stringify({ name, password, browser_info, os_info, ip_address }),
+    body: JSON.stringify({ name, password, browserInfo, osInfo, ipAddress }),
     cache: 'no-store',
   })
   return res.data as ILoginRes
+}
+
+async function loginPhone(phone: string, otp: string) {
+  const res = await request.post('/login-phone', {
+    body: JSON.stringify({ phone, otp }),
+    cache: 'no-store',
+  })
+  return res
+}
+
+async function logout() {
+  const res = await request.post(`/logout`, {
+    headers: getAuthHeader(),
+  })
+  return res
 }
 
 async function verifyAuth(token: string) {
@@ -55,17 +70,9 @@ async function sendOtp(phone: string) {
   return res
 }
 
-async function loginPhone(phone: string, otp: string) {
-  const res = await request.post('/login-phone', {
-    body: JSON.stringify({ phone, otp }),
-    cache: 'no-store',
-  })
-  return res
-}
-
-async function signup(name: string, password: string, phone_num: string) {
+async function signup(name: string, password: string, phoneNum: string) {
   const res = await request.post('/users', {
-    body: JSON.stringify({ name, password, phone_num }),
+    body: JSON.stringify({ name, password, phoneNum }),
     cache: 'no-store',
   })
   return res
@@ -96,21 +103,14 @@ async function updateUserInfo(name?: string, password?: string) {
   return res
 }
 
-async function logout() {
-  const res = await request.post(`/logout`, {
-    headers: getAuthHeader(),
-  })
-  return res
-}
-
 export {
   login,
   loginPhone,
-  sendOtp,
+  logout,
   verifyAuth,
+  sendOtp,
   signup,
   getUserById,
   uploadAvatar,
   updateUserInfo,
-  logout,
 }

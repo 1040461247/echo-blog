@@ -28,7 +28,7 @@ export const homeSlice = createSlice({
     statistics: null,
     articleList: [],
     articleListPage: 1,
-    articleLimit: 10
+    articleLimit: 10,
   } as IHomeSliceState,
   reducers: {
     addArticleListPageAction(state) {
@@ -37,7 +37,7 @@ export const homeSlice = createSlice({
       if (curAtcLength === atcLength) {
         state.articleListPage += 1
       }
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,7 +50,7 @@ export const homeSlice = createSlice({
           state.articleList = [...state.articleList, ...(payload ?? [])]
         }
       })
-  }
+  },
 })
 
 export { fetchStatisticsAction, fetchArticlesAction }

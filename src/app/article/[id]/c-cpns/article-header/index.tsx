@@ -5,10 +5,10 @@ import ComponentLoading from '@/components/component-loading'
 
 // Dynamic Import
 const ArticleHeaderCover = dynamic(() => import('../article-header-cover'), {
-  loading: () => <ComponentLoading />
+  loading: () => <ComponentLoading />,
 })
 const ArticleHeaderNocover = dynamic(() => import('../article-header-nocover'), {
-  loading: () => <ComponentLoading />
+  loading: () => <ComponentLoading />,
 })
 
 // Types

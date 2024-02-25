@@ -22,9 +22,9 @@ const FooterPageviews: FC<IProps> = memo(() => {
   const { uv, pv } = useAppSelector(
     (state) => ({
       uv: state.global.uv,
-      pv: state.global.pv
+      pv: state.global.pv,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   return (

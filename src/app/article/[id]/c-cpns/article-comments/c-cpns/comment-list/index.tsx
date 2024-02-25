@@ -25,7 +25,7 @@ const CommentList: FC<IProps> = memo(() => {
   // 根据一级评论获得其下所有子评论的平行列表
   function getReplysBySupComment(supCommentId: number) {
     const replys = []
-    const commentReplys = articleComments.filter((comment) => comment.comment_id === supCommentId)
+    const commentReplys = articleComments.filter((comment) => comment.commentId === supCommentId)
     if (commentReplys.length === 0) return []
 
     for (const commentReply of commentReplys) {
@@ -44,7 +44,7 @@ const CommentList: FC<IProps> = memo(() => {
 
       <div className="comment-list-content">
         {articleComments
-          .filter((item) => item.comment_id === null)
+          .filter((item) => item.commentId === null)
           .map((comment) => (
             // 文章顶层评论
             <CommentItem
@@ -53,7 +53,7 @@ const CommentList: FC<IProps> = memo(() => {
               setCurReplyId={setCurReplyId}
               curReplyId={curReplyId}
             >
-              {articleComments.findIndex((item) => item.comment_id === comment.id) !== -1 && (
+              {articleComments.findIndex((item) => item.commentId === comment.id) !== -1 && (
                 <div className="article-comment-reply border-l border-dashed border-gray-400">
                   {getReplysBySupComment(comment.id).map((reply) => (
                     // 子评论-回复

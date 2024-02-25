@@ -23,9 +23,9 @@ const TagPage: FC<IProps> = memo(() => {
 
   const { tags } = useAppSelector(
     (state) => ({
-      tags: state.tag.tags
+      tags: state.tag.tags,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const customRenderer: RendererFunction = (tag: any, size, color) => {
@@ -50,12 +50,12 @@ const TagPage: FC<IProps> = memo(() => {
       tags: tagsMapTagCloud(tags),
       renderer: customRenderer,
       colorOptions: {
-        hue: 'orange'
-      } as ColorOptions
+        hue: 'orange',
+      } as ColorOptions,
     },
     titleIconName: 'icon-tags',
     titleText: '标签',
-    titleColor: 'text-orange-400'
+    titleColor: 'text-orange-400',
   }
 
   return (

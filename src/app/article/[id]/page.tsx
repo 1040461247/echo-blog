@@ -56,11 +56,11 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
   }, [userInfo])
 
   const {
-    cover_url: coverUrl,
+    coverUrl: coverUrl,
     title,
     author,
-    create_time: createTime,
-    update_time: updateTime,
+    createTime: createTime,
+    updateTime: updateTime,
     tags,
     category,
     content,

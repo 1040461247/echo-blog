@@ -37,7 +37,7 @@ const V2MenuItem: FC<IProps> = memo(
         {showContent()}
       </div>
     )
-  }
+  },
 )
 
 export default V2MenuItem

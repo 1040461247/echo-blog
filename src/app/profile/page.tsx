@@ -21,9 +21,9 @@ const ProfilePage: FC<IProps> = memo(() => {
 
   const { userInfo } = useAppSelector(
     (state) => ({
-      userInfo: state.user.userInfo
+      userInfo: state.user.userInfo,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   useEffect(() => {
@@ -36,21 +36,21 @@ const ProfilePage: FC<IProps> = memo(() => {
     name: [
       {
         validate: (value) => !!value,
-        message: '用户名不能为空'
+        message: '用户名不能为空',
       },
       {
         validate: (value) => REG_NAME_LENGTH.test(value),
-        message: '请输入3~20个字符'
+        message: '请输入3~20个字符',
       },
       {
         validate: (value) => REG_NAME_CHARACTER.test(value),
-        message: '支持数字、字母、下划线'
-      }
-    ]
+        message: '支持数字、字母、下划线',
+      },
+    ],
   }
   const { formData, errors, handleReset, handleChange, handleBlur } = useFormValidation(
     initialFormData,
-    validationRules
+    validationRules,
   )
 
   // 用户头像上传和预览
@@ -126,7 +126,7 @@ const ProfilePage: FC<IProps> = memo(() => {
 
           <div className="profile-phone">
             <span>联系方式：</span>
-            <span>{userInfo?.phone_num && encryptPhone(userInfo.phone_num)}</span>
+            <span>{userInfo?.phoneNum && encryptPhone(userInfo.phoneNum)}</span>
           </div>
 
           <div className="profile-control absolute right-5 bottom-5">

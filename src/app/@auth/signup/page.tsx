@@ -25,9 +25,9 @@ const RegisterPage: FC<IProps> = memo(() => {
 
   const { registeringPhone } = useAppSelector(
     (state) => ({
-      registeringPhone: state.user.registeringPhone
+      registeringPhone: state.user.registeringPhone,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   useEffect(() => {
@@ -43,41 +43,41 @@ const RegisterPage: FC<IProps> = memo(() => {
     name: [
       {
         validate: (value) => !!value,
-        message: '用户名不能为空'
+        message: '用户名不能为空',
       },
       {
         validate: (value) => REG_NAME_LENGTH.test(value),
-        message: '请输入3~20个字符'
+        message: '请输入3~20个字符',
       },
       {
         validate: (value) => REG_NAME_CHARACTER.test(value),
-        message: '支持数字、字母、下划线'
-      }
+        message: '支持数字、字母、下划线',
+      },
     ],
     password: [
       {
         validate: (value) => !!value,
-        message: '密码不能为空'
+        message: '密码不能为空',
       },
       {
         validate: (value) => REG_PASSWORD_LENGTH.test(value),
-        message: '密码长度至少8位'
-      }
+        message: '密码长度至少8位',
+      },
     ],
     rePassword: [
       {
         validate: (value) => !!value,
-        message: '请再次输入密码'
+        message: '请再次输入密码',
       },
       {
         validate: (value) => value === formData.password,
-        message: '密码不匹配'
-      }
-    ]
+        message: '密码不匹配',
+      },
+    ],
   }
   const { formData, errors, handleChange, handleBlur, validateAll } = useFormValidation(
     initialFormData,
-    validationRules
+    validationRules,
   )
 
   // 表单提交

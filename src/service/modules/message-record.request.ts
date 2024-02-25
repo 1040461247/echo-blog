@@ -28,16 +28,16 @@ async function getMessageTotal(userId: number) {
   return res.data as IMessageTotal
 }
 
+async function getMessageListByState(userId: number, state?: TState, offset = 0, limit = 10) {
+  const res = await request.get(
+    `${MODULE_BASE_URL}/${userId}?offset=${offset}&limit=${limit}${state ? `&state=${state}` : ''}`,
+  )
+  return res.data as IMessageListItem[]
+}
+
 async function clearUnread() {
   const res = await request.post(`${MODULE_BASE_URL}`, { headers: getAuthHeader() })
   return res
 }
 
-async function getMessageListByState(userId: number, state?: TState, offset = 0, limit = 10) {
-  const res = await request.get(
-    `${MODULE_BASE_URL}/${userId}?offset=${offset}&limit=${limit}${state ? `&state=${state}` : ''}`
-  )
-  return res.data as IMessageListItem[]
-}
-
-export { getMessageTotal, clearUnread, getMessageListByState }
+export { getMessageTotal, getMessageListByState, clearUnread }

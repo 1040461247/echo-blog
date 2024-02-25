@@ -23,31 +23,31 @@ const AuditFriends: FC<IProps> = memo(() => {
     linkName: [
       {
         validate: (value) => !!value,
-        message: '网站昵称不能为空'
-      }
+        message: '网站昵称不能为空',
+      },
     ],
     linkDesc: [
       {
         validate: (value) => !!value,
-        message: '网站描述不能为空'
-      }
+        message: '网站描述不能为空',
+      },
     ],
     linkUrl: [
       {
         validate: (value) => !!value,
-        message: '网站地址不能为空'
-      }
+        message: '网站地址不能为空',
+      },
     ],
     linkIcon: [
       {
         validate: (value) => !!value,
-        message: '网站图标地址不能为空'
-      }
-    ]
+        message: '网站图标地址不能为空',
+      },
+    ],
   }
   const { formData, errors, handleChange, handleBlur, validateAll } = useFormValidation(
     initialFormData,
-    validationRules
+    validationRules,
   )
 
   // 提交表单

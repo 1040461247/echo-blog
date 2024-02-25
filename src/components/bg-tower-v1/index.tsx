@@ -20,23 +20,23 @@ const BgTowerV1: FC<IProps> = memo(({ className }) => {
     solidPct: 0.6,
     adapter: {
       sm: {
-        speed: -2.5
+        speed: -2.5,
       },
       lg: {
-        speed: -1.5
+        speed: -1.5,
       },
       xl: {
-        speed: -1
-      }
-    }
+        speed: -1,
+      },
+    },
   }
   const secondTowersOption: IOption = {
     speed: 3,
     adapter: {
       md: {
-        speed: 4
-      }
-    }
+        speed: 4,
+      },
+    },
   }
 
   const secondTowerStyle = `mt-[35vh] md:mt-0 lg:mt-[-35vh] 2xl:mt-[-70vh]`

@@ -15,10 +15,10 @@ import type { FC } from 'react'
 
 // Dynamic Import
 const V2UserNav = dynamic(() => import('./c-cpns/v2-user-nav'), {
-  loading: () => <ComponentLoading />
+  loading: () => <ComponentLoading />,
 })
 const V2AuthNav = dynamic(() => import('./c-cpns/v2-auth-nav'), {
-  loading: () => <ComponentLoading />
+  loading: () => <ComponentLoading />,
 })
 
 // Types
@@ -31,9 +31,9 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const { userInfo } = useAppSelector(
     (state) => ({
-      userInfo: state.user.userInfo
+      userInfo: state.user.userInfo,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   function showMenuList(menuList: IMenuListItem[], res: any[] = []) {
@@ -50,7 +50,7 @@ const HeaderMenubutton: FC<IProps> = memo(() => {
             text={menu.text}
             key={menu.text}
             handleClick={() => setIsDrawerOpen(false)}
-          />
+          />,
         )
       }
     }

@@ -24,7 +24,7 @@ function parseMarkdown(mdStr: string) {
     const headItem: ITocItem = {
       title: item.replace('# ', ''),
       level: 1,
-      offsetTop: 0
+      offsetTop: 0,
     }
 
     if (item.startsWith('# ')) {

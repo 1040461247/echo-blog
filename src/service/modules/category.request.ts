@@ -5,9 +5,9 @@ import { IArticle } from './home.request'
 export interface ICategory {
   id: number
   name: string
-  create_time: string
-  update_time: string
-  article_count: number
+  createTime: string
+  updateTime: string
+  articleCount: number
 }
 
 const MODULE_BASE_URL = '/categories'

@@ -15,7 +15,7 @@ const fetchArticlesByTagIdAction = createAsyncThunk(
   'tag/fetchArticlesByTagIdAction',
   async (tagId: number) => {
     return await getArticlesByTagId(tagId)
-  }
+  },
 )
 const fetchTagByIdAction = createAsyncThunk('tag/fetchTagByIdAction', async (tagId: number) => {
   return await getTagById(tagId)
@@ -29,7 +29,7 @@ export const tagSlice = createSlice({
   initialState: {
     articles: [],
     tag: {},
-    tags: []
+    tags: [],
   } as ITagSliceState,
   reducers: {},
   extraReducers: (builder) => {
@@ -43,7 +43,7 @@ export const tagSlice = createSlice({
       .addCase(fetchTagListAction.fulfilled, (state, { payload }) => {
         state.tags = payload ?? []
       })
-  }
+  },
 })
 
 export { fetchArticlesByTagIdAction, fetchTagByIdAction, fetchTagListAction }

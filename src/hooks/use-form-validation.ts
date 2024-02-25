@@ -10,7 +10,7 @@ export type IValidationRules<T> = Record<keyof T, IValidationRule[]>
 // Hook
 function useFormValidation<T extends Record<string, any>>(
   initialState: T,
-  validationRules: IValidationRules<T>
+  validationRules: IValidationRules<T>,
 ) {
   const [formData, setFormData] = useState(initialState)
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -19,7 +19,7 @@ function useFormValidation<T extends Record<string, any>>(
     const { name, value } = e.target
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     })
   }
 
@@ -46,7 +46,7 @@ function useFormValidation<T extends Record<string, any>>(
     }
     setErrors({
       ...errors,
-      [field]: error
+      [field]: error,
     })
     return error
   }

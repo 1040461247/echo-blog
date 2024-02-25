@@ -21,9 +21,9 @@ const BgTowerV2: FC<IProps> = memo(() => {
     animation: false,
     adapter: {
       lg: {
-        speed: -8.5
-      }
-    }
+        speed: -8.5,
+      },
+    },
   }
 
   return (

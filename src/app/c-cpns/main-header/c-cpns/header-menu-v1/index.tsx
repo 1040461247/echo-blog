@@ -15,14 +15,14 @@ export interface IProps {
 const HeaderMenuV1: FC<IProps> = memo(() => {
   const { userInfo } = useAppSelector(
     (state) => ({
-      userInfo: state.user.userInfo
+      userInfo: state.user.userInfo,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const actPathname = usePathname()
   function isActivePath(
-    item: string[] | { path: string; children?: IMenuListItem[] } | IMenuListItem
+    item: string[] | { path: string; children?: IMenuListItem[] } | IMenuListItem,
   ) {
     // 当前路径的根路径等于某个菜单（或子菜单）路径时，菜单高亮
     const actPathList = actPathname.split('/')

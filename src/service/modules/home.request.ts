@@ -12,14 +12,14 @@ export interface IArticle {
   title: string
   content?: string
   description: string
-  cover_url: string
-  create_time: string
-  update_time: string
-  is_sticky: boolean
+  coverUrl: string
+  createTime: string
+  updateTime: string
+  isSticky: boolean
   author: {
     id: number
     name: string
-    avatar_url: string
+    avatarUrl: string
   }
   category: {
     id: number

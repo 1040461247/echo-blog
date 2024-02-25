@@ -31,7 +31,7 @@ class myRequest {
     if (init?.body && !(init?.body instanceof FormData)) {
       init.headers = {
         'Content-Type': 'application/json',
-        ...init.headers
+        ...init.headers,
       }
     }
     return await fetch(`${this.baseUrl}${path}`, { method: 'POST', ...init })
@@ -52,7 +52,7 @@ class myRequest {
     if (init?.body) {
       init.headers = {
         ...init.headers,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     }
     return await fetch(`${this.baseUrl}${path}`, { method: 'DELETE', ...init })

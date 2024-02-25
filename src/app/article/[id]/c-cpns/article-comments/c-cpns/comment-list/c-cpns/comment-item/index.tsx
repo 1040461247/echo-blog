@@ -1,4 +1,4 @@
-import { IComment, addLikes, delComment, remLikes } from '@/service/modules/article.request'
+import { IComment, addLikes, remComment, remLikes } from '@/service/modules/article.request'
 import formatDate from '@/utils/format-date'
 import Link from 'next/link'
 import { memo, useEffect, useState } from 'react'
@@ -72,7 +72,7 @@ const CommentItem: FC<IProps> = memo(
     async function handleDelete() {
       const isConfirm = confirm('是否删除评论？')
       if (isConfirm) {
-        const res = await delComment(comment.id)
+        const res = await remComment(comment.id)
         if (res.code === 200) {
           Message.success('删除成功')
           dispatch(fetchCommentsByArticleIdAction(article.id))
@@ -101,7 +101,7 @@ const CommentItem: FC<IProps> = memo(
         <div className="item-avatar mr-3">
           <div className="overflow-hidden rounded-2xl">
             <UserAvatar
-              avatarUrl={comment.user.avatar_url}
+              avatarUrl={comment.user.avatarUrl}
               userId={comment.user.id}
               size={52}
               square
@@ -124,7 +124,7 @@ const CommentItem: FC<IProps> = memo(
             <div className="acpi-top-right flex-1 flex justify-between items-center">
               <div className="mr-1">
                 <span className="text-xs text-gray-400 ellipsis-1-line">
-                  {formatDate(comment.create_time, 'YYYY-MM-DD')}
+                  {formatDate(comment.createTime, 'YYYY-MM-DD')}
                 </span>
               </div>
               <div className="flex pr-2">
@@ -133,7 +133,7 @@ const CommentItem: FC<IProps> = memo(
                   title="点赞"
                   onClick={handleLikes}
                 >
-                  {isLike ? (
+                  {isLike && userInfo ? (
                     <i className="iconfont icon-heart-fill mr-[2px] text-xl text-[--primary-color]" />
                   ) : (
                     <i className="iconfont icon-heart mr-[2px] text-xl" />
@@ -164,14 +164,14 @@ const CommentItem: FC<IProps> = memo(
 
           {/* 用户系统信息 */}
           <div className="acpi-system flex flex-wrap items-center gap-1 text-[10px] text-gray-500 leading-normal">
-            <CommentItemSystemTag iconName="icon-position" info={comment.user.ip_address} />
+            <CommentItemSystemTag iconName="icon-position" info={comment.user.ipAddress} />
             <CommentItemSystemTag
-              iconName={getBroserIcon(comment.user.browser_info)}
-              info={comment.user.browser_info}
+              iconName={getBroserIcon(comment.user.browserInfo)}
+              info={comment.user.browserInfo}
             />
             <CommentItemSystemTag
-              iconName={getOsIcon(comment.user.os_info)}
-              info={comment.user.os_info}
+              iconName={getOsIcon(comment.user.osInfo)}
+              info={comment.user.osInfo}
             />
           </div>
 

@@ -14,14 +14,14 @@ const fetchPassedListAction = createAsyncThunk('friends/fetchPassedListAction', 
 export const friendsSlice = createSlice({
   name: 'friends',
   initialState: {
-    passedList: []
+    passedList: [],
   } as IFriendsSliceState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchPassedListAction.fulfilled, (state, { payload }) => {
       state.passedList = payload ?? []
     })
-  }
+  },
 })
 
 export { fetchPassedListAction }

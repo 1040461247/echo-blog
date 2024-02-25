@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import {
   addArticleListPageAction,
   fetchArticlesAction,
-  fetchStatisticsAction
+  fetchStatisticsAction,
 } from '@/store/slices/home.slice'
 import type { FC } from 'react'
 import { memo, useEffect } from 'react'
@@ -24,9 +24,9 @@ const ArchivesPage: FC<IProps> = memo(() => {
   const { statistics, articleList } = useAppSelector(
     (state) => ({
       statistics: state.home.statistics,
-      articleList: state.home.articleList
+      articleList: state.home.articleList,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const ArchivesPage: FC<IProps> = memo(() => {
   }, [])
 
   useEffect(() => {
-    if (reachBottom && statistics.articlesCount !== articleList.length) {
+    if (reachBottom && statistics?.articlesCount !== articleList.length) {
       dispatch(addArticleListPageAction())
       dispatch(fetchArticlesAction())
     }
@@ -47,11 +47,11 @@ const ArchivesPage: FC<IProps> = memo(() => {
         <BgTowerV2 />
         <header className="pt-7 text-gray-200 text-center">
           <h2 className="text-5xl mb-3">时间轴</h2>
-          <h3>-共发布了{statistics.articlesCount}篇文章-</h3>
+          <h3>-共发布了{statistics?.articlesCount}篇文章-</h3>
         </header>
         <main className="w-full">
           <Timeline articlesData={articleList} />
-          {statistics.articlesCount !== articleList.length && <LoadMore />}
+          {statistics?.articlesCount !== articleList.length && <LoadMore />}
         </main>
       </div>
     </div>

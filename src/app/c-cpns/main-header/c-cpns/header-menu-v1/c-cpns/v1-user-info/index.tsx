@@ -28,9 +28,9 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
 
   const { total } = useAppSelector(
     (state) => ({
-      total: state.messageRecord.total
+      total: state.messageRecord.total,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   return (
@@ -38,7 +38,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
       {/* Avatar */}
       <div className="user-avatar">
         <div className="flex items-center overflow-hidden rounded-full w-10 h-10">
-          <UserAvatar avatarUrl={userInfo?.avatar_url} userId={userInfo?.id} size={35} />
+          <UserAvatar avatarUrl={userInfo?.avatarUrl} userId={userInfo?.id} size={35} />
         </div>
         {total.unreadCount !== 0 && <NoticeDot />}
       </div>

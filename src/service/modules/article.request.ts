@@ -6,17 +6,17 @@ import getAuthHeader from '@/utils/get-auth-header'
 export interface IComment {
   id: number
   content: string
-  comment_id: number | null
-  create_time: string
-  update_time: string
+  commentId: number | null
+  createTime: string
+  updateTime: string
   totalLikes: number
   user: {
     id: number
     name: string
-    avatar_url: string
-    ip_address: string
-    browser_info: string
-    os_info: string
+    avatarUrl: string
+    ipAddress: string
+    browserInfo: string
+    osInfo: string
   }
 }
 export type TCommentLikes = number[]
@@ -30,51 +30,8 @@ async function getArticleById(id: number) {
 }
 
 async function getCommentsByArticleId(id: number) {
-  const res = await request.get(`${COMMENT_BASE_URL}?article_id=${id}`)
+  const res = await request.get(`${COMMENT_BASE_URL}?articleId=${id}`)
   return res.data as IComment[]
-}
-
-async function addCommentToArticle(user_id: number, article_id: number, content: string) {
-  const res = await request.post(`${COMMENT_BASE_URL}`, {
-    headers: getAuthHeader(),
-    body: JSON.stringify({ user_id, article_id, content }),
-  })
-  return res
-}
-
-async function addReplyToComment(
-  user_id: number,
-  article_id: number,
-  content: string,
-  comment_id: number,
-) {
-  const res = await request.post(`${COMMENT_BASE_URL}/${comment_id}/reply`, {
-    headers: getAuthHeader(),
-    body: JSON.stringify({ user_id, article_id, content }),
-  })
-  return res
-}
-
-async function delComment(commentId: number) {
-  const res = await request.delete(`${COMMENT_BASE_URL}/${commentId}`, {
-    headers: getAuthHeader(),
-  })
-  return res
-}
-
-async function addLikes(comment_id: number) {
-  const res = await request.post(`${COMMENT_BASE_URL}/likes`, {
-    headers: getAuthHeader(),
-    body: JSON.stringify({ comment_id: comment_id }),
-  })
-  return res
-}
-
-async function remLikes(comment_id: number) {
-  const res = await request.delete(`${COMMENT_BASE_URL}/likes/${comment_id}`, {
-    headers: getAuthHeader(),
-  })
-  return res
 }
 
 async function getCommentLikesById(userId: number) {
@@ -82,13 +39,56 @@ async function getCommentLikesById(userId: number) {
   return res.data as TCommentLikes
 }
 
+async function addCommentToArticle(userId: number, articleId: number, content: string) {
+  const res = await request.post(`${COMMENT_BASE_URL}`, {
+    headers: getAuthHeader(),
+    body: JSON.stringify({ userId, articleId, content }),
+  })
+  return res
+}
+
+async function addLikes(commentId: number) {
+  const res = await request.post(`${COMMENT_BASE_URL}/likes`, {
+    headers: getAuthHeader(),
+    body: JSON.stringify({ commentId }),
+  })
+  return res
+}
+
+async function addReplyToComment(
+  userId: number,
+  articleId: number,
+  content: string,
+  commentId: number,
+) {
+  const res = await request.post(`${COMMENT_BASE_URL}/${commentId}/reply`, {
+    headers: getAuthHeader(),
+    body: JSON.stringify({ userId, articleId, content }),
+  })
+  return res
+}
+
+async function remComment(commentId: number) {
+  const res = await request.delete(`${COMMENT_BASE_URL}/${commentId}`, {
+    headers: getAuthHeader(),
+  })
+  return res
+}
+
+async function remLikes(commentId: number) {
+  const res = await request.delete(`${COMMENT_BASE_URL}/likes/${commentId}`, {
+    headers: getAuthHeader(),
+  })
+  return res
+}
+
 export {
   getArticleById,
   getCommentsByArticleId,
+  getCommentLikesById,
   addCommentToArticle,
   addReplyToComment,
-  delComment,
   addLikes,
+  remComment,
   remLikes,
-  getCommentLikesById,
 }

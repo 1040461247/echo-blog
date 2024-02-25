@@ -16,9 +16,9 @@ const MainHeader: FC<IProps> = memo(() => {
   const dispatch = useAppDispatch()
   const { userInfo } = useAppSelector(
     (state) => ({
-      userInfo: state.user.userInfo
+      userInfo: state.user.userInfo,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   useEffect(() => {

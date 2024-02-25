@@ -18,14 +18,14 @@ const ContentMainArticleItem: FC<IProps> = memo(({ articleData }) => {
   return (
     <div className="article c-card mb-[38px]" key={articleData.id}>
       {/* Article Album */}
-      {articleData.cover_url && (
+      {articleData.coverUrl && (
         <Link
           className="article-album group block relative overflow-hidden h-[150px]"
           href={`${ARTICLE_PATH}/${articleData.id}`}
         >
           <Image
             className="object-cover"
-            src={articleData.cover_url}
+            src={articleData.coverUrl}
             fill
             sizes="100%"
             alt="article-album"
@@ -50,7 +50,7 @@ const ContentMainArticleItem: FC<IProps> = memo(({ articleData }) => {
           <div className="footer-left flex flex-wrap gap-3 text-left">
             <span className="article-info-date">
               <i className="iconfont icon-time mr-1" />
-              <span>{formatDate(articleData.create_time)}</span>
+              <span>{formatDate(articleData.createTime)}</span>
             </span>
             <ArticleCategory mobileHide categoryInfo={articleData.category} />
             <ArticleTags mobileHide tagList={articleData.tags} />

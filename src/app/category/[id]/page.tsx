@@ -27,15 +27,15 @@ const CategoryPage: FC<IProps> = memo((props) => {
   const { articles, category } = useAppSelector(
     (state) => ({
       articles: state.category.articles,
-      category: state.category.category
+      category: state.category.category,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const articleDisplayProps: IArticlesDisplayProps = {
     titleIcon: (className) => <i className={`iconfont icon-category ${className}`} />,
     titleText: category.name,
-    articlesData: articles
+    articlesData: articles,
   }
 
   return (

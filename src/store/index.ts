@@ -7,7 +7,7 @@ import {
   userSlice,
   globalSlice,
   friendsSlice,
-  messageRecordSlice
+  messageRecordSlice,
 } from './slices'
 
 const store = configureStore({
@@ -19,8 +19,8 @@ const store = configureStore({
     [userSlice.name]: userSlice.reducer,
     [globalSlice.name]: globalSlice.reducer,
     [friendsSlice.name]: friendsSlice.reducer,
-    [messageRecordSlice.name]: messageRecordSlice.reducer
-  }
+    [messageRecordSlice.name]: messageRecordSlice.reducer,
+  },
 })
 
 export default store

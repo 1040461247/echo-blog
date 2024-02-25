@@ -29,23 +29,23 @@ const LoginContent: FC<IProps> = memo(() => {
     phone: [
       {
         validate: (value) => !!value,
-        message: '电话号码不能为空'
+        message: '电话号码不能为空',
       },
       {
         validate: (value) => REG_PHONE.test(value),
-        message: '请输入合法的电话号码'
-      }
+        message: '请输入合法的电话号码',
+      },
     ],
     otp: [
       {
         validate: (value) => !!value,
-        message: '验证码不能为空'
+        message: '验证码不能为空',
       },
       {
         validate: (value) => REG_OTP.test(value),
-        message: '请输入合法的验证码'
-      }
-    ]
+        message: '请输入合法的验证码',
+      },
+    ],
   }
   const { formData, errors, handleChange, handleBlur, validateAll, valiedateField } =
     useFormValidation(initialFormData, validationRules)

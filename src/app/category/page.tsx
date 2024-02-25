@@ -23,9 +23,9 @@ const CategoryPage: FC<IProps> = memo(() => {
 
   const { categories } = useAppSelector(
     (state) => ({
-      categories: state.category.categories
+      categories: state.category.categories,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const customRenderer: RendererFunction = (tag: any, size, color) => {
@@ -49,13 +49,13 @@ const CategoryPage: FC<IProps> = memo(() => {
       tags: tagsMapTagCloud(categories),
       renderer: customRenderer,
       colorOptions: {
-        hue: 'red'
+        hue: 'red',
       } as ColorOptions,
-      shuffle: false
+      shuffle: false,
     },
     titleIconName: 'icon-folder',
     titleText: '分类',
-    titleColor: 'text-red-400'
+    titleColor: 'text-red-400',
   }
 
   return (

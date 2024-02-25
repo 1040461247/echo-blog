@@ -23,9 +23,9 @@ const ContentMain: FC<IProps> = memo(() => {
   const { articleList, statistics } = useAppSelector(
     (state) => ({
       articleList: state.home.articleList,
-      statistics: state.home.statistics
+      statistics: state.home.statistics,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   useEffect(() => {

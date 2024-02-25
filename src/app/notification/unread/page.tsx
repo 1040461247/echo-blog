@@ -8,7 +8,7 @@ import { shallowEqual } from 'react-redux'
 import {
   addUnreadPage,
   fetchUnreadMessageListAction,
-  tempClearUnreadCountAction
+  tempClearUnreadCountAction,
 } from '@/store/slices'
 import NoMessage from '../c-cpns/no-message'
 import { clearUnread } from '@/service/modules/message-record.request'
@@ -28,9 +28,9 @@ const NotificationUnreadPage: FC<IProps> = memo(() => {
 
   const { unReadMessageList } = useAppSelector(
     (state) => ({
-      unReadMessageList: state.messageRecord.unReadMessageList
+      unReadMessageList: state.messageRecord.unReadMessageList,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   // 滚动到底部加载更多

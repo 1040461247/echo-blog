@@ -15,7 +15,7 @@ const MePage: FC<IProps> = memo(() => {
   const normalOps = {
     isTransparent: true,
     startShowPct: 0.3,
-    solidPct: 0.5
+    solidPct: 0.5,
   }
 
   return (

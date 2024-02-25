@@ -17,25 +17,25 @@ const myFont = localFont({
     {
       path: '../../public/fonts/Alimama_DongFangDaKai_Regular.woff',
       weight: '400',
-      style: 'normal'
+      style: 'normal',
     },
     {
       path: '../../public/fonts/Alimama_DongFangDaKai_Regular.woff2',
       weight: '400',
-      style: 'normal'
-    }
+      style: 'normal',
+    },
   ],
-  display: 'swap'
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: 'Echo - 欢迎来到我的思维广场',
-  description: 'Welcome to my blog. this is Echo Blog.'
+  description: 'Welcome to my blog. this is Echo Blog.',
 }
 
 export default function RootLayout({
   children,
-  auth
+  auth,
 }: {
   children: React.ReactNode
   auth: React.ReactNode

@@ -14,7 +14,7 @@ const ContentSidebar: FC<IProps> = memo(() => {
   function filterAndSortMenu(
     menus: IMenuListItem[],
     filterList: string[],
-    resMenu: IMenuListItem[] = []
+    resMenu: IMenuListItem[] = [],
   ) {
     for (const menu of menus) {
       if (filterList.includes(menu.text)) {

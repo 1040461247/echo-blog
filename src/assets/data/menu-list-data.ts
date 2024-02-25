@@ -7,7 +7,7 @@ import {
   // MESSAGES_PATH,
   ME_PATH,
   // MOOD_PATH,
-  TAG_PATH
+  TAG_PATH,
 } from '@/constants'
 
 const prefix = 'icon-'
@@ -16,7 +16,7 @@ const menuList: IMenuListItem[] = [
   {
     icon: `${prefix}home`,
     text: '首页',
-    path: HOME_PATH
+    path: HOME_PATH,
   },
   {
     icon: `${prefix}read`,
@@ -25,19 +25,19 @@ const menuList: IMenuListItem[] = [
       {
         icon: `${prefix}time`,
         text: '时间轴',
-        path: ARCHIVES_PATH
+        path: ARCHIVES_PATH,
       },
       {
         icon: `${prefix}folder`,
         text: '分类',
-        path: CATEGORY_PATH
+        path: CATEGORY_PATH,
       },
       {
         icon: `${prefix}tags`,
         text: '标签',
-        path: TAG_PATH
-      }
-    ]
+        path: TAG_PATH,
+      },
+    ],
   },
   // {
   //   icon: `${prefix}smile`,
@@ -56,20 +56,20 @@ const menuList: IMenuListItem[] = [
       {
         icon: `${prefix}astronaut`,
         text: '我',
-        path: ME_PATH
+        path: ME_PATH,
       },
       {
         icon: `${prefix}link`,
         text: '友链',
-        path: FRIENDS_PATH
+        path: FRIENDS_PATH,
       },
       {
         icon: `${prefix}github`,
         text: 'github',
-        path: GITHUB_URL
-      }
-    ]
-  }
+        path: GITHUB_URL,
+      },
+    ],
+  },
 ]
 
 export default menuList

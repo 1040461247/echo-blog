@@ -12,16 +12,16 @@ import type { FC } from 'react'
 
 // Dynamic Import
 const CommentPanelClose = dynamic(() => import('../comment-panel-close'), {
-  loading: () => <ComponentLoading />
+  loading: () => <ComponentLoading />,
 })
 const CommentPanelFooter = dynamic(() => import('../comment-panel-footer'), {
-  loading: () => <ComponentLoading />
+  loading: () => <ComponentLoading />,
 })
 const CommentPanelAuth = dynamic(() => import('../comment-panel-auth'), {
-  loading: () => <ComponentLoading />
+  loading: () => <ComponentLoading />,
 })
 const CommentPanelEmojiPicker = dynamic(() => import('../comment-panel-emoji-picker'), {
-  loading: () => <ComponentLoading />
+  loading: () => <ComponentLoading />,
 })
 
 // Types
@@ -41,16 +41,16 @@ const CommentPanel: FC<IProps> = memo(({ handleClose, replyCommentId }) => {
 
   const { userInfo } = useAppSelector(
     (state) => ({
-      userInfo: state.user.userInfo
+      userInfo: state.user.userInfo,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const { article } = useAppSelector(
     (state) => ({
-      article: state.article.article
+      article: state.article.article,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   // Handles

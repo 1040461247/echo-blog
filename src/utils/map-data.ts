@@ -6,8 +6,8 @@ export const tagsMapTagCloud = (tags: ITag[] | ICategory[]): Tag[] => {
   return tags.map((item) => {
     return {
       value: item.name,
-      count: item.article_count,
-      key: String(item.id)
+      count: item.articleCount,
+      key: String(item.id),
     }
   })
 }

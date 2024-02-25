@@ -3,10 +3,10 @@ import request from '../index'
 // Types
 export interface IPassedListItem {
   id: number
-  link_name: string
-  link_url: string
-  link_icon: string
-  link_desc: string
+  linkName: string
+  linkUrl: string
+  linkIcon: string
+  linkDesc: string
 }
 
 const MODULE_BASE_URL = '/friend-links-audit'
@@ -15,10 +15,10 @@ async function commitFriends(
   linkName: string,
   linkUrl: string,
   linkIcon: string,
-  linkDesc: string
+  linkDesc: string,
 ) {
   const res = await request.post(`${MODULE_BASE_URL}`, {
-    body: JSON.stringify({ linkName, linkUrl, linkIcon, linkDesc })
+    body: JSON.stringify({ linkName, linkUrl, linkIcon, linkDesc }),
   })
   return res
 }

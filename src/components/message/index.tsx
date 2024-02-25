@@ -99,20 +99,20 @@ const BaseMessage: FC<IProps> = memo(({ type, message, id }) => {
   const typeStyle: Record<keyof IPropsMessage, ITypeStyle> = {
     info: {
       customClass: 'text-[#909399] bg-[#f4f4f5] border-[#e9e9eb]',
-      iconName: 'icon-info'
+      iconName: 'icon-info',
     },
     success: {
       customClass: 'text-[#67c23a] bg-[#f0f9eb] border-[#e1f3d8]',
-      iconName: 'icon-success'
+      iconName: 'icon-success',
     },
     warn: {
       customClass: 'text-[#e6a23c] bg-[#fdf6ec] border-[#faecd8]',
-      iconName: 'icon-warn'
+      iconName: 'icon-warn',
     },
     error: {
       customClass: 'text-[#f56c6c] bg-[#fef0f0] border-[#fde2e2]',
-      iconName: 'icon-error'
-    }
+      iconName: 'icon-error',
+    },
   }
 
   const { customClass, iconName } = typeStyle[type]
@@ -136,7 +136,7 @@ const Message: IPropsMessage = {
   info: (message: string) => addMessage({ type: 'info', message }),
   success: (message: string) => addMessage({ type: 'success', message }),
   warn: (message: string) => addMessage({ type: 'warn', message }),
-  error: (message: string) => addMessage({ type: 'error', message })
+  error: (message: string) => addMessage({ type: 'error', message }),
 }
 
 export default Message

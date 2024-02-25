@@ -27,15 +27,15 @@ const TagPage: FC<IProps> = memo((props) => {
   const { articles, tag } = useAppSelector(
     (state) => ({
       articles: state.tag.articles,
-      tag: state.tag.tag
+      tag: state.tag.tag,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const articleDisplayProps: IArticlesDisplayProps = {
     titleIcon: (className) => <i className={`iconfont icon-tags ${className}`} />,
     titleText: tag.name,
-    articlesData: articles
+    articlesData: articles,
   }
 
   return (

@@ -19,20 +19,20 @@ const NotificationPage: FC<IProps> = memo(({ children }) => {
   const { total } = useAppSelector(
     (state) => ({
       userInfo: state.user.userInfo,
-      total: state.messageRecord.total
+      total: state.messageRecord.total,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const tabs = [
     {
       text: '全部消息',
-      url: NOTIFICATION_PATH
+      url: NOTIFICATION_PATH,
     },
     {
       text: `未读消息(${total.unreadCount})`,
-      url: NOTIFICATION_UNREAD_PATH
-    }
+      url: NOTIFICATION_UNREAD_PATH,
+    },
   ]
 
   return (

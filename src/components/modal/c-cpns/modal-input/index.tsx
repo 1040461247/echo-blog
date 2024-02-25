@@ -23,7 +23,7 @@ const ModalInput: FC<IProps> = memo(
     name,
     type = 'text',
     handleKeyUp,
-    autoFocus = false
+    autoFocus = false,
   }) => {
     return (
       <input
@@ -37,7 +37,7 @@ const ModalInput: FC<IProps> = memo(
         autoFocus={autoFocus}
       />
     )
-  }
+  },
 )
 
 export default ModalInput

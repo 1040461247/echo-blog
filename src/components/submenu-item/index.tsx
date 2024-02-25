@@ -32,7 +32,7 @@ const SubmenuItem: FC<IProps> = memo(
         </div>
       </div>
     )
-  }
+  },
 )
 
 export default SubmenuItem

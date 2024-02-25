@@ -22,7 +22,7 @@ export const globalSlice = createSlice({
   initialState: {
     messageQueue: [],
     uv: 0,
-    pv: 0
+    pv: 0,
   } as IGlobalSliceState,
   reducers: {
     pushMessageQueueAction(state, { payload }) {
@@ -31,7 +31,7 @@ export const globalSlice = createSlice({
     remMessageQueueByIdAction(state, { payload }) {
       const position = state.messageQueue.findIndex((item) => item.id === payload)
       state.messageQueue = state.messageQueue.filter((_, index) => index !== position)
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -41,7 +41,7 @@ export const globalSlice = createSlice({
       .addCase(fetchTotalPvAction.fulfilled, (state, { payload }) => {
         state.pv = payload.pvCount ?? 0
       })
-  }
+  },
 })
 
 export const { pushMessageQueueAction, remMessageQueueByIdAction } = globalSlice.actions

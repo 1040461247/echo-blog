@@ -44,7 +44,7 @@ const ArticleAside: FC<IProps> = memo(({ articleContent }) => {
     e.preventDefault()
     setCurTitle(tocItem.title)
     scrollTo({
-      top: tocItem.offsetTop
+      top: tocItem.offsetTop,
     })
   }
 

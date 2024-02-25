@@ -11,7 +11,7 @@ import { shallowEqual } from 'react-redux'
 import { type IProps as IItemProps } from '../blog-info-statistics-item'
 
 const BlogInfoStatisticsItem = dynamic(() => import('../blog-info-statistics-item'), {
-  loading: () => <ComponentLoading />
+  loading: () => <ComponentLoading />,
 })
 
 // Types
@@ -28,9 +28,9 @@ const BlogInfoStatistics: FC<IProps> = memo(({ handleClouseDrawer }) => {
 
   const { statistics } = useAppSelector(
     (state) => ({
-      statistics: state.home.statistics
+      statistics: state.home.statistics,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const [itemList, setItemList] = useState<IItemProps[] | []>([])
@@ -41,18 +41,18 @@ const BlogInfoStatistics: FC<IProps> = memo(({ handleClouseDrawer }) => {
         {
           text: '文章',
           linkHref: ARCHIVES_PATH,
-          count: statistics.articlesCount
+          count: statistics.articlesCount,
         },
         {
           text: '分类',
           linkHref: CATEGORY_PATH,
-          count: statistics.categoriesCount
+          count: statistics.categoriesCount,
         },
         {
           text: '标签',
           linkHref: TAG_PATH,
-          count: statistics.tagsCount
-        }
+          count: statistics.tagsCount,
+        },
       ])
     }
   }, [statistics])

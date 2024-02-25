@@ -23,7 +23,7 @@ const V1MenuItem: FC<IProps> = memo(
     iconName,
     text,
     handleClick,
-    scroll = true
+    scroll = true,
   }) => {
     // Common Styles
     const activeLinkStyle = `!text-[--primary-color] border-b-[3px] border-solid border-[--primary-color]`
@@ -59,7 +59,7 @@ const V1MenuItem: FC<IProps> = memo(
         {children}
       </div>
     )
-  }
+  },
 )
 
 export default V1MenuItem

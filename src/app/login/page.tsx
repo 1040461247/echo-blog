@@ -4,9 +4,7 @@ import LoginContent from './c-cpns/login-content'
 import LoginHeader from './c-cpns/login-header'
 
 // Types
-export interface IProps {
-  children?: React.ReactElement
-}
+export interface IProps {}
 
 const LoginPage: FC<IProps> = memo(() => {
   return (

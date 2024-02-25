@@ -7,10 +7,10 @@ export default function sortComments(comments: IComment[], curUserId?: number) {
   // 当前登录用户的评论
   const selfComment = commentList
     .filter((item) => item.user.id === curUserId)
-    .toSorted((a, b) => Date.parse(b.create_time) - Date.parse(a.create_time))
+    .toSorted((a, b) => Date.parse(b.createTime) - Date.parse(a.createTime))
   // 按时间排序的评论
   const newSort = commentList.toSorted(
-    (a, b) => Date.parse(b.create_time) - Date.parse(a.create_time)
+    (a, b) => Date.parse(b.createTime) - Date.parse(a.createTime),
   )
   const endSort = Array.from(new Set([...selfComment, ...newSort]))
 

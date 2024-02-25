@@ -46,7 +46,7 @@ const Timeline: FC<IProps> = memo(({ articlesData }) => {
                   }`}
                 >
                   <span className="time inline-block p-2 bg-[--primary-color] rounded-sm md:py-[5px] md:px-[10px]">
-                    {formatDate(item.create_time)}
+                    {formatDate(item.createTime)}
                   </span>
                 </span>
               </div>
@@ -57,12 +57,12 @@ const Timeline: FC<IProps> = memo(({ articlesData }) => {
                   isLeft(index) ? '' : 'md:mt-4 md:mb-3'
                 }`}
               >
-                {item.cover_url && (
+                {item.coverUrl && (
                   <div className="desc-cover relative h-32">
                     <div className="desc-cover-img relative w-full h-full">
                       <Image
                         className="object-cover"
-                        src={item.cover_url}
+                        src={item.coverUrl}
                         fill
                         sizes="100%"
                         alt="article-cover"
@@ -77,7 +77,7 @@ const Timeline: FC<IProps> = memo(({ articlesData }) => {
                   </div>
                 )}
                 <div className="desc-content p-4 bg-white text-[#333]">
-                  {!item.cover_url && <h3 className="text-2xl font-bold">{item.title}</h3>}
+                  {!item.coverUrl && <h3 className="text-2xl font-bold">{item.title}</h3>}
                   <span className="ellipsis-4-line">{item.description}</span>
                 </div>
               </Link>

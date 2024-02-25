@@ -20,9 +20,9 @@ const NotificationPage: FC<IProps> = memo(() => {
     (state) => ({
       allMessageList: state.messageRecord.allMessageList,
       total: state.messageRecord.total,
-      userInfo: state.user.userInfo
+      userInfo: state.user.userInfo,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   // 获取数据

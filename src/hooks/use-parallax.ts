@@ -92,7 +92,7 @@ export default function useParallax() {
     speed: -2,
     isTransparent: false,
     startShowPct: 0.2,
-    solidPct: 0.5
+    solidPct: 0.5,
   }
 
   return function parallax(elRef: HTMLElement | null, option = defaultOption) {
@@ -108,7 +108,7 @@ export default function useParallax() {
       md: 768,
       lg: 1024,
       xl: 1280,
-      xxl: 1537
+      xxl: 1537,
     }
 
     const adapters = option.adapter

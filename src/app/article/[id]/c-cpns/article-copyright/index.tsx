@@ -17,20 +17,20 @@ const ArticleCopyright: FC<IProps> = memo(
     const copyRightList = [
       {
         title: '标题',
-        content: title
+        content: title,
       },
       {
         title: '作者',
-        content: author
+        content: author,
       },
       {
         title: '创建时间',
-        content: formatDate(createTime, 'YYYY-MM-DD hh:mm')
+        content: formatDate(createTime, 'YYYY-MM-DD hh:mm'),
       },
       {
         title: '修改时间',
-        content: formatDate(updateTime, 'YYYY-MM-DD hh:mm')
-      }
+        content: formatDate(updateTime, 'YYYY-MM-DD hh:mm'),
+      },
     ]
 
     return (
@@ -45,7 +45,7 @@ const ArticleCopyright: FC<IProps> = memo(
         </ul>
       </div>
     )
-  }
+  },
 )
 
 export default ArticleCopyright

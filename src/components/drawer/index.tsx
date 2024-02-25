@@ -36,7 +36,7 @@ const Drawer: FC<IProps> = memo(({ children, isOpen, onClose }) => {
   return (
     <div
       className={classNames('group fixed inset-0 z-50', {
-        hidden: !isOpen
+        hidden: !isOpen,
       })}
     >
       {/* Mask */}

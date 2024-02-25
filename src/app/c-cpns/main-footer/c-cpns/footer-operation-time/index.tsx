@@ -15,7 +15,7 @@ const FooterOperationTime: FC<IProps> = memo(() => {
     days: 0,
     hours: 0,
     minutes: 0,
-    remainingSeconds: 0
+    remainingSeconds: 0,
   })
 
   useEffect(() => {

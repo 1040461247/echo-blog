@@ -16,9 +16,9 @@ export interface IProps {
 const ProfileAvatar: FC<IProps> = memo(({ setSelectedAvatar, previewUrl, setPreviewUrl }) => {
   const { userInfo } = useAppSelector(
     (state) => ({
-      userInfo: state.user.userInfo
+      userInfo: state.user.userInfo,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   function handleAvatarChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -47,7 +47,7 @@ const ProfileAvatar: FC<IProps> = memo(({ setSelectedAvatar, previewUrl, setPrev
             />
           </div>
         ) : (
-          <UserAvatar avatarUrl={userInfo?.avatar_url} userId={userInfo?.id} size={112} />
+          <UserAvatar avatarUrl={userInfo?.avatarUrl} userId={userInfo?.id} size={112} />
         )}
       </div>
       <div className="avatar-selector">

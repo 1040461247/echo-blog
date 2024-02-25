@@ -44,15 +44,15 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
       <Link
         href={`/article/${articleData.id}`}
         className={`card block absolute inset-0 px-[11.8%] pt-[16.5%] bg-cover bg-center ${
-          articleData.is_sticky ? 'bg-card-red' : 'bg-card-gray'
+          articleData.isSticky ? 'bg-card-red' : 'bg-card-gray'
         }`}
       >
         {/* Card Cover */}
         <div className="card-cover relative h-[48%] rounded-sm overflow-hidden">
-          {articleData.cover_url && (
+          {articleData.coverUrl && (
             <Image
               className="object-cover"
-              src={articleData.cover_url}
+              src={articleData.coverUrl}
               fill
               sizes="100%"
               alt="card-cover"
@@ -74,7 +74,7 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
         <div className="card-footer flex justify-between gap-5 mt-11 sm:mt-8 text-lg sm:text-base text-black/30">
           <div className="card-footer-left flex-1 text-center">{articleData.category.name}</div>
           <div className="card-footer-right flex-1 text-center">
-            {formatDate(articleData.create_time, 'YYYY-MM')}
+            {formatDate(articleData.createTime, 'YYYY-MM')}
           </div>
         </div>
       </Link>

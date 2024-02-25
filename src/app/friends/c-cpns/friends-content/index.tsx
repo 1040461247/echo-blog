@@ -21,9 +21,9 @@ const FriendsContent: FC<IProps> = memo(() => {
 
   const { passedList } = useAppSelector(
     (state) => ({
-      passedList: state.friends.passedList
+      passedList: state.friends.passedList,
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   return (
@@ -32,18 +32,18 @@ const FriendsContent: FC<IProps> = memo(() => {
         {passedList.map((item) => (
           <Link
             className="group flex overflow-hidden rounded-lg border border-gray-600/50 hover:border-gray-600 hover:translate-y-[-2px] hover:shadow-lg transition-all duration-300"
-            href={item.link_url}
-            key={item.link_name}
+            href={item.linkUrl}
+            key={item.linkName}
             target="_blank"
           >
             <div className="friend-avatar relative w-16 h-16 bg-black/30">
-              <Image className="boject-cover" src={item.link_icon} fill alt="friend-avatar" />
+              <Image className="boject-cover" src={item.linkIcon} fill alt="friend-avatar" />
             </div>
             <div className="friend-info flex flex-col justify-center gap-1 w-full px-3 overflow-hidden">
               <span className="friend-info-name text-lg group-hover:text-[--primary-color] transition-colors duration-300">
-                {item.link_name}
+                {item.linkName}
               </span>
-              <span className="friend-info-desc w-full ellipsis-1-line">{item.link_desc}</span>
+              <span className="friend-info-desc w-full ellipsis-1-line">{item.linkDesc}</span>
             </div>
           </Link>
         ))}

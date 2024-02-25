@@ -23,13 +23,13 @@ const ArticleContent: FC<IProps> = memo(
         <MarkdownPreview
           className="!bg-transparent"
           wrapperElement={{
-            'data-color-mode': 'dark'
+            'data-color-mode': 'dark',
           }}
           source={articleContent}
         />
       </div>
     )
-  }
+  },
 )
 
 export default ArticleContent

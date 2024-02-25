@@ -16,15 +16,15 @@ const HomeMainAstronaut: FC<IProps> = memo(() => {
     speed: -3,
     adapter: {
       xs: {
-        speed: -4
+        speed: -4,
       },
       sm: {
-        speed: -4
+        speed: -4,
       },
       md: {
-        speed: -4
-      }
-    }
+        speed: -4,
+      },
+    },
   }
   return (
     <div className="absolute inset-x-0 bottom-0">
