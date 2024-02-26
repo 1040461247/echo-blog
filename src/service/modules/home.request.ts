@@ -1,3 +1,4 @@
+import { AM_ARTICLES, AM_STATISTICS } from '@/constants'
 import request from '../index'
 
 // Types
@@ -28,13 +29,14 @@ export interface IArticle {
   tags: { id: number; name: string }[] | null
 }
 
+// Services
 async function getStatistics() {
-  const res = await request.get('/statistics')
+  const res = await request.get(AM_STATISTICS)
   return res.data as IStatistics
 }
 
 async function getArticleList(offset = 0, limit = 10) {
-  const res = await request.get(`/articles?offset=${offset}&limit=${limit}`)
+  const res = await request.get(`${AM_ARTICLES}?offset=${offset}&limit=${limit}`)
   return res.data as IArticle[]
 }
 

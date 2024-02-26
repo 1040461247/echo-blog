@@ -1,3 +1,4 @@
+import { AM_ARTICLES, AM_TAGS } from '@/constants'
 import request from '../index'
 import { IArticle } from './home.request'
 
@@ -10,20 +11,19 @@ export interface ITag {
   articleCount: number
 }
 
-const MODULE_BASE_URL = '/tags'
-
+// Services
 async function getTagById(tagId: number) {
-  const res = await request.get(`${MODULE_BASE_URL}/${tagId}`)
+  const res = await request.get(`${AM_TAGS}/${tagId}`)
   return res.data as ITag
 }
 
 async function getArticlesByTagId(tagId: number) {
-  const res = await request.get(`${MODULE_BASE_URL}/${tagId}/articles`)
+  const res = await request.get(`${AM_ARTICLES}/tag/${tagId}`)
   return res.data as IArticle[]
 }
 
 async function getTagList() {
-  const res = await request.get(`${MODULE_BASE_URL}`)
+  const res = await request.get(`${AM_TAGS}`)
   return res.data as ITag[]
 }
 

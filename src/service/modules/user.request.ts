@@ -1,5 +1,6 @@
 import getAuthHeader from '@/utils/get-auth-header'
 import request from '../index'
+import { AM_USERS } from '@/constants'
 
 // Types
 export interface ILoginRes {
@@ -25,6 +26,7 @@ export interface IUserInfo {
   commentLikesId: number[]
 }
 
+// Services
 async function login(
   name: string,
   password: string,
@@ -70,19 +72,6 @@ async function sendOtp(phone: string) {
   return res
 }
 
-async function signup(name: string, password: string, phoneNum: string) {
-  const res = await request.post('/users', {
-    body: JSON.stringify({ name, password, phoneNum }),
-    cache: 'no-store',
-  })
-  return res
-}
-
-async function getUserById(userId: number) {
-  const res = await request.get(`/users/${userId}`)
-  return res.data as IUserInfo
-}
-
 async function uploadAvatar(formData: FormData) {
   const res = await request.post(`/upload/avatar`, {
     headers: getAuthHeader(),
@@ -91,12 +80,25 @@ async function uploadAvatar(formData: FormData) {
   return res
 }
 
+async function signup(name: string, password: string, phoneNum: string) {
+  const res = await request.post(AM_USERS, {
+    body: JSON.stringify({ name, password, phoneNum }),
+    cache: 'no-store',
+  })
+  return res
+}
+
+async function getUserById(userId: number) {
+  const res = await request.get(`${AM_USERS}/${userId}`)
+  return res.data as IUserInfo
+}
+
 async function updateUserInfo(name?: string, password?: string) {
   const bodyData = { name, password }
   const entriesBody = Object.entries(bodyData)
   const endBodyData = Object.fromEntries(entriesBody.filter(([_, value]) => value))
 
-  const res = await request.post(`/users/update`, {
+  const res = await request.post(`${AM_USERS}/update`, {
     headers: getAuthHeader(),
     body: JSON.stringify(endBodyData),
   })
