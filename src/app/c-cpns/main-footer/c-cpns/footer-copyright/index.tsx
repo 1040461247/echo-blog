@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import type { FC } from 'react'
-import profile from '@/assets/data/profile.json'
 
 // Types
 export interface IProps {
@@ -13,7 +12,7 @@ const FooterCopyright: FC<IProps> = memo(() => {
       <span>&copy; 2024 - 至今</span>
       <span className="ml-1">
         <i className="iconfont icon-developer mx-1" />
-        <span>By {profile.nickName}</span>
+        <span>By Cheems</span>
       </span>
     </div>
   )

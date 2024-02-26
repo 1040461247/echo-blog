@@ -5,7 +5,12 @@ import HeaderLogo from './c-cpns/header-logo'
 import HeaderMenuV1 from './c-cpns/header-menu-v1'
 import HeaderMenuV2 from './c-cpns/header-menu-v2'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
-import { fetchMessageTotalAction, fetchVerifyAuthAction } from '@/store/slices'
+import {
+  fetchBlogAuthorInfoAction,
+  fetchMessageTotalAction,
+  fetchStatisticsAction,
+  fetchVerifyAuthAction,
+} from '@/store/slices'
 import type { FC } from 'react'
 import { shallowEqual } from 'react-redux'
 import useScroll from '@/hooks/use-scroll'
@@ -23,6 +28,8 @@ const MainHeader: FC<IProps> = memo(() => {
 
   useEffect(() => {
     dispatch(fetchVerifyAuthAction())
+    dispatch(fetchStatisticsAction())
+    dispatch(fetchBlogAuthorInfoAction())
   }, [])
 
   // 页面是否滚动到顶部

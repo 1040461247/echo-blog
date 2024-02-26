@@ -21,11 +21,6 @@ export interface IProps {
 }
 
 const BlogInfoStatistics: FC<IProps> = memo(({ handleClouseDrawer }) => {
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(fetchStatisticsAction())
-  }, [])
-
   const { statistics } = useAppSelector(
     (state) => ({
       statistics: state.home.statistics,

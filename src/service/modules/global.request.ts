@@ -1,4 +1,4 @@
-import { AM_PAGEVIEWS } from '@/constants'
+import { AM_PAGEVIEWS, AM_USERS } from '@/constants'
 import request from '../index'
 
 // Types

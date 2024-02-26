@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getStatistics, getArticleList } from '@/service/modules/home.request'
+import { getStatistics, getArticleList, getBlogAuthorInfo } from '@/service/modules/home.request'
 import pageToOffsetlimit from '@/utils/page-to-offsetlimit'
 import type { IStatistics, IArticle } from '@/service/modules/home.request'
 import type { ReduxState } from '..'
+import { IUserInfo } from '@/service/modules/user.request'
 
 // Types
 export interface IHomeSliceState {
@@ -10,16 +11,22 @@ export interface IHomeSliceState {
   articleList: IArticle[] | []
   articleListPage: number
   articleLimit: number
+  blogAuthorInfo: IUserInfo | null
 }
 
 // Thunks
-const fetchStatisticsAction = createAsyncThunk('home/fetchStatistics', async () => {
+const fetchStatisticsAction = createAsyncThunk('home/fetchStatisticsAction', async () => {
   return await getStatistics()
 })
+
 const fetchArticlesAction = createAsyncThunk('home/fetchArticlesAction', async (_, thunkAPI) => {
   const { articleListPage, articleLimit } = (thunkAPI.getState() as ReduxState).home
   const { offset, limit } = pageToOffsetlimit(articleListPage, articleLimit)
   return await getArticleList(offset, limit)
+})
+
+const fetchBlogAuthorInfoAction = createAsyncThunk('home/fetchBlogAuthorInfoAction', async () => {
+  return await getBlogAuthorInfo()
 })
 
 export const homeSlice = createSlice({
@@ -29,6 +36,7 @@ export const homeSlice = createSlice({
     articleList: [],
     articleListPage: 1,
     articleLimit: 10,
+    blogAuthorInfo: null,
   } as IHomeSliceState,
   reducers: {
     addArticleListPageAction(state) {
@@ -50,8 +58,11 @@ export const homeSlice = createSlice({
           state.articleList = [...state.articleList, ...(payload ?? [])]
         }
       })
+      .addCase(fetchBlogAuthorInfoAction.fulfilled, (state, { payload }) => {
+        state.blogAuthorInfo = payload ?? null
+      })
   },
 })
 
-export { fetchStatisticsAction, fetchArticlesAction }
+export { fetchStatisticsAction, fetchArticlesAction, fetchBlogAuthorInfoAction }
 export const { addArticleListPageAction } = homeSlice.actions

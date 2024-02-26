@@ -18,9 +18,11 @@ export interface IUserInfo {
   name: string
   avatarUrl: string
   phoneNum: string
+  motto: string
   browserInfo: string
   osInfo: string
   ipAddress: string
+  loginTime: string
   updateTime: string
   createTime: string
   commentLikesId: number[]

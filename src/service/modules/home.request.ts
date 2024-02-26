@@ -1,5 +1,6 @@
-import { AM_ARTICLES, AM_STATISTICS } from '@/constants'
+import { AM_ARTICLES, AM_STATISTICS, AM_USERS } from '@/constants'
 import request from '../index'
+import { IUserInfo } from './user.request'
 
 // Types
 export interface IStatistics {
@@ -40,4 +41,9 @@ async function getArticleList(offset = 0, limit = 10) {
   return res.data as IArticle[]
 }
 
-export { getArticleList, getStatistics }
+async function getBlogAuthorInfo() {
+  const res = await request.get(`${AM_USERS}/1`)
+  return res.data as IUserInfo
+}
+
+export { getArticleList, getStatistics, getBlogAuthorInfo }
