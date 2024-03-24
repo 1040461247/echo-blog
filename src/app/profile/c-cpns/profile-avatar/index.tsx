@@ -29,7 +29,7 @@ const ProfileAvatar: FC<IProps> = memo(({ setSelectedAvatar, previewUrl, setPrev
         setPreviewUrl(reader.result)
       }
       reader.readAsDataURL(file)
-      setSelectedAvatar(file)
+        (file)
     }
   }
 
