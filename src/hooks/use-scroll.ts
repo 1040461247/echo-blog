@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function useScroll() {
   const [scrollY, setScrollY] = useState(0)
@@ -15,11 +15,7 @@ export default function useScroll() {
       // 页面是否滚动至底部
       const pageHeight = document.documentElement.scrollHeight
       const distanceToBtm = pageHeight - (vpHeight + windowScrollY)
-      if (distanceToBtm <= 50) {
-        reachBottom || setReachBottom(true)
-      } else {
-        reachBottom && setReachBottom(false)
-      }
+      distanceToBtm <= 50 ? setReachBottom(true) : setReachBottom(false)
     }
 
     addEventListener('scroll', handleScroll)

@@ -40,10 +40,12 @@ export const homeSlice = createSlice({
   } as IHomeSliceState,
   reducers: {
     addArticleListPageAction(state) {
-      const curAtcLength = state.articleList.length
-      const atcLength = state.articleListPage * state.articleLimit
+      const curAtcLength = state.articleList.length // 当前文章列表已有长度
+      const atcLength = state.articleListPage * state.articleLimit // 当前应该展示的文章列表长度
+      console.log(curAtcLength, atcLength)
       if (curAtcLength === atcLength) {
         state.articleListPage += 1
+        console.log(state.articleListPage)
       }
     },
   },
