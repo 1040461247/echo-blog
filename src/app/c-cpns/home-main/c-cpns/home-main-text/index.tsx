@@ -1,5 +1,6 @@
 'use client'
 
+import Typing from '@/components/typing'
 import useScroll from '@/hooks/use-scroll'
 import { memo, useEffect, useRef, useState } from 'react'
 import type { FC } from 'react'
@@ -10,25 +11,6 @@ export interface IProps {
 }
 
 const HomeMainText: FC<IProps> = memo(() => {
-  // 打字效果
-  const typeText = '一名软件开发工程师'
-  const typeSpeed = 150
-  const typeIndex = useRef(0)
-  const [showText, setShowText] = useState('')
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (typeIndex.current < typeText.length) {
-        setShowText(showText + typeText[typeIndex.current])
-        typeIndex.current += 1
-      } else {
-        clearTimeout(timer)
-      }
-    }, typeSpeed)
-
-    return () => clearTimeout(timer)
-  }, [showText])
-
   // 触发角标文字入场动画
   const [showSubText, setShowSubText] = useState(false)
   useEffect(() => {
@@ -40,21 +22,32 @@ const HomeMainText: FC<IProps> = memo(() => {
   const { scrollY } = useScroll()
   const speed = 1.3
 
+  // 当元素在屏幕外时，停止角标偏移
+  const textWrapRef = useRef<HTMLDivElement>(null)
+  const [isInner, setIsInner] = useState(true)
+  useEffect(() => {
+    if (textWrapRef.current) {
+      const { bottom } = textWrapRef.current.getBoundingClientRect()
+      bottom <= 0 ? setIsInner(false) : setIsInner(true)
+    }
+  }, [scrollY])
+
   return (
-    <div className="home-main-text flex justify-center items-center h-[110vh]">
+    <div className="home-main-text flex justify-center items-center h-[110vh]" ref={textWrapRef}>
       <div className="home-main-text-inner w-full px-5 text-[#1d1e2c] font-black text-center rotate-[-8deg] translate-y-[-11vh] [text-shadow:_-0.2083vw_0.2083vw_var(--primary-color)]">
         <div
           className={`text-left text-[4.5vw] transition-transform duration-1000 ease-out`}
           style={{
-            transform: `translate3D(${showSubText ? `${-(scrollY * speed)}px` : '-100%'}, 0, 0)`,
+            transform: `translate3D(${
+              showSubText && isInner ? `${-(scrollY * speed)}px` : '-100%'
+            }, 0, 0)`,
           }}
         >
           你好啊，我是Cheems
         </div>
 
         <div className="my-1 text-center text-[9.5vw]">
-          {showText}
-          {showText.length !== typeText.length && <span className="animate-blink">|</span>}
+          <Typing text="一名Web开发工程师" />
         </div>
 
         <div

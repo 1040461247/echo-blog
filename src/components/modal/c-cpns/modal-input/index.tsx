@@ -4,9 +4,9 @@ import { memo } from 'react'
 // Types
 export interface IProps {
   children?: React.ReactElement
-  handleChange: ChangeEventHandler
-  handleKeyUp?: KeyboardEventHandler
-  handleBlur: FocusEventHandler
+  onChange: ChangeEventHandler
+  onEnterUp?: KeyboardEventHandler
+  onBlur: FocusEventHandler
   placeholder: string
   customClass?: string
   name: string
@@ -16,13 +16,13 @@ export interface IProps {
 
 const ModalInput: FC<IProps> = memo(
   ({
-    handleChange,
-    handleBlur,
+    onChange,
+    onBlur,
+    onEnterUp,
     placeholder,
     customClass,
     name,
     type = 'text',
-    handleKeyUp,
     autoFocus = false,
   }) => {
     return (
@@ -30,10 +30,10 @@ const ModalInput: FC<IProps> = memo(
         type={type}
         placeholder={placeholder}
         className={`w-full h-11 bg-transparent p-4 placeholder:text-sm rounded-md border-gray-400 border focus:border-white hover:border-white transition-colors ${customClass}`}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        onChange={onChange}
+        onBlur={onBlur}
         name={name}
-        onKeyUp={handleKeyUp}
+        onKeyUp={(e) => e.code === 'Enter' && onEnterUp?.(e)}
         autoFocus={autoFocus}
       />
     )

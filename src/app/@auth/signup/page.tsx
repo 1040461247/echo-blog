@@ -81,7 +81,9 @@ const RegisterPage: FC<IProps> = memo(() => {
   )
 
   // 表单提交
-  async function handleCommit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function handleCommit(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent,
+  ) {
     e.preventDefault()
     const errors = validateAll()
     const errorKeys = Object.keys(errors)
@@ -92,8 +94,7 @@ const RegisterPage: FC<IProps> = memo(() => {
       const res = await signup(name, password, registeringPhone!)
 
       // 注册失败
-      const codeError = res?.code !== 200
-      if (codeError) {
+      if (!res.success) {
         Message.error(res!.msg)
         return
       }
@@ -118,8 +119,8 @@ const RegisterPage: FC<IProps> = memo(() => {
           <div className="form-name mb-5">
             <ModalInput
               placeholder="用户名"
-              handleChange={handleChange}
-              handleBlur={handleBlur}
+              onChange={handleChange}
+              onBlur={handleBlur}
               name="name"
             />
             {errors.name && <ErrorMessage text={errors.name} />}
@@ -129,8 +130,8 @@ const RegisterPage: FC<IProps> = memo(() => {
             <div className="input-wrap relative">
               <ModalInput
                 placeholder="密码"
-                handleChange={handleChange}
-                handleBlur={handleBlur}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 type={isShowPwd ? 'text' : 'password'}
                 name="password"
               />
@@ -148,8 +149,9 @@ const RegisterPage: FC<IProps> = memo(() => {
             <div className="input-wrap relative">
               <ModalInput
                 placeholder="再次输入密码"
-                handleChange={handleChange}
-                handleBlur={handleBlur}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onEnterUp={handleCommit}
                 type={isShowPwd ? 'text' : 'password'}
                 name="rePassword"
               />

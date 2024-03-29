@@ -44,7 +44,7 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
       <Link
         href={`/article/${articleData.id}`}
         className={`card block absolute inset-0 px-[11.8%] pt-[16.5%] bg-cover bg-center ${
-          articleData.isSticky ? 'bg-card-red' : 'bg-card-gray'
+          articleData.isSticky === '1' ? 'bg-card-red' : 'bg-card-gray'
         }`}
       >
         {/* Card Cover */}

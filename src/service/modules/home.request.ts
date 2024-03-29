@@ -17,7 +17,8 @@ export interface IArticle {
   coverUrl: string
   createTime: string
   updateTime: string
-  isSticky: boolean
+  // isSticky: boolean
+  isSticky: '0' | '1'
   author: {
     id: number
     name: string

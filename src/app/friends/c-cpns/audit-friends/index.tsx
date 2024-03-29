@@ -51,7 +51,9 @@ const AuditFriends: FC<IProps> = memo(() => {
   )
 
   // 提交表单
-  async function handleCommit(e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function handleCommit(
+    e?: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent,
+  ) {
     e && e.preventDefault()
     const errors = validateAll()
     const errorKeys = Object.keys(errors)
@@ -89,8 +91,8 @@ const AuditFriends: FC<IProps> = memo(() => {
               <ModalInput
                 name="linkName"
                 placeholder="网站昵称"
-                handleChange={handleChange}
-                handleBlur={handleBlur}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 autoFocus
               />
               {errors.linkName && <ErrorMessage text={errors.linkName} />}
@@ -100,8 +102,8 @@ const AuditFriends: FC<IProps> = memo(() => {
               <ModalInput
                 name="linkDesc"
                 placeholder="网站描述"
-                handleChange={handleChange}
-                handleBlur={handleBlur}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
               {errors.linkDesc && <ErrorMessage text={errors.linkDesc} />}
             </div>
@@ -110,8 +112,8 @@ const AuditFriends: FC<IProps> = memo(() => {
               <ModalInput
                 name="linkUrl"
                 placeholder="网站地址"
-                handleChange={handleChange}
-                handleBlur={handleBlur}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
               {errors.linkUrl && <ErrorMessage text={errors.linkUrl} />}
             </div>
@@ -120,8 +122,9 @@ const AuditFriends: FC<IProps> = memo(() => {
               <ModalInput
                 name="linkIcon"
                 placeholder="网站图标地址"
-                handleChange={handleChange}
-                handleBlur={handleBlur}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onEnterUp={handleCommit}
               />
               {errors.linkIcon && <ErrorMessage text={errors.linkIcon} />}
             </div>

@@ -1,5 +1,3 @@
-import { PREVENT_SCROLL_CLASSNAME } from '@/constants'
-import { useEffect, useState } from 'react'
 import useScroll from './use-scroll'
 
 // Types

@@ -18,12 +18,6 @@ const HomeMainAstronaut: FC<IProps> = memo(() => {
       xs: {
         speed: -4,
       },
-      sm: {
-        speed: -4,
-      },
-      md: {
-        speed: -4,
-      },
     },
   }
   return (
@@ -43,6 +37,7 @@ const HomeMainAstronaut: FC<IProps> = memo(() => {
             alt="universe"
             sizes="100vw"
             ref={(elRef) => parallax(elRef, parallaxOption)}
+            priority
           />
         </div>
 

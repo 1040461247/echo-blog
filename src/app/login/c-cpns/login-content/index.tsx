@@ -85,7 +85,9 @@ const LoginContent: FC<IProps> = memo(() => {
   }, [countdown])
 
   // 提交表单
-  async function handleCommit(e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function handleCommit(
+    e?: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent,
+  ) {
     e && e.preventDefault()
     const errors = validateAll()
     const errorKeys = Object.keys(errors)
@@ -104,10 +106,12 @@ const LoginContent: FC<IProps> = memo(() => {
 
       const isRegisteredUser = res?.data.status === 1
       if (isRegisteredUser) {
+        // 已注册，登录
         login(res.data.user.token)
         router.back()
         Message.success(`欢迎回来，${res.data.user.name}`)
       } else {
+        // 未注册，引导填写信息
         dispatch(setRegisteringPhoneAction(phone))
         router.replace(`${SIGNUP_PATH}`, { scroll: false })
       }
@@ -122,8 +126,8 @@ const LoginContent: FC<IProps> = memo(() => {
         <div className="form-phone mb-5">
           <ModalInput
             placeholder="电话号码"
-            handleChange={handleChange}
-            handleBlur={handleBlur}
+            onChange={handleChange}
+            onBlur={handleBlur}
             name="phone"
             autoFocus
           />
@@ -134,8 +138,9 @@ const LoginContent: FC<IProps> = memo(() => {
           <div className="flex justify-between w-full h-11">
             <ModalInput
               placeholder="验证码"
-              handleChange={handleChange}
-              handleBlur={handleBlur}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onEnterUp={handleCommit}
               name="otp"
               customClass="flex-1 rounded-r-none"
             />
