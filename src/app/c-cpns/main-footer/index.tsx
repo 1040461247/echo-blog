@@ -5,6 +5,7 @@ import FooterOperationTime from './c-cpns/footer-operation-time'
 import FooterCopyright from './c-cpns/footer-copyright'
 import FooterPageviews from './c-cpns/footer-pageviews'
 import { usePathname } from 'next/navigation'
+import FooterRecord from './c-cpns/footer-record'
 
 // Types
 export interface IProps {
@@ -34,6 +35,7 @@ const MainFooter: FC<IProps> = memo(() => {
           {/* Center Area */}
           <section className="order-last lg:order-none flex-1 flex flex-col lg:gap-1 items-center">
             <FooterCopyright />
+            <FooterRecord />
             <FooterOperationTime />
           </section>
 

@@ -19,7 +19,7 @@ const FooterOperationTime: FC<IProps> = memo(() => {
   })
 
   useEffect(() => {
-    const startTime = new Date('2024-02-04T08:00:00')
+    const startTime = new Date('2024-03-30T00:00:00')
 
     function updateOperationTime() {
       const curTime = new Date()

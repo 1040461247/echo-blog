@@ -30,12 +30,12 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
 
   return (
     <div
-      className={`article-card group relative transition-transform ${duration} hover:!rotate-0`}
+      className={`article-card group relative transition-transform ${duration} sm:hover:!rotate-0`}
       ref={(el) => rotateCard(el)}
     >
       {/* Card Shadow */}
       <div
-        className={`card-shadow relative left-5 top-5 transition-transform ${duration} group-hover:translate-x-10 group-hover:translate-y-20`}
+        className={`card-shadow relative left-5 top-5 transition-transform ${duration} group-hover:sm:translate-x-10 group-hover:sm:translate-y-20`}
       >
         <img className="w-full" src="/images/articles-display/card_shadow.png" alt="card-shadow" />
       </div>
@@ -49,13 +49,21 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
       >
         {/* Card Cover */}
         <div className="card-cover relative h-[48%] rounded-sm overflow-hidden">
-          {articleData.coverUrl && (
+          {articleData.coverUrl ? (
             <Image
               className="object-cover"
               src={articleData.coverUrl}
               fill
               sizes="100%"
               alt="card-cover"
+            />
+          ) : (
+            <Image
+              className="object-cover"
+              src="/images/articles-display/card_wait.png"
+              fill
+              sizes="100%"
+              alt="card-wait"
             />
           )}
         </div>
@@ -71,9 +79,11 @@ const ArticleCard: FC<IProps> = memo(({ articleData }) => {
         </div>
 
         {/* Card Footer */}
-        <div className="card-footer flex justify-between gap-5 mt-11 sm:mt-8 text-lg sm:text-base text-black/30">
-          <div className="card-footer-left flex-1 text-center">{articleData.category.name}</div>
-          <div className="card-footer-right flex-1 text-center">
+        <div className="card-footer flex justify-between gap-5 mt-8 text-lg sm:text-base text-black/30">
+          <div className="card-footer-left flex-1 text-center ellipsis-1-line">
+            {articleData.category.name}
+          </div>
+          <div className="card-footer-right flex-1 text-center ellipsis-1-line">
             {formatDate(articleData.createTime, 'YYYY-MM')}
           </div>
         </div>

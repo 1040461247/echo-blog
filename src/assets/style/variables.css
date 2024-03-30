@@ -25,8 +25,8 @@
   --min-height: calc(100vh - var(--header-fheight-md) - var(--footer-height-lg));
 
   /* footer height */
-  --footer-height: 122px;
-  --footer-height-lg: 94px;
+  --footer-height: 142px;
+  --footer-height-lg: 122px;
 
   /* btn */
   --btn-gray: #3c3c47;

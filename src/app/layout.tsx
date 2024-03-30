@@ -13,23 +13,13 @@ import MainFooter from './c-cpns/main-footer'
 import { NavigationEvents } from './c-cpns/navigation-events'
 
 const myFont = localFont({
-  src: [
-    {
-      path: '../../public/fonts/Alimama_DongFangDaKai_Regular.woff',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Alimama_DongFangDaKai_Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
+  src: '../../public/fonts/Alimama_DongFangDaKai_Regular.woff2',
   display: 'swap',
+  preload: true,
 })
 
 export const metadata: Metadata = {
-  title: 'Echo - 欢迎来到我的思维广场',
+  title: 'Echo Blog - 欢迎来到我的思维广场',
   description: 'Welcome to my blog. this is Echo Blog.',
 }
 

@@ -3,7 +3,6 @@ import BlogInfo from '@/components/blog-info'
 import type { FC } from 'react'
 import menuList, { type IMenuListItem } from '@/assets/data/menu-list-data'
 import Link from 'next/link'
-// import menuList from '@/assets/data/menu-list-data'
 
 // Types
 export interface IProps {
@@ -36,7 +35,7 @@ const ContentSidebar: FC<IProps> = memo(() => {
             <h2 className="text-xl">Echo Blog</h2>
           </header>
           <nav className="flex flex-col gap-2 pb-3">
-            {filterAndSortMenu(menuList, ['我', '友链', '时间轴', '分类', '标签']).map((item) => (
+            {filterAndSortMenu(menuList, ['作者', '友链', '时间轴', '分类', '标签']).map((item) => (
               <Link href={item.path!} key={item.text} className="hover-highlight">
                 <i className={`iconfont ${item.icon} mr-1`} />
                 <span>{item.text}</span>

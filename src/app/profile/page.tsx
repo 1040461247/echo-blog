@@ -62,15 +62,18 @@ const ProfilePage: FC<IProps> = memo(() => {
     setPreviewUrl(null)
     setSelectedAvatar(null)
     handleReset()
+    Message.info('修改已重置')
   }
   async function handleSubmit() {
     let hasError = false
+    console.log('commit')
+    console.log(selectedAvatar)
     // 上传头像
     if (selectedAvatar) {
       const avatarFormData = new FormData()
       avatarFormData.append('avatar', selectedAvatar)
       const uploadRes = await uploadAvatar(avatarFormData)
-      if (uploadRes.code !== 200) {
+      if (!uploadRes.success) {
         Message.error(uploadRes.msg)
         hasError = true
       }

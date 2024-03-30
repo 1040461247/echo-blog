@@ -148,6 +148,7 @@ const LoginContent: FC<IProps> = memo(() => {
               className="px-4 bg-gray-300 text-[--bg-dark-blue] rounded-r-md whitespace-nowrap hover:bg-gray-200 transition-colors disabled:hover:bg-gray-300 disabled:hover:cursor-not-allowed"
               onClick={(e) => handleSendOtp(e)}
               disabled={otpDisabled}
+              type="button"
             >
               {otpDisabled ? `${countdown}秒后重新获取` : '验证码'}
             </button>

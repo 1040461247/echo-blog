@@ -19,10 +19,10 @@ const ArticlesDisplay: FC<IProps> = memo(({ titleIcon, titleText, articlesData }
   `
 
   return (
-    <div className="articles-display min-h-[--min-height] pt-[--header-fheight-ssm] sm:pt-[--header-fheight-sm] md:pt-[--header-fheight-md] bg-desk bg-no-repeat bg-center bg-cover [background-attachment:fixed]">
+    <div className="articles-display min-h-[--min-height] pt-10 bg-desk bg-no-repeat bg-center bg-cover [background-attachment:fixed]">
       <div className="articles-display-inner">
         {/* Header */}
-        <header className={`title flex justify-center w-full pt-4 text-left ${wordArtStyle}`}>
+        <header className={`title flex justify-center w-full text-left ${wordArtStyle}`}>
           <div className="title-icon">{titleIcon(wordArtStyle)}</div>
           <h2 className="title-text">{titleText}</h2>
         </header>
@@ -31,7 +31,7 @@ const ArticlesDisplay: FC<IProps> = memo(({ titleIcon, titleText, articlesData }
         <main className="articles sm:mt-6 md:mt-8">
           <nav className="flex flex-wrap justify-center">
             {articlesData.map((item) => (
-              <div className="card-wrap w-[280px] sm:w-[240px]" key={item.id}>
+              <div className="card-wrap w-[240px]" key={item.id}>
                 <ArticleCard articleData={item} />
               </div>
             ))}

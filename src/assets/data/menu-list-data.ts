@@ -55,7 +55,7 @@ const menuList: IMenuListItem[] = [
     children: [
       {
         icon: `${prefix}astronaut`,
-        text: '我',
+        text: '作者',
         path: ME_PATH,
       },
       {

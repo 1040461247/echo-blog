@@ -231,7 +231,7 @@ const MePage: FC<IProps> = memo(() => {
             <i className="iconfont icon-email mr-1" />
             <span>邮箱：</span>
             <Link className="underline" href="mailto:1040461147@qq.com">
-              1040461147@qq.com
+              m18669275339@163.com
             </Link>
           </div>
           <div>
