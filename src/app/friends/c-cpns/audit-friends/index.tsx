@@ -80,6 +80,7 @@ const AuditFriends: FC<IProps> = memo(() => {
       <button
         className="audit-friends w-full py-3 bg-[--primary-color] text-white hover:bg-[--primary-color-dark] transition-colors duration-300"
         onClick={() => setShowModal(true)}
+        type="button"
       >
         申请友链
       </button>
@@ -133,6 +134,7 @@ const AuditFriends: FC<IProps> = memo(() => {
               <button
                 className="w-full h-11 rounded-md bg-[--primary-color] text-white hover:bg-[--primary-color-dark] transition-colors duration-200"
                 onClick={handleCommit}
+                type="button"
               >
                 提交申请
               </button>

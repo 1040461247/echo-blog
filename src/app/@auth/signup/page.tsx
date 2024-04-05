@@ -169,6 +169,7 @@ const RegisterPage: FC<IProps> = memo(() => {
             <button
               className="w-full h-11 rounded-md bg-[--primary-color] text-white hover:bg-[--primary-color-dark] transition-colors"
               onClick={handleCommit}
+              type="button"
             >
               创建账户
             </button>

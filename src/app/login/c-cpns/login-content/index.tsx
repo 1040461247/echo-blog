@@ -160,6 +160,7 @@ const LoginContent: FC<IProps> = memo(() => {
           <button
             className="w-full h-11 rounded-md bg-[--primary-color] text-white hover:bg-[--primary-color-dark] transition-colors duration-200"
             onClick={handleCommit}
+            type="button"
           >
             注册或登录
           </button>
