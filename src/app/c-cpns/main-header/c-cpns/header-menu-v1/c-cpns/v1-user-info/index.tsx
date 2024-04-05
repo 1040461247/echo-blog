@@ -62,7 +62,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
         <SubmenuItem isActive={false} handleClick={handleLogout}>
           <div className="submenu-item-link inline-block w-full h-full px-[15px] py-[3px] cursor-pointer">
             <i className={`icon iconfont icon-exit mr-[2px]`} />
-            <span className="text">退出</span>
+            <span className="text">退出登录</span>
           </div>
         </SubmenuItem>
       </SubmenuWrap>

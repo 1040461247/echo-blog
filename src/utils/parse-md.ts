@@ -7,6 +7,7 @@ export interface ITocItem {
   offsetTop: number
 }
 
+// 获取对应标题的滚动位置
 function addHeadOffset(obj: ITocItem) {
   const { title } = obj
   const headOffset = document.getElementById(formatName(title))?.offsetTop
@@ -39,7 +40,13 @@ function parseMarkdown(mdStr: string) {
       addHeadOffset(headItem)
       const lastIndex = treeList.length - 1
 
-      treeList[lastIndex].children!.push({ ...headItem, children: [] })
+      // 当二级标签有父标签时，加入父标签的children，否则与以及一级标签平行
+      const children = treeList[lastIndex]?.children
+      if (children) {
+        children.push({ ...headItem, children: [] })
+      } else {
+        treeList.push({ ...headItem, children: [] })
+      }
       lineList.push({ ...headItem })
     } else if (item.startsWith('### ')) {
       // 三级标题
@@ -47,9 +54,20 @@ function parseMarkdown(mdStr: string) {
       headItem.level = 3
       addHeadOffset(headItem)
       const lastIndex = treeList.length - 1
-      const lastChildIndex = treeList[lastIndex].children!.length - 1
 
-      treeList[lastIndex].children![lastChildIndex].children!.push({ ...headItem, children: [] })
+      const children = treeList[lastIndex]?.children
+      if (children) {
+        const lastChildIndex = children.length - 1
+        const subChildren = children[lastChildIndex].children
+        if (subChildren) {
+          subChildren.push({ ...headItem, children: [] })
+        } else {
+          children.push({ ...headItem, children: [] })
+        }
+      } else {
+        treeList.push({ ...headItem, children: [] })
+      }
+
       lineList.push({ ...headItem })
     }
   })

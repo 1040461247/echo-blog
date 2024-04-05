@@ -1,5 +1,6 @@
 import ArticleCategory from '@/components/article-category'
 import ArticleTags from '@/components/article-tags'
+import Subscript from '@/components/subscript'
 import { ARTICLE_PATH } from '@/constants'
 import { IArticle } from '@/service/modules/home.request'
 import formatDate from '@/utils/format-date'
@@ -16,7 +17,14 @@ export interface IProps {
 
 const ContentMainArticleItem: FC<IProps> = memo(({ articleData }) => {
   return (
-    <div className="article c-card mb-[38px]" key={articleData.id}>
+    <div className="article c-card relative overflow-hidden mb-[38px]" key={articleData.id}>
+      {/* Article Subscript */}
+      {articleData.isSticky === '1' && (
+        <Subscript>
+          <i className="iconfont icon-topping relative left-[-2px] -rotate-45 text-sm" />
+        </Subscript>
+      )}
+
       {/* Article Album */}
       {articleData.coverUrl && (
         <Link
@@ -30,7 +38,7 @@ const ContentMainArticleItem: FC<IProps> = memo(({ articleData }) => {
             sizes="100%"
             alt="article-album"
           />
-          <div className="mask absolute inset-0 group-hover:bg-black/10 transition-colors"></div>
+          <div className="mask absolute inset-0 group-hover:bg-black/10 transition-colors duration-300"></div>
         </Link>
       )}
 

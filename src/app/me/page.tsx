@@ -21,8 +21,8 @@ const MePage: FC<IProps> = memo(() => {
   return (
     <div className="me-page text-gray-300 pb-8">
       <section className="flex justify-center mt-[40vh] text-xl">
-        <span>试试往下滑~</span>
-        <span className="animate-bounce">👇</span>
+        <span>Hi~试试往下滑</span>
+        <span className="animate-bounce">&nbsp;👇</span>
       </section>
 
       <section className="mt-[40vh]">
@@ -149,8 +149,7 @@ const MePage: FC<IProps> = memo(() => {
           className="flex flex-col relative z-30 w-full"
           ref={(elRef) => parallax(elRef, { ...normalOps, speed: -1.5 })}
         >
-          <span className="text-[10vw]">闲暇之余</span>
-          <span className="text-[10vw]">抬头看看天吧</span>
+          <span className="text-[10vw]">喜欢云南的天</span>
         </p>
         <div className="me-images flex flex-col">
           <Image

@@ -14,8 +14,14 @@ export interface IProps {
 const ArticleAside: FC<IProps> = memo(({ articleContent }) => {
   // head信息
   const [curTitle, setCurTitle] = useState('')
-  const [[treeList, lineList], setHeadList] = useState<ITocItem[][]>(parseMarkdown(articleContent))
+  const [[treeList, lineList], setHeadList] = useState<ITocItem[][]>([])
   useEffect(() => setHeadList(parseMarkdown(articleContent)), [articleContent])
+
+  useEffect(() => {
+    if (articleContent) {
+      setHeadList(parseMarkdown(articleContent))
+    }
+  }, [articleContent])
 
   // 监听滚动，获取当前阅读的标题
   useEffect(() => {

@@ -27,7 +27,7 @@ const V2UserNav: FC<IProps> = memo(({ setIsDrawerOpen, handleLogout }) => {
         iconName="icon-notification"
         handleClick={() => setIsDrawerOpen(false)}
       />
-      <V2MenuItem text="退出" isLink={false} iconName="icon-tags" handleClick={handleLogout} />
+      <V2MenuItem text="退出登录" isLink={false} iconName="icon-tags" handleClick={handleLogout} />
     </div>
   )
 })
