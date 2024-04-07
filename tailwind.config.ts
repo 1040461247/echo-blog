@@ -5,12 +5,12 @@ const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     screens: {
       xs: '475px',
-      ...defaultTheme.screens
+      ...defaultTheme.screens,
     },
     extend: {
       backgroundImage: {
@@ -20,39 +20,48 @@ const config: Config = {
         'card-gray': "url('/images/articles-display/card_gray.png')",
         'card-blue': "url('/images/articles-display/card_blue.png')",
         'card-red': "url('/images/articles-display/card_red.png')",
-        room: "url('/images/tag-cloud-page/bg_static.png')"
+        room: "url('/images/tag-cloud-page/bg_static.png')",
       },
       cursor: { pointer: 'url(/images/common/pointer.png), auto' },
       keyframes: {
         throught: {
           '0%, 10%': {
             transform: 'translateY(100%)',
-            opacity: '0'
+            opacity: '0',
           },
           '30%, 70%': {
             transform: 'translateY(0)',
-            opacity: '1'
+            opacity: '1',
           },
           '90%, 100%': {
             transform: 'translateY(-100%)',
-            opacity: '0'
-          }
+            opacity: '0',
+          },
         },
         blink: {
           '0%, 100%': {
-            opacity: '1'
+            opacity: '1',
           },
           '50%': {
-            opacity: '0'
-          }
-        }
+            opacity: '0',
+          },
+        },
+        masked: {
+          '0%': {
+            backgroundPosition: '0 0',
+          },
+          '100%': {
+            backgroundPosition: '-100% 0%',
+          },
+        },
       },
       animation: {
         throught: 'throught 3s ease infinite',
-        blink: 'blink 1s step-end infinite'
-      }
-    }
+        blink: 'blink 1s step-end infinite',
+        masked: 'masked 4s infinite linear',
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 }
 export default config

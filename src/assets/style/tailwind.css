@@ -14,6 +14,25 @@
   .content-card {
     @apply bg-[--bg-dark-blue-opacity] sm:rounded-[18px] sm:border border-gray-600/40 hover:border-gray-600 transition-all duration-300 sm:[box-shadow:rgba(255,255,255,0.05)_0px_6px_24px_0px,rgba(255,255,255,0.08)_0px_0px_0px_1px];
   }
+
+  .rainbow-text {
+    @apply bg-[length:200%_100%] bg-clip-text text-transparent animate-masked;
+    background-image: linear-gradient(
+      to right,
+      #d7566c,
+      #cf6599,
+      #b87abc,
+      #998ed1,
+      #7c9fd7,
+      #d7566c,
+      #cf6599,
+      #b87abc,
+      #998ed1,
+      #7c9fd7,
+      #d7566c
+    );
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 @layer utilities {

@@ -8,7 +8,7 @@ export interface IResponse {
   success: boolean
 }
 
-class myRequest {
+class MyRequest {
   constructor(public baseUrl: string) {
     this.baseUrl = baseUrl
   }
@@ -71,4 +71,4 @@ class myRequest {
   }
 }
 
-export default new myRequest(process.env.NEXT_PUBLIC_API_BASEURL)
+export default new MyRequest(process.env.NEXT_PUBLIC_API_BASEURL)
