@@ -94,7 +94,7 @@ const ArticlePage: FC<IProps> = memo(({ params: { id } }) => {
       <BgTower className="mt-[100vh]" />
 
       <div className="inner-layout items-start text-gray-300">
-        <main className="article-main overflow-hidden flex-1 pb-5 md:mr-10 content-card">
+        <main className="article-main flex-1 pb-5 md:mr-10 content-card">
           <Suspense fallback={<ComponentLoading />}>
             <ArticleHeader {...articleHeaderProps} customStyle={mainCommonStyle} />
           </Suspense>

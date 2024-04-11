@@ -48,8 +48,8 @@ function parseMarkdown(mdStr: string) {
         treeList.push({ ...headItem, children: [] })
       }
       lineList.push({ ...headItem })
-    } else if (item.startsWith('### ')) {
-      // 三级标题
+    } else if (item.startsWith('###')) {
+      // 其余全部处理为三级标题
       headItem.title = item.replace('### ', '')
       headItem.level = 3
       addHeadOffset(headItem)

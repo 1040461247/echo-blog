@@ -23,17 +23,15 @@ const NotificationUnreadPage: FC<IProps> = memo(() => {
   useEffect(() => {
     dispatch(fetchUnreadMessageListAction())
     dispatch(tempClearUnreadCountAction())
-    setTimeout(() => clearUnread(), 100)
+    clearUnread()
   }, [])
 
-  const { unReadMessageList } = useAppSelector(
-    (state) => ({
-      unReadMessageList: state.messageRecord.unReadMessageList,
-    }),
+  const { unReadMessageList } = useAppSelector((state) => ({
+    unReadMessageList: state.messageRecord.unReadMessageList,
     shallowEqual,
-  )
-
+  }))
   // 滚动到底部加载更多
+
   const { reachBottom } = useScroll()
   useEffect(() => {
     if (reachBottom) {

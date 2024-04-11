@@ -1,4 +1,4 @@
-import { AM_FRIENDS, AM_FRIENDS_AUDIT } from '@/constants'
+import { AM_FRIENDS } from '@/constants'
 import request from '../index'
 
 // Types
@@ -18,14 +18,14 @@ async function commitFriends(
   linkIcon: string,
   linkDesc: string,
 ) {
-  const res = await request.post(`${AM_FRIENDS_AUDIT}`, {
+  const res = await request.post(`${AM_FRIENDS}`, {
     body: JSON.stringify({ linkName, linkUrl, linkIcon, linkDesc }),
   })
   return res
 }
 
 async function getPassedList() {
-  const res = await request.get(`${AM_FRIENDS}/passed`)
+  const res = await request.get(`${AM_FRIENDS}/list?auditState=pass`)
   return res.data as IPassedListItem[]
 }
 

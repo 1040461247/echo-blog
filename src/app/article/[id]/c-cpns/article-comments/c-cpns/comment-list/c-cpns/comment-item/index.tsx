@@ -8,7 +8,11 @@ import CommentPanel from '../../../comment-panel'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-store'
 import { shallowEqual } from 'react-redux'
 import Message from '@/components/message'
-import { fetchCommentsByArticleIdAction, fetchUserInfoAction } from '@/store/slices'
+import {
+  fetchCommentLikeByIdAction,
+  fetchCommentsByArticleIdAction,
+  fetchUserInfoAction,
+} from '@/store/slices'
 import UserAvatar from '@/components/user-avatar'
 
 // Types
@@ -85,11 +89,13 @@ const CommentItem: FC<IProps> = memo(
     }
 
     async function handleLikes() {
-      const res = isLike ? await remLikes(comment.id) : await addLikes(comment.id)
+      const preVal = isLike
+      const res = preVal ? await remLikes(comment.id) : await addLikes(comment.id)
 
       if (res.code === 200) {
         dispatch(fetchUserInfoAction())
         dispatch(fetchCommentsByArticleIdAction(article.id))
+        dispatch(fetchCommentLikeByIdAction())
       } else {
         Message.error(res.msg)
       }
@@ -115,7 +121,7 @@ const CommentItem: FC<IProps> = memo(
             <div className="acpi-top-left flex mr-2">
               <span className="text-sm text-gray-300">{comment.user.name}</span>
               {article?.author?.id === comment.user.id && (
-                <span className="px-1 py-[2px] border border-[#3498db] rounded-[4px] text-xs text-[#3498db] whitespace-nowrap">
+                <span className="px-1 py-[2px] ml-2 border border-[#3498db] rounded-[4px] text-xs text-[#3498db] whitespace-nowrap">
                   博主
                 </span>
               )}

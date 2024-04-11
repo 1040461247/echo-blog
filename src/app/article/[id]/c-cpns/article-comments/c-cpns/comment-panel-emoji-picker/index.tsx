@@ -13,7 +13,7 @@ export interface IProps {
 
 const CommentPanelEmojiPicker: FC<IProps> = memo(({ setShowEmojiPicker, handleEmojiSelect }) => {
   return (
-    <div className="comment-panel-emoji-picker absolute" onBlur={() => setShowEmojiPicker(false)}>
+    <div className="comment-panel-emoji-picker" onBlur={() => setShowEmojiPicker(false)}>
       <EmojiPicker
         data={data}
         onEmojiSelect={handleEmojiSelect}
@@ -22,7 +22,7 @@ const CommentPanelEmojiPicker: FC<IProps> = memo(({ setShowEmojiPicker, handleEm
         previewPosition="none"
         skinTonePosition="search"
         theme="dark"
-        perLine={7}
+        perLine={8}
         autoFocus
       />
     </div>

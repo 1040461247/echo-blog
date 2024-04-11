@@ -47,7 +47,7 @@ const HomeMainText: FC<IProps> = memo(() => {
         </div>
 
         <div className="my-1 text-center text-[9.5vw]">
-          <Typing text="一名Web开发工程师" />
+          <Typing text="一名软件开发工程师" />
         </div>
 
         <div

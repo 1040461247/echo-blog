@@ -3,7 +3,7 @@ import NoticeDot from '@/components/notice-dot'
 import SubmenuItem from '@/components/submenu-item'
 import SubmenuWrap from '@/components/submenu-wrap'
 import UserAvatar from '@/components/user-avatar'
-import { NOTIFICATION_PATH, PROFILE_PATH } from '@/constants'
+import { NOTIFICATION_PATH, NOTIFICATION_UNREAD_PATH, PROFILE_PATH } from '@/constants'
 import useLogout from '@/hooks/use-logout'
 import { useAppSelector } from '@/hooks/use-store'
 import type { IUserInfo } from '@/service/modules/user.request'
@@ -54,7 +54,7 @@ const V1UserInfo: FC<IProps> = memo(({ userInfo, isActivePath }) => {
 
         <SubmenuItem
           isActive={isActivePath({ path: NOTIFICATION_PATH })}
-          path={NOTIFICATION_PATH}
+          path={total.unreadCount === 0 ? NOTIFICATION_PATH : NOTIFICATION_UNREAD_PATH}
           iconName="icon-notification"
           text={total.unreadCount === 0 ? '消息' : `未读消息(${total.unreadCount})`}
         />

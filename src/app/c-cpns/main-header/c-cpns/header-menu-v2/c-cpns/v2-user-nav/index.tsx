@@ -1,7 +1,11 @@
+'use client'
+
 import { memo } from 'react'
 import type { FC } from 'react'
 import V2MenuItem from '../v2-menu-item'
-import { NOTIFICATION_PATH, PROFILE_PATH } from '@/constants'
+import { NOTIFICATION_PATH, NOTIFICATION_UNREAD_PATH, PROFILE_PATH } from '@/constants'
+import { useAppSelector } from '@/hooks/use-store'
+import { shallowEqual } from 'react-redux'
 
 // Types
 export interface IProps {
@@ -11,6 +15,13 @@ export interface IProps {
 }
 
 const V2UserNav: FC<IProps> = memo(({ setIsDrawerOpen, handleLogout }) => {
+  const { total } = useAppSelector(
+    (state) => ({
+      total: state.messageRecord.total,
+    }),
+    shallowEqual,
+  )
+
   return (
     <div className="user-nav">
       <V2MenuItem
@@ -21,9 +32,9 @@ const V2UserNav: FC<IProps> = memo(({ setIsDrawerOpen, handleLogout }) => {
         handleClick={() => setIsDrawerOpen(false)}
       />
       <V2MenuItem
-        text="消息"
+        text={total.unreadCount === 0 ? '消息' : `未读消息(${total.unreadCount})`}
         isLink
-        path={NOTIFICATION_PATH}
+        path={total.unreadCount === 0 ? NOTIFICATION_PATH : NOTIFICATION_UNREAD_PATH}
         iconName="icon-notification"
         handleClick={() => setIsDrawerOpen(false)}
       />
