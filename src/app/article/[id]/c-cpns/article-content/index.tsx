@@ -2,6 +2,7 @@
 
 import { memo } from 'react'
 import MarkdownPreview from '@uiw/react-markdown-preview'
+import '@/assets/style/md-reset.css'
 import type { FC } from 'react'
 
 // Types
@@ -21,7 +22,7 @@ const ArticleContent: FC<IProps> = memo(
         </div>
 
         <MarkdownPreview
-          className="!bg-transparent"
+          // className="!bg-transparent"
           wrapperElement={{
             'data-color-mode': 'dark',
           }}

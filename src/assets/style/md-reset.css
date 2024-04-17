@@ -1,0 +1,29 @@
+@font-face {
+  font-family: alimama;
+  src: url(/fonts/Alimama_DongFangDaKai_Regular.woff2);
+}
+
+body .wmde-markdown {
+  background-color: transparent;
+  font-family: alimama;
+}
+
+/* 标题样式 */
+body .wmde-markdown h1 {
+  border-color: rgb(255 255 255 / 0.2);
+}
+
+body .wmde-markdown h2,
+body .wmde-markdown h3,
+body .wmde-markdown h4,
+body .wmde-markdown h5,
+body .wmde-markdown h6 {
+  border: none;
+}
+
+/* 列表样式 */
+body .wmde-markdown ul,
+body .wmde-markdown ol,
+body .wmde-markdown li {
+  list-style: disc;
+}
