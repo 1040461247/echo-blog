@@ -15,6 +15,7 @@ export interface IArticleSliceState {
   article: IArticle | Record<string, never>
   articleComments: IComment[] | []
   userCommentLikes: TCommentLikes | null
+  titleIds: string[]
 }
 
 // Thunks
@@ -48,8 +49,18 @@ export const articleSlice = createSlice({
     article: {},
     articleComments: [],
     userCommentLikes: [],
+    titleIds: [],
   } as IArticleSliceState,
-  reducers: {},
+  reducers: {
+    pushTitleIdsAction(state, { payload }) {
+      if (!state.titleIds.includes(payload)) {
+        state.titleIds = [...state.titleIds, payload]
+      }
+    },
+    clearTitleIdsAction(state) {
+      state.titleIds = []
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchArticleByIdAction.fulfilled, (state, { payload }) => {
@@ -65,3 +76,4 @@ export const articleSlice = createSlice({
 })
 
 export { fetchArticleByIdAction, fetchCommentsByArticleIdAction, fetchCommentLikeByIdAction }
+export const { pushTitleIdsAction, clearTitleIdsAction } = articleSlice.actions

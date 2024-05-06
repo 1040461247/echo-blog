@@ -1,75 +1,65 @@
 import formatName from './format-name'
+import uuid from './uuid'
 
 export interface ITocItem {
   title: string
   level: number
   children?: ITocItem[]
   offsetTop: number
+  id: string
 }
 
 // 获取对应标题的滚动位置
-function addHeadOffset(obj: ITocItem) {
-  const { title } = obj
-  const headOffset = document.getElementById(formatName(title))?.offsetTop
-  obj.offsetTop = headOffset ?? 0
+function getHeadOffset(title: string, samePreCount?: number) {
+  const titleId = samePreCount ? `${formatName(title)}-${samePreCount}` : formatName(title)
+  const headOffset = document.getElementById(titleId)?.offsetTop
+  return headOffset ?? 0
 }
 
+// 找到上一级父节点
+function findParent(treeList: ITocItem[], currentLevel: number) {
+  const lastSubTree = treeList[treeList.length - 1]
+  let parentObj: ITocItem = lastSubTree
+
+  function seek(treeItem?: ITocItem) {
+    if (!treeItem || treeItem.level >= currentLevel) return
+    parentObj = treeItem
+    const children = treeItem.children
+    seek(children?.[children.length - 1])
+  }
+  seek(treeList[treeList.length - 1])
+
+  return parentObj
+}
+
+// 解析标题
 function parseMarkdown(mdStr: string) {
   if (!mdStr) return []
   const treeList: ITocItem[] = []
   const lineList: ITocItem[] = []
-  const headReg = /^(#{1,3})(.*)/gm
-  const headStrList = mdStr.match(headReg)
+  const headStrList = mdStr.match(/^(#{1,3})(.*)/gm)
+  const sameTitleMap: Record<string, number> = {}
 
-  headStrList?.forEach((item) => {
-    const headItem: ITocItem = {
-      title: item.replace('# ', ''),
-      level: 1,
-      offsetTop: 0,
-    }
+  headStrList?.forEach((item, index) => {
+    const level = item.match(/^#+/g)![0].length
+    const title = formatName(item.replace(`${'#'.repeat(level)} `, ''))
+    const offsetTop = getHeadOffset(title, sameTitleMap[item])
+    const id = uuid()
+    const headItem: ITocItem = { level, title, offsetTop, id }
 
-    if (item.startsWith('# ')) {
-      // 一级标题
-      addHeadOffset(headItem)
-      lineList.push({ ...headItem })
+    if (index === 0 && level !== 1) {
+      // 处理非一级标题开头的情况
       treeList.push({ ...headItem, children: [] })
-    } else if (item.startsWith('## ')) {
-      // 二级标题
-      headItem.title = item.replace('## ', '')
-      headItem.level = 2
-      addHeadOffset(headItem)
-      const lastIndex = treeList.length - 1
-
-      // 当二级标签有父标签时，加入父标签的children，否则与以及一级标签平行
-      const children = treeList[lastIndex]?.children
-      if (children) {
-        children.push({ ...headItem, children: [] })
-      } else {
-        treeList.push({ ...headItem, children: [] })
-      }
-      lineList.push({ ...headItem })
-    } else if (item.startsWith('###')) {
-      // 其余全部处理为三级标题
-      headItem.title = item.replace('### ', '')
-      headItem.level = 3
-      addHeadOffset(headItem)
-      const lastIndex = treeList.length - 1
-
-      const children = treeList[lastIndex]?.children
-      if (children) {
-        const lastChildIndex = children.length - 1
-        const subChildren = children[lastChildIndex].children
-        if (subChildren) {
-          subChildren.push({ ...headItem, children: [] })
-        } else {
-          children.push({ ...headItem, children: [] })
-        }
-      } else {
-        treeList.push({ ...headItem, children: [] })
-      }
-
-      lineList.push({ ...headItem })
+      return
+    } else if (level === 1) {
+      treeList.push({ ...headItem, children: [] })
+    } else {
+      const parent = findParent(treeList, level)
+      parent.children?.push({ ...headItem, children: [] })
     }
+
+    lineList.push({ ...headItem })
+    sameTitleMap[item] = (sameTitleMap[item] ?? 0) + 1
   })
 
   return [treeList, lineList]

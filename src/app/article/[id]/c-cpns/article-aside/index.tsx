@@ -1,9 +1,12 @@
+'use client'
+
 import parseMarkdown from '@/utils/parse-md'
 import { memo, useEffect, useState } from 'react'
 import type { FC } from 'react'
 import { ITocItem } from '@/utils/parse-md'
 import formatName from '@/utils/format-name'
 import throttle from '@/utils/throttle'
+import { useAppSelector } from '@/hooks/use-store'
 
 // Types
 export interface IProps {
@@ -13,10 +16,9 @@ export interface IProps {
 
 const ArticleAside: FC<IProps> = memo(({ articleContent }) => {
   // head信息
-  const [curTitle, setCurTitle] = useState('')
-  const [[treeList, lineList], setHeadList] = useState<ITocItem[][]>([])
-  useEffect(() => setHeadList(parseMarkdown(articleContent)), [articleContent])
+  const [curTitleId, setCurTitleId] = useState('')
 
+  const [[treeList, lineList], setHeadList] = useState<ITocItem[][]>([])
   useEffect(() => {
     if (articleContent) {
       setHeadList(parseMarkdown(articleContent))
@@ -26,29 +28,29 @@ const ArticleAside: FC<IProps> = memo(({ articleContent }) => {
   // 监听滚动，获取当前阅读的标题
   useEffect(() => {
     if (!lineList) return
-    let curTitleTemp = ''
+    let curTitleIdTemp = ''
     function handleScroll() {
       const scrollTop = document.documentElement.scrollTop
       for (const headItem of lineList) {
         if (scrollTop >= headItem.offsetTop) {
-          curTitleTemp = headItem.title
+          curTitleIdTemp = headItem.id
         } else {
-          curTitleTemp !== curTitle && setCurTitle(curTitleTemp)
+          curTitleIdTemp !== curTitleId && setCurTitleId(curTitleIdTemp)
           break
         }
       }
       // 在文章末尾时，最后一个标题高亮
-      if (curTitleTemp === lineList[lineList.length - 1]?.title && curTitleTemp !== curTitle) {
-        setCurTitle(curTitleTemp)
+      if (curTitleIdTemp === lineList[lineList.length - 1]?.id && curTitleIdTemp !== curTitleId) {
+        setCurTitleId(curTitleIdTemp)
       }
     }
     addEventListener('scroll', handleScroll)
     return () => removeEventListener('scroll', throttle(handleScroll, 500))
-  }, [lineList, curTitle])
+  }, [lineList, curTitleId])
 
   function handleTocClick(tocItem: ITocItem, e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault()
-    setCurTitle(tocItem.title)
+    setCurTitleId(tocItem.id)
     scrollTo({
       top: tocItem.offsetTop,
     })
@@ -65,18 +67,18 @@ const ArticleAside: FC<IProps> = memo(({ articleContent }) => {
             className={`relative pl-3 text-gray-300 ${
               olLevel === 1 ? '' : 'border-l-2 border-dotted border-gray-500'
             }`}
-            key={item.title}
+            key={item.id}
           >
             <a
               className={`${formatName(item.title)} ${
-                curTitle === item.title ? 'text-[--primary-color] font-bold' : ''
+                curTitleId === item.id ? 'text-[--primary-color] font-bold' : ''
               } leading-7 ellipsis-1-line transition-colors duration-300`}
               href={`#${formatName(item.title)}`}
               onClick={(e) => handleTocClick(item, e)}
             >
               <span
                 className={`absolute left-[-2px] opacity-0 w-[2px] h-7 bg-[--primary-color] transition-opacity duration-300 ${
-                  curTitle === item.title ? 'opacity-100' : ''
+                  curTitleId === item.id ? 'opacity-100' : ''
                 }`}
               ></span>
               {item.title}

@@ -21,7 +21,7 @@ export interface IProps {
 
 const ArticleHeader: FC<IProps> = memo(({ coverUrl, title, customStyle }) => {
   return (
-    <div className={`article-header overflow-hidden sm:rounded-t-[18px] ${customStyle}`}>
+    <div className={`article-header sm:rounded-t-[18px] ${customStyle}`}>
       {coverUrl ? (
         <ArticleHeaderCover coverUrl={coverUrl} title={title} />
       ) : (

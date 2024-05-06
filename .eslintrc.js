@@ -35,5 +35,6 @@ module.exports = {
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     '@typescript-eslint/no-unused-vars': 0,
     'no-debugger': 0,
+    'react/no-children-prop': 0,
   },
 }

@@ -17,7 +17,7 @@ const ArticleHeaderCover: FC<IProps> = memo(({ coverUrl, title }) => {
           className="object-cover"
           src={coverUrl}
           fill
-          sizes="100%"
+          sizes="100vw"
           alt="article-cover"
           priority
         />

@@ -47,7 +47,7 @@ export default function useParallax() {
 
   function setParallax(elRef: HTMLElement, option: IOption | TAdapterOption) {
     const { speed, isTransparent, startShowPct, solidPct, animation = true } = option
-    const { top, bottom } = elRef.getBoundingClientRect() // 元素距离视口顶/底部的距离
+    const { top, bottom } = elRef.getBoundingClientRect() // 元素顶/底部距离视口顶部的距离
     const enteredViewport = top <= viewportHeight && bottom >= 0 // 元素是否已进入视口
     const elReachTopDistance = 1 - top / viewportHeight // 元素到达顶部距离的百分比
 
@@ -68,7 +68,8 @@ export default function useParallax() {
       let opacity = 0
 
       if (enteredViewport) {
-        const isInInterval = elReachTopDistance >= startShowPct && elReachTopDistance <= 1 // 元素是否到达需要显示的区间
+        // 元素是否到达需要显示的区间
+        const isInInterval = elReachTopDistance >= startShowPct && elReachTopDistance <= 1
         if (isInInterval) {
           // 元素在区间内，opacity跟随滚动偏移量增加
           opacity = (elReachTopDistance - startShowPct) / (solidPct! - startShowPct)

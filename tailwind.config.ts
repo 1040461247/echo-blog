@@ -58,7 +58,7 @@ const config: Config = {
       animation: {
         throught: 'throught 3s ease infinite',
         blink: 'blink 1s step-end infinite',
-        masked: 'masked 4s infinite linear',
+        masked: 'masked 10s infinite linear',
       },
     },
   },
