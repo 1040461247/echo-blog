@@ -8,27 +8,66 @@
   font-family: alimama;
 }
 
-/* 标题样式 */
-.wmde-markdown h1 {
-  border-color: rgb(255 255 255 / 0.2);
+.wmde-markdown {
+  --p-spacing: 1.5rem;
+  --of-strong: #cb7731;
 }
 
+/* 标题样式 */
+.wmde-markdown h1,
 .wmde-markdown h2,
 .wmde-markdown h3,
 .wmde-markdown h4,
 .wmde-markdown h5,
 .wmde-markdown h6 {
-  border: none;
+  font-family: var(--title-font);
+  font-weight: bold;
+  clear: both;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+  margin: 0 0 var(--p-spacing);
+  padding: 0 0 12px;
+  color: #ff6666;
+  line-height: 1.4;
 }
 
-/* 列表样式 */
-.wmde-markdown ul,
-.wmde-markdown ol,
-.wmde-markdown li {
-  list-style: disc;
+.wmde-markdown h1 {
+  font-size: 2.5rem;
+  letter-spacing: -1.5px;
+  margin-top: 1em;
+  border-color: #ff66664a;
+}
+
+.wmde-markdown h2 {
+  font-size: 1.63rem;
+  letter-spacing: -1px;
+  font-weight: bold;
+  border-color: #ff66664a;
+}
+
+.wmde-markdown h3 {
+  font-size: 1.6rem;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.wmde-markdown h4 {
+  font-size: 1.12rem;
+}
+
+.wmde-markdown h5 {
+  font-size: 0.97rem;
+  font-weight: bold;
+}
+
+.wmde-markdown h6 {
+  font-size: 0.93rem;
 }
 
 /* 代码块样式 */
+.wmde-markdown pre {
+  overflow: auto;
+}
 @media (max-width: 1114px) {
   .wmde-markdown pre {
     width: 60vw;
@@ -48,4 +87,56 @@
   .wmde-markdown pre {
     width: 89vw;
   }
+}
+
+/* 列表样式 */
+.wmde-markdown ul,
+.wmde-markdown ol {
+  padding: 0 0 0 1.875rem;
+  /* 30px */
+}
+
+/* 列表样式 */
+.wmde-markdown ul li {
+  list-style: square;
+}
+
+.wmde-markdown ol li {
+  list-style: decimal;
+}
+
+.wmde-markdown li::marker {
+  color: #10eaac;
+}
+
+/* 斜体 */
+.wmde-markdown i,
+.wmde-markdown em,
+.wmde-markdown dfn,
+.wmde-markdown cite {
+  font-style: italic;
+  color: #87939a;
+}
+
+/* 引用 */
+blockquote {
+  color: #304455;
+  border-radius: 2px;
+  padding: 10px 16px !important;
+  background-color: #fdefee;
+  position: relative;
+  border-left: none;
+}
+
+/*quote block*/
+blockquote:before {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 4px;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #e95f59;
+  border-radius: 2px;
 }
