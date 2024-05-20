@@ -49,7 +49,6 @@ const MainHeader: FC<IProps> = memo(() => {
       dispatch(fetchMessageTotalAction(userInfo.id))
       timer = setInterval(() => dispatch(fetchMessageTotalAction(userInfo!.id)), 60 * 1000) // polling
     }
-
     return () => clearInterval(timer)
   }, [userInfo])
 

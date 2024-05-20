@@ -26,7 +26,7 @@
   -ms-word-wrap: break-word;
   word-wrap: break-word;
   margin: 0 0 var(--p-spacing);
-  padding: 0 0 12px;
+  padding: 0;
   color: #ff6666;
   line-height: 1.4;
 }
@@ -36,6 +36,7 @@
   letter-spacing: -1.5px;
   margin-top: 1em;
   border-color: #ff66664a;
+  padding-bottom: 12px;
 }
 
 .wmde-markdown h2 {
@@ -43,6 +44,7 @@
   letter-spacing: -1px;
   font-weight: bold;
   border-color: #ff66664a;
+  padding-bottom: 12px;
 }
 
 .wmde-markdown h3 {
